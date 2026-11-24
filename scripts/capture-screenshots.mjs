@@ -55,8 +55,21 @@ async function evaluate(expression) {
   if (result.exceptionDetails) throw new Error(result.exceptionDetails.text || "Page evaluation failed.");
   return result.result.value;
 }
+async function stylesReady() {
+  return evaluate(`(() => {
+    const hasAssetSheet = [...document.styleSheets].some((sheet) => sheet.href && sheet.href.includes('/assets/'));
+    const styled = getComputedStyle(document.body).fontFamily.includes('Manrope');
+    return hasAssetSheet && styled;
+  })()`);
+}
 async function waitReady(extra = 900) {
   await delay(extra);
+  for (let attempt = 0; attempt < 4; attempt += 1) {
+    if (await stylesReady()) break;
+    await send("Page.reload", { ignoreCache: true });
+    await delay(1100);
+  }
+  if (!(await stylesReady())) throw new Error("Production stylesheet did not load.");
   await evaluate("document.fonts.ready.then(() => true)");
 }
 async function goto(hash, extra = 900) {

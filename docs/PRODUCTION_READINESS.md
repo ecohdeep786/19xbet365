@@ -23,7 +23,7 @@ This is a virtual-credit release with deliberate legal, provider, and operationa
 | Auth/authorization | PASS | session, RBAC, scope, trigger tests |
 | Security tests | PASS with findings | `SECURITY_TEST_REPORT.md` |
 | Production build | PASS | `tsc --noEmit && vite build` |
-| Performance | PARTIAL | ~159 KB gzip JS; no load test; no image payloads |
+| Performance | PARTIAL | ~160 KB gzip JS; no load test; no image payloads |
 | Critical defects | NONE KNOWN | recent bug fixes covered in E2E report |
 | Restricted functionality disabled | PASS | money locked, provider session required |
 | Legal/licensing satisfied | FAIL / BLOCKED | no licence; no real-money operation |

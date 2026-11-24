@@ -1,6 +1,7 @@
-import { type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { useRef, type ButtonHTMLAttributes, type CSSProperties, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
 import { AlertTriangle, ArrowRight, Copy, Loader2, X } from "lucide-react";
 import { classNames, initials } from "../lib/format";
+import { useDialog } from "../lib/useDialog";
 
 export function Button({
   children, variant = "primary", size = "md", loading, icon, className, ...props
@@ -85,10 +86,12 @@ export function ErrorState({ message, onRetry }: { message: string; onRetry?: ()
 }
 
 export function Modal({ open, onClose, title, children, footer, wide }: { open: boolean; onClose: () => void; title: string; children: ReactNode; footer?: ReactNode; wide?: boolean }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+  useDialog(open, onClose, panelRef);
   if (!open) return null;
   return (
     <div className="modal-backdrop" onMouseDown={(event) => { if (event.currentTarget === event.target) onClose(); }}>
-      <div className={classNames("modal", wide && "modal-wide")} role="dialog" aria-modal="true" aria-label={title}>
+      <div className={classNames("modal", wide && "modal-wide")} role="dialog" aria-modal="true" aria-label={title} ref={panelRef}>
         <div className="modal-head">
           <h2>{title}</h2>
           <button className="icon-btn" onClick={onClose} aria-label="Close dialog"><X size={18} /></button>

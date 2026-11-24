@@ -16,11 +16,13 @@ export function OddsButton({ match, selection, value, compact }: { match: Match;
       className={classNames("odds-btn", active && "active", compact && "compact")}
       disabled={value == null || match.status === "finished" || match.status === "suspended"}
       onClick={() => { if (value != null) toggleSelection(match, selection, value); }}
-      aria-label={`${label} ${selection} odds ${formatOdds(value)}`}
       aria-pressed={active}
     >
       <span className="odds-label">{label}</span>
       <strong>{formatOdds(value)}</strong>
+      <span className="sr-only">
+        {selection === "home" ? match.homeTeam : selection === "away" ? match.awayTeam : "Draw"} {selection} odds, {match.homeTeam} vs {match.awayTeam}
+      </span>
     </button>
   );
 }

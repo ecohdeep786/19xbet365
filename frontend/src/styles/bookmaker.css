@@ -11,8 +11,8 @@
   --line-strong: #b9cadd;
   --text: #10243d;
   --text-soft: #304660;
-  --muted: #5f748a;
-  --muted-2: #8a9db0;
+  --muted: #526a82;
+  --muted-2: #5f748a;
   --cyan: #1266d6;
   --cyan-deep: #0d4fae;
   --lime: #1c9b4b;
@@ -50,7 +50,7 @@
 .bookmaker .nav-panel-note { color: #8194a7; }
 .bookmaker .nav-panel-item:hover { background: #f2f8ff; border-color: #dbe8f5; }
 .bookmaker .nav-panel-item strong { color: #163654; }
-.bookmaker .nav-panel-item span { color: #71869b; }
+.bookmaker .nav-panel-item span { color: #526a82; }
 .bookmaker .nav-panel-icon { background: #eaf3ff; color: #1266d6; }
 .bookmaker .live-spot-sport svg { color: #1266d6; }
 .bookmaker .header-actions .icon-btn { color: #d9e9f7; }
@@ -59,6 +59,9 @@
 .bookmaker .header-balance { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.24); color: #fff; }
 .bookmaker .header-balance svg { color: #78f29e; }
 .bookmaker .odds-btn strong { font-weight: 700; font-variant-numeric: tabular-nums; }
+.bookmaker .lime-text { color: #14773a !important; }
+.bookmaker .game-category-label { color: #526a82; }
+.bookmaker .top-win strong { color: #14773a; }
 .bookmaker .header-login { color: #e0eefb; }
 .bookmaker .header-login:hover { color: #7cf0a2; }
 .bookmaker .header-join { background: #34c96b; color: #fff; box-shadow: none; }
@@ -71,7 +74,7 @@
 .bookmaker .slip-trigger em { background: #62ed91; color: #0b3b24; }
 .bookmaker .header-search { background: #fff; border-color: #c9d9e8; }
 .bookmaker .header-search input { color: #173451; }
-.bookmaker .header-search kbd { color: #71869b; border-color: #d7e2ee; }
+.bookmaker .header-search kbd { color: #526a82; border-color: #d7e2ee; }
 .bookmaker .header-ticker { background: #082c53; border-top-color: #0d3765; }
 .bookmaker .ticker-track span { color: #bcd7ed; }
 .bookmaker .ticker-track svg { color: #7af29f; }
@@ -84,20 +87,20 @@
 .bookmaker .notification-item.unread { background: #f0f8ff; }
 .bookmaker .notification-item strong { color: #173451; }
 .bookmaker .notification-item small { color: #637b91; }
-.bookmaker .notification-item em { color: #8a9db0; }
+.bookmaker .notification-item em { color: #5f748a; }
 .bookmaker .notification-icon { background: #e9f3ff; color: #1266d6; }
 .bookmaker .notification-icon.type-security { background: #fff0f2; color: #d84b5d; }
 .bookmaker .notification-icon.type-promo { background: #eefbea; color: #1c9b4b; }
 .bookmaker .notification-icon.type-game { background: #f2efff; color: #6d56d9; }
-.bookmaker .notification-icon.type-system { background: #f0f4f8; color: #6b8197; }
-.bookmaker .popover-empty, .bookmaker .popover-link { color: #6b8197; border-color: #e4edf5; }
+.bookmaker .notification-icon.type-system { background: #f0f4f8; color: #526a82; }
+.bookmaker .popover-empty, .bookmaker .popover-link { color: #526a82; border-color: #e4edf5; }
 .bookmaker .popover-link { color: #1266d6; }
 .bookmaker .account-menu-head { border-color: #e4edf5; }
 .bookmaker .account-menu-head strong { color: #173451; }
-.bookmaker .account-menu-head small { color: #71869b; }
+.bookmaker .account-menu-head small { color: #526a82; }
 .bookmaker .account-menu-balance { background: #f4faef; border-color: #e4edf5; }
-.bookmaker .account-menu-balance span { color: #71869b; }
-.bookmaker .account-menu-balance strong { color: #1c8a46; }
+.bookmaker .account-menu-balance span { color: #526a82; }
+.bookmaker .account-menu-balance strong { color: #14773a; }
 .bookmaker .account-menu > a, .bookmaker .account-menu > button { color: #38516c; }
 .bookmaker .account-menu > a:hover, .bookmaker .account-menu > button:hover { background: #f2f8ff; color: #1266d6; }
 .bookmaker .account-menu .admin-link { color: #137638; }
@@ -108,7 +111,7 @@
 .bookmaker .mobile-drawer .logo-word span { color: #1c9b4b; }
 .bookmaker .mobile-user { background: #f6faff; border-color: #dce8f4; }
 .bookmaker .mobile-user strong { color: #173451; }
-.bookmaker .mobile-user span { color: #1c8a46; }
+.bookmaker .mobile-user span { color: #14773a; }
 .bookmaker .mobile-nav-section { border-color: #e2ebf4; }
 .bookmaker .mobile-nav-section .eyebrow { color: #1266d6; }
 .bookmaker .mobile-nav-section a { color: #38516c; }
@@ -132,7 +135,7 @@
 .bookmaker .badge-coral { background: #fff0f2; border-color: #f0c0c6; color: #b53c4d; }
 .bookmaker .badge-violet { background: #f2efff; border-color: #d4cbf6; color: #5d46c4; }
 .bookmaker .badge-amber { background: #fff8e8; border-color: #f0d7a1; color: #9a6811; }
-.bookmaker .badge-outline { border-color: #c4d6e7; color: #657b91; }
+.bookmaker .badge-outline { border-color: #c4d6e7; color: #526a82; }
 .bookmaker .status-dot.status-active { background: #20a653; box-shadow: 0 0 0 4px rgba(32,166,83,.12); }
 .bookmaker .live-pulse { background: #d84b5d; }
 .bookmaker .age-badge { border-color: #e2b467; color: #a36a08; }
@@ -148,7 +151,7 @@
 
 /* Forms */
 .bookmaker .field-label { color: #334d68; }
-.bookmaker .field-hint { color: #71869b; }
+.bookmaker .field-hint { color: #526a82; }
 .bookmaker .input { background: #fff; border-color: #c9d9e8; color: #173451; }
 .bookmaker .input:hover { border-color: #a8c1d7; }
 .bookmaker .input:focus { border-color: #6ba8e8; box-shadow: 0 0 0 3px rgba(18,102,214,.1); }
@@ -157,10 +160,10 @@
 .bookmaker .checkline { color: #425b73; }
 .bookmaker .checkline input { background: #fff; border-color: #b9cadd; }
 .bookmaker .checkline input:checked { background: #1c9b4b; border-color: #1c9b4b; }
-.bookmaker .input-action { color: #71869b; }
+.bookmaker .input-action { color: #526a82; }
 .bookmaker .form-error { background: #fff0f2; border-color: #f0b8bf; color: #b83243; }
 .bookmaker .segmented { background: #f2f7fc; border-color: #d2dfea; }
-.bookmaker .segmented button { color: #60788e; }
+.bookmaker .segmented button { color: #526a82; }
 .bookmaker .segmented button:hover { color: #173451; }
 .bookmaker .segmented button.active { background: #fff; color: #1266d6; box-shadow: 0 1px 4px rgba(18,50,80,.12); }
 .bookmaker .progress { background: #e0e9f2; }
@@ -175,22 +178,22 @@
 }
 .bookmaker .panel-head { color: #173451; border-color: #e3ecf4; }
 .bookmaker .panel-head svg { color: #1266d6; }
-.bookmaker .panel-note { color: #71869b; }
-.bookmaker .section-heading p { color: #5f748a; }
+.bookmaker .panel-note { color: #526a82; }
+.bookmaker .section-heading p { color: #526a82; }
 .bookmaker .section-link { color: #34526f; border-color: #c4d6e7; }
 .bookmaker .section-link:hover { color: #1266d6; border-color: #1266d6; }
 .bookmaker .text-btn { color: #1266d6; }
-.bookmaker .text-btn:hover { color: #1c8a46; }
-.bookmaker .muted-small { color: #71869b; }
+.bookmaker .text-btn:hover { color: #14773a; }
+.bookmaker .muted-small { color: #526a82; }
 .bookmaker .stat {
   background: #fff;
   border-color: #dce6ef;
   box-shadow: var(--shadow-soft);
 }
-.bookmaker .stat-top { color: #6b8197; }
+.bookmaker .stat-top { color: #526a82; }
 .bookmaker .stat-top svg { color: #1266d6; }
 .bookmaker .stat strong { color: #132b46; }
-.bookmaker .stat small { color: #71869b; }
+.bookmaker .stat small { color: #526a82; }
 .bookmaker .stat-lime { border-color: #bce3c8; }
 .bookmaker .stat-lime strong { color: #14773a; }
 .bookmaker .stat-cyan strong { color: #0f5cad; }
@@ -198,12 +201,12 @@
 .bookmaker .stat-amber strong { color: #98640c; }
 .bookmaker .skeleton { background: linear-gradient(90deg, #e8eff6 25%, #f5f9fd 37%, #e8eff6 63%); background-size: 400% 100%; }
 .bookmaker .empty-icon { background: #eaf3ff; border-color: #d4e4f4; color: #1266d6; }
-.bookmaker .empty-state p { color: #647b91; }
-.bookmaker .data-table th { color: #71869b; border-color: #e3ecf4; }
+.bookmaker .empty-state p { color: #526a82; }
+.bookmaker .data-table th { color: #526a82; border-color: #e3ecf4; }
 .bookmaker .data-table td { color: #3c556e; border-color: #edf2f7; }
 .bookmaker .data-table tbody tr:hover { background: #f7fbff; }
 .bookmaker .data-table strong { color: #173451; }
-.bookmaker .row-sub, .bookmaker .muted-cell { color: #7c90a4 !important; }
+.bookmaker .row-sub, .bookmaker .muted-cell { color: #526a82 !important; }
 .bookmaker .amount.negative { color: #b53c4d; }
 .bookmaker .amount.positive { color: #14773a; }
 .bookmaker .type-chip { background: #eaf3ff; color: #0f5cad; }
@@ -222,7 +225,7 @@
 .bookmaker .page-hero h1 { color: #10243d; }
 .bookmaker .page-hero p { color: #5f748a; }
 .bookmaker .page-hero-stats strong { color: #173451; }
-.bookmaker .page-hero-stats span { color: #71869b; }
+.bookmaker .page-hero-stats span { color: #526a82; }
 .bookmaker .compact-hero .page-hero-inner { padding-top: 38px; padding-bottom: 30px; }
 
 /* Home */
@@ -234,7 +237,7 @@
 .bookmaker .hero-copy h1 { color: #10243d; }
 .bookmaker .hero-copy h1 em { background: linear-gradient(100deg, #0e5ab9 0%, #138fbe 45%, #1b9a49 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .bookmaker .hero-lede { color: #5f748a; }
-.bookmaker .hero-trust { color: #647b91; }
+.bookmaker .hero-trust { color: #526a82; }
 .bookmaker .hero-trust svg { color: #1266d6; }
 .bookmaker .orbit-halo { background: radial-gradient(circle, rgba(18,102,214,.16), transparent 66%); }
 .bookmaker .orbit-ring { border-color: rgba(18,102,214,.2); }
@@ -245,39 +248,39 @@
 .bookmaker .orbit-core { background: radial-gradient(circle at 35% 28%, #ffffff, #eaf3fd 70%); border-color: #a9c9e8; box-shadow: 0 16px 40px rgba(30,70,110,.12), inset 0 0 24px rgba(18,102,214,.05); }
 .bookmaker .core-label { color: #1266d6; }
 .bookmaker .orbit-core strong { color: #10243d; }
-.bookmaker .core-sub { color: #6b8197; }
+.bookmaker .core-sub { color: #526a82; }
 .bookmaker .floating-card { background: #fff; border-color: #cfddea; box-shadow: 0 18px 36px rgba(24,60,96,.15); }
 .bookmaker .floating-card span { color: #1266d6; }
 .bookmaker .floating-card strong { color: #173451; }
-.bookmaker .floating-card em { color: #71869b; }
+.bookmaker .floating-card em { color: #526a82; }
 .bookmaker .floating-chip { background: #fff; border-color: #bce4c8; color: #14773a; box-shadow: 0 8px 22px rgba(24,60,96,.12); }
 .bookmaker .float-chip-two { color: #0f5cad; border-color: #c3daf2; }
 .bookmaker .hero-orbit-label { color: #a0b3c5; }
 .bookmaker .hero-metrics { background: rgba(255,255,255,.82); border-color: #d6e3ef; }
 .bookmaker .hero-metrics > div { border-color: #d6e3ef; }
 .bookmaker .hero-metrics strong { color: #10243d; }
-.bookmaker .hero-metrics span { color: #6b8197; }
+.bookmaker .hero-metrics span { color: #526a82; }
 .bookmaker .quick-strip { background: #fff; border-color: #d4e1ec; box-shadow: var(--shadow-soft); }
 .bookmaker .quick-sport:hover { background: #f2f8ff; border-color: #d9e8f5; }
 .bookmaker .quick-sport-icon { background: #eaf3ff; color: #1266d6; }
 .bookmaker .quick-sport strong { color: #173451; }
-.bookmaker .quick-sport small { color: #71869b; }
+.bookmaker .quick-sport small { color: #526a82; }
 .bookmaker .quick-sport > svg { color: #8da1b4; }
-.bookmaker .pulse-big > span, .bookmaker .pulse-list small { color: #6b8197; }
+.bookmaker .pulse-big > span, .bookmaker .pulse-list small { color: #526a82; }
 .bookmaker .pulse-big > strong { color: #10243d; }
 .bookmaker .pulse-bars i { background: linear-gradient(180deg, #58b7e8, rgba(88,183,232,.2)); }
 .bookmaker .pulse-list a { color: #38516c; border-color: #edf2f7; }
 .bookmaker .pulse-list strong { color: #173451; }
 .bookmaker .panel-foot-link { color: #1266d6; border-color: #e3ecf4; }
 .bookmaker .leaderboard { background: #f8fbff; border-color: #d9e5f1; }
-.bookmaker .leaderboard-head { color: #71869b; border-color: #d9e5f1; }
+.bookmaker .leaderboard-head { color: #526a82; border-color: #d9e5f1; }
 .bookmaker .leaderboard-row { border-color: #e8f0f7; color: #38516c; }
-.bookmaker .rank { background: #edf3f9; color: #6b8197; }
+.bookmaker .rank { background: #edf3f9; color: #526a82; }
 .bookmaker .rank-1 { background: #e7f9ec; color: #14773a; }
 .bookmaker .rank-2 { background: #eaf3ff; color: #0f5cad; }
 .bookmaker .rank-3 { background: #fff8e8; color: #98640c; }
 .bookmaker .mini-avatar { background: #dcecfb; color: #24537e; }
-.bookmaker .leaderboard-row > strong { color: #1c8a46; }
+.bookmaker .leaderboard-row > strong { color: #14773a; }
 
 .bookmaker .home-sports-grid { grid-template-columns: 210px minmax(0, 1fr) 280px; align-items: start; }
 .bookmaker .home-sports-sidebar { padding: 7px; }
@@ -291,14 +294,15 @@
 /* Match rows and odds */
 .bookmaker .match-row { border-color: #edf2f7; }
 .bookmaker .match-row:hover { background: #f7fbff; }
-.bookmaker .match-meta { color: #71869b; }
+.bookmaker .match-meta { color: #526a82; }
+.bookmaker .live-tag { color: #b42f43; }
 .bookmaker .match-row.is-finished { background: #fbfcfe; }
 .bookmaker .match-row.is-finished .match-info { opacity: .9; }
 .bookmaker .ft-tag { color: #14773a; background: #e9f9ee; border: 1px solid #b8e7c7; border-radius: 4px; padding: 2px 6px; font-size: .56rem; font-weight: 800; letter-spacing: .04em; }
 .bookmaker .sport-chip svg { color: #1266d6; }
 .bookmaker .team-link { color: #263f5b; }
 .bookmaker .team-link strong { color: #14773a; }
-.bookmaker .team-sep, .bookmaker .league-line { color: #8a9db0; }
+.bookmaker .team-sep, .bookmaker .league-line { color: #5f748a; }
 .bookmaker .odds-btn { background: #f2f7fc; border-color: #d3e0ec; color: #234a72; }
 .bookmaker .odds-btn:hover:not(:disabled) { background: #e8f3ff; border-color: #8fbce6; }
 .bookmaker .odds-btn.active { background: #e5f7eb; border-color: #29a658; }
@@ -307,34 +311,34 @@
 .bookmaker .league-head { background: #f2f7fc; border-color: #dce7f2; }
 .bookmaker .league-head strong { color: #173451; }
 .bookmaker .league-icon { background: #eaf3ff; color: #1266d6; }
-.bookmaker .league-sport { color: #71869b; }
+.bookmaker .league-sport { color: #526a82; }
 .bookmaker .sports-sidebar { box-shadow: var(--shadow-soft); }
-.bookmaker .sidebar-head { color: #6b8197; }
+.bookmaker .sidebar-head { color: #526a82; }
 .bookmaker .sport-filter { color: #536a81; }
 .bookmaker .sport-filter:hover { background: #f3f8fd; color: #173451; }
 .bookmaker .sport-filter.active { background: #e9f3ff; color: #0f5cad; }
 .bookmaker .sport-filter-icon { background: #f0f5fa; color: #1266d6; }
 .bookmaker .sport-filter.active .sport-filter-icon { background: #dcecff; color: #0d4fae; }
 .bookmaker .sport-filter.active .sport-filter-icon { background: #dcecff; }
-.bookmaker .sport-filter em { color: #8a9db0; }
-.bookmaker .sidebar-note { border-color: #e3ecf4; color: #647b91; }
+.bookmaker .sport-filter em { color: #526a82; }
+.bookmaker .sidebar-note { border-color: #e3ecf4; color: #526a82; }
 .bookmaker .sidebar-note svg { color: #1266d6; }
 .bookmaker .sidebar-note strong { color: #334d68; }
 .bookmaker .sports-toolbar { box-shadow: var(--shadow-soft); }
 .bookmaker .sports-search { background: #f8fbff; border-color: #d3e0ec; }
 .bookmaker .sports-search svg { color: #7b90a4; }
-.bookmaker .sports-footnote { color: #7c90a4; border-color: #cbdbe9; }
+.bookmaker .sports-footnote { color: #526a82; border-color: #cbdbe9; }
 .bookmaker .sports-footnote svg { color: #1266d6; }
 .bookmaker .live-spot-card { background: #fff; border-color: #d9e5f1; box-shadow: var(--shadow-soft); }
-.bookmaker .live-spot-top { color: #6b8197; }
+.bookmaker .live-spot-top { color: #526a82; }
 .bookmaker .live-spot-teams > div { color: #334d68; }
 .bookmaker .live-spot-teams strong { color: #14773a; }
 .bookmaker .bet-slip-rail { box-shadow: var(--shadow-soft); }
-.bookmaker .slip-rail-empty svg { color: #8a9db0; }
-.bookmaker .slip-rail-empty span { color: #6b8197; }
-.bookmaker .slip-rail-row { color: #647b91; border-color: #eaf0f6; }
+.bookmaker .slip-rail-empty svg { color: #5f748a; }
+.bookmaker .slip-rail-empty span { color: #526a82; }
+.bookmaker .slip-rail-row { color: #526a82; border-color: #eaf0f6; }
 .bookmaker .slip-rail-row strong { color: #0f5cad; }
-.bookmaker .slip-rail-totals > div { color: #6b8197; }
+.bookmaker .slip-rail-totals > div { color: #526a82; }
 .bookmaker .slip-rail-totals strong { color: #173451; }
 .bookmaker .rail-games .game-card { box-shadow: none; }
 
@@ -367,7 +371,7 @@
 .bookmaker .promo-violet { background: radial-gradient(500px 220px at 90% 0%, rgba(182,156,255,.2), transparent 60%), linear-gradient(150deg, #322a57, #1d1b3a 85%); }
 .bookmaker .promo-coral { background: radial-gradient(500px 220px at 90% 0%, rgba(255,125,138,.2), transparent 60%), linear-gradient(150deg, #572a36, #351e2a 85%); }
 .bookmaker .promo-info-band > div { background: #fff; border-color: #d9e5f1; }
-.bookmaker .promo-info-band span { color: #647b91; }
+.bookmaker .promo-info-band span { color: #526a82; }
 .bookmaker .promo-info-band strong { color: #334d68; }
 .bookmaker .tournament-band { background: linear-gradient(150deg, #0f3c6d, #0a284a); border-color: #0e4a7f; box-shadow: 0 18px 40px rgba(13,55,93,.2); }
 .bookmaker .tournament-copy h2 { color: #fff; }
@@ -378,11 +382,11 @@
 .bookmaker .trust-band { border-color: #d7e2ee; background: #d7e2ee; }
 .bookmaker .trust-band > div { background: #fff; }
 .bookmaker .trust-band strong { color: #173451; }
-.bookmaker .trust-band p { color: #647b91; }
+.bookmaker .trust-band p { color: #526a82; }
 .bookmaker .trust-icon { background: #eaf3ff; color: #1266d6; }
 .bookmaker .responsible-cta { background: linear-gradient(120deg, #e9f4ff, #f0faef); border-color: #cfe4d7; }
 .bookmaker .responsible-cta h2 { color: #173451; }
-.bookmaker .responsible-cta p { color: #647b91; }
+.bookmaker .responsible-cta p { color: #526a82; }
 .bookmaker .responsible-cta .btn-secondary { background: #fff; }
 .bookmaker .footer-brand .logo-word { color: #fff; }
 
@@ -396,9 +400,9 @@
 .bookmaker .notice-icon { background: #fff3d7; color: #98640c; }
 .bookmaker .live-casino-notice strong { color: #5b461e; }
 .bookmaker .live-casino-notice p { color: #7c6d4f; }
-.bookmaker .lobby-note { color: #6b8197; }
+.bookmaker .lobby-note { color: #526a82; }
 .bookmaker .lobby-note svg { color: #1c9b4b; }
-.bookmaker .lobby-info p { color: #647b91; }
+.bookmaker .lobby-info p { color: #526a82; }
 .bookmaker .live-casino-promo { background: #fff; border-color: #d7e2ee; }
 .bookmaker .live-casino-art { background: radial-gradient(400px 240px at 70% 20%, rgba(216,75,93,.14), transparent 60%), linear-gradient(145deg, #175486, #0c3358); }
 .bookmaker .live-casino-copy p { color: #c3dbef; }
@@ -410,26 +414,26 @@
 .bookmaker .tournament-card.featured { border-color: #bcd6ef; }
 .bookmaker .tournament-card-head { border-color: #e3ecf4; }
 .bookmaker .tournament-card-head h3 { color: #10243d; }
-.bookmaker .tournament-game { color: #6b8197; }
-.bookmaker .tournament-prize span { color: #71869b; }
+.bookmaker .tournament-game { color: #526a82; }
+.bookmaker .tournament-prize span { color: #526a82; }
 .bookmaker .tournament-prize strong { color: #14773a; }
 .bookmaker .tournament-leaderboard { background: #f8fbff; border-color: #d9e5f1; }
-.bookmaker .tournament-leaderboard .leaderboard-head { color: #71869b; border-color: #d9e5f1; }
+.bookmaker .tournament-leaderboard .leaderboard-head { color: #526a82; border-color: #d9e5f1; }
 .bookmaker .tournament-leaderboard .leaderboard-row { color: #38516c; border-color: #e8f0f7; }
-.bookmaker .tournament-card-foot { background: #f8fbff; border-color: #e3ecf4; color: #647b91; }
+.bookmaker .tournament-card-foot { background: #f8fbff; border-color: #e3ecf4; color: #526a82; }
 .bookmaker .tournament-rules { background: #fff; }
 .bookmaker .tournament-rules p, .bookmaker .tournament-rules li { color: #526a81; }
 
 /* Game page */
-.bookmaker .breadcrumbs { color: #7c90a4; }
+.bookmaker .breadcrumbs { color: #526a82; }
 .bookmaker .breadcrumbs a:hover { color: #1266d6; }
 .bookmaker .game-page-head h1 { color: #10243d; }
-.bookmaker .game-page-head p { color: #647b91; }
+.bookmaker .game-page-head p { color: #526a82; }
 .bookmaker .game-stage-panel { box-shadow: var(--shadow-soft); }
 .bookmaker .stage-toolbar { background: #f6faff; border-color: #e0ebf4; }
-.bookmaker .stage-status { color: #647b91; }
+.bookmaker .stage-status { color: #526a82; }
 .bookmaker .stage-status.online .status-dot { background: #20a653; }
-.bookmaker .stage-balance { color: #6b8197; }
+.bookmaker .stage-balance { color: #526a82; }
 .bookmaker .stage-balance strong { color: #14773a; }
 .bookmaker .game-control-grid { background: #f8fbff; border-color: #e2ebf4; }
 .bookmaker .stake-box-head label { color: #334d68; }
@@ -439,135 +443,135 @@
 .bookmaker .stake-input svg { color: #1c9b4b; }
 .bookmaker .quick-stakes button { background: #fff; border-color: #d3e0ec; color: #60788e; }
 .bookmaker .quick-stakes button:hover, .bookmaker .quick-stakes button.active { background: #e9f9ee; border-color: #94d8aa; color: #14773a; }
-.bookmaker .stake-meta { color: #7c90a4; }
+.bookmaker .stake-meta { color: #526a82; }
 .bookmaker .game-facts { background: #fff; border-color: #dfe9f3; }
-.bookmaker .game-facts > div { border-color: #edf2f7; color: #647b91; }
-.bookmaker .game-facts > div span { color: #647b91; }
+.bookmaker .game-facts > div { border-color: #edf2f7; color: #526a82; }
+.bookmaker .game-facts > div span { color: #526a82; }
 .bookmaker .game-facts > div strong { color: #173451; }
-.bookmaker .game-facts .fact-note { color: #7c90a4; }
+.bookmaker .game-facts .fact-note { color: #526a82; }
 .bookmaker .detail-tabs { border-color: #e0ebf4; }
-.bookmaker .detail-tabs button { color: #6b8197; }
+.bookmaker .detail-tabs button { color: #526a82; }
 .bookmaker .detail-tabs button.active { color: #173451; }
 .bookmaker .detail-copy > p { color: #526a81; }
 .bookmaker .detail-warning { background: #fffaf0; border-color: #efd9ab; color: #7c6d4f; }
 .bookmaker .howto-list p { color: #526a81; }
 .bookmaker .feature-list span { color: #526a81; }
 .bookmaker .game-facts-panel, .bookmaker .activity-panel, .bookmaker .rounds-panel, .bookmaker .responsible-mini { background: #fff; }
-.bookmaker .fact-list > div { border-color: #edf2f7; color: #647b91; }
-.bookmaker .fact-list span { color: #647b91; }
+.bookmaker .fact-list > div { border-color: #edf2f7; color: #526a82; }
+.bookmaker .fact-list span { color: #526a82; }
 .bookmaker .fact-list strong { color: #173451; }
 .bookmaker .activity-stats { border-color: #e2ebf4; }
-.bookmaker .activity-stats span, .bookmaker .top-wins-label { color: #6b8197; }
+.bookmaker .activity-stats span, .bookmaker .top-wins-label { color: #526a82; }
 .bookmaker .top-win { border-color: #edf2f7; }
-.bookmaker .top-win > span:nth-child(2) { color: #647b91; }
+.bookmaker .top-win > span:nth-child(2) { color: #526a82; }
 .bookmaker .mini-round { border-color: #edf2f7; }
-.bookmaker .mini-round span { color: #7c90a4; }
-.bookmaker .responsible-mini span { color: #647b91; }
+.bookmaker .mini-round span { color: #526a82; }
+.bookmaker .responsible-mini span { color: #526a82; }
 .bookmaker .provider-preview { background: #0f3156; }
 .bookmaker .provider-overlay p, .bookmaker .provider-fineprint { color: #c3dbef; }
 
 /* Account */
 .bookmaker .account-hero { background: radial-gradient(700px 300px at 85% 0%, rgba(28,155,75,.08), transparent 62%), linear-gradient(180deg, #e7f2ff, #f7fbff); border-color: #d7e3ef; }
 .bookmaker .account-identity h1 { color: #10243d; }
-.bookmaker .account-meta { color: #647b91; }
+.bookmaker .account-meta { color: #526a82; }
 .bookmaker .account-balance-block { border-color: #d5e2ee; }
-.bookmaker .account-balance-block span { color: #6b8197; }
+.bookmaker .account-balance-block span { color: #526a82; }
 .bookmaker .account-balance-block strong { color: #14773a; }
-.bookmaker .account-xp > div { color: #6b8197; }
-.bookmaker .account-xp small { color: #8a9db0; }
+.bookmaker .account-xp > div { color: #526a82; }
+.bookmaker .account-xp small { color: #5f748a; }
 .bookmaker .account-nav-card { background: #fff; border-color: #d7e2ee; }
 .bookmaker .account-nav-link { color: #5f748a; }
 .bookmaker .account-nav-link:hover { background: #f3f8fd; color: #173451; }
 .bookmaker .account-nav-link.active { background: #e9f3ff; color: #0f5cad; }
-.bookmaker .support-card > span, .bookmaker .account-nav-note { color: #7c90a4; }
+.bookmaker .support-card > span, .bookmaker .account-nav-note { color: #526a82; }
 .bookmaker .support-card-icon { background: #e9f9ee; color: #14773a; }
 .bookmaker .account-welcome h2 { color: #10243d; }
-.bookmaker .account-welcome p { color: #647b91; }
+.bookmaker .account-welcome p { color: #526a82; }
 .bookmaker .txn-row, .bookmaker .round-row, .bookmaker .limits-summary > div, .bookmaker .snippet-row { border-color: #edf2f7; }
 .bookmaker .txn-copy strong, .bookmaker .round-row strong, .bookmaker .snippet-row strong { color: #334d68; }
-.bookmaker .txn-copy span, .bookmaker .txn-amount span, .bookmaker .round-row span, .bookmaker .snippet-row span { color: #7c90a4; }
+.bookmaker .txn-copy span, .bookmaker .txn-amount span, .bookmaker .round-row span, .bookmaker .snippet-row span { color: #526a82; }
 .bookmaker .txn-icon { background: #fff0f2; color: #b53c4d; }
 .bookmaker .txn-icon.in { background: #e9f9ee; color: #14773a; }
-.bookmaker .round-dot { background: #edf3f9; color: #647b91; }
+.bookmaker .round-dot { background: #edf3f9; color: #526a82; }
 .bookmaker .round-dot.win { background: #e9f9ee; color: #14773a; }
-.bookmaker .limits-summary span { color: #647b91; }
+.bookmaker .limits-summary span { color: #526a82; }
 .bookmaker .limits-summary strong { color: #173451; }
-.bookmaker .limits-note { color: #7c90a4; border-color: #e3ecf4; }
+.bookmaker .limits-note { color: #526a82; border-color: #e3ecf4; }
 .bookmaker .quick-card { background: #fff; border-color: #d7e2ee; color: #38516c; }
 .bookmaker .quick-card:hover { border-color: #8cbbe8; }
 .bookmaker .quick-card > svg:first-child { color: #1266d6; }
-.bookmaker .quick-card span { color: #71869b; }
-.bookmaker .account-fineprint { color: #7c90a4; }
+.bookmaker .quick-card span { color: #526a82; }
+.bookmaker .account-fineprint { color: #526a82; }
 .bookmaker .subpage-head h2 { color: #10243d; }
-.bookmaker .subpage-head p { color: #647b91; }
+.bookmaker .subpage-head p { color: #526a82; }
 .bookmaker .profile-card, .bookmaker .profile-form { background: #fff; }
 .bookmaker .profile-avatar-row { border-color: #e3ecf4; }
-.bookmaker .profile-avatar-row > div > span { color: #71869b; }
-.bookmaker .profile-facts > div { border-color: #edf2f7; color: #647b91; }
-.bookmaker .profile-facts span { color: #71869b; }
+.bookmaker .profile-avatar-row > div > span { color: #526a82; }
+.bookmaker .profile-facts > div { border-color: #edf2f7; color: #526a82; }
+.bookmaker .profile-facts span { color: #526a82; }
 .bookmaker .identity-panel { background: #fff; }
 .bookmaker .identity-panel p, .bookmaker .identity-panel h3 { color: #334d68; }
 .bookmaker .wallet-hero { background: radial-gradient(500px 220px at 15% 0%, rgba(28,155,75,.08), transparent 60%), #fff; }
-.bookmaker .wallet-balance > span { color: #71869b; }
+.bookmaker .wallet-balance > span { color: #526a82; }
 .bookmaker .wallet-balance strong { color: #14773a; }
-.bookmaker .wallet-balance small, .bookmaker .wallet-disabled-note { color: #7c90a4; }
+.bookmaker .wallet-balance small, .bookmaker .wallet-disabled-note { color: #526a82; }
 .bookmaker .wallet-summary > div { background: #fff; border-color: #d7e2ee; }
-.bookmaker .wallet-summary span { color: #71869b; }
+.bookmaker .wallet-summary span { color: #526a82; }
 .bookmaker .wallet-summary strong { color: #173451; }
 .bookmaker .bets-toolbar, .bookmaker .wallet-toolbar { border-color: #e3ecf4; }
 .bookmaker .bet-card { background: #fff; border-color: #d7e2ee; }
 .bookmaker .bet-card-head, .bookmaker .bet-card-foot { border-color: #e3ecf4; }
 .bookmaker .bet-card-head > div:first-child > strong { color: #173451; }
-.bookmaker .bet-card-head > div:first-child > span:last-child, .bookmaker .bet-card-foot { color: #7c90a4; }
-.bookmaker .bet-head-numbers span { color: #71869b; }
+.bookmaker .bet-card-head > div:first-child > span:last-child, .bookmaker .bet-card-foot { color: #526a82; }
+.bookmaker .bet-head-numbers span { color: #526a82; }
 .bookmaker .bet-head-numbers strong { color: #173451; }
 .bookmaker .bet-selection { border-color: #edf2f7; }
 .bookmaker .bet-selection strong { color: #334d68; }
-.bookmaker .selection-match { color: #71869b; }
+.bookmaker .selection-match { color: #526a82; }
 .bookmaker .selection-side > strong { color: #0f5cad; }
-.bookmaker .selection-result { background: #f0f4f8; color: #647b91; }
+.bookmaker .selection-result { background: #f0f4f8; color: #526a82; }
 .bookmaker .selection-result.won { background: #e9f9ee; color: #14773a; }
 .bookmaker .selection-result.lost { background: #fff0f2; color: #b53c4d; }
 .bookmaker .round-history-row { border-color: #edf2f7; }
 .bookmaker .round-history-main strong { color: #334d68; }
-.bookmaker .round-history-main span { color: #647b91; }
-.bookmaker .round-history-main small { color: #8a9db0; }
-.bookmaker .round-history-numbers span { color: #71869b; }
+.bookmaker .round-history-main span { color: #526a82; }
+.bookmaker .round-history-main small { color: #5f748a; }
+.bookmaker .round-history-numbers span { color: #526a82; }
 .bookmaker .round-history-numbers strong { color: #173451; }
 .bookmaker .round-detail { background: #f8fbff; border-color: #d9e5f1; }
-.bookmaker .round-detail span { color: #71869b; }
+.bookmaker .round-detail span { color: #526a82; }
 .bookmaker .round-detail strong { color: #334d68; }
 .bookmaker .notification-centre-row { border-color: #edf2f7; background: #fff; }
 .bookmaker .notification-centre-row:hover { background: #f8fbff; }
 .bookmaker .notification-centre-row.unread { background: #f0f8ff; }
 .bookmaker .notification-centre-copy strong { color: #173451; }
-.bookmaker .notification-centre-copy p { color: #647b91; }
-.bookmaker .notification-centre-copy small { color: #8a9db0; }
+.bookmaker .notification-centre-copy p { color: #526a82; }
+.bookmaker .notification-centre-copy small { color: #5f748a; }
 .bookmaker .notification-open { color: #1266d6; }
 .bookmaker .security-card, .bookmaker .sessions-panel, .bookmaker .security-note, .bookmaker .responsible-tips, .bookmaker .responsible-support, .bookmaker .responsible-facts, .bookmaker .referrals-panel, .bookmaker .referral-rules { background: #fff; }
-.bookmaker .security-card-body p, .bookmaker .security-card-head span { color: #647b91; }
+.bookmaker .security-card-body p, .bookmaker .security-card-head span { color: #526a82; }
 .bookmaker .session-row { border-color: #edf2f7; }
 .bookmaker .session-row.current { background: #f7fbf5; }
 .bookmaker .session-copy strong { color: #334d68; }
-.bookmaker .session-copy span { color: #647b91; }
-.bookmaker .session-copy small { color: #8a9db0; }
-.bookmaker .session-icon { background: #f0f4f8; color: #647b91; }
-.bookmaker .security-note p { color: #647b91; }
+.bookmaker .session-copy span { color: #526a82; }
+.bookmaker .session-copy small { color: #5f748a; }
+.bookmaker .session-icon { background: #f0f4f8; color: #526a82; }
+.bookmaker .security-note p { color: #526a82; }
 .bookmaker .referral-hero { background: radial-gradient(500px 260px at 85% 20%, rgba(28,155,75,.09), transparent 60%), #fff; }
 .bookmaker .referral-copy h3 { color: #10243d; }
-.bookmaker .referral-copy p { color: #647b91; }
+.bookmaker .referral-copy p { color: #526a82; }
 .bookmaker .referral-code strong { color: #14773a; }
 .bookmaker .referral-orbit { border-color: #b9dfc6; background: radial-gradient(circle, #e9f9ee, transparent 68%); }
 .bookmaker .referral-orbit span { color: #14773a; }
 .bookmaker .referral-rules strong { color: #334d68; }
-.bookmaker .referral-rules p { color: #647b91; }
+.bookmaker .referral-rules p { color: #526a82; }
 .bookmaker .restriction-banner { background: #fff0f2; border-color: #efbcc3; }
 .bookmaker .restriction-banner span { color: #8a5260; }
-.bookmaker .responsible-tips li, .bookmaker .responsible-support span, .bookmaker .responsible-side-note { color: #647b91; }
-.bookmaker .responsible-facts span { color: #71869b; }
+.bookmaker .responsible-tips li, .bookmaker .responsible-support span, .bookmaker .responsible-side-note { color: #526a82; }
+.bookmaker .responsible-facts span { color: #526a82; }
 .bookmaker .current-limits { border-color: #e3ecf4; }
-.bookmaker .current-limits span { color: #71869b; }
-.bookmaker .current-limits div span { color: #8a9db0; }
+.bookmaker .current-limits span { color: #526a82; }
+.bookmaker .current-limits div span { color: #5f748a; }
 .bookmaker .account-nav-link em { background: #62ed91; color: #0b3b24; }
 
 /* Support / help / content */
@@ -575,57 +579,57 @@
 .bookmaker .ticket-item { border-color: #edf2f7; color: #38516c; background: transparent; }
 .bookmaker .ticket-item:hover { background: #f7fbff; }
 .bookmaker .ticket-item.active { background: #eaf3ff; }
-.bookmaker .ticket-item span, .bookmaker .ticket-form .form-note { color: #71869b; }
+.bookmaker .ticket-item span, .bookmaker .ticket-form .form-note { color: #526a82; }
 .bookmaker .thread-head { border-color: #e3ecf4; }
 .bookmaker .thread-head h2 { color: #10243d; }
-.bookmaker .thread-head span { color: #71869b; }
+.bookmaker .thread-head span { color: #526a82; }
 .bookmaker .thread-head .badge-lime { color: #14773a; background: #e9f9ee; border-color: #b8e7c7; }
-.bookmaker .thread-head .badge-outline { color: #657b91; }
-.bookmaker .thread-message-meta { color: #8a9db0; }
+.bookmaker .thread-head .badge-outline { color: #526a82; }
+.bookmaker .thread-message-meta { color: #5f748a; }
 .bookmaker .thread-message-meta strong { color: #526a81; }
 .bookmaker .thread-message p { background: #f4f8fc; border-color: #dde7f1; color: #334d68; }
 .bookmaker .thread-message.mine p { background: #eaf4ff; border-color: #c8dff5; }
 .bookmaker .thread-message.internal p { background: #fff8e8; border-color: #efd9ab; }
 .bookmaker .thread-reply { border-color: #e3ecf4; }
-.bookmaker .thread-reply > div > span { color: #8a9db0; }
-.bookmaker .support-help-card span { color: #647b91; }
+.bookmaker .thread-reply > div > span { color: #5f748a; }
+.bookmaker .support-help-card span { color: #526a82; }
 .bookmaker .help-categories button { background: #f8fbff; border-color: #d7e2ee; color: #5f748a; }
 .bookmaker .help-categories button.active { color: #0f5cad; border-color: #b9d7f2; background: #eaf3ff; }
-.bookmaker .help-list-item > span { color: #8a9db0; }
+.bookmaker .help-list-item > span { color: #5f748a; }
 .bookmaker .help-list-item strong { color: #334d68; }
 .bookmaker .help-list-item:hover, .bookmaker .help-list-item.active { background: #f4f9ff; border-color: #d7e2ee; }
 .bookmaker .help-list-item.active strong { color: #0f5cad; }
 .bookmaker .help-hero-card { background: #fff; border-color: #d7e2ee; box-shadow: var(--shadow-soft); }
 .bookmaker .help-hero-card svg { color: #6d56d9; }
 .bookmaker .help-hero-card strong { color: #173451; }
-.bookmaker .help-hero-card span { color: #647b91; }
+.bookmaker .help-hero-card span { color: #526a82; }
 .bookmaker .help-hero-card > div { color: #315a7e; }
 .bookmaker .help-article > p, .bookmaker .help-welcome > p { color: #526a81; }
-.bookmaker .help-article-meta > span { color: #8a9db0; }
+.bookmaker .help-article-meta > span { color: #5f748a; }
 .bookmaker .help-article-note { background: #f8fbff; border-color: #d9e5f1; }
-.bookmaker .help-article-note span { color: #647b91; }
-.bookmaker .help-related a { border-color: #e8eff6; color: #647b91; }
+.bookmaker .help-article-note span { color: #526a82; }
+.bookmaker .help-related a { border-color: #e8eff6; color: #526a82; }
 .bookmaker .help-quick-grid a { background: #f8fbff; border-color: #d7e2ee; }
 .bookmaker .help-quick-grid span { color: #1266d6; }
 .bookmaker .help-quick-grid strong { color: #334d68; }
 .bookmaker .static-nav a { color: #5f748a; }
 .bookmaker .static-nav a:hover { background: #f4f9ff; color: #173451; }
 .bookmaker .static-nav a.active { background: #eaf3ff; color: #0f5cad; }
-.bookmaker .static-nav-note { color: #7c90a4; border-color: #e3ecf4; }
+.bookmaker .static-nav-note { color: #526a82; border-color: #e3ecf4; }
 .bookmaker .static-article-head { border-color: #e3ecf4; }
 .bookmaker .static-prose p { color: #425b73; }
 .bookmaker .static-prose p.lead { color: #173451; }
 .bookmaker .about-values > div { background: #f8fbff; border-color: #d9e5f1; }
 .bookmaker .about-values strong { color: #334d68; }
-.bookmaker .about-values p { color: #647b91; }
+.bookmaker .about-values p { color: #526a82; }
 .bookmaker .safety-callout { background: #f2fbf4; border-color: #bfe4c9; }
 .bookmaker .safety-callout p { color: #526a81; }
-.bookmaker .static-legal-note { color: #7c90a4; border-color: #e3ecf4; }
+.bookmaker .static-legal-note { color: #526a82; border-color: #e3ecf4; }
 .bookmaker .static-hero { padding: 34px 0 28px; }
 .bookmaker .static-hero h1 { margin-top: 8px; }
 .bookmaker .static-hero p { max-width: 700px; margin-top: 8px; }
-.bookmaker .static-hero-meta { color: #6b8197; }
-.bookmaker .not-found-page p { color: #647b91; }
+.bookmaker .static-hero-meta { color: #526a82; }
+.bookmaker .not-found-page p { color: #526a82; }
 .bookmaker .not-found-orbit { border-color: #b9d7f2; }
 
 /* Footer */
@@ -649,25 +653,25 @@
 .bookmaker .bet-slip-head h2 { color: #10243d; }
 .bookmaker .bet-slip-head h2 em { color: #14773a; }
 .bookmaker .slip-empty-icon { background: #eaf3ff; border-color: #d5e4f4; color: #1266d6; }
-.bookmaker .slip-empty p { color: #647b91; }
+.bookmaker .slip-empty p { color: #526a82; }
 .bookmaker .slip-selection { border-color: #e8eff6; }
-.bookmaker .slip-league { color: #8a9db0; }
+.bookmaker .slip-league { color: #5f748a; }
 .bookmaker .slip-selection-copy strong { color: #334d68; }
-.bookmaker .slip-selection-copy small { color: #8a9db0; }
+.bookmaker .slip-selection-copy small { color: #5f748a; }
 .bookmaker .slip-selection-side > strong { color: #0f5cad; }
-.bookmaker .slip-pick { background: #edf3f9; color: #6b8197; }
+.bookmaker .slip-pick { background: #edf3f9; color: #526a82; }
 .bookmaker .slip-pick.home { background: #eaf3ff; color: #0f5cad; }
 .bookmaker .slip-pick.draw { background: #f0f4f8; color: #526a81; }
 .bookmaker .slip-pick.away { background: #e9f9ee; color: #14773a; }
 .bookmaker .slip-mode { color: #334d68; }
-.bookmaker .slip-mode-note, .bookmaker .slip-stake > label span { color: #71869b; }
+.bookmaker .slip-mode-note, .bookmaker .slip-stake > label span { color: #526a82; }
 .bookmaker .slip-summary { border-color: #e3ecf4; }
-.bookmaker .slip-summary span { color: #71869b; }
+.bookmaker .slip-summary span { color: #526a82; }
 .bookmaker .slip-summary strong { color: #173451; }
 .bookmaker .slip-signin { background: #eef8ff; border-color: #cbe2f6; }
-.bookmaker .slip-signin span { color: #647b91; }
+.bookmaker .slip-signin span { color: #526a82; }
 .bookmaker .slip-signin a { color: #1266d6; }
-.bookmaker .slip-disclaimer { color: #8a9db0; }
+.bookmaker .slip-disclaimer { color: #5f748a; }
 .bookmaker .modal { background: #fff; border-color: #cfddea; box-shadow: 0 24px 60px rgba(13,44,73,.25); }
 .bookmaker .modal-head, .bookmaker .modal-foot { background: #fff; border-color: #e3ecf4; }
 .bookmaker .modal-head h2 { color: #10243d; }
@@ -680,15 +684,15 @@
 .bookmaker.auth-page .auth-art-foot { color: #a9c4dd; }
 .bookmaker.auth-page .auth-panel { background: #fff; }
 .bookmaker.auth-page .auth-panel .logo-word { color: #10243d; }
-.bookmaker.auth-page .auth-panel .logo-word span { color: #1c9b4b; }
+.bookmaker.auth-page .auth-panel .logo-word span { color: #14773a; }
 .bookmaker.auth-page .auth-heading h1 { color: #10243d; }
-.bookmaker.auth-page .auth-heading p { color: #647b91; }
-.bookmaker.auth-page .auth-legal, .bookmaker.auth-page .auth-switch { color: #7c90a4; }
+.bookmaker.auth-page .auth-heading p { color: #526a82; }
+.bookmaker.auth-page .auth-legal, .bookmaker.auth-page .auth-switch { color: #526a82; }
 .bookmaker.auth-page .auth-switch a { color: #1266d6; }
 .bookmaker.auth-page .demo-login { background: #f8fbff; border-color: #cfddea; }
 .bookmaker.auth-page .demo-login button { background: #fff; border-color: #d7e2ee; color: #38516c; }
 .bookmaker.auth-page .success-panel { background: #f2fbf4; border-color: #bfe4c9; }
-.bookmaker.auth-page .success-panel p { color: #647b91; }
+.bookmaker.auth-page .success-panel p { color: #526a82; }
 
 @media (max-width: 1400px) {
   .bookmaker .nav-link { padding: 0 6px; font-size: .72rem; gap: 4px; }

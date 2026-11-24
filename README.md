@@ -162,6 +162,8 @@ node scripts/settlement-smoke.mjs
 
 The demo settlement worker runs every 60 seconds by default and is controlled by `DEMO_MATCH_MINUTES` (default 90), `DEMO_SETTLEMENT_INTERVAL_MS` (default 60000) and `DEMO_SETTLEMENT=off` in `backend/.env`.
 
+Final desktop Lighthouse audits returned **100 accessibility / 100 best practices / 100 SEO** on the public, player and control-room pages listed in `docs/UI_UX_AUDIT.md`. A Playwright/Edge real-user journey passed registration, bet placement, Dice Roll, wallet, bet history, support, mobile dialog keyboard behaviour, player login and Master Admin access.
+
 ## Documentation
 
 The complete handoff set is indexed in [`docs/README.md`](docs/README.md), including:
@@ -170,7 +172,7 @@ The complete handoff set is indexed in [`docs/README.md`](docs/README.md), inclu
 - design system, component and route inventories;
 - game catalogue and admin/database architecture;
 - API specification;
-- responsive, visual, end-to-end and security test reports;
+- UI/UX audit, responsive, visual, end-to-end and security test reports;
 - known limitations, production readiness and the 19xbet365 handoff.
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the data model, API map, hierarchy rules, and integrity model. See [`docs/REFERENCE_PRODUCT_ANALYSIS.md`](docs/REFERENCE_PRODUCT_ANALYSIS.md) for the full reference research notes. Screenshots can be regenerated with `node scripts/capture-screenshots.mjs` while the production server is running.

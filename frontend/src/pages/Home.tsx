@@ -84,14 +84,14 @@ export function Home() {
               <Trophy size={14} /> 250,000 VC prize pool
             </div>
             <div className="floating-chip float-chip-two">
-              <Zap size={14} /> Next round in 03s
+              <ServerCog size={14} /> Rounds start on demand
             </div>
             <div className="hero-orbit-label">SERVER<br />AUTHORITATIVE</div>
           </div>
         </div>
         <div className="hero-metrics">
           <div><strong>{number(games.length)}</strong><span>catalogue titles</span></div>
-          <div><strong>{number(playable.length + 3)}</strong><span>playable originals</span></div>
+          <div><strong>{number(games.filter((game) => game.playable).length)}</strong><span>playable originals</span></div>
           <div><strong>{number(matches.length)}</strong><span>demo fixtures</span></div>
           <div><strong>100%</strong><span>virtual credits</span></div>
         </div>

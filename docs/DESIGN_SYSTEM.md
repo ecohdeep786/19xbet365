@@ -25,7 +25,7 @@ The `PublicLayout` wraps the header, pages, footer and overlays in `.bookmaker`;
 | line strong | `#b9cadd` | emphasis |
 | text | `#10243d` | primary copy |
 | text soft | `#304660` | secondary |
-| muted | `#5f748a` | helper |
+| muted | `#526a82` | helper / secondary text (5.6:1 on white) |
 | blue | `#1266d6` | information/active/odds |
 | blue deep | `#0d4fae` | primary gradient |
 | green | `#1c9b4b` | CTA/win |
@@ -116,4 +116,5 @@ No fake urgency countdowns or flashing alerts.
 - Reduced-motion media query.
 - Semantic buttons, field labels, `aria-label` on icon controls, `aria-pressed` on odds, dialog `aria-modal`, live toast region.
 - Responsive controls retain 31–50px target heights.
-- Contrast corrected for light surfaces, promo cards, game-card overlays, tournament cards, help hero, support badges and legal pages.
+- Contrast corrected for light surfaces, promo cards, game-card overlays, tournament cards, help hero, support badges, auth pages and legal pages. Positive monetary text uses `#14773a` (5.6:1 on white) while the brighter `#1c9b4b` remains the action/button green.
+- Lighthouse desktop audit returns **100 accessibility / 100 best practices / 100 SEO** on the public, player and admin pages listed in `UI_UX_AUDIT.md`.

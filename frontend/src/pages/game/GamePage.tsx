@@ -115,13 +115,13 @@ export function GamePage() {
             </div>
           </div>
           <div className="game-head-actions">
-            <button className={classNames("icon-btn labeled", isFavorite && "active")} onClick={() => toggleFavorite(game.id)} aria-label="Toggle favourite">
+            <button className={classNames("icon-btn labeled", isFavorite && "active")} onClick={() => toggleFavorite(game.id)} aria-label={isFavorite ? `Saved: remove ${game.name} from favourites` : `Save ${game.name} to favourites`}>
               <Heart size={17} fill={isFavorite ? "currentColor" : "none"} /> <span>{isFavorite ? "Saved" : "Save"}</span>
             </button>
             <button className="icon-btn labeled" onClick={async () => {
               try { await navigator.clipboard.writeText(window.location.href); push("Game link copied.", "success"); }
               catch { push("Copy is unavailable in this browser.", "info"); }
-            }} aria-label="Copy game link">
+            }} aria-label="Share game link">
               <Copy size={16} /> <span>Share</span>
             </button>
             <Link to="/instant" className="btn btn-ghost btn-sm"><ArrowLeft size={15} /> Lobby</Link>

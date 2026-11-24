@@ -1,9 +1,11 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Coins, ReceiptText, ShieldCheck, Trash2, X } from "lucide-react";
 import { useAuth } from "../state/AuthContext";
 import { useBetSlip } from "../state/BetSlipContext";
 import { Button } from "./UI";
 import { classNames, vc } from "../lib/format";
+import { useDialog } from "../lib/useDialog";
 
 function selectionName(matchLabel: string, selection: "home" | "draw" | "away") {
   const [home, away] = matchLabel.split(" vs ");
@@ -14,6 +16,8 @@ function selectionName(matchLabel: string, selection: "home" | "draw" | "away") 
 export function BetSlipDrawer() {
   const { selections, open, setOpen, removeSelection, clear, stake, setStake, totalOdds, potentialReturn, placeBet, busy } = useBetSlip();
   const { user } = useAuth();
+  const panelRef = useRef<HTMLElement>(null);
+  useDialog(open, () => setOpen(false), panelRef);
 
   if (!open) return null;
   const multiple = selections.length > 1;
@@ -21,11 +25,11 @@ export function BetSlipDrawer() {
   return (
     <>
       <div className="drawer-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }} />
-      <aside className="bet-slip" aria-label="Bet slip">
+      <aside className="bet-slip" role="dialog" aria-modal="true" aria-labelledby="bet-slip-title" ref={panelRef}>
         <div className="bet-slip-head">
           <div>
             <span className="eyebrow">Your selection{selections.length === 1 ? "" : "s"}</span>
-            <h2>Bet slip <em>{selections.length}</em></h2>
+            <h2 id="bet-slip-title">Bet slip <em>{selections.length}</em></h2>
           </div>
           <div className="bet-slip-head-actions">
             {selections.length > 0 && <button className="text-btn" onClick={clear}>Clear</button>}
@@ -68,6 +72,7 @@ export function BetSlipDrawer() {
                   <input
                     id="slip-stake"
                     type="number"
+                    data-autofocus
                     min={10}
                     max={5000}
                     step={10}

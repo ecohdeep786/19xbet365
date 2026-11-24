@@ -1,7 +1,7 @@
 # Responsive Test Report
 
 **Date:** 24 November 2026  
-**Method:** A same-origin iframe harness rendered the production build at controlled widths and compared `documentElement.scrollWidth` with `clientWidth + 1` on every route. Horizontal overflow was treated as a defect. Final evidence captures were then regenerated with `scripts/capture-screenshots.mjs` in headless Edge at 1440×900 and 390×844. The temporary QA harness was removed from the production output after acceptance.
+**Method:** A same-origin iframe harness rendered the production build at controlled widths and compared `documentElement.scrollWidth` with `clientWidth + 1` on every route. Horizontal overflow was treated as a defect. The final sweep was repeated through Playwright/Edge at ten viewport widths and 16 routes, then evidence captures were regenerated with `scripts/capture-screenshots.mjs` at 1440×900 and 390×844. Temporary QA harness files were removed from the production output after acceptance.
 
 ## Widths tested
 

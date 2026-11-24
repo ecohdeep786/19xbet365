@@ -13,6 +13,7 @@ import { useToast } from "../state/ToastContext";
 import { Avatar, Badge, Button } from "./UI";
 import { BetSlipDrawer } from "./BetSlipDrawer";
 import { SportIcon } from "./SportIcon";
+import { useDialog } from "../lib/useDialog";
 import { classNames, relative, vc } from "../lib/format";
 
 export function Logo({ compact = false }: { compact?: boolean }) {
@@ -99,19 +100,24 @@ export function Header() {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (!accountOpen && !bellOpen) return;
+    if (!accountOpen && !bellOpen && !searchOpen) return;
     const onPointerDown = (event: PointerEvent) => {
       if (accountOpen && accountRef.current && !accountRef.current.contains(event.target as Node)) setAccountOpen(false);
       if (bellOpen && bellRef.current && !bellRef.current.contains(event.target as Node)) setBellOpen(false);
     };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setAccountOpen(false);
+      setBellOpen(false);
+      setSearchOpen(false);
+    };
     document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [accountOpen, bellOpen]);
-
-  useEffect(() => {
-    document.body.classList.toggle("no-scroll", mobileOpen);
-    return () => document.body.classList.remove("no-scroll");
-  }, [mobileOpen]);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [accountOpen, bellOpen, searchOpen]);
 
   const submitSearch = (event: FormEvent) => {
     event.preventDefault();
@@ -165,7 +171,7 @@ export function Header() {
           </nav>
           <div className="header-actions">
             <span className="header-locale" title="English interface · virtual credits">EN · VC</span>
-            <button className="icon-btn header-search-btn" onClick={() => setSearchOpen((open) => !open)} aria-label="Search games and fixtures">
+            <button className="icon-btn header-search-btn" onClick={() => setSearchOpen((open) => !open)} aria-label="Search games and fixtures" aria-expanded={searchOpen} aria-controls="header-search">
               <Search size={19} />
             </button>
             {user ? (
@@ -175,7 +181,13 @@ export function Header() {
                   <span>{vc(user.balance)}</span>
                 </div>
                 <div className="header-pop" ref={bellRef}>
-                  <button className={classNames("icon-btn bell-btn", bellOpen && "active")} onClick={() => { setBellOpen((open) => !open); setAccountOpen(false); }} aria-label="Notifications">
+                  <button
+                    className={classNames("icon-btn bell-btn", bellOpen && "active")}
+                    onClick={() => { setBellOpen((open) => !open); setAccountOpen(false); }}
+                    aria-label={unreadCount > 0 ? `Notifications, ${unreadCount} unread` : "Notifications"}
+                    aria-expanded={bellOpen}
+                    aria-haspopup="true"
+                  >
                     <Bell size={19} />
                     {unreadCount > 0 && <span className="notification-count">{unreadCount}</span>}
                   </button>
@@ -207,7 +219,13 @@ export function Header() {
                   )}
                 </div>
                 <div className="header-pop account-pop" ref={accountRef}>
-                  <button className="account-trigger" onClick={() => { setAccountOpen((open) => !open); setBellOpen(false); }} aria-label="Open account menu">
+                  <button
+                    className="account-trigger"
+                    onClick={() => { setAccountOpen((open) => !open); setBellOpen(false); }}
+                    aria-expanded={accountOpen}
+                    aria-haspopup="true"
+                  >
+                    <span className="sr-only">Open account menu</span>
                     <Avatar name={user.displayName} seed={user.avatarSeed} size={34} />
                     <span className="account-trigger-copy">
                       <strong>{user.displayName.split(" ")[0]}</strong>
@@ -247,7 +265,7 @@ export function Header() {
           </div>
         </div>
         {searchOpen && (
-          <form className="header-search" onSubmit={submitSearch}>
+          <form className="header-search" id="header-search" onSubmit={submitSearch}>
             <Search size={18} />
             <input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search games, providers, teams or leagues…" aria-label="Search" />
             <kbd>Enter</kbd>
@@ -275,12 +293,14 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { user, isStaff, logout } = useAuth();
   const navigate = useNavigate();
   const { push } = useToast();
+  const drawerRef = useRef<HTMLElement>(null);
+  useDialog(open, onClose, drawerRef);
   return (
     <div className={classNames("mobile-drawer-backdrop", open && "open")} onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <aside className="mobile-drawer" aria-label="Mobile navigation">
+      <aside className="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden={!open} ref={drawerRef}>
         <div className="mobile-drawer-head">
           <Logo />
-          <button className="icon-btn" onClick={onClose} aria-label="Close menu"><X size={20} /></button>
+          <button className="icon-btn" onClick={onClose} aria-label="Close menu" data-autofocus><X size={20} /></button>
         </div>
         {user && (
           <div className="mobile-user">

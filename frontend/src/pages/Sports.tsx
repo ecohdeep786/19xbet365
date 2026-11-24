@@ -274,9 +274,9 @@ function VirtualsContent({ games, matches }: { games: ReturnType<typeof useData>
           <p>Virtual events run on compressed schedules. Playable originals settle instantly; provider titles are integration-ready only.</p>
         </div>
         <div className="virtuals-badge">
-          <span>Next event</span>
-          <strong>00:03</strong>
-          <small>demo clock</small>
+          <span>Settlement</span>
+          <strong>Instant</strong>
+          <small>server-recorded</small>
         </div>
       </section>
       <div className="game-grid featured-grid">

@@ -13,7 +13,7 @@ export function GameCard({ game, size = "md", showFavorite = true }: { game: Gam
   const target = `/game/${game.id}`;
   return (
     <article className={classNames("game-card", `game-card-${size}`)}>
-      <Link to={target} className="game-card-link" aria-label={`Open ${game.name}`}>
+      <Link to={target} className="game-card-link">
         <GameArt game={game} />
         <div className="game-card-overlay">
           <div className="game-card-topline">
@@ -30,6 +30,7 @@ export function GameCard({ game, size = "md", showFavorite = true }: { game: Gam
             </div>
           </div>
           <span className="game-play"><Play size={16} fill="currentColor" /></span>
+          <span className="sr-only">Open game</span>
         </div>
       </Link>
       {showFavorite && (

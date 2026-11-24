@@ -13,7 +13,7 @@ A complete, independently branded virtual-credit gaming foundation with:
 - server demo-settlement worker for 1X2 singles/accumulators, with generated final scores, notifications, wallet credits and audit events;
 - a light bookmaker interface for players and a deliberately distinct dark control room for staff;
 - responsive layouts tested from 320px to 2560px with no horizontal overflow;
-- an 18-document handoff set, automated smoke/security/referral/game tests and reproducible screenshot capture.
+- a 19-document handoff set, automated smoke/security/referral/game tests, Playwright user journeys and reproducible screenshot capture.
 
 ## Repository map
 
@@ -78,12 +78,13 @@ New registrations receive 10,500 VC. The seeded player starts at 22,500 VC with 
 2. `docs/REFERENCE_PRODUCT_ANALYSIS.md` — what was studied and why.
 3. `docs/PRODUCT_PARITY_MATRIX.md` — gap status.
 4. `docs/DESIGN_SYSTEM.md` — brand tokens and component rules.
-5. `docs/RESPONSIVE_TEST_REPORT.md` — viewport evidence.
-6. `docs/VISUAL_COMPARISON_REPORT.md` — reference/product screenshot table.
-7. `docs/END_TO_END_TEST_REPORT.md` — verified journeys.
-8. `docs/SECURITY_TEST_REPORT.md` — auth/scope/immutability evidence.
-9. `docs/KNOWN_LIMITATIONS.md` and `docs/PRODUCTION_READINESS.md` — what is blocked.
-10. Source: `frontend/src/App.tsx`, `backend/src/routes/`, `backend/db/schema.sql`.
+5. `docs/UI_UX_AUDIT.md` — reference-to-product design study, real-user QA and Lighthouse results.
+6. `docs/RESPONSIVE_TEST_REPORT.md` — viewport evidence.
+7. `docs/VISUAL_COMPARISON_REPORT.md` — reference/product screenshot table.
+8. `docs/END_TO_END_TEST_REPORT.md` — verified journeys.
+9. `docs/SECURITY_TEST_REPORT.md` — auth/scope/immutability evidence.
+10. `docs/KNOWN_LIMITATIONS.md` and `docs/PRODUCTION_READINESS.md` — what is blocked.
+11. Source: `frontend/src/App.tsx`, `backend/src/routes/`, `backend/db/schema.sql`.
 
 ## Evidence inventory
 

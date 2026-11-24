@@ -10,7 +10,7 @@ import { Logo } from "../components/Layout";
 
 function AuthShell({ children, title, kicker, body }: { children: ReactNode; title: string; kicker: string; body: string }) {
   return (
-    <div className="auth-page bookmaker">
+    <main className="auth-page bookmaker">
       <div className="auth-art">
         <div className="auth-orbit"><span className="auth-ring r1" /><span className="auth-ring r2" /><span className="auth-ring r3" /><span className="auth-core">19</span></div>
         <div className="auth-art-copy">
@@ -36,7 +36,7 @@ function AuthShell({ children, title, kicker, body }: { children: ReactNode; tit
           <div className="auth-legal">By continuing you confirm you are 18 or older and accept our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>. Virtual credits have no cash value.</div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
