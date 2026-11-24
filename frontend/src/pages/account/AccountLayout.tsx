@@ -1,4 +1,5 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { NavLink, Outlet, Link, useLocation } from "react-router-dom";
 import {
   Activity, ArrowDownToLine, Bell, ChevronRight, Coins, HeartHandshake, ShieldCheck, Ticket, UserRound,
   WalletCards, Users, ArrowRight, Sparkles
@@ -24,6 +25,12 @@ const LINKS = [
 export function AccountLayout() {
   const { user } = useAuth();
   const { unreadCount } = useData();
+  const location = useLocation();
+  const navRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const active = navRef.current?.querySelector<HTMLElement>(".account-nav-link.active");
+    active?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [location.pathname, user?.id]);
   if (!user) return null;
   const progress = Math.min(100, Math.round(((user.xp % 2400) / 2400) * 100));
 
@@ -58,7 +65,7 @@ export function AccountLayout() {
       </div>
       <div className="page-shell account-shell">
         <aside className="account-nav">
-          <div className="account-nav-card">
+          <div className="account-nav-card" ref={navRef} role="navigation" aria-label="Account sections">
             {LINKS.map((link) => (
               <NavLink key={link.to} to={link.to} end={link.end} className={({ isActive }) => classNames("account-nav-link", isActive && "active")}>
                 <link.icon size={16} />

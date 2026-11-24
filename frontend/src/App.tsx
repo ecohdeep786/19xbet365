@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Header, Footer } from "./components/Layout";
 import { RequireAuth, RequireStaff, ScrollToTop } from "./components/ProtectedRoute";
+import { PageTitle } from "./components/PageTitle";
 import { Home } from "./pages/Home";
 import { SportsPage, LiveSports, Esports, VirtualSports } from "./pages/Sports";
 import { Casino, LiveCasino, Slots, InstantGames } from "./pages/Casino";
@@ -53,6 +54,7 @@ function PublicLayout() {
 export default function App() {
   return (
     <>
+      <PageTitle />
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />

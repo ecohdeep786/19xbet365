@@ -50,6 +50,13 @@ The reference is attractive because it is **predictable**, not because it is lar
 - Team badges and provider marks give dense rows a stable visual anchor.
 - Header density was rebalanced at 1181–1400px: tighter nav padding, hidden duplicate balance chip, locale hidden below 1440px.
 
+### Frustration-reduction details
+- Compacted the home hero so the **Live right now** heading is visible in the first desktop viewport, while keeping the brand artwork; mobile retains its stacked hero.
+- Added unique document titles for every route, including the selected game name, so browser tabs, history, bookmarks and screen readers have context.
+- Mobile account tabs auto-scroll the active section into view when navigating between Wallet, Add coins, Bets and other sections.
+- Low-balance states now offer a direct **Add coins** action in both the bet slip and the game page instead of only returning an error.
+- Deposit configuration is explicit: missing QR, sandbox mode, manual review and the live-payment gate are all stated in context rather than leaving disabled controls unexplained.
+
 ### Interaction and accessibility
 - Bet slip, mobile drawer and generic modals now use a shared dialog helper:
   - Escape closes.

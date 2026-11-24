@@ -7,7 +7,11 @@ import type { DepositConfig, DepositRequest } from "../../types";
 import { useAuth } from "../../state/AuthContext";
 import { useToast } from "../../state/ToastContext";
 import { Badge, Button, EmptyState, ErrorState, Field, Input, Skeleton, Textarea } from "../../components/UI";
-import { dateTime, vc } from "../../lib/format";
+import { dateTime } from "../../lib/format";
+
+function coins(value: number) {
+  return `${Number(value || 0).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} coins`;
+}
 
 const STATUS_TONE: Record<string, "lime" | "amber" | "coral" | "outline"> = {
   approved: "lime",
@@ -100,12 +104,12 @@ export function AccountDeposit() {
       <div className="deposit-hero">
         <div>
           <span className="eyebrow"><ArrowDownToLine size={13} /> Coin deposit</span>
-          <h1>Add coins to your account</h1>
-          <p>Scan the payment QR, submit the transfer reference, and a reviewer will verify it before coins are credited. Current balance: <strong>{vc(user?.balance || 0)}</strong>.</p>
+          <h2>Add coins to your account</h2>
+          <p>Scan the payment QR, submit the transfer reference, and a reviewer will verify it before coins are credited. Current balance: <strong>{coins(user?.balance || 0)}</strong>.</p>
         </div>
         <div className="deposit-balance">
           <span>Available coins</span>
-          <strong>{vc(user?.balance || 0)}</strong>
+          <strong>{coins(user?.balance || 0)}</strong>
           <Badge tone={config.mode === "sandbox" ? "amber" : "outline"}>{config.mode === "sandbox" ? "Sandbox verification" : "Manual review"}</Badge>
         </div>
       </div>
@@ -142,7 +146,7 @@ export function AccountDeposit() {
             <span className="eyebrow">Deposit bonus</span>
             {config.tiers.map((tier) => (
               <div key={tier.min} className={selectedTier?.min === tier.min ? "active" : ""}>
-                <span>Deposit {vc(tier.min, { compact: true })} or more</span>
+                <span>Deposit {coins(tier.min)} or more</span>
                 <strong>{tier.percent}% bonus</strong>
               </div>
             ))}
@@ -158,7 +162,7 @@ export function AccountDeposit() {
             </Field>
             <div className="deposit-preview">
               <span>Estimated bonus</span>
-              <strong>{vc(previewBonus)}</strong>
+              <strong>{coins(previewBonus)}</strong>
               <small>{selectedTier ? `${selectedTier.percent}% tier` : "No tier reached"}</small>
             </div>
             <Field label="Payment reference / UTR" required hint="The reference shown in your payment app after transfer.">
@@ -182,11 +186,11 @@ export function AccountDeposit() {
             {deposits.map((deposit) => (
               <div className="deposit-row" key={deposit.id}>
                 <div>
-                  <strong>{vc(deposit.amount)}</strong>
+                  <strong>{coins(deposit.amount)}</strong>
                   <span>Ref {deposit.reference} · {dateTime(deposit.createdAt)}</span>
                 </div>
                 <div>
-                  {deposit.bonusAmount > 0 && <span className="deposit-bonus">+{vc(deposit.bonusAmount)} bonus</span>}
+                  {deposit.bonusAmount > 0 && <span className="deposit-bonus">+{coins(deposit.bonusAmount)} bonus</span>}
                   <Badge tone={STATUS_TONE[deposit.status] || "outline"}>{deposit.status}</Badge>
                   {deposit.status === "pending" && <button className="text-btn" onClick={() => cancel(deposit.id)}>Cancel</button>}
                 </div>

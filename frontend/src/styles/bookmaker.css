@@ -279,7 +279,16 @@
 .bookmaker .compact-hero .page-hero-inner { padding-top: 38px; padding-bottom: 30px; }
 
 /* Home */
-.bookmaker .hero { background: radial-gradient(700px 500px at 76% 28%, rgba(18,102,214,.12), transparent 60%), linear-gradient(180deg, #e7f2ff, #f8fbff 72%, #f3f7fc); border-color: #d8e4f0; }
+.bookmaker .hero { min-height: 540px; background: radial-gradient(700px 500px at 76% 28%, rgba(18,102,214,.12), transparent 60%), linear-gradient(180deg, #e7f2ff, #f8fbff 72%, #f3f7fc); border-color: #d8e4f0; }
+.bookmaker .hero-inner { min-height: 496px; padding-top: 42px; padding-bottom: 78px; }
+.bookmaker .hero-copy h1 { margin-top: 18px; font-size: clamp(3.1rem, 5.6vw, 4.9rem); }
+.bookmaker .hero-lede { margin-top: 16px; }
+.bookmaker .hero-actions { margin-top: 21px; }
+.bookmaker .hero-trust { margin-top: 18px; }
+.bookmaker .hero-stage { height: 410px; transform: scale(.92); transform-origin: center right; }
+.bookmaker .floating-card { width: 156px; }
+.bookmaker .float-mines { left: -5%; bottom: 6%; }
+.bookmaker .float-crash { right: -1%; top: 12%; }
 .bookmaker .hero-bg::before { background-image: linear-gradient(rgba(18,102,214,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(18,102,214,.045) 1px, transparent 1px); }
 .bookmaker .hero-bg::after { background: radial-gradient(ellipse at center, rgba(18,102,214,.08), transparent 65%); }
 .bookmaker .hero-star { background: #69a9e8; box-shadow: 0 0 8px rgba(18,102,214,.4); }
@@ -632,7 +641,7 @@
 .bookmaker .deposit-page > *, .bookmaker .deposit-grid > * { min-width: 0; }
 .bookmaker .deposit-form .input, .bookmaker .deposit-form .textarea { min-width: 0; width: 100%; }
 .bookmaker .deposit-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; }
-.bookmaker .deposit-hero h1 { margin: 5px 0 8px; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+.bookmaker .deposit-hero h2 { margin: 5px 0 8px; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.1; }
 .bookmaker .deposit-hero p { max-width: 640px; color: #526a82; font-size: .88rem; line-height: 1.65; }
 .bookmaker .deposit-balance { min-width: 210px; padding: 16px 18px; border: 1px solid #d7e2ee; border-radius: 12px; background: #fff; display: grid; gap: 4px; }
 .bookmaker .deposit-balance > span { color: #526a82; font-size: .72rem; }
@@ -817,6 +826,9 @@
 }
 @media (max-width: 900px) {
   .bookmaker .header-shell { width: calc(100% - 20px); }
+  .bookmaker .hero { min-height: 0; }
+  .bookmaker .hero-inner { min-height: 0; }
+  .bookmaker .hero-stage { height: auto; transform: none; }
 }
 @media (max-width: 760px) {
   .bookmaker .page-hero-inner { flex-direction: column; align-items: stretch; gap: 16px; }
