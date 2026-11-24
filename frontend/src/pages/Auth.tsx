@@ -16,13 +16,13 @@ function AuthShell({ children, title, kicker, body }: { children: ReactNode; tit
         <div className="auth-art-copy">
           <span className="eyebrow"><Sparkles size={13} /> 19xbet365</span>
           <h2>Your next board<br />starts here.</h2>
-          <p>Sportsbook, originals, and a fully recorded virtual-credit wallet. No cash value. No real-money risk.</p>
+          <p>Sportsbook, originals, and a fully recorded coin wallet. No cash value. Sandbox balance. No real-money risk.</p>
           <div className="auth-perks">
             <span><ShieldCheck size={15} /> Server-authoritative play</span>
-            <span><Gift size={15} /> 10,500 VC welcome allocation</span>
+            <span><Gift size={15} /> 10,500 coin welcome allocation</span>
           </div>
         </div>
-        <div className="auth-art-foot"><span className="age-badge">18+</span> Virtual credits only · Play responsibly</div>
+        <div className="auth-art-foot"><span className="age-badge">18+</span> Sandbox coin play · Play responsibly</div>
       </div>
       <div className="auth-panel">
         <div className="auth-panel-inner">
@@ -33,7 +33,7 @@ function AuthShell({ children, title, kicker, body }: { children: ReactNode; tit
             <p>{body}</p>
           </div>
           {children}
-          <div className="auth-legal">By continuing you confirm you are 18 or older and accept our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>. Virtual credits have no cash value.</div>
+          <div className="auth-legal">By continuing you confirm you are 18 or older and accept our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>. Coins have no cash value in this sandbox.</div>
         </div>
       </div>
     </main>
@@ -113,7 +113,7 @@ export function Register() {
     setBusy(true);
     try {
       const user = await register({ email: form.email, password: form.password, displayName: form.displayName, referralCode: form.referralCode || undefined, marketingOptIn: form.marketingOptIn });
-      push(`Welcome to 19X, ${user.displayName.split(" ")[0]}. Your virtual wallet is ready.`, "success", "Account created");
+      push(`Welcome to 19X, ${user.displayName.split(" ")[0]}. Your coin wallet is ready.`, "success", "Account created");
       navigate("/account");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Registration failed.");
@@ -123,7 +123,7 @@ export function Register() {
   const strength = form.password.length >= 12 ? 3 : form.password.length >= 8 ? 2 : form.password.length ? 1 : 0;
 
   return (
-    <AuthShell kicker="New player" title="Create your 19XBET365 account." body="Start with 10,000 virtual credits — plus a 500-credit welcome boost.">
+    <AuthShell kicker="New player" title="Create your 19XBET365 account." body="Start with 10,000 coins — plus a 500-coin welcome boost.">
       <form className="auth-form" onSubmit={submit}>
         <Field label="Display name" required>
           <div className="input-with-icon"><UserRound size={16} /><Input value={form.displayName} onChange={(event) => update("displayName", event.target.value)} placeholder="How should we call you?" required minLength={2} maxLength={60} /></div>
@@ -143,8 +143,8 @@ export function Register() {
         <Field label="Referral code" hint="Optional. Referrals never grant admin access.">
           <div className="input-with-icon"><Gift size={16} /><Input value={form.referralCode} onChange={(event) => update("referralCode", event.target.value.toUpperCase())} placeholder="19X-XXXXXX" /></div>
         </Field>
-        <label className="checkline"><input type="checkbox" checked={form.marketingOptIn} onChange={(event) => update("marketingOptIn", event.target.checked)} /> Send me virtual-credit promotions and tournament news.</label>
-        <label className="checkline"><input type="checkbox" checked={age} onChange={(event) => setAge(event.target.checked)} /> I am 18 or older and understand all balances are non-redeemable virtual credits.</label>
+        <label className="checkline"><input type="checkbox" checked={form.marketingOptIn} onChange={(event) => update("marketingOptIn", event.target.checked)} /> Send me coin promotions and tournament news.</label>
+        <label className="checkline"><input type="checkbox" checked={age} onChange={(event) => setAge(event.target.checked)} /> I am 18 or older and understand all balances are non-redeemable coins.</label>
         {error && <div className="form-error">{error}</div>}
         <Button variant="lime" size="lg" loading={busy} type="submit" className="full-btn">Create account <ArrowRight size={17} /></Button>
       </form>

@@ -56,7 +56,7 @@ export function AdminNetworkPage() {
       <AdminHeader kicker="Network" title="Hierarchy & delegation" body="Authoritative parent-child relationships from PostgreSQL. Scope is enforced server-side on every request." actions={<><AdminScopePill label={scope?.label || "Loading scope"} /><Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button></>} />
       <div className="admin-stat-grid compact-stats">
         <Stat label="Accounts in scope" value={number(summary?.total || 0)} hint={`${summary?.roles.player || 0} players`} tone="cyan" icon={<Users size={16} />} />
-        <Stat label="Virtual balance" value={vc(summary?.balance || 0, { compact: true })} hint="Held across scoped wallets" tone="lime" icon={<Coins size={16} />} />
+        <Stat label="Coin balance" value={vc(summary?.balance || 0, { compact: true })} hint="Held across scoped wallets" tone="lime" icon={<Coins size={16} />} />
         <Stat label="Suspended" value={number(summary?.suspended || 0)} hint="Requires review" tone="coral" icon={<UserRound size={16} />} />
         <Stat label="Max depth" value="5 levels" hint="Master → Admin → Sub-admin → Agent → Player" icon={<Network size={16} />} />
       </div>

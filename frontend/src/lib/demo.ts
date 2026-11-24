@@ -57,11 +57,11 @@ export const demoBootstrap: BootstrapData = {
     platformName: "19xbet365",
     platformTagline: "Play beyond the ordinary.",
     realMoneyEnabled: false,
-    licenseStatus: "Demonstration — virtual credits only",
+    licenseStatus: "Demonstration — coins only",
     thirdPartyIntegrations: "disabled"
   },
   announcements: [
-    { type: "demo", title: "Virtual credits only", body: "19xbet365 uses non-redeemable virtual credits. No real-money wagering, deposits, or withdrawals are enabled." },
+    { type: "demo", title: "Coins only", body: "19xbet365 uses non-redeemable coins. No real-money wagering, deposits, or withdrawals are enabled." },
     { type: "integrity", title: "Server-authoritative rounds", body: "Every playable 19X Original round is generated and recorded on the server. Third-party titles remain clearly marked as integration-ready." }
   ],
   helpArticles: catalog.helpArticles
@@ -98,7 +98,7 @@ export const demoUser: Account = {
 };
 
 export const demoTransactions: Transaction[] = [
-  { id: "t1", type: "promo_credit", amount: 300, balance_after: 22500, description: "19X loyalty top-up — virtual credits", reference_type: "promotion", reference_id: "p1", created_at: ago(100) },
+  { id: "t1", type: "promo_credit", amount: 300, balance_after: 22500, description: "19X loyalty top-up", reference_type: "promotion", reference_id: "p1", created_at: ago(100) },
   { id: "t2", type: "bet_stake", amount: -300, balance_after: 22200, description: "Sports single · 1 selection", reference_type: "sports_bet", reference_id: "b1", created_at: ago(160) },
   { id: "t3", type: "bet_stake", amount: -400, balance_after: 22600, description: "Sports accumulator · 2 selections", reference_type: "sports_bet", reference_id: "b2", created_at: ago(220) },
   { id: "t4", type: "game_win", amount: 5590, balance_after: 23000, description: "Game win · Crash Orbit", reference_type: "game_round", reference_id: "r1", created_at: ago(4320) },
@@ -135,10 +135,10 @@ export const demoBets: Bet[] = [
 ];
 
 export const demoNotifications: Notification[] = [
-  { id: "n1", title: "Crash Orbit tournament is live", body: "Altitude Week is underway. Your best completed cash-out this week is 1.86x. The top ten share 250,000 VC.", type: "promo", link: "/promotions", read_at: null, created_at: ago(60) },
+  { id: "n1", title: "Crash Orbit tournament is live", body: "Altitude Week is underway. Your best completed cash-out this week is 1.86x. The top ten share 250,000 coins.", type: "promo", link: "/promotions", read_at: null, created_at: ago(60) },
   { id: "n2", title: "New sign-in detected", body: "A sign-in to your account was recorded from your current browser. If this was not you, change your password and sign out other sessions.", type: "security", link: "/account/security", read_at: null, created_at: ago(180) },
-  { id: "n3", title: "Your Mines Vault round settled", body: "A 150.00 VC round ended on a mine. Review the full round in game activity.", type: "game", link: "/account/activity", read_at: ago(10080), created_at: ago(10080) },
-  { id: "n4", title: "Welcome to 19xbet365", body: "Your virtual-credit wallet is ready. Explore sports, originals, and responsible-play tools.", type: "system", link: "/account", read_at: ago(57600), created_at: ago(60480) }
+  { id: "n3", title: "Your Mines Vault round settled", body: "A 150.00-coin round ended on a mine. Review the full round in game activity.", type: "game", link: "/account/activity", read_at: ago(10080), created_at: ago(10080) },
+  { id: "n4", title: "Welcome to 19xbet365", body: "Your coin wallet is ready. Explore sports, originals, and responsible-play tools.", type: "system", link: "/account", read_at: ago(57600), created_at: ago(60480) }
 ];
 
 export const demoOverview: PlayerOverview = {

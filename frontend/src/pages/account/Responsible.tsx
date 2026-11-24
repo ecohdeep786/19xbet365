@@ -80,7 +80,7 @@ export function AccountResponsible() {
       <div className="subpage-head">
         <span className="eyebrow">Wellbeing</span>
         <h2>Responsible gaming</h2>
-        <p>19xbet365 is entertainment, not income. These tools apply to virtual-credit play and can be set at any time.</p>
+        <p>19xbet365 is entertainment, not income. These tools apply to coin play and can be set at any time.</p>
       </div>
       {(activeExclusion || activeCoolOff) && (
         <div className="restriction-banner">
@@ -90,11 +90,11 @@ export function AccountResponsible() {
       )}
       <div className="responsible-grid">
         <form className="panel responsible-form" onSubmit={submit}>
-          <div className="panel-head"><span><ShieldCheck size={15} /> Play limits</span><Badge tone="outline">Virtual credits only</Badge></div>
+          <div className="panel-head"><span><ShieldCheck size={15} /> Play limits</span><Badge tone="outline">Coins only</Badge></div>
           {loading ? <Skeleton className="sk-line" /> : (
             <>
-              <Field label="Daily virtual-credit bet limit" hint="The maximum total stake you can place in a day across games and sports.">
-                <div className="input-suffix"><Input type="number" min={0} step={100} value={form.dailyBetLimit} onChange={(event) => setForm({ ...form, dailyBetLimit: Number(event.target.value) })} /><span>VC</span></div>
+              <Field label="Daily coin bet limit" hint="The maximum total stake you can place in a day across games and sports.">
+                <div className="input-suffix"><Input type="number" min={0} step={100} value={form.dailyBetLimit} onChange={(event) => setForm({ ...form, dailyBetLimit: Number(event.target.value) })} /><span>coins</span></div>
               </Field>
               <div className="form-two-col">
                 <Field label="Session time limit" hint="A reminder and play restriction after this many minutes.">
@@ -123,7 +123,7 @@ export function AccountResponsible() {
               {form.selfExcludeDays > 0 && (
                 <label className="checkline danger-line"><input type="checkbox" checked={confirmExclusion} onChange={(event) => setConfirmExclusion(event.target.checked)} /> I understand self-exclusion restricts play and cannot be shortened once applied.</label>
               )}
-              <div className="form-actions"><Button variant="lime" loading={busy} type="submit">Save my limits</Button><span className="form-note">These controls are for your virtual-credit account.</span></div>
+              <div className="form-actions"><Button variant="lime" loading={busy} type="submit">Save my limits</Button><span className="form-note">These controls are for your coin account.</span></div>
               <div className="current-limits">
                 <span>Current settings</span>
                 <div><strong>{limits?.daily_bet_limit ? vc(limits.daily_bet_limit) : "No daily limit"}</strong><span>daily bet limit</span></div>
@@ -138,7 +138,7 @@ export function AccountResponsible() {
             <span className="eyebrow"><HeartHandshake size={13} /> Keep it healthy</span>
             <h3>Five ways to stay in control</h3>
             <ul>
-              <li><UserCheck size={15} /> Decide a virtual-credit budget before you play.</li>
+              <li><UserCheck size={15} /> Decide a coin budget before you play.</li>
               <li><Clock3 size={15} /> Take regular breaks and use reality checks.</li>
               <li><Timer size={15} /> Never chase a losing round.</li>
               <li><ShieldCheck size={15} /> Use self-exclusion when play stops feeling fun.</li>

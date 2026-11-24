@@ -10,7 +10,7 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | --- | --- | --- | --- | --- |
 | Global header | Utility row, sport/casino tabs, auth actions, language/currency | Brand header, mega menus, search, notifications, balance, account menu, bet slip | Complete | `Layout.tsx`, screenshots in `capture/product/home-1440.jpeg` |
 | Language selection | Country/currency/language selector | Not implemented; all content is English | Functionally incomplete | Needs translation catalogue and locale persistence |
-| Global footer | Legal, help, partners, payment marks | Brand, play/account/platform/legal columns, virtual-credit notice | Complete | `Layout.tsx` |
+| Global footer | Legal, help, partners, payment marks | Brand, play/account/platform/legal columns, coin-play notice | Complete | `Layout.tsx` |
 | Homepage | Carousel, shortcuts, sports table, promotions, right rail | Orbit hero, quick sports, live feed, originals, casino split, promos, tournament, trust | Improved | Static hero instead of carousel; original brand direction |
 | Sports sidebar | Dense sports list, counts, A–Z categories | Sticky sports filter, icons, counts, mobile drawer | Complete | `Sports.tsx`, `.sports-sidebar` |
 | Sports filters | League/sport/market chips, search, status | Search, all/live/upcoming, sport filters, mobile drawer | Improved | Additional markets not fabricated |
@@ -36,12 +36,12 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Game activity | Round history | Server rounds, outcomes, references, details | Complete | `Activity.tsx` |
 | Notifications | All/unread/security | Notification centre, read/all, security tags | Complete | Global read updates currently affect global records |
 | Security | Sessions, password, 2FA | Sessions, revoke, password, 2FA preference | Improved | Auth challenge not yet provisioned |
-| Referrals | Referral links, rewards | Code, share, pending/rewarded, 1,000 VC each after first round | Complete | `referrals.js`; tested with smoke script |
+| Referrals | Referral links, rewards | Code, share, pending/rewarded, 1,000 coins each after first round | Complete | `referrals.js`; tested with smoke script |
 | Support | Chat/tickets/FAQ | Ticket list, create, thread, reply; help centre | Complete | No live chat provider |
 | Responsible gaming | Limits, self-exclusion, help | Daily/session limits, reality check, cool-off, self-exclusion | Complete | Limits apply to virtual credits |
 | Help centre | Category/search/articles | 10 seeded articles, search, category filter, detail | Complete | Content from `shared/catalog.json` |
 | Legal pages | Terms, privacy, AML, etc. | Terms, privacy, cookies, AML, bonus, affiliates, responsible | Complete | Not legal advice |
-| Promotions | Deposit/cashback/free bet campaigns | Virtual-credit campaigns with terms, no cash value | Improved | Automated promo payout engine absent |
+| Promotions | Deposit/cashback/free bet campaigns | Coin campaigns with terms, no cash value | Improved | Automated promo payout engine absent |
 | Tournaments | Live leaderboards | Seeded tournament cards/standings, qualifiers linked | Complete | Automated qualification worker absent |
 | Master Admin dashboard | Global analytics/network | Metrics, series, alerts, audit chain, export | Complete | `admin/Dashboard.tsx` |
 | Delegated admin | Scoped admin dashboard | Same dashboard with server-derived scope | Complete | `getScopedAccountIds` |
@@ -50,8 +50,8 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Network visualization | Hierarchy tree | Recursive tree with role and balance | Complete | Scope verified via API |
 | Transfers | Request/approve network moves | Request/approve/reject workflow | Complete | Tested UI; server scope checks |
 | Game catalogue admin | Visibility/featured | Status, featured, copy controls | Complete | Outcomes/RTP not editable |
-| Content admin | CMS/promotions | Page and promotion editing, audit | Complete | Promotions are virtual-credit only |
-| Credit admin | Manual adjustments | Player-only adjustment, reason, audit event | Complete | Browser test recorded 250 VC |
+| Content admin | CMS/promotions | Page and promotion editing, audit | Complete | Promotions are coin-funded only |
+| Credit admin | Manual adjustments | Player-only adjustment, reason, audit event | Complete | Browser test recorded 250 coins |
 | Support admin | Assign/status/reply/internal | Status, priority, assignment, public/internal replies | Complete | Browser tested |
 | Security centre | Sessions, failed logins, suspension | Events, chain status, revoke sessions | Complete | No forced password reset |
 | Audit trail | Immutable history | Hash chain, paginated view, export, trigger | Complete | SQL tamper tests rejected |

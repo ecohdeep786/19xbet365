@@ -16,7 +16,7 @@ This foundation was researched against the public 1xBet experience, which redire
 - Crash game page
 - Crash Point page
 
-Ticket, betting, deposit, withdrawal, and account surfaces were login-gated or region-gated. No access controls were bypassed; the build therefore uses an independent account and virtual-credit model.
+Ticket, betting, deposit, withdrawal, and account surfaces were login-gated or region-gated. No access controls were bypassed; the build therefore uses an independent account and coin model.
 
 ## Design observations
 
@@ -29,7 +29,7 @@ Ticket, betting, deposit, withdrawal, and account surfaces were login-gated or r
 
 ## 19xbet365 original interpretation
 
-- Brand: **19X / 19xbet365**, deep-blue header chrome, pale blue/white bookmaker surfaces, green primary actions, Sora display type, Manrope body type.
+- Brand: **19X / 19xbet365**, deep-blue header chrome, pale blue/white bookmaker surfaces, green primary actions, Roboto Condensed display type, Roboto body type.
 - All hero art, game-card art, orbit graphics, icons, copy, layout, and CSS are original to this project. No 1xBet image files, logos, fonts, or text were reused.
 - The sportsbook model is illustrative demo fixtures, not copied live odds.
 - The casino catalogue contains 11 playable server-authoritative 19X Originals plus 33 clearly labelled integration-ready provider titles.

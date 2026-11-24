@@ -1,9 +1,9 @@
 export function vc(value: number | string | null | undefined, options: { compact?: boolean; sign?: boolean } = {}) {
   const amount = Number(value || 0);
   if (options.compact && Math.abs(amount) >= 1000) {
-    return `${amount < 0 ? "-" : options.sign && amount > 0 ? "+" : ""}${(Math.abs(amount) / 1000).toFixed(Math.abs(amount) >= 10000 ? 0 : 1)}k VC`;
+    return `${amount < 0 ? "-" : options.sign && amount > 0 ? "+" : ""}${(Math.abs(amount) / 1000).toFixed(Math.abs(amount) >= 10000 ? 0 : 1)}k coins`;
   }
-  return `${amount < 0 ? "-" : options.sign && amount > 0 ? "+" : ""}${Math.abs(amount).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} VC`;
+  return `${amount < 0 ? "-" : options.sign && amount > 0 ? "+" : ""}${Math.abs(amount).toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} coins`;
 }
 
 export function number(value: number | string | null | undefined) {

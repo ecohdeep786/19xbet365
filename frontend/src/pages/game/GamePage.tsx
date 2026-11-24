@@ -135,7 +135,7 @@ export function GamePage() {
                 <div className="stage-toolbar-left">
                   <span className={classNames("stage-status", game.playable && "online")}><span className="status-dot" /> {game.playable ? "Game engine online" : "Provider session not configured"}</span>
                   <span className="stage-divider" />
-                  <span className="stage-balance"><span>{user ? "Virtual balance" : "Player session"}</span><strong>{user ? vc(user.balance) : "Sign in required"}</strong></span>
+                  <span className="stage-balance"><span>{user ? "Coin balance" : "Player session"}</span><strong>{user ? vc(user.balance) : "Sign in required"}</strong></span>
                 </div>
                 <div className="stage-toolbar-right">
                   {demoMode && <Badge tone="amber">Browser preview</Badge>}
@@ -246,7 +246,7 @@ export function GamePage() {
 
             <div className="panel responsible-mini">
               <ShieldCheck size={18} />
-              <div><strong>Keep it virtual</strong><span>19xbet365 uses non-redeemable virtual credits. No deposits or withdrawals. Set a daily limit whenever you need one.</span></div>
+              <div><strong>Keep it virtual</strong><span>19xbet365 uses non-redeemable coins. No deposits or withdrawals. Set a daily limit whenever you need one.</span></div>
               <Link to="/account/responsible" className="text-btn">Limits</Link>
             </div>
           </aside>
@@ -273,12 +273,12 @@ function GameSignIn({ gameName }: { gameName: string }) {
       <span className="game-signin-icon"><LockKeyhole size={25} /></span>
       <span className="eyebrow">Account required</span>
       <h2>Sign in to play {gameName}</h2>
-      <p>Your virtual balance, game rounds, and payouts are recorded against your player account. Sign in or create a free account to begin.</p>
+      <p>Your coin balance, game rounds, and payouts are recorded against your player account. Sign in or create a free account to begin.</p>
       <div className="game-signin-actions">
         <Link to="/login" state={{ from: location.pathname }} className="btn btn-primary">Sign in to play <ArrowRight size={16} /></Link>
         <Link to="/register" className="btn btn-secondary">Create free account</Link>
       </div>
-      <span className="game-signin-note"><ShieldCheck size={14} /> No deposits · 10,500 VC welcome allocation · virtual credits only</span>
+      <span className="game-signin-note"><ShieldCheck size={14} /> No deposits · 10,500 coins welcome allocation · coins only</span>
     </div>
   );
 }

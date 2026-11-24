@@ -11,7 +11,7 @@ import { classNames } from "../../lib/format";
 const GROUP_LABELS: Record<string, string> = {
   network: "Network visibility",
   accounts: "Account operations",
-  credits: "Virtual credits",
+  credits: "Coins",
   games: "Game catalogue",
   content: "Content & promotions",
   promotions: "Content & promotions",

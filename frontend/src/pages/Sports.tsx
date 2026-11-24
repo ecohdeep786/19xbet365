@@ -15,12 +15,12 @@ const COPY: Record<Mode, { kicker: string; title: string; body: string }> = {
   all: {
     kicker: "The sportsbook",
     title: "Every fixture. One clean board.",
-    body: "Browse demo fixtures across 12 sports. Odds are illustrative, every selection settles into a transparent virtual-credit record."
+    body: "Browse demo fixtures across 12 sports. Odds are illustrative, every selection settles into a transparent coin record."
   },
   live: {
     kicker: "In-play",
     title: "Live betting, without the noise.",
-    body: "Follow the demo feed, see the score, and build a virtual bet slip while the action is moving."
+    body: "Follow the demo feed, see the score, and build a coin bet slip while the action is moving."
   },
   esports: {
     kicker: "Competitive gaming",
@@ -183,7 +183,7 @@ export function SportsPage({ mode = "all" }: { mode?: Mode }) {
 
           <div className="sports-footnote">
             <ShieldCheck size={16} />
-            <span>All prices are illustrative demo data. Virtual-credit stakes are settled in your account ledger. No real-money wagering is offered.</span>
+            <span>All prices are illustrative demo data. Coin stakes are settled in your account ledger. No real-money wagering is offered.</span>
           </div>
         </main>
 
@@ -197,17 +197,17 @@ export function SportsPage({ mode = "all" }: { mode?: Mode }) {
           </div>
           <div className="panel rail-panel help-panel">
             <span className="eyebrow">First time here?</span>
-            <h3>How virtual betting works</h3>
+            <h3>How coin betting works</h3>
             <ol>
               <li>Pick a fixture and tap 1, X, or 2.</li>
-              <li>Set a virtual-credit stake in your slip.</li>
+              <li>Set a coin stake in your slip.</li>
               <li>Your bet is recorded server-side. Open bets appear in your dashboard.</li>
             </ol>
             <Link to="/help/getting-started" className="text-btn">Read the quick start <ArrowRight size={14} /></Link>
           </div>
           <div className="panel rail-panel limits-panel">
             <Zap size={18} />
-            <div><strong>Play within limits</strong><span>Set a daily virtual-credit limit in Responsible Gaming.</span></div>
+            <div><strong>Play within limits</strong><span>Set a daily coin limit in Responsible Gaming.</span></div>
             <Link to="/account/responsible" className="text-btn">Manage</Link>
           </div>
         </aside>
@@ -250,7 +250,7 @@ export function BetSlipRail() {
         <div className="slip-rail-empty">
           <ReceiptText size={20} />
           <strong>No selections yet</strong>
-          <span>Tap 1, X, or 2 on any fixture to start a virtual slip.</span>
+          <span>Tap 1, X, or 2 on any fixture to start a coin slip.</span>
         </div>
       ) : (
         <div className="slip-rail-body">

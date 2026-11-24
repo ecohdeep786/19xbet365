@@ -54,7 +54,7 @@ export function AdminContentPage() {
 
   return (
     <div className="admin-page">
-      <AdminHeader kicker="Content operations" title="Content & promotions" body="Edit public content pages and virtual-credit promotions. Every change records before/after state in the audit trail." actions={<Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button>} />
+      <AdminHeader kicker="Content operations" title="Content & promotions" body="Edit public content pages and coin promotions. Every change records before/after state in the audit trail." actions={<Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button>} />
       <div className="content-tabs"><Segmented value={tab} onChange={setTab} options={[{ value: "pages", label: `Content pages (${pages.length})` }, { value: "promotions", label: `Promotions (${promotions.length})` }]} /></div>
       {loading ? <div className="panel"><Skeleton className="sk-line" /><Skeleton className="sk-line" /></div> : error ? <ErrorState message={error} onRetry={load} /> : tab === "pages" ? (
         <div className="content-page-grid">
@@ -106,7 +106,7 @@ export function AdminContentPage() {
               <Field label="Active"><Select value={editingPromo.active === false ? "false" : "true"} onChange={(event) => setEditingPromo({ ...editingPromo, active: event.target.value === "true" })}><option value="true">Active</option><option value="false">Inactive</option></Select></Field>
             </div>
             <Field label="Terms"><Textarea rows={4} value={editingPromo.terms} onChange={(event) => setEditingPromo({ ...editingPromo, terms: event.target.value })} /></Field>
-            <div className="admin-fineprint"><Sparkles size={14} /> Promotions award virtual credits only. No cash value or wagering requirement can be configured here.</div>
+            <div className="admin-fineprint"><Sparkles size={14} /> Promotions award coins only. No cash value or wagering requirement can be configured here.</div>
           </form>
         )}
       </Modal>

@@ -23,7 +23,7 @@ export function AccountNotifications() {
       <div className="subpage-head">
         <span className="eyebrow">Inbox</span>
         <h2>Notifications</h2>
-        <p>Security alerts, platform updates, and virtual-credit offers. Security messages are always delivered.</p>
+        <p>Security alerts, platform updates, and coin offers. Security messages are always delivered.</p>
       </div>
       <div className="panel notifications-panel">
         <div className="wallet-toolbar">

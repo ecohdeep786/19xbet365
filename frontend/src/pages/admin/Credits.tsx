@@ -29,18 +29,18 @@ export function AdminCreditsPage() {
 
   return (
     <div className="admin-page">
-      <AdminHeader kicker="Financial integrity" title="Credit activity" body="Every manual virtual-credit adjustment, who made it, and why. These are the only balance changes outside game and bet settlement." actions={<><AdminScopePill /><Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button><Link to="/admin/accounts" className="btn btn-lime btn-sm">Adjust an account <ArrowRight size={14} /></Link></>} />
+      <AdminHeader kicker="Financial integrity" title="Credit activity" body="Every manual coin adjustment, who made it, and why. These are the only balance changes outside game and bet settlement." actions={<><AdminScopePill /><Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button><Link to="/admin/accounts" className="btn btn-lime btn-sm">Adjust an account <ArrowRight size={14} /></Link></>} />
       {loading ? <div className="admin-stat-grid">{Array.from({ length: 4 }).map((_, index) => <div className="stat" key={index}><Skeleton className="sk-line" /><Skeleton className="sk-line w70" /></div>)}</div> : error ? <ErrorState message={error} onRetry={load} /> : data && (
         <>
           <div className="admin-stat-grid compact-stats">
             <Stat label="Credited" value={vc(data.summary.credited, { compact: true })} hint="Manual additions" tone="lime" icon={<ArrowDownLeft size={16} />} />
             <Stat label="Debited" value={vc(data.summary.debited, { compact: true })} hint="Manual removals" tone="coral" icon={<ArrowUpRight size={16} />} />
             <Stat label="Adjustments" value={number(data.summary.adjustments)} hint="Lifetime in scope" icon={<Coins size={16} />} />
-            <Stat label="Net adjustment" value={vc(data.summary.credited - data.summary.debited, { compact: true, sign: true })} hint="Virtual credits" tone="cyan" icon={<ShieldCheck size={16} />} />
+            <Stat label="Net adjustment" value={vc(data.summary.credited - data.summary.debited, { compact: true, sign: true })} hint="Coins" tone="cyan" icon={<ShieldCheck size={16} />} />
           </div>
           <div className="credits-layout">
             <section className="panel credit-chart-panel">
-              <div className="panel-head"><span><Coins size={15} /> 14-day adjustment flow</span><Badge tone="outline">Virtual credits</Badge></div>
+              <div className="panel-head"><span><Coins size={15} /> 14-day adjustment flow</span><Badge tone="outline">Coins</Badge></div>
               <div className="credit-bars">
                 {data.series.length === 0 && <EmptyState title="No adjustments in the last 14 days" body="Credit actions from account management appear here." />}
                 {data.series.map((item) => (
@@ -68,7 +68,7 @@ export function AdminCreditsPage() {
               </tbody></table></div>
             )}
           </div>
-          <div className="admin-fineprint"><ShieldCheck size={14} /> Real-money deposits, withdrawals, and redemption are disabled. Virtual-credit adjustments do not create cash value.</div>
+          <div className="admin-fineprint"><ShieldCheck size={14} /> Real-money deposits, withdrawals, and redemption are disabled. Coin adjustments do not create cash value.</div>
         </>
       )}
     </div>

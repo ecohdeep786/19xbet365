@@ -25,8 +25,8 @@ function useInstantPlay(gameId: string, props: GameProps, minStake = 5) {
 
   const play = useCallback(async (params: Record<string, unknown> = {}) => {
     const { stake, balance, onBalance, onSettled, offline } = props;
-    if (stake < minStake) { setError(`The minimum stake is ${minStake} VC.`); return null; }
-    if (stake > balance) { setError("Your virtual-credit balance is too low for that stake."); return null; }
+    if (stake < minStake) { setError(`The minimum stake is ${minStake} coins.`); return null; }
+    if (stake > balance) { setError("Your coin balance is too low for that stake."); return null; }
     setBusy(true); setError(null);
     try {
       if (offline) {
@@ -80,7 +80,7 @@ function ResultBanner({ result, gameName }: { result: InstantResult | null; game
       <span>{result.win ? <><Trophy size={16} /> Win</> : <><RotateCcw size={15} /> No win</>}</span>
       <strong>{result.win ? vc(result.payout) : "Try another round"}</strong>
       <small>{result.message}</small>
-      <em>{gameName} · virtual credits</em>
+      <em>{gameName} · coins</em>
     </div>
   );
 }

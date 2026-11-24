@@ -40,7 +40,7 @@ All paths are relative to `frontend/src/`.
 | API client | `lib/api.ts` | typed REST wrappers, errors, 401 dispatch |
 | Demo catalogue | `lib/demo.ts` | offline browser fallback |
 | Simulated instant engine | `lib/simulate.ts` | browser-preview fallback only |
-| Formatters | `lib/format.ts` | VC, odds, dates, relative times, labels |
+| Formatters | `lib/format.ts` | coins, odds, dates, relative times, labels |
 | Static content | `lib/content.ts` | fallback legal content |
 
 ## Page families

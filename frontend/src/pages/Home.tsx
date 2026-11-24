@@ -41,19 +41,19 @@ export function Home() {
               <span className="live-pulse" />
               <span>19X Originals · server-recorded rounds</span>
               <span className="hero-kicker-divider" />
-              <span>Virtual credits only</span>
+              <span>Sandbox coin play</span>
             </div>
             <h1>Play beyond<br />the <em>ordinary.</em></h1>
             <p className="hero-lede">
               A sportsbook, casino lobby, and original instant games in one precise arena.
-              Every 19X round is generated on our server, recorded, and completely free to play.
+              Every 19X round is generated on our server, recorded, and settled in your coin balance.
             </p>
             <div className="hero-actions">
               <Link to="/instant" className="btn btn-primary btn-lg">Explore originals <ArrowRight size={18} /></Link>
               <Link to="/live" className="btn btn-ghost btn-lg"><span className="live-pulse" /> View live odds</Link>
             </div>
             <div className="hero-trust">
-              <span><ShieldCheck size={15} /> No real money</span>
+              <span><ShieldCheck size={15} /> Sandbox mode</span>
               <span><ServerCog size={15} /> Server-authoritative</span>
               <span><Eye size={15} /> Transparent limits</span>
             </div>
@@ -81,7 +81,7 @@ export function Home() {
               </div>
             )}
             <div className="floating-chip float-chip">
-              <Trophy size={14} /> 250,000 VC prize pool
+              <Trophy size={14} /> 250,000 coin prize pool
             </div>
             <div className="floating-chip float-chip-two">
               <ServerCog size={14} /> Rounds start on demand
@@ -93,7 +93,7 @@ export function Home() {
           <div><strong>{number(games.length)}</strong><span>catalogue titles</span></div>
           <div><strong>{number(games.filter((game) => game.playable).length)}</strong><span>playable originals</span></div>
           <div><strong>{number(matches.length)}</strong><span>demo fixtures</span></div>
-          <div><strong>100%</strong><span>virtual credits</span></div>
+          <div><strong>100%</strong><span>server-settled rounds</span></div>
         </div>
       </section>
 
@@ -112,7 +112,7 @@ export function Home() {
           <SectionHeading
             kicker="In the arena"
             title={liveMatches.length ? "Live right now" : "Tonight's fixtures"}
-            body="Server-generated demo fixtures with transparent prices. Add a selection to your virtual bet slip."
+            body="Server-generated demo fixtures with transparent prices. Add a selection to your coin bet slip."
             action={<Link to={liveMatches.length ? "/live" : "/sports"} className="section-link">All {liveMatches.length ? "live" : "fixtures"} <ArrowRight size={15} /></Link>}
           />
           <div className="home-sports-grid">
@@ -207,7 +207,7 @@ export function Home() {
           <SectionHeading
             kicker="Rewards & competition"
             title="More ways to make the board"
-            body="Virtual-credit promotions and leaderboards. No cash value, no wagering requirements."
+            body="Coin promotions and leaderboards. Sandbox coins, no cash value, no wagering requirements."
             action={<Link to="/promotions" className="section-link">All promotions <ArrowRight size={15} /></Link>}
           />
           <div className="promo-grid">
@@ -239,7 +239,7 @@ export function Home() {
             <div className="tournament-copy">
               <span className="eyebrow"><Trophy size={13} /> Live tournament</span>
               <h2>{liveTournament?.name || "19X tournament series"}</h2>
-              <p>Climb the leaderboard with your best completed rounds. Prize pools are virtual credits.</p>
+              <p>Climb the leaderboard with your best completed rounds. Prize pools are coins.</p>
               <div className="tournament-meta">
                 <span><Coins size={15} /> {vc(liveTournament?.prizePool || 0)} pool</span>
                 <span><Clock3 size={15} /> Ends {dateShort(liveTournament?.endsAt)}</span>
@@ -271,7 +271,7 @@ export function Home() {
           <div>
             <span className="eyebrow">Play with a clear head</span>
             <h2>Entertainment, not income.</h2>
-            <p>Set a virtual-credit limit, schedule a reality check, or take a cool-off. Your controls are always one tap away.</p>
+            <p>Set a coin limit, schedule a reality check, or take a cool-off. Your controls are always one tap away.</p>
           </div>
           <div className="responsible-actions">
             <Link to="/account/responsible" className="btn btn-secondary">Set my limits</Link>

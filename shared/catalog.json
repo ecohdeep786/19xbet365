@@ -735,10 +735,10 @@
       "tagline": "Ride the curve. Cash out before orbit breaks.",
       "description": "A live multiplier curve climbs from 1.00x. Cash out at any moment to bank your stake multiplied by the current value — wait too long and the round ends at zero. Every crash point is generated server-side and recorded.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Live multiplier graph",
@@ -754,7 +754,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 5796,
+      "players": 8412,
       "sortOrder": 1,
       "maxWin": "1,000x"
     },
@@ -770,10 +770,10 @@
       "tagline": "Reveal gems, dodge the mines, take the profit.",
       "description": "A 5×5 vault hides between one and twenty-four mines. Every safe tile raises your multiplier. Cash out whenever you like — or clear the board for the maximum win.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -789,7 +789,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 3643,
+      "players": 9001,
       "sortOrder": 2,
       "maxWin": "2,231x"
     },
@@ -805,10 +805,10 @@
       "tagline": "Drop the ball. Follow the path. Find your multiplier.",
       "description": "Choose a risk profile and number of rows, then send a ball through the peg field. The landing bucket determines your payout. Paths are generated on our servers and shown after each drop.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -824,7 +824,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 6693,
+      "players": 7097,
       "sortOrder": 3,
       "maxWin": "170x"
     },
@@ -840,10 +840,10 @@
       "tagline": "Set your target. Roll above or below. Simple by design.",
       "description": "Roll a number between 0 and 100. Choose your target and direction to set the win chance and multiplier. The result is generated with a cryptographically secure server RNG.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -859,7 +859,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 1560,
+      "players": 8003,
       "sortOrder": 4,
       "maxWin": "49x"
     },
@@ -875,10 +875,10 @@
       "tagline": "One spin. Twenty-four sectors. Endless possibility.",
       "description": "Spin the 19X wheel and land on a multiplier from 0x to 5x. Every result is settled by the server and stored with its round identifier.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -894,7 +894,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 2937,
+      "players": 10200,
       "sortOrder": 5,
       "maxWin": "5x"
     },
@@ -910,10 +910,10 @@
       "tagline": "Heads or tails. One call, instant result.",
       "description": "Call the coin and let it fly. A winning call returns 1.96x your stake. Rounds resolve instantly and are recorded for your activity history.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -929,7 +929,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 7255,
+      "players": 10151,
       "sortOrder": 6,
       "maxWin": "1.96x"
     },
@@ -945,10 +945,10 @@
       "tagline": "Higher or lower? Read the card, trust your call.",
       "description": "A card is drawn and revealed. Predict whether the next card will be higher or lower. Ties lose. Volatility changes with the rank on the table.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -964,7 +964,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 6437,
+      "players": 5214,
       "sortOrder": 7,
       "maxWin": "12x"
     },
@@ -980,10 +980,10 @@
       "tagline": "Pick a number. Ten possibilities. One golden draw.",
       "description": "Choose one number from zero to nine. If the draw lands on your number, the round pays 8.8x. Results are generated on the server and immediately auditable in your history.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -999,7 +999,7 @@
       },
       "badge": "ORIGINAL",
       "featured": false,
-      "players": 6084,
+      "players": 1628,
       "sortOrder": 8,
       "maxWin": "8.8x"
     },
@@ -1013,12 +1013,12 @@
       "rtp": 96,
       "volatility": "Medium",
       "tagline": "Classic fruit energy with three reels and three paylines.",
-      "description": "A three-reel, three-row original slot with three paylines. Match three symbols across any row. Simple to learn, quick to play, and built with responsible virtual-credit limits.",
+      "description": "A three-reel, three-row original slot with three paylines. Match three symbols across any row. Simple to learn, quick to play, and built with responsible coin limits.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -1034,7 +1034,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 6917,
+      "players": 1821,
       "sortOrder": 9,
       "maxWin": "180x"
     },
@@ -1050,10 +1050,10 @@
       "tagline": "Six runners. One finish line. Pick your champion.",
       "description": "A fully simulated six-horse race with fixed virtual odds. Pick a runner, watch the simulated race, and see the official order in your results history. No real horses or live events are involved.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -1069,7 +1069,7 @@
       },
       "badge": "ORIGINAL",
       "featured": true,
-      "players": 10159,
+      "players": 5836,
       "sortOrder": 10,
       "maxWin": "9.4x"
     },
@@ -2135,10 +2135,10 @@
       "tagline": "Eight lanes. One electric finish.",
       "description": "A second 19X virtual racing product with a speedway theme. Choose a lane, watch the simulation, and review the official order.",
       "howTo": [
-        "Set your virtual-credit stake using the controls on the right.",
+        "Set your coin stake using the controls on the right.",
         "Start the round and follow the on-screen action.",
         "Cash out or let the round complete, then review the result in your activity.",
-        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+        "Use the history panel to see your last rounds. Coins have no cash value."
       ],
       "features": [
         "Server-authoritative rounds",
@@ -2269,39 +2269,39 @@
       "id": "p1",
       "title": "The 19X Welcome Haul",
       "kicker": "NEW PLAYERS",
-      "description": "Start with 10,000 virtual credits and a 500-credit gameplay boost. No deposit, no wagering, no cash value.",
+      "description": "Start with 10,000 coins and a 500-coin gameplay boost. No deposit, no wagering, no cash value.",
       "type": "welcome",
-      "badge": "VIRTUAL CREDITS",
+      "badge": "COINS",
       "theme": "lime",
       "endsAt": null,
       "cta": "Create an account",
-      "terms": "One welcome allocation per verified player. Virtual credits cannot be withdrawn or exchanged. This is not a real-money bonus.",
-      "prize": "10,500 VC"
+      "terms": "One welcome allocation per verified player. Coins cannot be withdrawn or exchanged. This is not a real-money bonus.",
+      "prize": "10,500 coins"
     },
     {
       "id": "p2",
       "title": "Crash Orbit: Altitude Week",
       "kicker": "TOURNAMENT · LIVE",
-      "description": "The ten highest cash-out multipliers this week share a 250,000 virtual-credit prize pool.",
+      "description": "The ten highest cash-out multipliers this week share a 250,000 coin prize pool.",
       "type": "tournament",
       "badge": "25 HOURS LEFT",
       "theme": "cyan",
       "endsAt": "2026-11-25T13:40:00.000Z",
       "cta": "View tournament",
-      "terms": "Open to registered players aged 18+. Minimum qualifying stake 50 VC. Leaderboard is based on the highest completed cash-out multiplier.",
-      "prize": "250,000 VC"
+      "terms": "Open to registered players aged 18+. Minimum qualifying stake 50 coins. Leaderboard is based on the highest completed cash-out multiplier.",
+      "prize": "250,000 coins"
     },
     {
       "id": "p3",
       "title": "Weekend Multiplier",
       "kicker": "CASINO",
-      "description": "Play any 19X Originals game on Saturday or Sunday and collect a 10% virtual-credit top-up on net losses.",
+      "description": "Play any 19X Originals game on Saturday or Sunday and collect a 10% coin top-up on net losses.",
       "type": "casino",
       "badge": "SAT & SUN",
       "theme": "violet",
       "endsAt": "2026-11-28T12:40:00.000Z",
       "cta": "Explore originals",
-      "terms": "Maximum top-up 1,000 VC per day. Virtual credits only. Bonus terms apply.",
+      "terms": "Maximum top-up 1,000 coins per day. Coins only. Bonus terms apply.",
       "prize": "10% back"
     },
     {
@@ -2314,34 +2314,34 @@
       "theme": "gold",
       "endsAt": "2026-12-01T12:40:00.000Z",
       "cta": "View football",
-      "terms": "Minimum combined odds 3.00. Virtual-credit bets only. Loyalty points have no cash value.",
+      "terms": "Minimum combined odds 3.00. Coin bets only. Loyalty points have no cash value.",
       "prize": "2× XP"
     },
     {
       "id": "p5",
       "title": "Mines Vault: Deep Run",
       "kicker": "TOURNAMENT · STARTS SOON",
-      "description": "Clear the most tiles without a bust. The top 50 vault runners win from a 100,000 VC pool.",
+      "description": "Clear the most tiles without a bust. The top 50 vault runners win from a 100,000 coin pool.",
       "type": "tournament",
       "badge": "STARTS FRIDAY",
       "theme": "emerald",
       "endsAt": "2026-11-26T12:40:00.000Z",
       "cta": "Open Mines Vault",
       "terms": "Each round is recorded. Leaderboard ranks by total tiles cleared across qualifying rounds.",
-      "prize": "100,000 VC"
+      "prize": "100,000 coins"
     },
     {
       "id": "p6",
       "title": "Bring a Friend",
       "kicker": "REFERRALS",
-      "description": "Invite a friend to 19xbet365. You both receive 1,000 virtual credits after their first game round.",
+      "description": "Invite a friend to 19xbet365. You both receive 1,000 coins after their first game round.",
       "type": "referral",
       "badge": "BOTH WIN",
       "theme": "rose",
       "endsAt": null,
       "cta": "Get your invite code",
-      "terms": "Referrals do not grant administrative access. One reward per verified new account. Virtual credits only.",
-      "prize": "1,000 VC each"
+      "terms": "Referrals do not grant administrative access. One reward per verified new account. Coins only.",
+      "prize": "1,000 coins each"
     }
   ],
   "tournaments": [
@@ -2458,19 +2458,19 @@
       "slug": "getting-started",
       "title": "Getting started with 19xbet365",
       "category": "Account",
-      "body": "19xbet365 is a free-to-play demonstration platform. Create an account, explore the sportsbook and games, and use virtual credits to try every interaction. Virtual credits have no cash value and cannot be purchased, withdrawn, or exchanged."
+      "body": "19xbet365 is a free-to-play demonstration platform. Create an account, explore the sportsbook and games, and use coins to try every interaction. Coins have no cash value and cannot be purchased, withdrawn, or exchanged."
     },
     {
-      "slug": "virtual-credits",
-      "title": "How virtual credits work",
+      "slug": "coins",
+      "title": "How coins work",
       "category": "Wallet",
-      "body": "Virtual credits (VC) are the only balance used on 19xbet365. They are granted for demonstration and cannot be bought or redeemed. Every stake, payout, and adjustment is recorded in your wallet history. Real-money deposits and withdrawals are disabled."
+      "body": "Coins are the only balance used on 19xbet365. They are granted for demonstration and cannot be bought or redeemed. Every stake, payout, and adjustment is recorded in your wallet history. Real-money deposits and withdrawals are disabled."
     },
     {
       "slug": "placing-a-bet",
-      "title": "Placing a virtual sports bet",
+      "title": "Placing a sports bet",
       "category": "Sports",
-      "body": "Open any sport, choose a match, then tap one of the odds buttons to add a selection to your bet slip. Enter a stake and confirm. A single selection creates a single bet; two or more create an accumulator. All bets use virtual credits and are limited to demo fixtures."
+      "body": "Open any sport, choose a match, then tap one of the odds buttons to add a selection to your bet slip. Enter a stake and confirm. A single selection creates a single bet; two or more create an accumulator. All bets use coins and are limited to demo fixtures."
     },
     {
       "slug": "cash-out",
@@ -2488,7 +2488,7 @@
       "slug": "responsible-play",
       "title": "Responsible play tools",
       "category": "Safety",
-      "body": "Use Responsible Gaming in your account to set a daily virtual-credit limit, a session reminder, a cool-off period, or a self-exclusion. These controls apply to this demo and are recorded for transparency."
+      "body": "Use Responsible Gaming in your account to set a daily coin limit, a session reminder, a cool-off period, or a self-exclusion. These controls apply to this demo and are recorded for transparency."
     },
     {
       "slug": "verification",

@@ -362,13 +362,13 @@ router.post("/accounts/:id/credits", requirePermission("credits.adjust"), async 
     const amount = round2(Number(req.body?.amount));
     const reason = String(req.body?.reason || "").trim().slice(0, 300);
     if (!Number.isFinite(amount) || amount === 0 || Math.abs(amount) > 100000) {
-      throw Object.assign(new Error("Enter an adjustment between -100,000 and +100,000 VC."), { status: 400, code: "invalid_amount" });
+      throw Object.assign(new Error("Enter an adjustment between -100,000 and +100,000 coins."), { status: 400, code: "invalid_amount" });
     }
     if (reason.length < 8) throw Object.assign(new Error("A reason of at least 8 characters is required for every credit adjustment."), { status: 400, code: "reason_required" });
     if (req.params.id === req.account.id) throw Object.assign(new Error("Use a separate authorized account for adjustments."), { status: 400, code: "self_action" });
     const result = await withTransaction(async (client) => {
       const target = await requireTarget(req, client, "credits.adjust");
-      if (target.role_code !== "player") throw Object.assign(new Error("Virtual-credit adjustments are limited to player accounts."), { status: 403, code: "target_role" });
+      if (target.role_code !== "player") throw Object.assign(new Error("Coin adjustments are limited to player accounts."), { status: 403, code: "target_role" });
       if (target.status === "closed") throw Object.assign(new Error("Closed accounts cannot receive adjustments."), { status: 400, code: "account_closed" });
       const locked = await client.query("SELECT balance, status FROM accounts WHERE id = $1 FOR UPDATE", [target.id]);
       const before = Number(locked.rows[0].balance);
@@ -382,21 +382,21 @@ router.post("/accounts/:id/credits", requirePermission("credits.adjust"), async 
       );
       await client.query(
         `INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'security','/account/wallet')`,
-        [target.id, "Virtual balance adjusted", `${amount > 0 ? "+" : ""}${amount.toFixed(2)} VC was added to your account by platform operations. Reason: ${reason}.`]
+        [target.id, "Coin balance adjusted", `${amount > 0 ? "+" : ""}${amount.toFixed(2)} coins was added to your account by platform operations. Reason: ${reason}.`]
       );
       await appendAudit(client, {
         actorId: req.account.id,
         action: amount > 0 ? "credits.credited" : "credits.debited",
         entityType: "account",
         entityId: target.id,
-        summary: `${amount > 0 ? "Credited" : "Debited"} ${Math.abs(amount).toFixed(2)} VC to ${target.display_name}: ${reason}`,
+        summary: `${amount > 0 ? "Credited" : "Debited"} ${Math.abs(amount).toFixed(2)} coins to ${target.display_name}: ${reason}`,
         before: { balance: before },
         after: { balance: after, amount, reason },
         ip: requestMeta(req).ip
       });
       return { balance: after, before, target };
     });
-    res.json({ ok: true, balance: result.balance, message: `Adjustment recorded. New balance: ${result.balance.toFixed(2)} VC.` });
+    res.json({ ok: true, balance: result.balance, message: `Adjustment recorded. New balance: ${result.balance.toFixed(2)} coins.` });
   } catch (error) {
     next(error);
   }

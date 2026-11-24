@@ -99,9 +99,9 @@ async function settleBetsForMatch(client, match) {
 
     const title = status === "won" ? "Sports bet won" : status === "void" ? "Sports bet voided" : "Sports bet settled";
     const body = status === "won"
-      ? `Your ${bet.type === "acca" ? "accumulator" : "single"} returned ${payout.toFixed(2)} VC.`
+      ? `Your ${bet.type === "acca" ? "accumulator" : "single"} returned ${payout.toFixed(2)} coins.`
       : status === "void"
-        ? `Your ${bet.type === "acca" ? "accumulator" : "single"} was voided and ${payout.toFixed(2)} VC was returned.`
+        ? `Your ${bet.type === "acca" ? "accumulator" : "single"} was voided and ${payout.toFixed(2)} coins was returned.`
         : `Your ${bet.type === "acca" ? "accumulator" : "single"} did not win.`;
     await client.query(
       `INSERT INTO notifications (account_id, title, body, type, link)
@@ -113,7 +113,7 @@ async function settleBetsForMatch(client, match) {
       action: "sportsbook.bet_settled",
       entityType: "bet",
       entityId: bet.id,
-      summary: `${title} · ${payout.toFixed(2)} VC · fixture ${match.id}`,
+      summary: `${title} · ${payout.toFixed(2)} coins · fixture ${match.id}`,
       after: { status, payout, outcome, matchId: match.id },
       ip: "demo-settlement-worker"
     });

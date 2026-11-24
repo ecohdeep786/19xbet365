@@ -135,7 +135,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
       if (!user || !detail || detail.accountId !== user.id) return;
       const won = detail.status === "won";
       const body = won
-        ? `Sports bet settled · ${Number(detail.payout || 0).toFixed(2)} VC returned.`
+        ? `Sports bet settled · ${Number(detail.payout || 0).toFixed(2)} coins returned.`
         : detail.status === "void"
           ? "Sports bet voided · stake returned."
           : "Sports bet settled · no return this time.";

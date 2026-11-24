@@ -45,8 +45,8 @@ export function AccountActivity() {
       </div>
       <div className="stat-grid">
         <Stat label="Rounds" value={filtered.length} hint={`${wins} winning rounds`} tone="cyan" icon={<Activity size={16} />} />
-        <Stat label="Total wagered" value={vc(wagered, { compact: true })} hint="Virtual credits" icon={<Coins size={16} />} />
-        <Stat label="Total returned" value={vc(returned, { compact: true })} hint="Virtual credits" tone="lime" icon={<Trophy size={16} />} />
+        <Stat label="Total wagered" value={vc(wagered, { compact: true })} hint="Coins" icon={<Coins size={16} />} />
+        <Stat label="Total returned" value={vc(returned, { compact: true })} hint="Coins" tone="lime" icon={<Trophy size={16} />} />
         <Stat label="Net" value={vc(returned - wagered, { compact: true, sign: true })} hint="Return minus stake" tone={returned - wagered >= 0 ? "lime" : "coral"} icon={<Sparkles size={16} />} />
       </div>
       <div className="panel activity-history-panel">

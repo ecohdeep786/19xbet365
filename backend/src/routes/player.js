@@ -285,7 +285,7 @@ router.patch("/responsible", requireAuth, async (req, res, next) => {
     );
     await query(
       `INSERT INTO notifications (account_id, title, body, type, link)
-       VALUES ($1,'Responsible-play settings updated','Your virtual-credit limits have been saved. These controls are part of the demonstration environment.','security','/account/responsible')`,
+       VALUES ($1,'Responsible-play settings updated','Your coin limits have been saved. These controls are part of the demonstration environment.','security','/account/responsible')`,
       [req.account.id]
     );
     const result = await query("SELECT * FROM responsible_limits WHERE account_id = $1", [req.account.id]);

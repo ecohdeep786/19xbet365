@@ -234,14 +234,14 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
           <div className="panel lobby-info">
             <span className="eyebrow"><Dices size={13} /> What is playable?</span>
             <h3>Original titles vs provider titles</h3>
-            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play them immediately with virtual credits.</p>
+            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play them immediately with coins.</p>
             <p><strong>Provider titles</strong> are catalogue entries prepared for future certified integrations. Their pages describe the game and clearly label the missing provider session.</p>
             <Link to="/help/games-and-providers" className="text-btn">Read about providers <ArrowRight size={14} /></Link>
           </div>
           <div className="panel lobby-info">
             <span className="eyebrow"><Trophy size={13} /> Tournaments</span>
             <h3>Turn a good round into a leaderboard run</h3>
-            <p>Altitude Week is live on Crash Orbit. The top ten players share 250,000 virtual credits. Every qualifying round is recorded automatically.</p>
+            <p>Altitude Week is live on Crash Orbit. The top ten players share 250,000 coins. Every qualifying round is recorded automatically.</p>
             <Link to="/tournaments" className="text-btn">View tournaments <ArrowRight size={14} /></Link>
           </div>
           <div className="panel lobby-info">

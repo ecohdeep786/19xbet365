@@ -11,9 +11,9 @@ export async function lockAccount(client, accountId) {
 export async function ensureCanWager(accountRow, bet) {
   if (!accountRow) throw Object.assign(new Error("Account not found."), { status: 404, code: "not_found" });
   if (accountRow.status !== "active") throw Object.assign(new Error("This account cannot place wagers right now."), { status: 403, code: "account_restricted" });
-  if (!Number.isFinite(bet) || bet <= 0) throw Object.assign(new Error("Enter a valid virtual-credit stake."), { status: 400, code: "invalid_stake" });
-  if (bet > 5000) throw Object.assign(new Error("The maximum stake per round is 5,000 VC."), { status: 400, code: "stake_limit" });
-  if (Number(accountRow.balance) < bet) throw Object.assign(new Error("Your virtual-credit balance is too low for that stake."), { status: 400, code: "insufficient_balance" });
+  if (!Number.isFinite(bet) || bet <= 0) throw Object.assign(new Error("Enter a valid coin stake."), { status: 400, code: "invalid_stake" });
+  if (bet > 5000) throw Object.assign(new Error("The maximum stake per round is 5,000 coins."), { status: 400, code: "stake_limit" });
+  if (Number(accountRow.balance) < bet) throw Object.assign(new Error("Your coin balance is too low for that stake."), { status: 400, code: "insufficient_balance" });
 }
 
 export async function checkDailyLimit(client, accountId, bet) {
@@ -34,7 +34,7 @@ export async function checkDailyLimit(client, accountId, bet) {
       [accountId]
     );
     if (Number(spent.rows[0].total) + bet > Number(limit.daily_bet_limit)) {
-      throw Object.assign(new Error("This wager would exceed your daily virtual-credit limit."), { status: 403, code: "responsible_limit" });
+      throw Object.assign(new Error("This wager would exceed your daily coin limit."), { status: 403, code: "responsible_limit" });
     }
   }
 }

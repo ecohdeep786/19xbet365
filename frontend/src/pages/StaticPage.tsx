@@ -54,7 +54,7 @@ export function StaticPage({ slug }: { slug: string }) {
           <span className="eyebrow">{KICKERS[slug] || "19xbet365"}{page?.category && page.category.toLowerCase() !== (KICKERS[slug] || "").toLowerCase() ? ` · ${page.category}` : ""}</span>
           <h1>{page?.title || "19xbet365"}</h1>
           <p>{slug === "responsible-gaming" ? "Tools, limits, and support for keeping play in its place." : "Clear, plain-language information about how 19xbet365 works and what is enabled."}</p>
-          <div className="static-hero-meta"><Badge tone="outline">Demonstration environment</Badge><span><ShieldCheck size={14} /> Virtual credits only</span>{page?.updated_at && <span>Updated {dateShort(page.updated_at)}</span>}</div>
+          <div className="static-hero-meta"><Badge tone="outline">Demonstration environment</Badge><span><ShieldCheck size={14} /> Coins only</span>{page?.updated_at && <span>Updated {dateShort(page.updated_at)}</span>}</div>
         </div>
       </div>
       <div className="page-shell static-shell">
@@ -72,7 +72,7 @@ export function StaticPage({ slug }: { slug: string }) {
               </div>
               {slug === "about" && (
                 <div className="about-values">
-                  <div><span><ShieldCheck size={18} /></span><strong>Virtual by design</strong><p>No real-money wagering, deposits, or withdrawals. Credits cannot be redeemed.</p></div>
+                  <div><span><ShieldCheck size={18} /></span><strong>Coin play by design</strong><p>No real-money wagering, deposits, or withdrawals. Coins cannot be redeemed.</p></div>
                   <div><span><Check size={18} /></span><strong>Server-recorded</strong><p>Every playable round is generated and stored by the game engine, with immutable settlement.</p></div>
                   <div><span><Sparkles size={18} /></span><strong>Honest catalogue</strong><p>Provider-required titles are labelled and never presented as live certified products.</p></div>
                 </div>

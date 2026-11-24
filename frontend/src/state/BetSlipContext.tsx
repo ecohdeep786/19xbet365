@@ -79,7 +79,7 @@ export function BetSlipProvider({ children }: { children: ReactNode }) {
 
   const placeBet = useCallback(async () => {
     if (!user) {
-      push("Sign in or create an account to place your virtual-credit bet.", "info");
+      push("Sign in or create an account to place your coin bet.", "info");
       return false;
     }
     if (!selections.length) {
@@ -87,7 +87,7 @@ export function BetSlipProvider({ children }: { children: ReactNode }) {
       return false;
     }
     if (stake < 10) {
-      push("The minimum virtual-credit stake is 10 VC.", "error");
+      push("The minimum coin stake is 10 coins.", "error");
       return false;
     }
     setBusy(true);
@@ -107,7 +107,7 @@ export function BetSlipProvider({ children }: { children: ReactNode }) {
       });
       updateUser({ balance: data.balance });
       const potential = Number(data.bet.potentialReturn ?? (data.bet as { potential_return?: number }).potential_return ?? 0);
-      push(`${data.message} Potential return ${potential.toFixed(2)} VC.`, "success", "Bet placed");
+      push(`${data.message} Potential return ${potential.toFixed(2)} coins.`, "success", "Bet placed");
       setSelections([]);
       setOpen(false);
       return true;

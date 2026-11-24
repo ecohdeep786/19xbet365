@@ -10,7 +10,7 @@ import { classNames, dateTime, vc } from "../../lib/format";
 
 const TYPE_LABELS: Record<string, string> = {
   welcome_bonus: "Welcome allocation",
-  promo_credit: "Promotion credit",
+  promo_credit: "Promotion bonus",
   deposit: "Coin deposit",
   deposit_bonus: "Deposit bonus",
   game_stake: "Game stake",
@@ -18,7 +18,7 @@ const TYPE_LABELS: Record<string, string> = {
   bet_stake: "Bet stake",
   bet_win: "Bet return",
   bet_refund: "Bet refund",
-  admin_credit: "Adjustment credit",
+  admin_credit: "Adjustment",
   admin_debit: "Adjustment debit",
   referral_reward: "Referral reward",
   bonus_expiry: "Bonus expiry"
@@ -105,13 +105,13 @@ export function AccountWallet() {
         <div className="wallet-actions">
           <Link to="/account/deposit" className="btn btn-primary"><Download size={16} /> Add coins</Link>
           <Button variant="secondary" disabled icon={<ArrowUpRight size={16} />}>Withdraw</Button>
-          <div className="wallet-disabled-note"><Info size={14} /><span>Real-money rails are disabled pending licensing. Virtual credits are allocated by the platform and cannot be purchased.</span></div>
+          <div className="wallet-disabled-note"><Info size={14} /><span>Real-money rails are disabled pending licensing. Coins are allocated by the platform and cannot be purchased.</span></div>
         </div>
       </div>
 
       <div className="wallet-summary">
-        <div><span><ArrowDownLeft size={15} /> Credits in</span><strong className="lime-text">{vc(credited)}</strong></div>
-        <div><span><ArrowUpRight size={15} /> Credits out</span><strong>{vc(debited)}</strong></div>
+        <div><span><ArrowDownLeft size={15} /> Coins in</span><strong className="lime-text">{vc(credited)}</strong></div>
+        <div><span><ArrowUpRight size={15} /> Coins out</span><strong>{vc(debited)}</strong></div>
         <div><span><WalletCards size={15} /> Entries loaded</span><strong>{filtered.length} / {total}</strong></div>
       </div>
 

@@ -23,7 +23,7 @@ export function HelpPage() {
     <div className="help-page">
       <div className="page-hero compact-hero help-hero">
         <div className="page-shell page-hero-inner">
-          <div><span className="eyebrow"><HelpCircle size={13} /> Help centre</span><h1>Answers, without the runaround.</h1><p>Clear guidance on virtual credits, playable originals, integration-ready providers, account security, and responsible play.</p></div>
+          <div><span className="eyebrow"><HelpCircle size={13} /> Help centre</span><h1>Answers, without the runaround.</h1><p>Clear guidance on coins, playable originals, integration-ready providers, account security, and responsible play.</p></div>
           <div className="help-hero-card"><BookOpen size={24} /><strong>{articles.length} articles</strong><span>Updated for the current foundation build</span><div><span className="status-dot status-active" /> API online</div></div>
         </div>
       </div>

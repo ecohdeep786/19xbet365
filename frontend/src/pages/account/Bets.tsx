@@ -45,7 +45,7 @@ export function AccountBets() {
       <div className="subpage-head">
         <span className="eyebrow">Sportsbook</span>
         <h2>My bets</h2>
-        <p>Every virtual-credit sports bet you place is recorded here with its selections, odds, and settlement state.</p>
+        <p>Every coin sports bet you place is recorded here with its selections, odds, and settlement state.</p>
       </div>
       <div className="bet-summary-grid">
         <div className="panel summary-tile"><span><Ticket size={15} /> Open bets</span><strong>{open.length}</strong><small>Awaiting fixture settlement</small></div>
@@ -54,11 +54,11 @@ export function AccountBets() {
       </div>
       <div className="panel bets-panel">
         <div className="bets-toolbar">
-          <div className="panel-head"><span><Ticket size={15} /> Bet history</span><Badge tone="outline">Virtual credits</Badge></div>
+          <div className="panel-head"><span><Ticket size={15} /> Bet history</span><Badge tone="outline">Coins</Badge></div>
           <Segmented size="sm" value={tab} onChange={setTab} options={TABS} />
         </div>
         {loading ? <div className="table-loading"><Skeleton className="sk-line" /><Skeleton className="sk-line" /></div> : error ? <ErrorState message={error} onRetry={load} /> : filtered.length === 0 ? (
-          <EmptyState icon={<Ticket size={22} />} title="No bets in this view" body="Build a slip from the sportsbook and place a virtual-credit bet. Singles and accumulators are supported." action={<Link to="/sports" className="btn btn-secondary btn-sm">Open sportsbook <ArrowRight size={15} /></Link>} />
+          <EmptyState icon={<Ticket size={22} />} title="No bets in this view" body="Build a slip from the sportsbook and place a coin bet. Singles and accumulators are supported." action={<Link to="/sports" className="btn btn-secondary btn-sm">Open sportsbook <ArrowRight size={15} /></Link>} />
         ) : (
           <div className="bet-list">
             {filtered.map((bet) => (
@@ -92,7 +92,7 @@ export function AccountBets() {
                   ))}
                 </div>
                 <div className="bet-card-foot">
-                  <span>{bet.status === "open" ? "Settlement will be applied when the demo fixture is resolved. No real-money settlement is involved." : bet.status === "won" ? `Paid ${vc(bet.payout)} to your virtual wallet.` : "This virtual bet returned no credits."}</span>
+                  <span>{bet.status === "open" ? "Settlement will be applied when the demo fixture is resolved. No real-money settlement is involved." : bet.status === "won" ? `Paid ${vc(bet.payout)} to your coin wallet.` : "This coin bet returned no credits."}</span>
                   <span className="bet-id">Ref {bet.id.slice(0, 8).toUpperCase()}</span>
                 </div>
               </article>

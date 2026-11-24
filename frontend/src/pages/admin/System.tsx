@@ -56,7 +56,7 @@ export function AdminSystemPage() {
             <div><span>Withdrawals</span><strong className="coral-text">Disabled</strong></div>
             <div><span>Cash redemption</span><strong className="coral-text">Disabled</strong></div>
             <div><span>Provider sessions</span><strong className="amber-text">Not configured</strong></div>
-            <div><span>Virtual credits</span><strong className="lime-text">Enabled</strong></div>
+            <div><span>Coins</span><strong className="lime-text">Enabled</strong></div>
             <div><span>Audit immutability</span><strong className="lime-text">Trigger active</strong></div>
           </div>
           <div className="compliance-note"><Zap size={14} /> Enabling financial rails requires licensing, payment partners, KYC/AML controls, and independent review.</div>

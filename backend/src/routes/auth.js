@@ -63,13 +63,13 @@ router.post("/register", loginRateLimit(), async (req, res, next) => {
       const created = account.rows[0];
       await client.query(
         `INSERT INTO transactions (account_id, type, amount, balance_after, description, reference_type, reference_id)
-         VALUES ($1,'welcome_bonus',$2,$3,'Welcome to 19xbet365 — virtual-credit allocation','welcome',$4)`,
+         VALUES ($1,'welcome_bonus',$2,$3,'Welcome to 19xbet365 — coin allocation','welcome',$4)`,
         [created.id, startingBalance, startingBalance, created.id]
       );
       await client.query(
         `INSERT INTO notifications (account_id, title, body, type, link)
          VALUES ($1,'Welcome to 19xbet365',$2,'system','/account')`,
-        [created.id, "Your virtual-credit wallet is ready. Explore the sportsbook, casino originals, and responsible-play tools. Virtual credits have no cash value."]
+        [created.id, "Your coin wallet is ready. Explore the sportsbook, casino originals, and responsible-play tools. Coins have no cash value."]
       );
       await client.query(
         `INSERT INTO responsible_limits (account_id, reality_check_minutes) VALUES ($1, 60) ON CONFLICT DO NOTHING`,

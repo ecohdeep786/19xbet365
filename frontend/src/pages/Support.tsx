@@ -178,7 +178,7 @@ export function SupportPage() {
           </section>
         </div>
         <div className="support-help-strip">
-          <div className="panel support-help-card"><BookOpen size={20} /><div><strong>Self-service answers</strong><span>Getting started, virtual credits, providers, responsible play, and account security.</span></div><Link to="/help" className="text-btn">Help centre <ArrowRight size={13} /></Link></div>
+          <div className="panel support-help-card"><BookOpen size={20} /><div><strong>Self-service answers</strong><span>Getting started, coins, providers, responsible play, and account security.</span></div><Link to="/help" className="text-btn">Help centre <ArrowRight size={13} /></Link></div>
           <div className="panel support-help-card"><CheckCircle2 size={20} /><div><strong>Game record checks</strong><span>Every settled round has a reference. Include it in your ticket for a faster review.</span></div><Link to="/account/activity" className="text-btn">My activity <ArrowRight size={13} /></Link></div>
         </div>
       </div>

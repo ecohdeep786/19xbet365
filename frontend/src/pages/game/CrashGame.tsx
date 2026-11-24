@@ -38,8 +38,8 @@ export function CrashGame({ game, stake, setStake, balance, onBalance, onSettled
   }, []);
 
   const launch = async () => {
-    if (stake < 5) { setError("Stake must be at least 5 VC."); return; }
-    if (stake > balance) { setError("Your virtual-credit balance is too low for that stake."); return; }
+    if (stake < 5) { setError("Stake must be at least 5 coins."); return; }
+    if (stake > balance) { setError("Your coin balance is too low for that stake."); return; }
     setError(null);
     setResult(null);
     setCrashPoint(null);

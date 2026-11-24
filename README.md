@@ -4,6 +4,10 @@
 
 **Important:** 19xbet365 currently runs a **sandbox coin economy**. The production deposit path is implemented: players can submit a QR payment reference, Master Admin can verify it, and a configurable deposit bonus is credited with ledger and audit records. Real cash collection remains hard-gated behind licensing, KYC/AML, payment onboarding and `PAYMENTS_LIVE_ENABLED=true`; withdrawals, cash redemption and real-money wagering are disabled. Provider-required game pages are clearly labelled and cannot be played without a certified integration.
 
+## Design system
+
+The public product follows the visual language of a modern bookmaker: a deep-navy two-row header, a lighter blue navigation strip, bold uppercase navigation, flat 8px controls, white cards on a pale blue-grey canvas, light-grey odds cells and a restrained green conversion accent. Typography is self-hosted **Roboto** for body/UI and **Roboto Condensed** for display, with tabular numerals for odds and balances. The palette and type scale were matched from the public 1xBet reference; all artwork, glyphs, illustrations and wording remain original 19xbet365 assets. Accessible variants are used for text contrast, so the brand green is split into a bright decorative lime and a darker AA-compliant action green. Font licences are included in `frontend/public/fonts/`.
+
 ## Repository layout
 
 ```text
@@ -38,7 +42,7 @@ The two applications are connected through the `/api` surface. In development Vi
 
 ## Stack
 
-- **Frontend:** React 18, TypeScript, Vite, React Router (HashRouter), Lucide controls, original sport glyphs, club/provider monograms and hand-built CSS/SVG artwork.
+- **Frontend:** React 18, TypeScript, Vite, React Router (HashRouter), Lucide controls, self-hosted Roboto/Roboto Condensed, original sport glyphs, club/provider monograms and hand-built CSS/SVG artwork.
 - **Backend:** Node.js ESM, Express, `pg`, `ws`, `helmet`, `compression`, `cookie-parser`.
 - **Database:** PostgreSQL 16. Default local database `astra_play`, port `5433`.
 - **Auth:** server sessions in PostgreSQL, HttpOnly `xbet_session` cookie, scrypt password hashes, rate-limited login.
@@ -133,7 +137,7 @@ Provider-required catalogue titles (live casino, provider slots, some virtuals) 
 ## Admin capabilities
 
 - Global/scoped analytics from `parent_id` hierarchy, with no client-supplied scope trusted.
-- Account search, suspension/restoration, session revocation, virtual-credit adjustments, and Master-only role changes.
+- Account search, suspension/restoration, session revocation, coin adjustments, and Master-only role changes.
 - **Master-only staff credential issuance** with a one-time email/password handoff. Admins can manage scoped accounts and the game catalogue, but cannot create staff logins, change roles, open settings, review deposits or access other Master-only controls.
 - Game catalogue visibility/featured controls; outcomes and RTP are not editable.
 - Content pages, promotions, support tickets, transfer approvals, security events, audit chain verification, settings, and system health.

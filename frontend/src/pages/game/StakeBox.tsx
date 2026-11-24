@@ -31,7 +31,7 @@ export function StakeBox({
           disabled={disabled}
           onChange={(event) => setStake(Math.max(0, Math.min(max, Number(event.target.value) || 0)))}
         />
-        <span>VC</span>
+        <span>coins</span>
       </div>
       <div className="quick-stakes game-stakes">
         {[10, 25, 50, 100, 250].map((amount) => (
@@ -40,8 +40,8 @@ export function StakeBox({
         <button type="button" disabled={disabled} onClick={() => setStake(Math.min(max, Math.floor(balance)))}>Max</button>
       </div>
       <div className="stake-meta">
-        <span>Min {min} · Max {max} VC</span>
-        <span><Sparkles size={12} /> Virtual credits only</span>
+        <span>Min {min} · Max {max} coins</span>
+        <span><Sparkles size={12} /> Coins only</span>
       </div>
       {children}
     </div>

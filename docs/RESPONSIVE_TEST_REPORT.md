@@ -22,9 +22,9 @@ Admin routes were separately tested with a Master Admin session:
 ### Defects found and corrected during the cycle
 
 1. **320px header overflow (all routes).**
-   - Cause: search, notification, account avatar and bet-slip controls exceeded the header action width.
-   - Fix: hide the header search icon at `≤480px`; hide the account avatar trigger at `≤380px`; search and account remain available in the mobile drawer.
-   - Evidence: `Layout.tsx`, `theme.css`.
+   - Cause: the logo wordmark, Sign in, Join and bet-slip controls exceeded the 300px usable header width.
+   - Fix: compact 32px account/search controls, a 30px Join button, an icon-only Sign in action, and a logo that collapses to the 19 mark at `≤380px`. Search and account remain available in the mobile drawer.
+   - Evidence: `Layout.tsx`, `bookmaker.css`.
 
 2. **320px live spotlight overflow.**
    - Cause: live cards remained two-up at 320px.
@@ -47,6 +47,16 @@ Admin routes were separately tested with a Master Admin session:
 
 6. **Mobile account tabs clipped without an obvious scroll affordance.**
    - The strip is intentionally horizontally scrollable with no wrapping; labels stay on one line and the active tab remains scrolled into view on navigation.
+
+7. **1181–1420px navigation crowding after the bold/uppercase pass.**
+   - Cause: 14px bold uppercase labels and icons exceeded the available strip at the narrowest desktop breakpoint.
+   - Fix: retuned 9–10px horizontal padding and 0.82rem labels below 1420px; verified `nav.scrollWidth === nav.clientWidth` at 1181, 1280, 1366 and 1440.
+   - Evidence: `bookmaker.css`, header viewport sweep.
+
+8. **Mobile hero metrics overlapped the second hero action.**
+   - Cause: the desktop absolute metric strip was taller than the hero's reserve on small screens.
+   - Fix: the metric strip becomes a static two-column grid below 900px, so it flows after the hero actions.
+   - Evidence: `bookmaker.css`, `capture/product/home-390.jpeg`.
 
 7. **Deposit page overflowed by 38px at 320px.**
    - Cause: the account content grid inherited a min-content width from the deposit hero/form rather than the available mobile width.

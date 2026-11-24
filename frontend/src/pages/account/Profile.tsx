@@ -80,7 +80,7 @@ export function AccountProfile() {
               <Input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="+44 …" />
             </Field>
           </div>
-          <label className="checkline"><input type="checkbox" checked={form.marketingOptIn} onChange={(event) => setForm({ ...form, marketingOptIn: event.target.checked })} /> Send me virtual-credit promotions and tournament news.</label>
+          <label className="checkline"><input type="checkbox" checked={form.marketingOptIn} onChange={(event) => setForm({ ...form, marketingOptIn: event.target.checked })} /> Send me coin promotions and tournament news.</label>
           <div className="form-actions">
             <Button variant="lime" loading={busy} type="submit">{saved ? <><Check size={16} /> Saved</> : "Save changes"}</Button>
             <span className="form-note">Email and username are protected. Contact support to change them.</span>

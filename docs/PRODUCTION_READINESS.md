@@ -1,7 +1,7 @@
 # Production Readiness
 
-**Status: production-oriented foundation — NOT approved for real-money launch.**  
-This is a virtual-credit release with deliberate legal, provider, and operational blockers.
+**Status: production-oriented foundation — NOT approved for real-money launch.**
+This is a sandbox coin release with deliberate legal, provider, and operational blockers.
 
 ## Acceptance checklist
 
@@ -9,7 +9,7 @@ This is a virtual-credit release with deliberate legal, provider, and operationa
 | --- | --- | --- |
 | Reference sections documented | PASS | `REFERENCE_PRODUCT_ANALYSIS.md` |
 | Approved product sections implemented | PARTIAL | Public, player, games, support, admin complete; multi-market/provider/money rails not |
-| Supplied font used consistently | PASS | local Sora/Manrope, `fonts.css`, theme tokens |
+| Supplied font used consistently | PASS | local Roboto + Roboto Condensed, `fonts.css`, theme tokens |
 | Design system consistent | PASS | `DESIGN_SYSTEM.md`; shared tokens/components |
 | Enabled buttons function | PASS | tested journeys; provider/locked controls clear |
 | Device layouts tested | PASS (widths) | 320–2560, 0 overflow; physical devices not tested |
@@ -33,8 +33,8 @@ This is a virtual-credit release with deliberate legal, provider, and operationa
 
 | Capability | Decision |
 | --- | --- |
-| Virtual-credit demo/public preview | **GO** |
-| Player account + virtual wallet | **GO** (with security hardening) |
+| Sandbox coin demo/public preview | **GO** |
+| Player account + coin wallet | **GO** (with security hardening) |
 | 19X Originals | **GO** for demo; independent certification not done |
 | 1X2 demo sportsbook settlement | **GO** for demo; results are server-generated demonstration data |
 | Manual QR deposit review | **GO** for sandbox; **NO-GO** for live collection until merchant QR, licensing, KYC/AML, `PAYMENTS_LIVE_ENABLED` and reconciliation are approved |
@@ -53,7 +53,7 @@ This is a virtual-credit release with deliberate legal, provider, and operationa
 6. MFA challenge, not just preference.
 7. Monitoring, error tracking, audit alerting, uptime checks.
 8. Load/performance test and bundle budget.
-9. Accessibility audit (WCAG 2.2 AA target).
+9. Independent WCAG 2.2 AA audit; automated Lighthouse and responsive checks pass.
 10. External penetration test and legal review.
 11. Multi-market sports model and settlement worker if claiming that parity.
 12. Provider adapter/certification or remove those pages before launch.

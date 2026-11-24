@@ -49,7 +49,7 @@ export function AccountOverview() {
         <div>
           <span className="eyebrow">At a glance</span>
           <h2>Welcome back, {user?.displayName.split(" ")[0] || "player"}.</h2>
-          <p>Your virtual-credit wallet, open tickets, and recent rounds in one place.</p>
+          <p>Your coin wallet, open tickets, and recent rounds in one place.</p>
         </div>
         <div className="account-welcome-actions">
           <Link to="/instant" className="btn btn-primary btn-sm"><Sparkles size={15} /> Play originals</Link>
@@ -58,7 +58,7 @@ export function AccountOverview() {
       </div>
 
       <div className="stat-grid">
-        <Stat label="Virtual balance" value={vc(user?.balance || 0)} hint="Non-redeemable credits" tone="lime" icon={<Coins size={16} />} />
+        <Stat label="Coin balance" value={vc(user?.balance || 0)} hint="Sandbox coin balance" tone="lime" icon={<Coins size={16} />} />
         <Stat label="Open bets" value={stats.openBets} hint={`${stats.settledBets} settled`} tone="cyan" icon={<Ticket size={16} />} />
         <Stat label="Rounds played" value={stats.totalRounds} hint={`${vc(stats.totalWagered, { compact: true })} wagered`} icon={<Activity size={16} />} />
         <Stat label="Total returned" value={vc(stats.totalReturned, { compact: true })} hint={`${vc(stats.totalStaked, { compact: true })} staked`} tone="coral" icon={<TrendingUp size={16} />} />
@@ -100,7 +100,7 @@ export function AccountOverview() {
             <div><span>Reality check</span><strong>{data.limits?.reality_check_minutes ? `${data.limits.reality_check_minutes} min` : "Off"}</strong></div>
             <div><span>Session limit</span><strong>{data.limits?.session_limit_minutes ? `${data.limits.session_limit_minutes} min` : "Not set"}</strong></div>
           </div>
-          <div className="limits-note"><ShieldCheck size={14} /> Limits apply to virtual-credit stakes only. No real-money play is enabled.</div>
+          <div className="limits-note"><ShieldCheck size={14} /> Limits apply to coin stakes only. No real-money play is enabled.</div>
         </section>
 
         <section className="panel">
@@ -118,11 +118,11 @@ export function AccountOverview() {
       </div>
 
       <div className="account-quick-grid">
-        <Link to="/account/bets" className="quick-card"><Ticket size={19} /><div><strong>Open bets</strong><span>{stats.openBets} virtual-credit bets waiting to settle</span></div><ArrowRight size={16} /></Link>
+        <Link to="/account/bets" className="quick-card"><Ticket size={19} /><div><strong>Open bets</strong><span>{stats.openBets} coin bets waiting to settle</span></div><ArrowRight size={16} /></Link>
         <Link to="/account/referrals" className="quick-card"><Users size={19} /><div><strong>Referrals</strong><span>{stats.referrals} invited · {stats.rewardedReferrals} rewarded</span></div><ArrowRight size={16} /></Link>
         <Link to="/support" className="quick-card"><Bell size={19} /><div><strong>Support tickets</strong><span>{stats.openTickets} open conversation{stats.openTickets === 1 ? "" : "s"}</span></div><ArrowRight size={16} /></Link>
       </div>
-      <div className="account-fineprint"><Badge tone="outline">Virtual credits only</Badge> All values shown are non-redeemable virtual credits. No deposits, withdrawals, or cash prizes.</div>
+      <div className="account-fineprint"><Badge tone="outline">Coins only</Badge> All values shown are non-redeemable coins. No deposits, withdrawals, or cash prizes.</div>
     </div>
   );
 }

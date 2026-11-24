@@ -93,7 +93,7 @@ export async function buildBootstrap() {
     settings: settingsMap,
     helpArticles: catalog.helpArticles || [],
     announcements: [
-      { type: "demo", title: "Virtual credits only", body: "19xbet365 uses non-redeemable virtual credits. No real-money wagering, deposits, or withdrawals are enabled." },
+      { type: "demo", title: "Coins only", body: "19xbet365 uses non-redeemable coins. No real-money wagering, deposits, or withdrawals are enabled." },
       { type: "integrity", title: "Server-authoritative rounds", body: "Every playable 19X Original round is generated and recorded on the server. Third-party titles remain clearly marked as integration-ready." }
     ]
   };
@@ -205,7 +205,7 @@ router.get("/settings/public", async (req, res, next) => {
 
 router.get("/responsible", async (req, res) => {
   res.json({
-    headline: "19xbet365 is virtual-credit entertainment.",
+    headline: "19xbet365 is coin entertainment.",
     points: [
       "No real-money deposits, withdrawals, or cash prizes are available.",
       "Players must be 18 or older to create an account.",

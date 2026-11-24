@@ -116,7 +116,7 @@ export function AdminLayout() {
               </button>
               {menuOpen && (
                 <div className="popover admin-account-menu">
-                  <div className="account-menu-balance"><span>Virtual balance</span><strong>{vc(user.balance)}</strong></div>
+                  <div className="account-menu-balance"><span>Coin balance</span><strong>{vc(user.balance)}</strong></div>
                   <Link to="/account" onClick={() => setMenuOpen(false)}><Activity size={15} /> Player dashboard</Link>
                   <Link to="/" onClick={() => setMenuOpen(false)}><Gamepad2 size={15} /> Public site</Link>
                   <button onClick={signOut}><LogOut size={15} /> Sign out</button>

@@ -15,14 +15,14 @@ export function Promotions() {
         <div className="page-shell page-hero-inner">
           <div>
             <span className="eyebrow">Rewards, without the fine print</span>
-            <h1>Virtual credits.<br /><em>Real reasons to play.</em></h1>
-            <p>Every 19X promotion awards non-redeemable virtual credits. No deposit, no wagering requirement, no cash value. The terms are written to be read.</p>
+            <h1>Coins.<br /><em>Real reasons to play.</em></h1>
+            <p>Every 19X promotion awards non-redeemable coins. No deposit, no wagering requirement, no cash value. The terms are written to be read.</p>
             <div className="hero-actions">
               <Link to="/register" className="btn btn-lime">Claim the welcome haul <ArrowRight size={16} /></Link>
               <Link to="/help" className="btn btn-ghost">Promotion rules</Link>
             </div>
           </div>
-          <div className="promo-hero-mark"><Gift size={54} /><span>10,500 VC</span><small>new player allocation</small></div>
+          <div className="promo-hero-mark"><Gift size={54} /><span>10,500 coins</span><small>new player allocation</small></div>
         </div>
       </div>
       <div className="page-shell">
@@ -39,7 +39,7 @@ export function Promotions() {
                   </div>
                   <h2>{promo.title}</h2>
                   <p>{promo.description}</p>
-                  <div className="promo-prize-line"><Coins size={16} /> {promo.prize || "Virtual-credit reward"}</div>
+                  <div className="promo-prize-line"><Coins size={16} /> {promo.prize || "Coin reward"}</div>
                   <div className="promo-bottom">
                     <span className={promo.endsAt ? "promo-deadline" : "promo-deadline open"}>
                       {promo.endsAt ? <><CalendarClock size={13} /> Ends {relative(promo.endsAt)}</> : <><Sparkles size={13} /> Always available</>}
@@ -54,9 +54,9 @@ export function Promotions() {
               ))}
             </div>
             <div className="promo-info-band">
-              <div><Info size={18} /><span><strong>Virtual credits only.</strong> Promotions have no cash value and cannot be withdrawn, transferred, or redeemed.</span></div>
+              <div><Info size={18} /><span><strong>Coins only.</strong> Promotions have no cash value and cannot be withdrawn, transferred, or redeemed.</span></div>
               <div><ShieldCheck size={18} /><span><strong>One allocation per verified player.</strong> Abuse, duplicate accounts, or attempts to manipulate outcomes are reviewed by platform operations.</span></div>
-              <div><Trophy size={18} /><span><strong>Leaderboards are final after settlement.</strong> Tournament prizes are awarded as virtual credits and recorded in the audit trail.</span></div>
+              <div><Trophy size={18} /><span><strong>Leaderboards are final after settlement.</strong> Tournament prizes are awarded as coins and recorded in the audit trail.</span></div>
             </div>
           </>
         )}
@@ -79,7 +79,7 @@ export function Tournaments() {
           <div>
             <span className="eyebrow">19X tournament series</span>
             <h1>Make the board.<br /><em>Take the pool.</em></h1>
-            <p>Leaderboards built from completed 19X Original rounds. Prize pools are virtual credits; standings are recorded from settled game history.</p>
+            <p>Leaderboards built from completed 19X Original rounds. Prize pools are coins; standings are recorded from settled game history.</p>
           </div>
           <div className="tournament-totals">
             <div><strong>{number(live.length)}</strong><span>live now</span></div>
@@ -115,7 +115,7 @@ export function Tournaments() {
                 </div>
               </section>
             )}
-            {!tournaments.length && <EmptyState icon={<Trophy size={22} />} title="No tournaments scheduled" body="New virtual-credit leaderboards appear here when platform operations publishes them." />}
+            {!tournaments.length && <EmptyState icon={<Trophy size={22} />} title="No tournaments scheduled" body="New coin leaderboards appear here when platform operations publishes them." />}
             <div className="tournament-rules panel">
               <div>
                 <span className="eyebrow"><ShieldCheck size={13} /> How standings work</span>
@@ -123,7 +123,7 @@ export function Tournaments() {
                 <p>Only settled 19X Original rounds count toward a tournament. The leaderboard is generated from the game-round ledger; no staff member can edit a payout or outcome after settlement.</p>
               </div>
               <ul>
-                <li><Coins size={15} /> Prize pools are non-redeemable virtual credits.</li>
+                <li><Coins size={15} /> Prize pools are non-redeemable coins.</li>
                 <li><Users size={15} /> One account per participant. Referral activity never grants administrative access.</li>
                 <li><CalendarClock size={15} /> Qualifying windows are fixed and shown on each event.</li>
               </ul>

@@ -2,123 +2,114 @@
 
 ## Brand direction
 
-The public product now uses a **bookmaker light theme** aligned with the reference’s information hierarchy: deep-blue chrome, pale blue page surfaces, white cards, green primary actions, and blue odds. The internal Master Admin remains a dark control-room theme so it is visually distinct from the player-facing product.
+The public product uses a **1xBet-aligned bookmaker language**: deep-navy chrome, a lighter blue navigation strip, bold uppercase navigation, white cards on a pale blue-grey canvas, light-grey odds cells, flat 8px controls and a restrained green conversion accent. The internal Master Admin keeps a dark control-room theme so staff operations are visually distinct from the player product.
 
-Sora is the display typeface and Manrope is the body typeface, both served locally from `frontend/public/fonts/`. All artwork and iconography are original or licensed open-source icons; no 1xBet visual assets are used.
+All artwork, sport glyphs, team badges, provider marks, game covers and wording are original 19xbet365 assets. No 1xBet code, images, logos or font files are used. The typefaces are open-source Roboto and Roboto Condensed, self-hosted with their SIL Open Font License files.
 
 ## Theme scopes
 
 - `body` default / admin: dark control-room tokens in `theme.css`.
-- `.bookmaker` public wrapper: light tokens in `bookmaker.css`.
+- `.bookmaker` public wrapper: light bookmaker tokens in `bookmaker.css`.
 - `.auth-page.bookmaker`: light auth panel with deep-blue brand artwork.
 
-The `PublicLayout` wraps the header, pages, footer and overlays in `.bookmaker`; `AdminLayout` stays outside it.
+`PublicLayout` wraps the header, pages, footer and overlays in `.bookmaker`; `AdminLayout` stays outside it.
 
 ## Public colour tokens
 
 | Token | Value | Use |
 | --- | --- | --- |
-| page background | `#eef3f9` | public canvas |
-| soft background | `#f6f9fd` | secondary surface |
-| surface | `#ffffff` | panels/cards |
-| line | `#d7e2ee` | borders/dividers |
-| line strong | `#b9cadd` | emphasis |
-| text | `#10243d` | primary copy |
-| text soft | `#304660` | secondary |
-| muted | `#526a82` | helper / secondary text (5.6:1 on white) |
-| blue | `#1266d6` | information/active/odds |
-| blue deep | `#0d4fae` | primary gradient |
-| green | `#1c9b4b` | CTA/win |
-| coral | `#d84b5d` | live/danger/bust |
-| violet | `#6d56d9` | tournament/secondary |
-| amber | `#b77b13` | warning/integration |
+| header navy | `#1d4268` | site header, footer, auth artwork |
+| navigation strip | `#205583` | second-row desktop navigation |
+| navigation resting | `#b0c8dc` | uppercase navigation labels and icons |
+| active blue | `#276aa5` | active nav pill, primary buttons, links, focus |
+| accent lime | `#7eac2f` | decorative highlight, borders, icons, ticker glyphs |
+| action green | `#557d1d` | white-text conversion actions (Join, Add coins, Place bet) |
+| action green hover | `#4f751a` | hover state for action green |
+| page background | `#eef1f5` | public canvas |
+| soft background | `#f5f7fa` | secondary surface |
+| surface | `#ffffff` | panels and cards |
+| line | `#e3e9ef` | borders and dividers |
+| line strong | `#cbd6e0` | emphasised borders |
+| text | `#1d4268` | primary copy and headings |
+| text soft | `#2f5475` | secondary copy |
+| muted | `#52718a` | helper text, metadata, table subcopy |
+| muted 2 | `#7f9ab0` | disabled/decorative metadata |
+| live/danger | `#e5484d` | live pulses, bust/danger states |
+| violet | `#6d56d9` | tournament/secondary accent |
+| amber | `#b7791f` | warning/integration states |
+| footer muted | `#a9c4dd` | footer body and bottom bar |
 
-Header chrome uses `#0c3a6c`, ticker `#082c53`, with white navigation and lime-green active accents.
-
-## Admin colour tokens
-
-Admin keeps the original dark navy/cyan/lime instrumentation palette for a distinct operational context. Public light tokens do not bleed into admin because `.bookmaker` is not applied there.
+Contrast notes: `#52718a` on white is 5.14:1 and on `#eef1f5` is 4.53:1. `#557d1d` with white text is 4.84:1. Bright `#7eac2f` is reserved for non-text decoration because white text on it does not meet AA.
 
 ## Typography
 
 | Role | Font | Scale |
 | --- | --- | --- |
-| Display / h1 | Sora | `clamp(2.6rem, 5.2vw, 4.7rem)` |
-| Section h2 | Sora | `clamp(1.55rem, 2.6vw, 2.3rem)` |
-| Card title | Sora | `.9–1.3rem` |
-| Body | Manrope | `16px` base, `.72–1rem` UI |
-| Labels / eyebrows | Sora | `.7–.82rem`, spaced uppercase |
-| Odds | Sora | `.82–.9rem`, tabular presentation |
-| Form controls | Manrope | `1rem` (prevents mobile zoom) |
+| Display / hero h1 | Roboto Condensed 700 | `clamp(2.1rem, 3.4vw, 2.75rem)` |
+| Page h1 | Roboto Condensed 700 | `clamp(1.9rem, 3.2vw, 2.7rem)` |
+| Page-hero h1 | Roboto Condensed 700 | `clamp(1.55rem, 2.5vw, 2.1rem)` |
+| Section h2 | Roboto Condensed 700 | `clamp(1.4rem, 2.1vw, 1.85rem)` |
+| Card title | Roboto Condensed 700 | `.9–1.3rem` |
+| Body | Roboto 400 | `16px` base, `.88–1rem` UI |
+| Navigation | Roboto 700 | `14px`, uppercase |
+| Buttons | Roboto 700 | `.82rem` (~13.1px), uppercase |
+| Odds | Roboto 700 | `13px`, tabular numbers |
+| Labels / eyebrows | Roboto 700 | `.68rem`, spaced uppercase |
+| Form controls | Roboto 400 | `16px` (prevents mobile zoom) |
 
-Numeric odds remain compact and aligned; all labels use the supplied Sora/Manrope pair. The public theme applies `tabular-nums` and `lining-nums` so odds, balances and timestamps keep a stable column rhythm. Headings use `text-wrap: balance`, body copy uses `text-wrap: pretty`, and font smoothing/optical sizing are enabled. No reference font files are used.
+Headings use `text-wrap: balance`; body copy uses `text-wrap: pretty`. Public surfaces apply `tabular-nums` and `lining-nums` so balances, odds and timestamps keep a stable column rhythm. The microtype floor is **11.2px**, with 12–13px metadata and 16px form controls.
 
-Microtype was raised to a **minimum 11.2px** on public surfaces, with 12–12.8px metadata, 13px odds and 16px form controls. The reference's dense 12px minimum informed the rhythm, but readability and contrast took priority over copying its smallest labels.
+## Spacing and layout
 
-## Iconography and graphics
+The public rhythm uses 8px increments:
 
-The interface uses three complementary, original mark systems:
-
-- **SportGlyph** (`frontend/src/components/SportIcon.tsx`): a hand-drawn 24px set for football, cricket, tennis, table tennis, basketball, ice hockey, esports, horse racing, volleyball, MMA, baseball, badminton, darts, motor sport, snooker, handball and Australian rules. Distinct silhouettes replace the previous reused generic icons; a neutral ball mark is the fallback.
-- **TeamBadge** (`frontend/src/components/TeamBadge.tsx`): deterministic two-letter club mark in a generated circular colour field. It gives every fixture a recognisable identity without copying real club crests.
-- **ProviderMark** (`frontend/src/components/ProviderMark.tsx`): a small square monogram on catalogue cards, replacing plain provider text with a scannable mark while keeping the provider name visible.
-
-Navigation categories (Top Events, Cricket, Sports, Live, 1xGames, Slots, Live Casino, More), casino filter chips and the mobile drawer use the same 13–17px icon scale. Icons that sit next to a visible label are `aria-hidden`; icon-only controls retain an accessible name. No third-party sports, provider, payment or operator artwork is bundled.
-
-Icon sizing follows a 13/15/17/22px ladder. `currentColor` is used so marks inherit the blue bookmaker ink on light surfaces and white/green ink in the dark header and control room.
-
-## Header and navigation
-
-- Deep-blue utility header with brand wordmark (`19` mark + `XBET365`).
-- Reference-style categories: Top Events, Cricket, Sports, Live, 1xGames, Slots, Live Casino, More.
-- Green registration CTA, blue login, search, locale (`EN · VC`), notifications, balance, account menu, bet slip.
-- Mega-menu panels are white, with dark copy and pale hover states.
-- Mobile: drawer with sections, search, account, support and admin links; header collapses search at ≤480px and avatar at ≤380px.
-
-## Surfaces and data density
-
-- White panels with light borders and low shadows.
-- Dark blue ticker and footer.
-- Pale blue page heroes with a subtle grid.
-- Game cards use illustrated dark cover scenes inside white card frames so original art stays legible and every title is visually identifiable.
-- Primary navigation and actions use the blue family; the white header Join button is the only conversion pill; emerald is a semantic success/accent colour.
-- Sports rows use pale-blue odds buttons, green selected state, blue active underline.
-- Account panels, wallet, support, legal, help and admin content use the same surface hierarchy.
-
-## Motion
-
-| Motion | Implementation |
-| --- | --- |
-| Card entrance | `fadeUp .35s ease both`, stagger |
-| Hover lift | `translateY(-3px)` 220ms |
-| Drawer | slide in 220ms |
-| Modal/toast | fade/fade-up 160–220ms |
-| Live pulse | 1.8s pulse |
-| Hero orbit | 22s / 34s rotation, floating cards 6s |
-| Reduced motion | all animation/transition durations collapse under `prefers-reduced-motion` |
-
-No fake urgency countdowns or flashing alerts.
+- 1320px content shell; 48px desktop gutters.
+- 8px header padding; 94px two-row header plus a 28px promo ticker.
+- 22px home shell top; 36px between home sections; 18px section-heading gap.
+- 14px game-grid gaps; 20px sports/account shell spacing; 16px mobile gutters.
+- Admin uses a slightly denser rhythm while retaining its dark theme.
 
 ## Components
 
-- `Button`: deep-blue primary action, white header conversion button, pale-blue secondary, ghost, danger and outline. Emerald is reserved for success, positive values, selected odds and live/settled cues rather than every call to action.
-- `Badge`: light green/blue/coral/violet/amber/outline.
-- `Input`, `Field`, `Select`, `Textarea`, `checkline`.
-- `Avatar`, `Modal`, `Segmented`, `Skeleton`, `EmptyState`, `ErrorState`, `Stat`, `ProgressBar`, `CopyButton`, `StatusDot`.
-- `ToastProvider`.
-- `BetSlipDrawer` + persistent `BetSlipRail`.
-- `GameCard` + full-bleed `GameArt` cover scenes. Each cover is a layered, original SVG illustration (rocket orbit, vault, plinko board, dice, wheel, coins, cards, lottery balls, slot reels, racing, live table or instant ticket) with theme gradients, rim light, perspective and title-safe darkening. This gives every catalogue card recognizable cover imagery rather than a single abstract glyph.
-- `MatchRow` / `OddsButton` with pressed, selected, live and finished states. Finished rows show an `FT · settled` badge, final scores and disabled odds.
-- `Bet settlement` toast driven by the WebSocket `bet.settled` event and filtered to the owning account.
-- `AdminHeader`, `AdminScopePill`, `AdminBreadcrumb`.
-- `ErrorBoundary`.
+### Header and navigation
+
+- Two rows: logo + account controls, then a full-width `#205583` navigation strip with 40px height and 8px radius.
+- 14px Roboto Bold uppercase labels; active item is a `#276aa5` pill with a white label and icon.
+- Search, notifications, balance, account menu and bet slip sit on the top row.
+- Below 1180px the navigation collapses to the drawer. Below 380px the logo wordmark collapses to the 19 mark so the header fits a 320px viewport.
+
+### Buttons
+
+- Flat, 8px radius, uppercase, Roboto 700, no decorative shadow.
+- 40px default height; 32px compact; 46px large.
+- Blue `#276aa5` for primary/neutral actions; green `#557d1d` for conversion and placing bets; secondary is `#eef1f5` on white.
+
+### Cards and panels
+
+- White surface, `#e3e9ef` 1px border, 8px radius, no drop shadow.
+- Panel headers use compact uppercase labels, navy text and a blue icon.
+- Promo, tournament, help and modal cards share the same 8px radius.
+
+### Odds
+
+- Light-grey `#eef1f5` cells with navy numerals and 8px radius.
+- Hover darkens the cell; selected uses a pale-lime fill with a `#7eac2f` border.
+- 42px mobile targets; full accessible names built from fixture and selection context.
+
+### Forms
+
+- 16px controls, visible labels, 1px `#c9d9e8` borders, blue focus ring, inline error text.
+- Inputs never use floating labels; hints and errors stay in the reading order.
+
+## Motion and interaction
+
+- Dialog and drawer transitions are short and respect `prefers-reduced-motion`.
+- Dialogs trap focus, close on Escape, restore focus and lock background scroll.
+- The promo ticker uses a slow marquee with edge masks; it is decorative and duplicated content is hidden from assistive technology by the surrounding live-region-free structure.
 
 ## Accessibility
 
-- Skip-to-content on public and admin shells.
-- Visible focus rings.
-- Reduced-motion media query.
-- Semantic buttons, field labels, `aria-label` on icon controls, `aria-pressed` on odds, dialog `aria-modal`, live toast region.
-- Responsive controls retain 31–50px target heights.
-- Contrast corrected for light surfaces, promo cards, game-card overlays, tournament cards, help hero, support badges, auth pages and legal pages. Positive monetary text uses `#14773a` (5.6:1 on white) while the brighter `#1c9b4b` remains the action/button green.
-- Lighthouse desktop audit returns **100 accessibility / 100 best practices / 100 SEO** on the public, player and admin pages listed in `UI_UX_AUDIT.md`.
+- Final Lighthouse runs: **100 accessibility / 100 best practices / 100 SEO** on home, sports, login and deposit.
+- Contrast-corrected tokens: muted `#52718a`, action green `#557d1d`, footer `#a9c4dd`.
+- Unique page titles per route; skip link; visible focus; labelled controls; accessible bet-slip and drawer names.
+- Responsive QA: 17 routes × 10 widths from 320px to 2560px with zero horizontal overflow.

@@ -24,8 +24,8 @@
   --radius: 18px;
   --radius-sm: 12px;
   --radius-xs: 8px;
-  --font-display: "Sora", system-ui, sans-serif;
-  --font-body: "Manrope", system-ui, sans-serif;
+  --font-display: "Roboto Condensed", "Roboto", Arial, sans-serif;
+  --font-body: "Roboto", Arial, sans-serif;
   --shell: 1320px;
   --header-h: 98px;
   color-scheme: dark;
@@ -208,6 +208,7 @@ code, pre { font-family: "SFMono-Regular", Consolas, monospace; }
 }
 .btn:hover:not(:disabled) { transform: translateY(-1px); }
 .btn:active:not(:disabled) { transform: translateY(0); }
+.btn > span { display: inline-flex; align-items: center; gap: 8px; }
 .btn-primary { background: linear-gradient(135deg, var(--cyan), #3ee1d3); color: #041218; box-shadow: 0 8px 26px rgba(103, 247, 231, 0.18); }
 .btn-primary:hover:not(:disabled) { box-shadow: 0 12px 30px rgba(103, 247, 231, 0.28); }
 .btn-lime { background: linear-gradient(135deg, var(--lime), #a8ef45); color: #0a1900; box-shadow: 0 8px 26px rgba(201, 255, 99, 0.16); }

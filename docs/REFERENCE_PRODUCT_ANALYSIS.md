@@ -61,7 +61,7 @@ Reference restrictions encountered:
 - Sans-serif throughout; bold promotion headlines and small navigation labels.
 - Numeric odds use tabular presentation and consistent decimals.
 - Registration modal uses multi-step compact labels and helper copy.
-- 19X uses supplied **Sora** for display and **Manrope** for body, with a larger display scale and more generous spacing. The public site is now light bookmaker chrome; the admin control room retains a dark operational theme. Numeric odds remain tabular and compact.
+- 19X uses self-hosted **Roboto** for body and **Roboto Condensed** for display, with a bookmaker-scale type hierarchy and an 8px spacing rhythm. The public site is now light bookmaker chrome; the admin control room retains a dark operational theme. Numeric odds remain tabular and compact.
 
 ## Component-by-component findings
 

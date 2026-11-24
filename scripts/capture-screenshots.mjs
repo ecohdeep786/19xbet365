@@ -58,7 +58,7 @@ async function evaluate(expression) {
 async function stylesReady() {
   return evaluate(`(() => {
     const hasAssetSheet = [...document.styleSheets].some((sheet) => sheet.href && sheet.href.includes('/assets/'));
-    const styled = getComputedStyle(document.body).fontFamily.includes('Manrope');
+    const styled = getComputedStyle(document.body).fontFamily.includes('Roboto');
     return hasAssetSheet && styled;
   })()`);
 }

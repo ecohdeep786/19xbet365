@@ -2,13 +2,14 @@
 
 ## What was delivered
 
-A complete, independently branded virtual-credit gaming foundation with:
+A complete, independently branded coin-based gaming foundation with:
 
 - original **19X / 19xbet365** branding and hand-built CSS/SVG artwork;
+- a 1xBet-aligned public design system: deep-navy two-row header, blue navigation strip, bold uppercase navigation, Roboto/Roboto Condensed typography, flat 8px controls, light-grey odds cells and AA-compliant accent variants; all artwork and wording remain original;
 - public sportsbook, live, esports, virtuals, casino, live-casino preview, slots and instant games;
 - 11 server-authoritative playable 19X Originals;
-- registration/login/account lifecycle, virtual wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
-- Master Admin and delegated staff control room with scoped hierarchy, RBAC, credits, support, transfers, catalogue, content, audit, settings and health;
+- registration/login/account lifecycle, coin wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
+- Master Admin and delegated staff control room with scoped hierarchy, RBAC, coin adjustments, support, transfers, catalogue, content, audit, settings and health;
 - Master-only staff credential issuance with one-time login ID/password handoff; administrators can manage scoped users and games but cannot create staff logins or access Master-only settings, roles, deposits and credential controls;
 - PostgreSQL schema/seed, transactional wallet, immutable audit chain, settled-round immutability, session auth, rate limiting and a WebSocket activity channel;
 - server demo-settlement worker for 1X2 singles/accumulators, with generated final scores, notifications, wallet credits and audit events;
@@ -72,7 +73,7 @@ Password for all seeded accounts: **`19X#2026`**
 - Agent: `luca.moretti@19xbet365.test`
 - Agent: `mira.haddad@19xbet365.test`
 
-New registrations receive 10,500 VC. The seeded player starts at 22,500 VC with a populated wallet, game, bet and notification history after the final reseed.
+New registrations receive 10,500 coins. The seeded player starts at 22,500 coins with a populated wallet, game, bet and notification history after the final reseed.
 
 ## Review order
 
@@ -112,5 +113,5 @@ These must remain visible in the 19xbet365 acceptance review; they are not claim
 
 ## Final status
 
-**Virtual-credit public/player/admin foundation:** ready for interactive review.  
+**Coin-based public/player/admin foundation:** ready for interactive review.
 **Real-money or provider-integrated production launch:** blocked by legal, licensing, integration and operational work documented in `PRODUCTION_READINESS.md`.

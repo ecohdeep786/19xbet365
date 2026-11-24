@@ -34,7 +34,7 @@ export function AccountReferrals() {
   const shareLink = `${window.location.origin}${window.location.pathname}#/register?ref=${code}`;
   const share = async () => {
     try {
-      if (navigator.share) await navigator.share({ title: "Join 19xbet365", text: "Try 19xbet365 with virtual credits.", url: shareLink });
+      if (navigator.share) await navigator.share({ title: "Join 19xbet365", text: "Try 19xbet365 with coins.", url: shareLink });
       else { await navigator.clipboard.writeText(shareLink); push("Referral link copied.", "success"); }
     } catch { /* dismissed */ }
   };
@@ -44,14 +44,14 @@ export function AccountReferrals() {
       <div className="subpage-head">
         <span className="eyebrow">Community</span>
         <h2>Referrals</h2>
-        <p>Invite friends into the 19X lobby. Referral rewards are virtual credits and never grant administrative access.</p>
+        <p>Invite friends into the 19X lobby. Referral rewards are coins and never grant administrative access.</p>
       </div>
       <div className="referral-hero panel">
         <div className="referral-copy">
-          <span className="eyebrow"><Gift size={13} /> Invite & earn virtual credits</span>
+          <span className="eyebrow"><Gift size={13} /> Invite & earn coins</span>
           <h3>Your referral code</h3>
           <div className="referral-code"><strong>{code}</strong><CopyButton value={code} label="Copy code" /></div>
-          <p>Both players receive a virtual-credit boost after the referred player completes their first round. No cash value or commission is paid.</p>
+          <p>Both players receive a coin boost after the referred player completes their first round. No cash value or commission is paid.</p>
           <div className="referral-actions"><button className="btn btn-lime btn-sm" onClick={share}><Share2 size={15} /> Share invite</button><CopyButton value={shareLink} label="Copy link" /></div>
         </div>
         <div className="referral-orbit"><Users size={42} /><span>{referrals.length}</span><small>invited</small></div>
@@ -64,10 +64,10 @@ export function AccountReferrals() {
       <div className="panel referrals-panel">
         <div className="panel-head"><span><Users size={15} /> Referred players</span><Badge tone="outline">No admin rights</Badge></div>
         {loading ? <div className="table-loading"><Skeleton className="sk-line" /><Skeleton className="sk-line" /></div> : referrals.length === 0 ? (
-          <EmptyState icon={<Users size={22} />} title="No referrals yet" body="Share your code or link. When a friend joins and completes a round, the virtual-credit reward appears here." />
+          <EmptyState icon={<Users size={22} />} title="No referrals yet" body="Share your code or link. When a friend joins and completes a round, the coin reward appears here." />
         ) : (
           <div className="data-table-wrap"><table className="data-table"><thead><tr><th>Player</th><th>Joined</th><th>Status</th><th>Reward</th></tr></thead><tbody>
-            {referrals.map((referral) => <tr key={referral.id}><td><strong>{referral.display_name}</strong></td><td className="muted-cell">{dateShort(referral.joined_at || referral.created_at)}</td><td><Badge tone={referral.status === "rewarded" ? "lime" : "outline"}>{referral.status}</Badge></td><td>{referral.status === "rewarded" ? "1,000 VC" : "Pending"}</td></tr>)}
+            {referrals.map((referral) => <tr key={referral.id}><td><strong>{referral.display_name}</strong></td><td className="muted-cell">{dateShort(referral.joined_at || referral.created_at)}</td><td><Badge tone={referral.status === "rewarded" ? "lime" : "outline"}>{referral.status}</Badge></td><td>{referral.status === "rewarded" ? "1,000 coins" : "Pending"}</td></tr>)}
           </tbody></table></div>
         )}
       </div>

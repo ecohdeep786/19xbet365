@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   Bell, Cherry, ChevronDown, Coins, Dices, Flame, Gamepad2, Gift, HelpCircle,
   LayoutDashboard, LayoutGrid, LogOut, Menu, Radio, ReceiptText, Search, ServerCog, ShieldCheck,
-  Sparkles, Spade, Ticket, Timer, Trophy, WalletCards, X, Zap, ShieldAlert, Goal
+  Sparkles, Spade, Ticket, Timer, Trophy, User, WalletCards, X, Zap, ShieldAlert, Goal
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const NAV: NavItem[] = [
     base: "/promotions",
     icon: LayoutGrid,
     children: [
-      { to: "/promotions", label: "Promotions", body: "Virtual-credit campaigns", icon: Gift },
+      { to: "/promotions", label: "Promotions", body: "Coin campaigns", icon: Gift },
       { to: "/tournaments", label: "Tournaments", body: "Leaderboards and prize pools", icon: Trophy },
       { to: "/casino", label: "Casino lobby", body: "Full game catalogue", icon: Dices },
       { to: "/help", label: "Help centre", body: "Rules, account, responsible play", icon: HelpCircle }
@@ -148,7 +148,7 @@ export function Header() {
                 <div className="nav-panel">
                   <div className="nav-panel-head">
                     <span className="eyebrow">Explore {item.label}</span>
-                    <span className="nav-panel-note">Virtual credits only</span>
+                    <span className="nav-panel-note">Coins only</span>
                   </div>
                   <div className="nav-panel-grid">
                     {item.children.map((child) => (
@@ -170,7 +170,7 @@ export function Header() {
             ))}
           </nav>
           <div className="header-actions">
-            <span className="header-locale" title="English interface · virtual credits">EN · VC</span>
+            <span className="header-locale" title="English interface · sandbox coin play">EN · COINS</span>
             <button className="icon-btn header-search-btn" onClick={() => setSearchOpen((open) => !open)} aria-label="Search games and fixtures" aria-expanded={searchOpen} aria-controls="header-search">
               <Search size={19} />
             </button>
@@ -253,7 +253,7 @@ export function Header() {
               </>
             ) : (
               <>
-                <Link to="/login" className="header-login">Sign in</Link>
+                <Link to="/login" className="header-login"><User size={16} className="header-login-icon" /><span>Sign in</span></Link>
                 <Link to="/register" className="btn btn-lime btn-sm header-join"><Sparkles size={14} /> Join 19X</Link>
               </>
             )}
@@ -274,12 +274,12 @@ export function Header() {
         )}
         <div className="header-ticker">
           <div className="ticker-track">
-            <span><Zap size={12} /> Server-authoritative virtual credits</span>
-            <span><Gift size={12} /> New player haul: 10,500 VC</span>
-            <span><ShieldCheck size={12} /> No real-money wagering</span>
+            <span><Zap size={12} /> Server-authoritative coin play</span>
+            <span><Gift size={12} /> New player haul: 10,500 coins</span>
+            <span><ShieldCheck size={12} /> Sandbox play · no real-money wagering</span>
             <span><Trophy size={12} /> Altitude Week is live</span>
             <span><Gamepad2 size={12} /> 11 playable 19X Originals</span>
-            <span><Zap size={12} /> Server-authoritative virtual credits</span>
+            <span><Zap size={12} /> Server-authoritative coin play</span>
           </div>
         </div>
       </header>
@@ -353,15 +353,15 @@ export function Footer() {
       <div className="footer-shell">
         <div className="footer-brand">
           <Logo />
-          <p>An independent, virtual-credit gaming platform. Built with server-authoritative play, transparent limits, and a clear line between what is live and what requires a licensed provider.</p>
+          <p>An independent, coin gaming platform. Built with server-authoritative play, transparent limits, and a clear line between what is live and what requires a licensed provider.</p>
           <div className="footer-trust">
             <span><ServerCog size={15} /> Server-authoritative</span>
-            <span><Coins size={15} /> Non-redeemable virtual credits</span>
+            <span><Coins size={15} /> Non-redeemable coins</span>
             <span><ShieldCheck size={15} /> 18+ responsible play</span>
           </div>
           <div className="footer-badges">
             <span className="age-badge">18+</span>
-            <Badge tone="outline">Virtual credits only</Badge>
+            <Badge tone="outline">Coins only</Badge>
             <Badge tone="lime">No cash value</Badge>
           </div>
         </div>
@@ -399,7 +399,7 @@ export function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>© 2026 19xbet365. Demonstration environment. All balances are non-redeemable virtual credits.</span>
+        <span>© 2026 19xbet365. Demonstration environment. All balances are non-redeemable coins.</span>
         <span className="footer-status"><span className={`status-dot ${liveConnected ? "status-active" : "status-pending"}`} /> {liveConnected ? "Live channel connected" : "API + game engine online"}</span>
       </div>
     </footer>

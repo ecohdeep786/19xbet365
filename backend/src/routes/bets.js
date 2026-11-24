@@ -22,7 +22,7 @@ router.post("/", requireAuth, async (req, res, next) => {
       throw Object.assign(new Error("Add between 1 and 20 selections to your bet slip."), { status: 400, code: "invalid_selections" });
     }
     if (!Number.isFinite(stake) || stake < 10) {
-      throw Object.assign(new Error("The minimum virtual-credit stake is 10 VC."), { status: 400, code: "invalid_stake" });
+      throw Object.assign(new Error("The minimum coin stake is 10 coins."), { status: 400, code: "invalid_stake" });
     }
     if (selections.length > 1 && req.body?.mode === "singles") {
       throw Object.assign(new Error("Multiple singles are not enabled in this build. Place a single bet or use an accumulator."), { status: 400, code: "unsupported_mode" });
@@ -83,7 +83,7 @@ router.post("/", requireAuth, async (req, res, next) => {
       await client.query(
         `INSERT INTO notifications (account_id, title, body, type, link)
          VALUES ($1,$2,$3,'game','/account/bets')`,
-        [req.account.id, "Virtual bet placed", `${prepared.length > 1 ? "Accumulator" : "Single"} · ${stake.toFixed(2)} VC at ${totalOdds.toFixed(2)} total odds. Potential return ${potentialReturn.toFixed(2)} VC.`]
+        [req.account.id, "Coin bet placed", `${prepared.length > 1 ? "Accumulator" : "Single"} · ${stake.toFixed(2)} coins at ${totalOdds.toFixed(2)} total odds. Potential return ${potentialReturn.toFixed(2)} coins.`]
       );
       return { betId, totalOdds, potentialReturn, balance: balance.balance, prepared };
     });
@@ -100,7 +100,7 @@ router.post("/", requireAuth, async (req, res, next) => {
         placedAt: new Date().toISOString()
       },
       balance: result.balance,
-      message: "Bet placed with virtual credits."
+      message: "Bet placed with coins."
     });
   } catch (error) {
     next(error);

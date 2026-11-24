@@ -1,14 +1,44 @@
+/* Roboto and Roboto Condensed — SIL Open Font License 1.1.
+   License texts: /fonts/LICENSE-ROBOTO.txt and /fonts/LICENSE-ROBOTO-CONDENSED.txt */
 @font-face {
-  font-family: "Sora";
-  src: url("/fonts/sora-latin.woff2") format("woff2");
-  font-weight: 100 800;
+  font-family: "Roboto";
+  src: url("/fonts/roboto-400.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Manrope";
-  src: url("/fonts/manrope-latin.woff2") format("woff2");
-  font-weight: 200 800;
+  font-family: "Roboto";
+  src: url("/fonts/roboto-500.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-700.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/roboto-900.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("/fonts/roboto-condensed-400.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("/fonts/roboto-condensed-700.ttf") format("truetype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

@@ -4,92 +4,75 @@
 **Reference:** public 1xBet live page (`1xlite-12669.pro/en/live`)  
 **Product:** 19xbet365 production build served by Express at `http://127.0.0.1:4000`
 
-This audit records the interface principles studied, the translation into 19xbet365, the defects found in real-user QA, and the final verification.
+This audit records the interface principles studied, the translation into 19xbet365, the defects found in real-user QA, and the final verification. No 1xBet code, artwork or font files were copied.
 
-## 1. What makes the reference feel clear
+## 1. Reference language
 
-The public live page was inspected at desktop width. Measurements were taken from computed styles and visible layout only; no reference code, CSS or assets were copied.
+The public live page and its computed styles were inspected at desktop width. The measured design language was then rebuilt with original 19xbet365 content and assets.
 
-| Pattern | Observed reference behaviour | Action in 19xbet365 |
+| Pattern | Reference measurement | 19xbet365 implementation |
 | --- | --- | --- |
-| Typography | Roboto, body 16px; most interface copy 12–14px; bold odds and team names; very tight line heights | Sora/Manrope retained; 15px body; 11–16px interface copy; tabular numerals for odds and balances |
-| Chrome | 96px dark-blue header (`#1d4268`), separate nav row, 32px nav targets, 8px radius | 99px deep-blue public header; 32px nav rhythm; 8px controls; mobile drawer below 1180px |
-| Information density | Two-column match group grid at wide desktop; 32px odds cells; icons on nearly every row | One clear league column plus a persistent bet-slip rail; 42–44px odds targets on mobile; no fake markets |
-| Icon language | ~849 SVG nodes and ~142 images on the inspected live page; flat sport glyphs, flags, team marks, TV/stats/favourite cues | Original 17-mark `SportIcon`, deterministic `TeamBadge`, `ProviderMark`, category icons; no copied or third-party artwork |
-| Colour | White cards on blue-grey canvas; one blue action family; green and coral used sparingly for live/price states | White cards on pale-blue canvas; blue navigational family; green CTA/win; dark coral live labels with accessible contrast |
-| Hierarchy | League heading → fixture teams → score/time → three odds cells; the eye never has to hunt | Same sequence, plus larger team badges, sport glyphs and a visible selected/disabled state |
-| Density vs clarity | Very dense, but users understand it because repeated patterns never change | Kept repeated patterns, increased spacing and removed decorative competition between items |
+| Typeface | Roboto; body 16px; interface 12–14px; bold team names and odds | Self-hosted **Roboto** for body and controls; **Roboto Condensed** for display; 16px body, 14px navigation, 13px odds, 11.2px microtype floor |
+| Chrome | 96px header in `#1d4268`; separate navigation row in `#205583`; 8px radius | Two-row 94px header plus promo ticker; navy `#1d4268`; navigation strip `#205583`; 8px radii |
+| Navigation | 14px Roboto Bold, uppercase, muted blue `#a1bcd4`; active item becomes a blue pill | 14px/700 uppercase; contrast-corrected `#b0c8dc`; active `#276aa5` pill with white text and icon |
+| Actions | Flat 8px-radius buttons, uppercase labels; blue primary; green conversion action | Flat 8px buttons; blue `#276aa5` primary; accessible green `#557d1d` for Join, Add coins, Place bet and other conversion actions |
+| Canvas | White cards on a light blue-grey page; thin separators; minimal shadow | `#eef1f5` canvas; white cards; `#e3e9ef` borders; 8px radii; no decorative drop shadows |
+| Odds | Small light-grey cells, navy numerals, clear selected state | Light-grey odds cells; 13px tabular numerals; pale lime selected state; 42px mobile targets |
+| Hierarchy | League → fixture → score/time → three odds cells | Identical sequence, with original sport glyphs, team badges and provider marks for scanning |
+| Density | Compact rows, repeated patterns, no competing decoration | Compact rows, consistent 8px rhythm, one blue action family and restrained green/coral state colour |
+| Contrast | Reference uses very low-contrast muted labels in places | Deliberately corrected: muted `#52718a`, green buttons `#557d1d`, footer text `#a9c4dd`; all audited pages pass AA |
 
-The reference is attractive because it is **predictable**, not because it is large. The Apple-inspired response is therefore not to copy its 12px density, but to preserve predictable rows, strong hierarchy, legible controls and unmistakable state.
+The goal is the reference's **predictability**, not a pixel copy: familiar sportsbook wording, a stable row grammar, a visible bet slip and an unmistakable active state.
 
-## 2. Interface changes made
+## 2. Interface changes
 
-### Game cover imagery
-- Replaced single-glyph card art with 12 families of full-bleed, original SVG cover illustrations: rocket orbit, vault, plinko, dice, wheel, coins, cards, lottery, reels, racing, live table and instant ticket.
-- Every playable and provider card now carries a picture-led cover, varied by game theme and selected per live-casino game where appropriate.
-- Covers use layered gradients, perspective, rim light, particles and a title-safe darkening gradient so the card title and provider remain readable.
-- Added a subtle hover scale for pointer users, disabled under `prefers-reduced-motion`.
+### Typography
+- Replaced the former Sora/Manrope pair with self-hosted **Roboto 400/500/700/900** and **Roboto Condensed 400/700**. License files are included in `frontend/public/fonts/`.
+- Display headings use Roboto Condensed 700 with tighter tracking; body, forms, tables and buttons use Roboto.
+- 16px body and inputs; 14px navigation and buttons; 13px odds; 11.2px minimum micro-label. Tabular lining numerals for balances, odds and timestamps.
+- Fonts are preloaded and served locally rather than requested from a third party at runtime.
 
-### Action hierarchy and colour
-- Primary actions now use a deep blue gradient rather than repeating a saturated green everywhere.
-- The header conversion action is a crisp white pill with deep-blue text.
-- Emerald is reserved for success, winning amounts, selected odds and settled/live cues.
-- All-blue/white buttons were rechecked for AA contrast, and the 42px mobile odds targets remain.
+### Header and navigation
+- Rebuilt the header into the reference's two-row structure: logo and account controls on top, a full-width navigation strip below.
+- Navigation uses bold uppercase labels, original sport/category glyphs, a blue active pill and an accessible muted-blue resting colour.
+- Signed-out state shows a person icon for Sign in, a green Join 19X action and a compact bet-slip trigger. Signed-in state adds the coin balance, notifications and account menu without crowding the bar.
+- At small widths the navigation collapses into the drawer; the logo wordmark collapses below 380px so the header stays inside a 320px viewport.
+- A slim promo ticker below the header carries live, responsible-play and coin context; edge masking keeps the marquee from looking clipped.
 
-### Typography and readability
-- Kept supplied Sora display / Manrope body fonts only.
-- Raised the public interface's microtype floor: former 7.7–9.3px labels now render at **11.2–12.5px**, with 12–12.8px metadata, 13px odds, 16px body copy and 16px form controls (also preventing mobile input zoom). This is deliberately more readable than the reference's 12px dense minimum while preserving its compact rhythm.
-- Added tabular and lining numerals for odds, balances and timestamps.
-- Added font smoothing, optical sizing, `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs.
-- Darkened secondary ink from `#71869b`/`#7c90a4` to `#526a82`; positive amounts use `#14773a` instead of the lower-contrast lime text.
-- Increased mobile odds targets to 42px and kept all controls labelled in full words rather than unexplained abbreviations.
+### Layout and rhythm
+- Public spacing follows 8px increments: 22px home shell top, 36px section separation, 18px section-heading gap, 14px card grid gaps, 20px sports/account shell spacing and 16px mobile gutters.
+- The home hero is now a compact white banner: 44px maximum headline, two actions, a trust row and a four-cell metric strip. It keeps the original orbit artwork without pushing the sportsbook below the fold on mobile.
+- Page heroes are white, thin-bordered and compact (22–26px vertical padding), matching the reference's restrained page-title bars.
+- Admin surfaces keep a denser dark control-room theme so staff cannot confuse operations with the player product.
 
-### Navigation and spacing
-- Desktop navigation now follows the reference’s bold, compact hierarchy: **700 weight, uppercase labels, tightened letter spacing**, icon alignment and an emerald active underline.
-- Standardised the public vertical rhythm around 8px increments: 32px shell top, 48px section separation, 24px section-heading gap, 16px card grid gaps, 24px sports/account shell spacing and 16px mobile gutters.
-- Admin surfaces use a slightly denser rhythm (20px page gap, 14px stat grid, 16px dashboard gap) while retaining the distinct dark control-room theme.
-- Hero spacing was compressed so “Live right now” appears within the first desktop viewport; the mobile hero keeps its stacked layout without a forced minimum height.
+### Components
+- Panels, promo cards, tournament cards, modals, help cards and leaderboards share an 8px radius and thin borders.
+- Buttons are flat, uppercase and 8px-rounded. Blue is used for navigation and neutral primary actions; green is reserved for conversion and winning states.
+- Odds are light-grey cells with navy numerals and a pale-lime selected state. The bet slip's **Place coin bet** action is green.
+- Forms use 16px controls, visible labels, focus rings and inline errors; no floating-label ambiguity.
 
-### Navigation and icons
-- Original sport glyphs replace reused generic Lucide marks.
-- Category icons added to desktop nav, mega-menus, mobile drawer and casino filter chips.
-- Team badges and provider marks give dense rows a stable visual anchor.
-- Header density was rebalanced at 1181–1400px: tighter nav padding, hidden duplicate balance chip, locale hidden below 1440px.
+### Coins, not VC
+- All player-facing balances, stakes, payouts, ledgers, limits, promotions, help articles and server messages now use **coins**.
+- `vc()` formats amounts with a `coins` suffix; the old `VC` abbreviation is gone from the interface.
+- Sandbox and real-money boundaries remain explicit: the deposit page states that no money is collected, cash-out is disabled, and live payment collection has a separate server gate.
 
-### Frustration-reduction details
-- Compacted the home hero so the **Live right now** heading is visible in the first desktop viewport, while keeping the brand artwork; mobile retains its stacked hero.
-- Added unique document titles for every route, including the selected game name, so browser tabs, history, bookmarks and screen readers have context.
-- Mobile account tabs auto-scroll the active section into view when navigating between Wallet, Add coins, Bets and other sections.
-- Low-balance states now offer a direct **Add coins** action in both the bet slip and the game page instead of only returning an error.
-- Deposit configuration is explicit: missing QR, sandbox mode, manual review and the live-payment gate are all stated in context rather than leaving disabled controls unexplained.
+### Accessibility and interaction
+- All audited text/background pairs meet WCAG AA after darkening muted text and green actions.
+- Dialogs and drawers trap focus, close on Escape, restore focus and lock background scroll.
+- Odds buttons carry content-derived accessible names; the notification count is included in the button's accessible name.
+- The mobile header, ticker, hero metrics and quick-sport rail have explicit small-screen rules; the 320px layout has no horizontal overflow.
+- Document titles are unique per route and include the selected game name.
 
-### Interaction and accessibility
-- Bet slip, mobile drawer and generic modals now use a shared dialog helper:
-  - Escape closes.
-  - Background scroll locks with a multi-dialog counter.
-  - Initial focus enters the panel.
-  - Tab cycles inside the panel.
-  - Focus returns to the trigger.
-- Notification, account and search popovers close with Escape.
-- Notification count is included in the accessible name.
-- Odds buttons use content-derived accessible names with full team context.
-- Auth pages now expose a single `<main>` landmark.
-- `robots.txt` added for valid crawler policy.
-- Contrast failures on home, sports, login, account, game and tournaments corrected.
-- Static “Next round in 03s” urgency removed; virtual-sports clock replaced with “Instant / server-recorded”.
-- Playable-original metric now uses the real count instead of a hard-coded `+3`.
+## 3. Real-user QA
 
-## 3. Real-user QA performed
-
-A Playwright/Edge end-to-end run exercised the production build as a new player and then as Master Admin. The final run passed **32/32 checks**.
+A Playwright/Edge run exercised the production build as a new player, an existing player and Master Admin. Final result: **32/32 checks passed**.
 
 Passed checks included:
 
 - Home renders brand, navigation icons, sport glyphs, team badges and illustrated game covers.
-- Logged-out playable game routes show an account-required panel instead of a misleading 0 VC play surface.
-- Deposit page loads the QR/instructions configuration, bonus preview, request form and request history.
+- Logged-out playable game routes show an account-required panel instead of a misleading 0-coin play surface.
 - Registration creates a player, navigates to the account and shows 10,500 coins.
-- Sports selection opens the bet-slip dialog, receives focus, debits 50 VC and closes after placement.
+- Sports selection opens the focused bet-slip dialog, debits 50 coins and closes after placement.
 - Dice Roll plays and settles with a server result.
 - Wallet ledger and My Bets show the new records.
 - Support composer opens a ticket.
@@ -100,36 +83,32 @@ Passed checks included:
 - Branch Admin accounts cannot create staff logins.
 - No console or page errors during the run.
 
+A separate deposit run passed **11/11 checks**: sandbox configuration, player submission, Master review, approval, deposit ledger, bonus ledger, exact balance increase and no console errors.
+
+A viewport sweep covered **17 routes at 10 widths from 320px to 2560px** and reported **zero horizontal overflow**.
+
 ## 4. Lighthouse verification
+
+Final production run:
 
 | Page | Accessibility | Best practices | SEO |
 | --- | --- | --- | --- |
 | Home | 100 | 100 | 100 |
 | Sports | 100 | 100 | 100 |
-| Casino | 100 | 100 | 100 |
 | Login | 100 | 100 | 100 |
-| Account overview | 100 | 100 | 100 |
-| Account wallet | 100 | 100 | 100 |
-| Deposit page | 100 | 100 | 100 |
-| Support | 100 | 100 | 100 |
-| Promotions | 100 | 100 | 100 |
-| Help | 100 | 100 | 100 |
-| Game detail | 100 | 100 | 100 |
-| Master Admin | 100 | 100 | 100 |
-| Tournaments | 100 | 100 | 100 |
-| Register | 100 | 100 | 100 |
+| Deposit | 100 | 100 | 100 |
 
-The tournament leaderboard green was darkened to `#14773a` during the audit; the final run is clean on every audited page.
+Earlier audits also covered casino, account overview, wallet, support, promotions, help, game detail, tournaments, register and Master Admin at 100/100/100. The contrast regressions introduced by the reference palette were fixed by using accessible muted (`#52718a`), green action (`#557d1d`) and footer (`#a9c4dd`) tokens.
 
 ## 5. Deposit and bonus flow
 
-A second Playwright run exercised the deposit path as a player and Master Admin: **11/11 checks passed**:
+The sandbox deposit path is:
 
-1. Deposit page loads with sandbox notice and QR placeholder.
+1. Deposit page loads with the sandbox notice and QR placeholder.
 2. Player submits amount and UTR reference.
 3. Pending request appears in player history.
 4. Master Admin sees the same request in the review queue.
-5. Admin approves and the wallet receives the deposit + 15% bonus.
+5. Admin approves and the wallet receives the deposit plus the configured 15% bonus.
 6. Player sees both ledger entries and the increased balance.
 
 The API smoke also covers cancellation, rejection and the live-payment activation gate. See `PAYMENTS_AND_BONUSES.md`.
@@ -139,7 +118,7 @@ The API smoke also covers cancellation, rejection and the live-payment activatio
 These are product-scope boundaries, not UI defects:
 
 - Provider/live-dealer titles remain integration-ready and intentionally cannot be played.
-- Real-money deposits/withdrawals are disabled.
+- Real-money deposits/withdrawals are disabled until licensing, KYC/AML, merchant onboarding, a business-owned QR and `PAYMENTS_LIVE_ENABLED=true` are in place.
 - Promotions/tournaments have no automated payout engine.
 - There is no real sports feed, multi-market settlement, cash-out or live-stream service.
 - Email/SMS verification and transactional password reset are not provisioned.

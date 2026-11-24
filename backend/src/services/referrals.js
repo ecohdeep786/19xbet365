@@ -39,7 +39,7 @@ export async function rewardReferralIfEligible(client, refereeId) {
     await client.query(
       `INSERT INTO notifications (account_id, title, body, type, link)
        VALUES ($1, 'Referral reward credited', $2, 'promo', '/account/referrals')`,
-      [accountId, `${REWARD.toFixed(0)} virtual credits were added for a completed referral. This reward has no cash value.`]
+      [accountId, `${REWARD.toFixed(0)} coins were added for a completed referral. This reward has no cash value.`]
     );
   }
   await appendAudit(client, {
@@ -47,7 +47,7 @@ export async function rewardReferralIfEligible(client, refereeId) {
     action: "referral.rewarded",
     entityType: "referral",
     entityId: referral.id,
-    summary: `Referral qualified; ${REWARD.toFixed(0)} VC credited to both accounts`,
+    summary: `Referral qualified; ${REWARD.toFixed(0)} coins credited to both accounts`,
     after: { referrerId: referral.referrer_id, refereeId: referral.referee_id, amount: REWARD },
     ip: null
   });

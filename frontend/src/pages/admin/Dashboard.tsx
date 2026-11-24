@@ -64,14 +64,14 @@ export function AdminDashboard() {
 
       <div className="admin-stat-grid">
         <Stat label="Network accounts" value={number(metrics.accounts)} hint={`${metrics.activeAccounts} active · ${metrics.newThisWeek} new this week`} tone="cyan" icon={<Users size={16} />} />
-        <Stat label="Virtual balance held" value={vc(metrics.virtualBalance, { compact: true })} hint="Across scoped player wallets" tone="lime" icon={<WalletCards size={16} />} />
+        <Stat label="Coin balance held" value={vc(metrics.virtualBalance, { compact: true })} hint="Across scoped player wallets" tone="lime" icon={<WalletCards size={16} />} />
         <Stat label="Game volume" value={vc(metrics.gameWagered, { compact: true })} hint={`${number(metrics.roundsToday)} rounds today`} icon={<Activity size={16} />} />
         <Stat label="Settlement margin" value={vc(metrics.margin, { compact: true, sign: true })} hint={`${vc(metrics.gamePaid, { compact: true })} returned to players`} tone={metrics.margin >= 0 ? "lime" : "coral"} icon={<Coins size={16} />} />
       </div>
 
       <div className="admin-dashboard-grid">
         <section className="panel admin-chart-panel">
-          <div className="panel-head"><span><Gauge size={15} /> Seven-day network pulse</span><Badge tone="outline">Virtual credits</Badge></div>
+          <div className="panel-head"><span><Gauge size={15} /> Seven-day network pulse</span><Badge tone="outline">Coins</Badge></div>
           <div className="chart-legend"><span className="legend-cyan">Wagered</span><span className="legend-lime">Returned</span><span className="legend-signup">Signups</span></div>
           <div className="bar-chart" role="img" aria-label="Seven day wagering and signups chart">
             {data.series.map((item) => (
@@ -105,7 +105,7 @@ export function AdminDashboard() {
           <div className="alert-list">
             <Link to="/admin/accounts?status=suspended" className="alert-row"><span className="alert-icon amber"><ShieldAlert size={16} /></span><div><strong>Suspended accounts</strong><span>Review restrictions and restoration eligibility.</span></div><strong>{data.alerts.suspended}</strong></Link>
             <Link to="/admin/security" className="alert-row"><span className="alert-icon coral"><LockKeyhole size={16} /></span><div><strong>Failed sign-ins</strong><span>Last 24 hours across the scoped network.</span></div><strong>{data.alerts.failedLogins}</strong></Link>
-            <Link to="/admin/credits" className="alert-row"><span className="alert-icon cyan"><Coins size={16} /></span><div><strong>Credit adjustments</strong><span>Manual virtual-credit changes in the last 24 hours.</span></div><strong>{data.alerts.creditActions}</strong></Link>
+            <Link to="/admin/credits" className="alert-row"><span className="alert-icon cyan"><Coins size={16} /></span><div><strong>Credit adjustments</strong><span>Manual coin changes in the last 24 hours.</span></div><strong>{data.alerts.creditActions}</strong></Link>
             <Link to="/admin/support" className="alert-row"><span className="alert-icon lime"><LifeBuoy size={16} /></span><div><strong>Open support tickets</strong><span>{metrics.urgentTickets} high-priority conversations need attention.</span></div><strong>{metrics.openTickets}</strong></Link>
             <Link to="/admin/transfers" className="alert-row"><span className="alert-icon violet"><ArrowLeftRight size={16} /></span><div><strong>Pending transfers</strong><span>Network moves awaiting an approver.</span></div><strong>{data.alerts.pendingTransfers}</strong></Link>
             <Link to="/admin/deposits" className="alert-row"><span className="alert-icon lime"><Coins size={16} /></span><div><strong>Deposits awaiting review</strong><span>Manual QR requests awaiting verification.</span></div><strong>{data.alerts.pendingDeposits}</strong></Link>
@@ -128,7 +128,7 @@ export function AdminDashboard() {
       </div>
 
       <div className="admin-quick-actions">
-        <Link to="/admin/accounts"><Users size={18} /><div><strong>Manage accounts</strong><span>Roles, restrictions, credits, sessions</span></div><ArrowRight size={15} /></Link>
+        <Link to="/admin/accounts"><Users size={18} /><div><strong>Manage accounts</strong><span>Roles, restrictions, coins, sessions</span></div><ArrowRight size={15} /></Link>
         <Link to="/admin/support"><LifeBuoy size={18} /><div><strong>Open support desk</strong><span>Respond, assign, resolve</span></div><ArrowRight size={15} /></Link>
         <Link to="/admin/audit"><ScrollText size={18} /><div><strong>Verify audit chain</strong><span>Every privileged action is recorded</span></div><ArrowRight size={15} /></Link>
         <Link to="/admin/system"><BellRing size={18} /><div><strong>System health</strong><span>Database, engine, integrations</span></div><ArrowRight size={15} /></Link>

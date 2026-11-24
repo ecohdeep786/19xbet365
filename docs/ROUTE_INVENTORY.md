@@ -13,7 +13,7 @@
 | `/live-casino` | LiveCasino | Public | integration-required table previews |
 | `/slots` | Slots | Public | slot catalogue |
 | `/instant` | InstantGames | Public | playable 19X Originals |
-| `/promotions` | Promotions | Public | virtual-credit campaign cards and terms |
+| `/promotions` | Promotions | Public | coin campaign cards and terms |
 | `/tournaments` | Tournaments | Public | live/upcoming/finished leaderboards |
 | `/search` | SearchPage | Public | games, fixtures, help search |
 | `/game/:id` | GamePage | Public | playable game or provider-required preview |
@@ -24,7 +24,7 @@
 | `/forgot-password` | ForgotPassword | Public | recovery request |
 | `/account` | AccountOverview | Auth | player dashboard |
 | `/account/profile` | AccountProfile | Auth | profile details |
-| `/account/wallet` | AccountWallet | Auth | virtual-credit ledger |
+| `/account/wallet` | AccountWallet | Auth | coin ledger |
 | `/account/bets` | AccountBets | Auth | sports bet history |
 | `/account/activity` | AccountActivity | Auth | game round history |
 | `/account/notifications` | AccountNotifications | Auth | inbox |

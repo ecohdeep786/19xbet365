@@ -31,8 +31,8 @@ export function MinesGame({ game, stake, setStake, balance, onBalance, onSettled
   const [hitTile, setHitTile] = useState<number | null>(null);
 
   const start = async () => {
-    if (stake < 5) { setError("Stake must be at least 5 VC."); return; }
-    if (stake > balance) { setError("Your virtual-credit balance is too low for that stake."); return; }
+    if (stake < 5) { setError("Stake must be at least 5 coins."); return; }
+    if (stake > balance) { setError("Your coin balance is too low for that stake."); return; }
     setBusy(true); setError(null); setRevealed([]); setMinePositions([]); setPayout(0); setHitTile(null); setMultiplier(1);
     try {
       if (offline) {

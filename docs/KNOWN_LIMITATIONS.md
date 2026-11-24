@@ -1,6 +1,6 @@
 # Known Limitations
 
-19xbet365 is a production-oriented virtual-credit foundation, not a licensed real-money operator. The following are intentionally incomplete or require external authorization.
+19xbet365 is a production-oriented sandbox coin foundation, not a licensed real-money operator. The following are intentionally incomplete or require external authorization.
 
 ## Legal / financial
 

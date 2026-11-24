@@ -118,13 +118,13 @@ router.post("/:gameId/play", requireAuth, async (req, res, next) => {
       throw Object.assign(new Error("Use the multi-step endpoint for this game."), { status: 400, code: "invalid_endpoint" });
     }
     const stake = round2(Number(req.body?.stake));
-    if (!Number.isFinite(stake) || stake < 5) throw Object.assign(new Error("The minimum game stake is 5 VC."), { status: 400, code: "invalid_stake" });
-    if (stake > 5000) throw Object.assign(new Error("The maximum game stake is 5,000 VC."), { status: 400, code: "stake_limit" });
+    if (!Number.isFinite(stake) || stake < 5) throw Object.assign(new Error("The minimum game stake is 5 coins."), { status: 400, code: "invalid_stake" });
+    if (stake > 5000) throw Object.assign(new Error("The maximum game stake is 5,000 coins."), { status: 400, code: "stake_limit" });
     const result = await withTransaction(async (client) => {
       const account = await lockAccount(client, req.account.id);
       await checkDailyLimit(client, req.account.id, stake);
       if (account.status !== "active") throw Object.assign(new Error("Account is restricted."), { status: 403, code: "account_restricted" });
-      if (Number(account.balance) < stake) throw Object.assign(new Error("Insufficient virtual-credit balance."), { status: 400, code: "insufficient_balance" });
+      if (Number(account.balance) < stake) throw Object.assign(new Error("Insufficient coin balance."), { status: 400, code: "insufficient_balance" });
       const roundId = crypto.randomUUID();
       const debit = await debitStake(client, req.account.id, stake, `Game stake · ${game.name}`, "game_round", roundId);
       const played = playInstant(game.id, stake, req.body?.params || {});
@@ -180,7 +180,7 @@ router.post("/crash-orbit/start", requireAuth, async (req, res, next) => {
       throw Object.assign(new Error("Auto cash-out must be between 1.01x and 1,000x."), { status: 400, code: "invalid_auto_cashout" });
     }
     if (!Number.isFinite(stake) || stake < 5 || stake > 5000) {
-      throw Object.assign(new Error("Stake must be between 5 and 5,000 VC."), { status: 400, code: "invalid_stake" });
+      throw Object.assign(new Error("Stake must be between 5 and 5,000 coins."), { status: 400, code: "invalid_stake" });
     }
     const result = await withTransaction(async (client) => {
       await lockAccount(client, req.account.id);
@@ -307,7 +307,7 @@ router.post("/crash-orbit/:roundId/cashout", requireAuth, async (req, res, next)
     if (result.busted) {
       return res.json({ status: "busted", crashPoint: result.crashPoint, multiplier: result.current, payout: 0, balance: result.balance, message: `Too late — crash at ${result.crashPoint.toFixed(2)}x.` });
     }
-    res.json({ status: "cashed_out", multiplier: result.multiplier, payout: result.payout, balance: result.balance, crashPoint: result.crashPoint, message: `Cashed out at ${result.multiplier.toFixed(2)}x for ${result.payout.toFixed(2)} VC.` });
+    res.json({ status: "cashed_out", multiplier: result.multiplier, payout: result.payout, balance: result.balance, crashPoint: result.crashPoint, message: `Cashed out at ${result.multiplier.toFixed(2)}x for ${result.payout.toFixed(2)} coins.` });
   } catch (error) {
     next(error);
   }
@@ -320,7 +320,7 @@ router.post("/mines-vault/start", requireAuth, async (req, res, next) => {
     const stake = round2(Number(req.body?.stake));
     const minesCount = Math.max(1, Math.min(24, Number(req.body?.mines) || 3));
     if (!Number.isFinite(stake) || stake < 5 || stake > 5000) {
-      throw Object.assign(new Error("Stake must be between 5 and 5,000 VC."), { status: 400, code: "invalid_stake" });
+      throw Object.assign(new Error("Stake must be between 5 and 5,000 coins."), { status: 400, code: "invalid_stake" });
     }
     const result = await withTransaction(async (client) => {
       await lockAccount(client, req.account.id);
@@ -399,7 +399,7 @@ router.post("/mines-vault/:roundId/reveal", requireAuth, async (req, res, next) 
       multiplier: result.multiplier,
       payout: result.payout ?? 0,
       balance: result.balance,
-      message: result.complete ? `Vault cleared for ${result.payout.toFixed(2)} VC.` : `Safe. Current multiplier ${result.multiplier.toFixed(2)}x.`
+      message: result.complete ? `Vault cleared for ${result.payout.toFixed(2)} coins.` : `Safe. Current multiplier ${result.multiplier.toFixed(2)}x.`
     });
   } catch (error) {
     next(error);
@@ -431,7 +431,7 @@ router.post("/mines-vault/:roundId/cashout", requireAuth, async (req, res, next)
       return { multiplier, payout: settled.payout, balance: referralReward?.refereeBalance ?? settled.balance, mines: state.mines };
     });
     broadcast({ type: "game.settled", accountId: req.account.id, gameId: "mines-vault", payout: result.payout });
-    res.json({ status: "settled", multiplier: result.multiplier, payout: result.payout, balance: result.balance, mines: result.mines, message: `Cashed out at ${result.multiplier.toFixed(2)}x for ${result.payout.toFixed(2)} VC.` });
+    res.json({ status: "settled", multiplier: result.multiplier, payout: result.payout, balance: result.balance, mines: result.mines, message: `Cashed out at ${result.multiplier.toFixed(2)}x for ${result.payout.toFixed(2)} coins.` });
   } catch (error) {
     next(error);
   }

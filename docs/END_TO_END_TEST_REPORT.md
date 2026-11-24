@@ -8,18 +8,19 @@
 | Script | Result | Evidence |
 | --- | --- | --- |
 | `scripts/api-smoke.mjs` | Passed: health, bootstrap, login, overview, transactions, activity, dice, Mines start, admin overview/network/accounts/audit/security/system | console output |
-| `scripts/game-smoke.mjs` | Passed: all 11 playable originals settled; Crash cash-out 1.05x; Mines bust path; 19 lifetime rounds; final balance 22,498.00 VC | console output |
+| `scripts/game-smoke.mjs` | Passed: all 11 playable originals settled; Crash cash-out 1.05x; Mines bust path; 19 lifetime rounds; final balance 22,498.00 coins | console output |
 | `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries; see `SECURITY_TEST_REPORT.md` | console output |
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
 | `scripts/deposit-smoke.mjs` | Passed: sandbox request, admin approval, 15% tier bonus, deposit/bonus ledger, cancellation, rejection and live-collection activation gate | console output |
-| `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 VC; referee balance reflects reward | console output |
+| `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 coins; referee balance reflects reward | console output |
 | `scripts/capture-screenshots.mjs` | Passed: 27 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
 | Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,650 modules |
 | Playwright real-user journey | Passed | 32/32 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
-| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, casino, login, account, wallet, deposit, support, promotions, tournaments, help, game detail, register and admin |
+| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, login and deposit after the contrast pass; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
+| Contrast pass | Passed | Muted ink `#52718a`, action green `#557d1d`, footer `#a9c4dd`; zero color-contrast failures on audited pages |
 
-The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 VC** player balance with 6 seeded rounds and 2 seeded open bets. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.
+The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 coins** player balance with 6 seeded rounds and 2 seeded open bets. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.
 
 ## Real-browser journeys
 
@@ -35,7 +36,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ### 2. New registration
 
 - Opened `/register`, filled display name, email, password and confirm, accepted age consent.
-- Server created a player with **10,500 VC** welcome allocation; session cookie set.
+- Server created a player with **10,500 coins** welcome allocation; session cookie set.
 - Redirected to the account dashboard with 10,500 balance, one welcome transaction, Level 1, 0 rounds.
 - Password validation rejects short/weak/mismatched input in both UI and server.
 
@@ -95,7 +96,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 | Recent-game rail rendered full-width | Renamed game-page side rail class | Rail returns to horizontal 180px cards |
 | Bet placement `potential_return` mismatch | Typed API response and fallback field | Bet placed; toast correct |
 | 401 stale UI after session/DB reset | Global unauthorized event clears auth state | Session expiry path |
-| Wallet VC wrapping | Nowrap + flex constraints | Desktop screenshot |
+| Long coin balance wrapping | Nowrap + flex constraints | Desktop screenshot |
 | Header overflow at 320/390 | Hide search at `≤480` and avatar at `≤380` | QA harness no overflow |
 | Live spotlight 2-up at 320 | 1 column at `≤520` | QA harness no overflow |
 | Wallet filters overflow | Internal segmented scroll | QA harness no overflow |

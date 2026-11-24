@@ -66,7 +66,7 @@ export function BetSlipDrawer() {
                 <span className="slip-mode-note">{multiple ? `${selections.length} selections combined` : "One selection"}</span>
               </div>
               <div className="slip-stake">
-                <label htmlFor="slip-stake">Stake <span>coins</span></label>
+                <label htmlFor="slip-stake">Stake</label>
                 <div className="stake-input">
                   <Coins size={16} />
                   <input
@@ -79,7 +79,7 @@ export function BetSlipDrawer() {
                     value={stake || ""}
                     onChange={(event) => setStake(Number(event.target.value))}
                   />
-                  <span>VC</span>
+                  <span>coins</span>
                 </div>
                 <div className="quick-stakes">
                   {[50, 100, 250, 500].map((amount) => (
@@ -95,7 +95,7 @@ export function BetSlipDrawer() {
               {!user && (
                 <div className="slip-signin">
                   <ShieldCheck size={17} />
-                  <div><strong>Sign in to place your bet</strong><span>Virtual credits, real server records.</span></div>
+                  <div><strong>Sign in to place your bet</strong><span>Coins, real server records.</span></div>
                   <Link to="/login" onClick={() => setOpen(false)}>Sign in</Link>
                 </div>
               )}
@@ -106,10 +106,10 @@ export function BetSlipDrawer() {
                   <Link to="/account/deposit" onClick={() => setOpen(false)}>Add coins</Link>
                 </div>
               )}
-              <Button variant="primary" size="lg" loading={busy} onClick={placeBet} className="slip-place" disabled={Boolean(user && stake > user.balance)}>
-                {user && stake > user.balance ? "Add coins to place bet" : "Place virtual bet"} <ArrowRight size={17} />
+              <Button variant="lime" size="lg" loading={busy} onClick={placeBet} className="slip-place" disabled={Boolean(user && stake > user.balance)}>
+                {user && stake > user.balance ? "Add coins to place bet" : "Place coin bet"} <ArrowRight size={17} />
               </Button>
-              <p className="slip-disclaimer">Demo fixtures only. All stakes and returns are non-redeemable virtual credits. No real-money wagering.</p>
+              <p className="slip-disclaimer">Demo fixtures only. All stakes and returns are non-redeemable coins. No real-money wagering.</p>
             </>
           )}
         </div>

@@ -24,7 +24,7 @@ Errors: `{ "error": "code", "message": "human-readable" }`.
 
 | Method | Path | Auth | Body / effect |
 | --- | --- | --- | --- |
-| POST | `/auth/register` | none | `{email,password,displayName,username?,referralCode?,marketingOptIn}`; creates player + 10,500 VC welcome allocation + session |
+| POST | `/auth/register` | none | `{email,password,displayName,username?,referralCode?,marketingOptIn}`; creates player + 10,500 coins welcome allocation + session |
 | POST | `/auth/login` | none | `{email,password}`; session cookie |
 | POST | `/auth/logout` | session | revokes current session |
 | GET | `/auth/me` | optional | current user or null |

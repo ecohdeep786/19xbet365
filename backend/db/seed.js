@@ -57,7 +57,7 @@ const ROLES = [
   },
   {
     code: "player", name: "Player", rank: 4,
-    description: "Self-service access to sports, games, virtual credits, history, responsible-play tools, and support.",
+    description: "Self-service access to sports, games, coins, history, responsible-play tools, and support.",
     permissions: []
   }
 ];
@@ -136,7 +136,7 @@ async function main() {
       if (balance > 0) {
         await client.query(
           `INSERT INTO transactions (account_id, type, amount, balance_after, description, reference_type, reference_id, created_at)
-           VALUES ($1,'welcome_bonus',$2,$2,'Welcome virtual-credit allocation','welcome',$1,$3)`,
+           VALUES ($1,'welcome_bonus',$2,$2,'Welcome coin allocation','welcome',$1,$3)`,
           [ids[key], balance, created]
         );
       }
@@ -229,7 +229,7 @@ async function main() {
       ["platformTagline", "Play beyond the ordinary.", "Brand tagline"],
       ["maintenanceMode", false, "Pauses public playable actions when enabled"],
       ["registrationsEnabled", true, "Allows new player registration"],
-      ["maxGameStake", 5000, "Maximum virtual-credit stake per game round"],
+      ["maxGameStake", 5000, "Maximum coin stake per game round"],
       ["depositMode", "sandbox", "Deposit mode: sandbox, manual_review or disabled"],
       ["depositQrImageUrl", "", "Payment QR image URL for the deposit page"],
       ["depositInstructions", "Scan the payment QR, then enter the amount and payment reference. A reviewer verifies the transfer before coins are credited.", "Instructions shown on the deposit page"],
@@ -237,7 +237,7 @@ async function main() {
       ["depositMin", 50, "Minimum deposit amount"],
       ["depositMax", 100000, "Maximum deposit amount"],
       ["supportEmail", "support@19xbet365.test", "Support contact"],
-      ["licenseStatus", "Demonstration — virtual credits only", "Regulatory status shown in the footer"],
+      ["licenseStatus", "Demonstration — coins only", "Regulatory status shown in the footer"],
       ["thirdPartyIntegrations", "disabled", "Certified provider connections"],
       ["realMoneyEnabled", false, "Hard-disabled pending licensing"],
       ["responsibleGaming", "enabled", "Responsible-play tooling"],
@@ -251,14 +251,14 @@ async function main() {
 
     // Content pages -----------------------------------------------------------
     const pages = [
-      ["about", "About 19xbet365", "Company", "19xbet365 is an independent, virtual-credit entertainment platform built as a complete foundation for future licensed operations. Our sportsbook, casino lobby, live dealer lobby, and original instant games are presented with clear labels about what is active and what requires a licensed provider.\n\nEvery 19X Originals round is generated on our server and recorded. Real-money wagering, deposits, withdrawals, cash redemption, and financial commission systems are disabled."],
-      ["terms", "Terms and Conditions", "Legal", "These terms govern use of the 19xbet365 demonstration platform. Access is limited to users aged 18 or older. All balances are virtual credits with no cash value and cannot be purchased, transferred, redeemed, or withdrawn.\n\nPlayable original games are provided for entertainment only. Third-party game pages are integration-ready interfaces and do not represent active provider services. 19xbet365 may suspend or close accounts that breach these terms or attempt to interfere with platform integrity.\n\nCompleted rounds and audit records are retained in an append-only ledger. Platform staff cannot alter settled game outcomes or erase audit history."],
-      ["privacy", "Privacy Policy", "Legal", "We collect account details, session metadata, gameplay activity, virtual-credit transactions, support communications, and security events to operate and protect the platform. We do not sell personal data. Data is retained according to the audit-retention policy and applicable law.\n\nYou can review and update your profile and security settings from your account. For data requests in this demonstration environment, contact support."],
-      ["responsible-gaming", "Responsible Gaming", "Safety", "19xbet365 is entertainment, not income. Use virtual-credit limits, reality checks, cool-off periods, and self-exclusion to stay in control. Our account tools let you set a daily wager limit and short session reminders.\n\nIf you feel that play is affecting your wellbeing, take a break and seek independent support in your region. This platform does not offer real-money wagering."],
-      ["bonus-terms", "Bonus Terms", "Legal", "All bonuses on 19xbet365 are virtual-credit gameplay allocations. They have no cash value, cannot be withdrawn, and do not create a debt or ownership interest. Tournament prize pools are virtual credits. One welcome allocation is available per verified player. Where a bonus has an expiry, the expiration is shown on the promotion card."],
+      ["about", "About 19xbet365", "Company", "19xbet365 is an independent, coin entertainment platform built as a complete foundation for future licensed operations. Our sportsbook, casino lobby, live dealer lobby, and original instant games are presented with clear labels about what is active and what requires a licensed provider.\n\nEvery 19X Originals round is generated on our server and recorded. Real-money wagering, deposits, withdrawals, cash redemption, and financial commission systems are disabled."],
+      ["terms", "Terms and Conditions", "Legal", "These terms govern use of the 19xbet365 demonstration platform. Access is limited to users aged 18 or older. All balances are coins with no cash value and cannot be purchased, transferred, redeemed, or withdrawn.\n\nPlayable original games are provided for entertainment only. Third-party game pages are integration-ready interfaces and do not represent active provider services. 19xbet365 may suspend or close accounts that breach these terms or attempt to interfere with platform integrity.\n\nCompleted rounds and audit records are retained in an append-only ledger. Platform staff cannot alter settled game outcomes or erase audit history."],
+      ["privacy", "Privacy Policy", "Legal", "We collect account details, session metadata, gameplay activity, coin transactions, support communications, and security events to operate and protect the platform. We do not sell personal data. Data is retained according to the audit-retention policy and applicable law.\n\nYou can review and update your profile and security settings from your account. For data requests in this demonstration environment, contact support."],
+      ["responsible-gaming", "Responsible Gaming", "Safety", "19xbet365 is entertainment, not income. Use coin limits, reality checks, cool-off periods, and self-exclusion to stay in control. Our account tools let you set a daily wager limit and short session reminders.\n\nIf you feel that play is affecting your wellbeing, take a break and seek independent support in your region. This platform does not offer real-money wagering."],
+      ["bonus-terms", "Bonus Terms", "Legal", "All bonuses on 19xbet365 are coin gameplay allocations. They have no cash value, cannot be withdrawn, and do not create a debt or ownership interest. Tournament prize pools are coins. One welcome allocation is available per verified player. Where a bonus has an expiry, the expiration is shown on the promotion card."],
       ["cookies", "Cookie Policy", "Legal", "19xbet365 uses a strictly necessary session cookie to authenticate your account. We do not use advertising cookies. The cookie is HttpOnly and SameSite-protected. Clearing it signs you out."],
       ["aml", "AML & KYC Policy", "Legal", "Real-money operations are disabled. In a future licensed deployment, identity verification, source-of-funds checks, sanctions screening, and transaction monitoring would be mandatory before any deposit, withdrawal, or real-money wager. No financial services are provided in this build."],
-      ["affiliates", "Affiliate Programme", "Company", "19xbet365's affiliate programme is not open for real-money commissions. In this foundation build, referral links award virtual credits to both parties after a referred player completes their first round. Referring a player never grants administrative access or staff permissions."]
+      ["affiliates", "Affiliate Programme", "Company", "19xbet365's affiliate programme is not open for real-money commissions. In this foundation build, referral links award coins to both parties after a referred player completes their first round. Referring a player never grants administrative access or staff permissions."]
     ];
     for (const [slug, title, category, body] of pages) {
       await client.query("INSERT INTO content_pages (slug, title, category, body, status) VALUES ($1,$2,$3,$4,'published')", [slug, title, category, body]);
@@ -276,7 +276,7 @@ async function main() {
         [ids.alexrowan, type, amount, balance, description, referenceType, referenceId, createdAt]
       );
     };
-    await balanceTx("welcome_bonus", 10000, "Welcome virtual-credit allocation", isoDaysAgo(42, 9), "welcome", ids.alexrowan);
+    await balanceTx("welcome_bonus", 10000, "Welcome coin allocation", isoDaysAgo(42, 9), "welcome", ids.alexrowan);
 
     const historicalRounds = [
       ["nova-fruits", 100, 0, at(20, 14), { game: "nova-fruits", grid: [["cherry","bell","lemon"],["seven","star","crown"],["diamond","lemon","bell"]], lines: [], multiplier: 0, win: false, summary: "No winning line", gameName: "Nova Fruits" }],
@@ -348,7 +348,7 @@ async function main() {
       }
       await balanceTx("bet_stake", -bet.stake, `Sports ${bet.type === "single" ? "single" : "accumulator"} · ${list.length} selection${list.length > 1 ? "s" : ""}`, bet.at, "sports_bet", created.rows[0].id);
     }
-    await balanceTx("promo_credit", 300, "19X loyalty top-up - virtual credits", at(0, 6), "promotion", "p1");
+    await balanceTx("promo_credit", 300, "19X loyalty top-up", at(0, 6), "promotion", "p1");
     await client.query("UPDATE accounts SET balance = $1 WHERE id = $2", [balance, ids.alexrowan]);
 
     // A little activity for the rest of the network --------------------------
@@ -364,7 +364,7 @@ async function main() {
       const created = isoDaysAgo(player.daysAgo, 10);
       await client.query(
         `INSERT INTO transactions (account_id,type,amount,balance_after,description,reference_type,created_at)
-         VALUES ($1,'welcome_bonus',$2,$2,'Welcome virtual-credit allocation','welcome',$3)`,
+         VALUES ($1,'welcome_bonus',$2,$2,'Welcome coin allocation','welcome',$3)`,
         [accountId, welcome, created]
       );
       const rounds = randomInt(3, 9);
@@ -414,10 +414,10 @@ async function main() {
       [ids.alexrowan]
     );
     const notes = [
-      ["Crash Orbit tournament is live", "Altitude Week is underway. Your best completed cash-out this week is 1.86x. The top ten share 250,000 VC.", "promo", "/promotions", false, 1],
+      ["Crash Orbit tournament is live", "Altitude Week is underway. Your best completed cash-out this week is 1.86x. The top ten share 250,000 coins.", "promo", "/promotions", false, 1],
       ["New sign-in detected", "A sign-in to your account was recorded from your current browser. If this was not you, change your password and sign out other sessions.", "security", "/account/security", false, 2],
-      ["Your Mines Vault round settled", "A 150.00 VC round ended on a mine. Review the full round in game activity.", "game", "/account/activity", true, 3],
-      ["Welcome to 19xbet365", "Your virtual-credit wallet is ready. Explore sports, originals, and responsible-play tools.", "system", "/account", true, 30]
+      ["Your Mines Vault round settled", "A 150.00-coin round ended on a mine. Review the full round in game activity.", "game", "/account/activity", true, 3],
+      ["Welcome to 19xbet365", "Your coin wallet is ready. Explore sports, originals, and responsible-play tools.", "system", "/account", true, 30]
     ];
     for (const [title, body, type, link, read, days] of notes) {
       await client.query(
@@ -472,10 +472,10 @@ async function main() {
 
     // Seed audit trail (hash-chained, append-only) ---------------------------
     const auditSeed = [
-      { actor: "master", action: "platform.foundation_initialized", entityType: "platform", entityId: "19xbet365", summary: "19xbet365 foundation initialized with virtual-credit controls enabled." },
+      { actor: "master", action: "platform.foundation_initialized", entityType: "platform", entityId: "19xbet365", summary: "19xbet365 foundation initialized with coin controls enabled." },
       { actor: "master", action: "real_money.disabled", entityType: "configuration", entityId: "realMoneyEnabled", summary: "Real-money deposits, withdrawals, and wagering hard-disabled pending licensing." },
       { actor: "mercer", action: "account.suspended", entityType: "account", entityId: ids.sofialind, summary: "Suspended Sofia Lind pending ownership verification." },
-      { actor: "owen", action: "credits.credited", entityType: "account", entityId: ids.mateocruz, summary: "Credited 2,500.00 VC to Mateo Cruz: tournament correction." },
+      { actor: "owen", action: "credits.credited", entityType: "account", entityId: ids.mateocruz, summary: "Credited 2,500.00 coins to Mateo Cruz: tournament correction." },
       { actor: "chen", action: "network.branch_reviewed", entityType: "network", entityId: ids.chen, summary: "Reviewed the Chen branch hierarchy and direct-player assignments." },
       { actor: "master", action: "settings.updated", entityType: "setting", entityId: "licenseStatus", summary: "Confirmed demonstration licensing status in platform settings." },
       { actor: "priya", action: "support.ticket_updated", entityType: "support_ticket", entityId: null, summary: "Resolved a support ticket in the Nair delegated network." },

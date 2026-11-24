@@ -151,7 +151,7 @@ export function AdminAccountsPage() {
       <AdminHeader
         kicker="Account operations"
         title="Accounts & access"
-        body="Search the scoped network, manage restrictions, and record every virtual-credit adjustment."
+        body="Search the scoped network, manage restrictions, and record every coin adjustment."
         actions={<><AdminScopePill />{isMaster && <Button variant="lime" size="sm" icon={<UserPlus size={15} />} onClick={() => { setInviteOpen(true); setInviteResult(null); setActionError(null); }}>Issue credentials</Button>}</>}
       />
       {!isMaster && <div className="admin-callout"><ShieldCheck size={17} /><div><strong>Staff credentials are issued by Master Admin.</strong><span>You can manage accounts and game operations within your authorized branch; creating new staff logins is restricted to the Master Admin.</span></div></div>}
@@ -222,8 +222,8 @@ export function AdminAccountsPage() {
                 {selected.status === "suspended" ? <Button variant="lime" size="sm" loading={actionBusy} onClick={doRestore} icon={<RotateCcw size={14} />}>Restore account</Button> : <><Textarea rows={3} value={reason} onChange={(event) => setReason(event.target.value)} placeholder="Reason (at least 8 characters) — recorded in the audit trail" maxLength={300} disabled={selected.role === "master_admin" || selected.id === user?.id} /><Button variant="danger" size="sm" loading={actionBusy} onClick={doSuspend} disabled={selected.role === "master_admin" || selected.id === user?.id} icon={<Ban size={14} />}>Suspend account</Button></>}
               </section>
               <section className="manage-card">
-                <div className="manage-card-head"><Coins size={16} /><div><strong>Virtual-credit adjustment</strong><span>{selected.role === "player" ? "Player account. Every change is audited." : "Adjustments are limited to player accounts."}</span></div></div>
-                <div className="inline-form"><Input type="number" step={50} value={credit.amount} onChange={(event) => setCredit({ ...credit, amount: Number(event.target.value) })} aria-label="Adjustment amount" disabled={selected.role !== "player"} /><span>VC</span></div>
+                <div className="manage-card-head"><Coins size={16} /><div><strong>Coin adjustment</strong><span>{selected.role === "player" ? "Player account. Every change is audited." : "Adjustments are limited to player accounts."}</span></div></div>
+                <div className="inline-form"><Input type="number" step={50} value={credit.amount} onChange={(event) => setCredit({ ...credit, amount: Number(event.target.value) })} aria-label="Adjustment amount" disabled={selected.role !== "player"} /><span>coins</span></div>
                 <Input value={credit.reason} onChange={(event) => setCredit({ ...credit, reason: event.target.value })} placeholder="Reason for adjustment" maxLength={300} disabled={selected.role !== "player"} />
                 <Button variant="secondary" size="sm" loading={actionBusy} onClick={doCredit} disabled={selected.role !== "player"} icon={<Coins size={14} />}>Record adjustment</Button>
               </section>
