@@ -29,6 +29,7 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Help centre | reference help | `capture/product/help-1440.jpeg` |
 | Support | reference support | `capture/product/support-1440.jpeg` |
 | Master Admin | not public reference | `capture/product/admin-dashboard-1440.jpeg` |
+| Admin accounts & credential issuance | not public reference | `capture/product/admin-accounts-1440.jpeg` |
 | Deposit review | not public reference | `capture/product/admin-deposits-1440.jpeg` |
 | Mobile home | `capture/screenshot-390.png` | `capture/product/home-390.jpeg` |
 | Mobile sports | reference mobile live | `capture/product/sports-390.jpeg` |

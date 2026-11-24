@@ -40,7 +40,7 @@
 .bookmaker .header-shell { gap: 14px; }
 .bookmaker .logo-word { color: #ffffff; letter-spacing: .07em; }
 .bookmaker .logo-word span { color: #62ed91; }
-.bookmaker .nav-link { color: #d9e9f7; padding: 0 9px; }
+.bookmaker .nav-link { color: #eaf4ff; padding: 0 8px; font-size: .75rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
 .bookmaker .nav-link:hover, .bookmaker .nav-link.active { color: #ffffff; }
 .bookmaker .nav-link .nav-icon { color: #b7d2ea; }
 .bookmaker .nav-link.active .nav-icon { color: #62ed91; }
@@ -654,7 +654,7 @@
 .bookmaker .deposit-notice.warning strong { color: #7d1d2c; }
 .bookmaker .deposit-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 16px; }
 .bookmaker .deposit-payment, .bookmaker .deposit-form-panel { padding: 16px; }
-.bookmaker .deposit-payment .panel-head, .bookmaker .deposit-form-panel .panel-head { margin-bottom: 12px; }
+.bookmaker .deposit-payment .panel-head, .bookmaker .deposit-form-panel .panel-head { margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
 .bookmaker .qr-frame { min-height: 238px; display: grid; place-items: center; border: 1px dashed #c7d8e8; border-radius: 10px; background: #f8fbff; padding: 12px; }
 .bookmaker .qr-frame img { width: min(100%, 230px); height: auto; display: block; border-radius: 8px; }
 .bookmaker .qr-placeholder { display: grid; justify-items: center; gap: 7px; text-align: center; color: #526a82; padding: 20px; }
@@ -819,10 +819,23 @@
 .bookmaker.auth-page .success-panel { background: #f2fbf4; border-color: #bfe4c9; }
 .bookmaker.auth-page .success-panel p { color: #526a82; }
 
-@media (max-width: 1400px) {
-  .bookmaker .nav-link { padding: 0 6px; font-size: .72rem; gap: 4px; }
+/* Consistent 8px rhythm for the public surfaces */
+.bookmaker .home-shell { padding-top: 32px; }
+.bookmaker .home-section { margin-top: 48px; }
+.bookmaker .quick-strip { gap: 10px; padding: 10px; }
+.bookmaker .game-grid { gap: 16px; }
+.bookmaker .sports-shell { gap: 16px; padding: 24px 0 64px; }
+.bookmaker .account-shell { gap: 24px; padding: 24px 0 64px; }
+.bookmaker .section-heading { gap: 24px; margin-bottom: 24px; }
+.bookmaker .deposit-page { gap: 20px; }
+
+@media (max-width: 1420px) {
+  .bookmaker .nav-link { padding: 0 5px; font-size: .68rem; gap: 4px; letter-spacing: .02em; }
   .bookmaker .nav-link .nav-icon { width: 13px; height: 13px; }
   .bookmaker .header-balance { display: none; }
+}
+@media (max-width: 560px) {
+  .bookmaker .page-shell, .bookmaker .narrow-shell { width: calc(100% - 32px); }
 }
 @media (max-width: 900px) {
   .bookmaker .header-shell { width: calc(100% - 20px); }

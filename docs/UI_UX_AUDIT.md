@@ -44,6 +44,12 @@ The reference is attractive because it is **predictable**, not because it is lar
 - Darkened secondary ink from `#71869b`/`#7c90a4` to `#526a82`; positive amounts use `#14773a` instead of the lower-contrast lime text.
 - Increased mobile odds targets to 42px and kept all controls labelled in full words rather than unexplained abbreviations.
 
+### Navigation and spacing
+- Desktop navigation now follows the reference’s bold, compact hierarchy: **700 weight, uppercase labels, tightened letter spacing**, icon alignment and an emerald active underline.
+- Standardised the public vertical rhythm around 8px increments: 32px shell top, 48px section separation, 24px section-heading gap, 16px card grid gaps, 24px sports/account shell spacing and 16px mobile gutters.
+- Admin surfaces use a slightly denser rhythm (20px page gap, 14px stat grid, 16px dashboard gap) while retaining the distinct dark control-room theme.
+- Hero spacing was compressed so “Live right now” appears within the first desktop viewport; the mobile hero keeps its stacked layout without a forced minimum height.
+
 ### Navigation and icons
 - Original sport glyphs replace reused generic Lucide marks.
 - Category icons added to desktop nav, mega-menus, mobile drawer and casino filter chips.
@@ -90,6 +96,8 @@ Passed checks included:
 - Mobile drawer opens as a modal, traps focus, closes on Escape and restores focus.
 - Bet slip locks page scroll on mobile, closes on Escape and unlocks.
 - Demo player login, account security, Master Admin dashboard and audit route all render.
+- Master Admin can issue a one-time staff email/password; the new admin can manage scoped accounts and games but is denied settings, roles and further credential issuance.
+- Branch Admin accounts cannot create staff logins.
 - No console or page errors during the run.
 
 ## 4. Lighthouse verification

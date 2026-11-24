@@ -1,6 +1,6 @@
 # Visual evidence
 
-`capture/product/` contains 26 screenshots of the 19xbet365 production build, captured by `scripts/capture-screenshots.mjs` in headless Edge at:
+`capture/product/` contains 27 screenshots of the 19xbet365 production build, captured by `scripts/capture-screenshots.mjs` in headless Edge at:
 
 - **1440 × 900** desktop for public, player, game and admin views;
 - **390 × 844** mobile for home, sports, casino, game, wallet, deposit, login and admin views.

@@ -161,6 +161,8 @@ try {
   await waitReady(1400);
   await goto("/admin", 1600);
   await shot("admin-dashboard-1440");
+  await goto("/admin/accounts", 1200);
+  await shot("admin-accounts-1440");
   await goto("/admin/deposits", 1200);
   await shot("admin-deposits-1440");
 

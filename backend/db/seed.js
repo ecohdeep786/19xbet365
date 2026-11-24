@@ -32,7 +32,7 @@ const ROLES = [
     permissions: [
       "network.view.scope", "network.manage", "accounts.create.subadmin", "accounts.create.agent",
       "accounts.create.player", "accounts.suspend", "accounts.restore", "credits.adjust",
-      "games.view", "content.manage", "promotions.manage", "support.view", "support.manage",
+      "games.view", "games.manage", "content.manage", "promotions.manage", "support.view", "support.manage",
       "security.view", "audit.view.scope", "transfers.approve", "reports.view.scope",
       "notifications.broadcast", "system.view"
     ]

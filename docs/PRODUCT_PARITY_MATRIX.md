@@ -46,7 +46,7 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Master Admin dashboard | Global analytics/network | Metrics, series, alerts, audit chain, export | Complete | `admin/Dashboard.tsx` |
 | Delegated admin | Scoped admin dashboard | Same dashboard with server-derived scope | Complete | `getScopedAccountIds` |
 | Admin account management | Restrictions, credits, roles | Search, suspend/restore, credit, role, revoke sessions | Complete | Tested 200 response and ledger update |
-| Admin invitations | Invite roles | Temporary credentials, role limits, revoke | Complete | Password shown once |
+| Staff credentials | Invite/admin accounts | Master-only issuance, one-time login ID/password, copy handoff, revoke | Complete | Password shown once; admins cannot create staff logins |
 | Network visualization | Hierarchy tree | Recursive tree with role and balance | Complete | Scope verified via API |
 | Transfers | Request/approve network moves | Request/approve/reject workflow | Complete | Tested UI; server scope checks |
 | Game catalogue admin | Visibility/featured | Status, featured, copy controls | Complete | Outcomes/RTP not editable |

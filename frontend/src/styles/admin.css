@@ -528,3 +528,13 @@
 .admin-callout > div { display: grid; gap: 2px; }
 .admin-callout strong { color: #fff; font-size: .8rem; }
 .admin-callout span { color: var(--muted); font-size: .72rem; line-height: 1.5; }
+
+/* Spacing rhythm */
+.admin-page { gap: 20px; }
+.admin-page-head { gap: 24px; }
+.admin-stat-grid { gap: 14px; }
+.admin-dashboard-grid { gap: 16px; }
+
+.invite-scope-note { display: flex; align-items: flex-start; gap: 8px; padding: 10px 11px; border: 1px solid rgba(201,255,99,.18); border-radius: 8px; background: rgba(201,255,99,.04); color: var(--muted); font-size: .7rem; line-height: 1.5; }
+.invite-scope-note svg { flex: 0 0 auto; color: var(--lime); margin-top: 1px; }
+.invite-result .copy-btn, .invite-result .btn { margin-top: 2px; }

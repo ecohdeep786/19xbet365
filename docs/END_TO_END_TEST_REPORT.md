@@ -13,8 +13,8 @@
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
 | `scripts/deposit-smoke.mjs` | Passed: sandbox request, admin approval, 15% tier bonus, deposit/bonus ledger, cancellation, rejection and live-collection activation gate | console output |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 VC; referee balance reflects reward | console output |
-| `scripts/capture-screenshots.mjs` | Passed: 26 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,649 modules |
+| `scripts/capture-screenshots.mjs` | Passed: 27 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,650 modules |
 | Playwright real-user journey | Passed | 32/32 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
 | Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, casino, login, account, wallet, deposit, support, promotions, tournaments, help, game detail, register and admin |
@@ -84,7 +84,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ### 8. Evidence capture
 
 - `scripts/capture-screenshots.mjs` logs in through the real API, sets viewport metrics through DevTools, captures desktop player pages, mobile pages, signed-out auth pages and the Master Admin control room.
-- All 26 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
+- All 27 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
 - Demo identity and support addresses were cleaned from the legacy `astraplay.io` domain to `19xbet365.test` in seed, UI shortcuts, existing rows and documentation.
 
 ## Defects found and fixed

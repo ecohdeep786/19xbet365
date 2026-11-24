@@ -449,7 +449,7 @@ router.post("/accounts/:id/revoke-sessions", requirePermission("security.view"),
 });
 
 // Staff, invitations ----------------------------------------------------------
-router.post("/staff", requirePermission("network.manage"), async (req, res, next) => {
+router.post("/staff", requireMaster, async (req, res, next) => {
   try {
     const email = String(req.body?.email || "").trim().toLowerCase();
     const displayName = String(req.body?.displayName || "").trim().slice(0, 60);
@@ -505,7 +505,7 @@ router.post("/staff", requirePermission("network.manage"), async (req, res, next
   }
 });
 
-router.get("/invitations", requirePermission("network.manage"), async (req, res, next) => {
+router.get("/invitations", requireMaster, async (req, res, next) => {
   try {
     const scope = await scoped(req);
     const result = await query(
@@ -526,7 +526,7 @@ router.get("/invitations", requirePermission("network.manage"), async (req, res,
   }
 });
 
-router.post("/invitations/:id/revoke", requirePermission("network.manage"), async (req, res, next) => {
+router.post("/invitations/:id/revoke", requireMaster, async (req, res, next) => {
   try {
     const scope = await scoped(req);
     const result = await withTransaction(async (client) => {

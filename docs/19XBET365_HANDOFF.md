@@ -9,6 +9,7 @@ A complete, independently branded virtual-credit gaming foundation with:
 - 11 server-authoritative playable 19X Originals;
 - registration/login/account lifecycle, virtual wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
 - Master Admin and delegated staff control room with scoped hierarchy, RBAC, credits, support, transfers, catalogue, content, audit, settings and health;
+- Master-only staff credential issuance with one-time login ID/password handoff; administrators can manage scoped users and games but cannot create staff logins or access Master-only settings, roles, deposits and credential controls;
 - PostgreSQL schema/seed, transactional wallet, immutable audit chain, settled-round immutability, session auth, rate limiting and a WebSocket activity channel;
 - server demo-settlement worker for 1X2 singles/accumulators, with generated final scores, notifications, wallet credits and audit events;
 - sandbox deposit/QR-request flow with Master Admin verification, configurable percentage bonuses, wallet ledger entries, notifications and audit events; live collection is hard-gated;
@@ -91,7 +92,7 @@ New registrations receive 10,500 VC. The seeded player starts at 22,500 VC with 
 ## Evidence inventory
 
 - Reference research screenshots are retained locally and excluded from the public repository; the comparison notes live in `docs/VISUAL_COMPARISON_REPORT.md`.
-- Product desktop captures: `capture/product/home-1440.jpeg`, `sports-1440.jpeg`, `live-1440.jpeg`, `casino-1440.jpeg`, `instant-1440.jpeg`, `dice-1440.jpeg`, `account-1440.jpeg`, `wallet-1440.jpeg`, `deposit-1440.jpeg`, `bets-1440.jpeg`, `promotions-1440.jpeg`, `tournaments-1440.jpeg`, `help-1440.jpeg`, `support-1440.jpeg`, `login-1440.jpeg`, `register-1440.jpeg`, `admin-dashboard-1440.jpeg`, `admin-deposits-1440.jpeg`.
+- Product desktop captures: `capture/product/home-1440.jpeg`, `sports-1440.jpeg`, `live-1440.jpeg`, `casino-1440.jpeg`, `instant-1440.jpeg`, `dice-1440.jpeg`, `account-1440.jpeg`, `wallet-1440.jpeg`, `deposit-1440.jpeg`, `bets-1440.jpeg`, `promotions-1440.jpeg`, `tournaments-1440.jpeg`, `help-1440.jpeg`, `support-1440.jpeg`, `login-1440.jpeg`, `register-1440.jpeg`, `admin-dashboard-1440.jpeg`, `admin-accounts-1440.jpeg`, `admin-deposits-1440.jpeg`.
 - Product mobile captures: `capture/product/home-390.jpeg`, `sports-390.jpeg`, `casino-390.jpeg`, `dice-390.jpeg`, `wallet-390.jpeg`, `deposit-390.jpeg`, `login-390.jpeg`, `admin-dashboard-390.jpeg`.
 - Reproducible capture: `scripts/capture-screenshots.mjs` (headless Edge, real API login, 1440×900 and 390×844).
 - Automated tests: `scripts/api-smoke.mjs`, `scripts/game-smoke.mjs`, `scripts/security-smoke.mjs`, `scripts/settlement-smoke.mjs`, `scripts/referral-smoke.mjs`.

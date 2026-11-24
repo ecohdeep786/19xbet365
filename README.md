@@ -134,7 +134,7 @@ Provider-required catalogue titles (live casino, provider slots, some virtuals) 
 
 - Global/scoped analytics from `parent_id` hierarchy, with no client-supplied scope trusted.
 - Account search, suspension/restoration, session revocation, virtual-credit adjustments, and Master-only role changes.
-- Invitations with temporary credentials; role escalation blocked by the server.
+- **Master-only staff credential issuance** with a one-time email/password handoff. Admins can manage scoped accounts and the game catalogue, but cannot create staff logins, change roles, open settings, review deposits or access other Master-only controls.
 - Game catalogue visibility/featured controls; outcomes and RTP are not editable.
 - Content pages, promotions, support tickets, transfer approvals, security events, audit chain verification, settings, and system health.
 - Master Admin account is protected from suspension, demotion, and deletion through the API.

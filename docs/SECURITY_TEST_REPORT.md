@@ -23,7 +23,13 @@ Run: `node scripts/security-smoke.mjs`
 | Agent `/admin/roles` | PASS | `403` permission denied |
 | Agent `/admin/transfers` | PASS | `403` permission denied |
 | Suspended account login | PASS | `403` rejected |
-| Audit count | PASS | 10 initial events |
+| Audit count | PASS | 10 initial events on clean seed |
+| Master issues staff credentials | PASS | `201`, one-time email + temporary password |
+| New admin can manage accounts | PASS | `200` scoped account list |
+| New admin can view/manage games | PASS | `200` game catalogue; `games.manage` granted |
+| New admin cannot open settings | PASS | `403` permission denied |
+| New admin cannot open roles | PASS | `403` permission denied |
+| New admin cannot issue staff credentials | PASS | `403` Master Admin authorization required |
 
 ## Database integrity checks
 

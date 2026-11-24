@@ -11,9 +11,9 @@ async function req(path, options = {}, expected = 200) {
   if (res.status !== expected) throw new Error(`${path}: expected ${expected}, got ${res.status}: ${JSON.stringify(data)}`);
   return { status: res.status, data };
 }
-async function login(email, expected = 200) {
+async function login(email, expected = 200, password = "19X#2026") {
   cookie = "";
-  return req("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password: "19X#2026" }) }, expected);
+  return req("/api/auth/login", { method: "POST", body: JSON.stringify({ email, password }) }, expected);
 }
 const evidence = {};
 evidence.anonymousAdmin = (await req("/api/admin/overview", {}, 401)).data.message;
@@ -33,9 +33,31 @@ evidence.agentOverview = { global: overview.data.scope.global, accountCount: ove
 evidence.agentRolesDenied = (await req("/api/admin/roles", {}, 403)).data.message;
 evidence.agentTransfersDenied = (await req("/api/admin/transfers", {}, 403)).data.message;
 evidence.agentDepositsDenied = (await req("/api/admin/deposits", {}, 403)).data.message;
+await login("admin.mercer@19xbet365.test");
+evidence.adminStaffIssueDenied = (await req("/api/admin/staff", {
+  method: "POST",
+  body: JSON.stringify({ email: "blocked.staff@19xbet365.test", displayName: "Blocked Staff", role: "admin" })
+}, 403)).data.message;
 await login("sofia.lind@example.com", 403);
 evidence.suspendedLogin = "rejected";
 await login("admin@19xbet365.test");
 evidence.masterDepositQueue = (await req("/api/admin/deposits", {}, 200)).data.deposits.length >= 0;
 evidence.auditCount = (await req("/api/admin/audit?limit=5")).data.total;
+
+const newAdminEmail = `access.${Date.now()}@19xbet365.test`;
+const created = await req("/api/admin/staff", {
+  method: "POST",
+  body: JSON.stringify({ email: newAdminEmail, displayName: "Access QA", role: "admin" })
+}, 201);
+evidence.masterIssuedCredentials = Boolean(created.data.credentials?.temporaryPassword);
+await login(newAdminEmail, 200, created.data.credentials.temporaryPassword);
+evidence.newAdminAccounts = (await req("/api/admin/accounts?limit=5", {}, 200)).data.total >= 0;
+evidence.newAdminGames = (await req("/api/admin/games", {}, 200)).data.games.length > 0;
+evidence.newAdminSettingsDenied = (await req("/api/admin/settings", {}, 403)).data.message;
+evidence.newAdminRolesDenied = (await req("/api/admin/roles", {}, 403)).data.message;
+evidence.newAdminStaffDenied = (await req("/api/admin/staff", {
+  method: "POST",
+  body: JSON.stringify({ email: `nested.${Date.now()}@19xbet365.test`, displayName: "Nested Admin", role: "admin" })
+}, 403)).data.message;
+
 console.log(JSON.stringify(evidence, null, 2));

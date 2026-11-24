@@ -8,7 +8,7 @@ import { api } from "../../lib/api";
 import type { AdminAccount } from "../../types";
 import { useAuth } from "../../state/AuthContext";
 import { useToast } from "../../state/ToastContext";
-import { Avatar, Badge, Button, EmptyState, ErrorState, Field, Input, Modal, Select, Skeleton, Textarea } from "../../components/UI";
+import { Avatar, Badge, Button, CopyButton, EmptyState, ErrorState, Field, Input, Modal, Select, Skeleton, Textarea } from "../../components/UI";
 import { AdminHeader, AdminScopePill } from "./AdminLayout";
 import { classNames, dateShort, number, vc } from "../../lib/format";
 
@@ -40,12 +40,9 @@ export function AdminAccountsPage() {
   const [actionError, setActionError] = useState<string | null>(null);
   const [invitations, setInvitations] = useState<{ id: string; email: string; display_name: string; role_code: string; status: string; created_at: string; expires_at: string; parent_name: string; invited_by_name: string; role_name: string }[]>([]);
 
-  const inviteRoles = useMemo(() => {
-    if (user?.role === "master_admin") return ["admin", "sub_admin", "agent", "player"];
-    if (user?.role === "admin") return ["sub_admin", "agent", "player"];
-    if (user?.role === "sub_admin") return ["agent", "player"];
-    return ["player"];
-  }, [user?.role]);
+  const inviteRoles = useMemo(() => (
+    user?.role === "master_admin" ? ["admin", "sub_admin", "agent", "player"] : []
+  ), [user?.role]);
 
   const load = async () => {
     setLoading(true);
@@ -155,8 +152,9 @@ export function AdminAccountsPage() {
         kicker="Account operations"
         title="Accounts & access"
         body="Search the scoped network, manage restrictions, and record every virtual-credit adjustment."
-        actions={<><AdminScopePill /><Button variant="lime" size="sm" icon={<UserPlus size={15} />} onClick={() => { setInviteOpen(true); setInviteResult(null); setActionError(null); }}>Create account</Button></>}
+        actions={<><AdminScopePill />{isMaster && <Button variant="lime" size="sm" icon={<UserPlus size={15} />} onClick={() => { setInviteOpen(true); setInviteResult(null); setActionError(null); }}>Issue credentials</Button>}</>}
       />
+      {!isMaster && <div className="admin-callout"><ShieldCheck size={17} /><div><strong>Staff credentials are issued by Master Admin.</strong><span>You can manage accounts and game operations within your authorized branch; creating new staff logins is restricted to the Master Admin.</span></div></div>}
       <div className="admin-toolbar panel">
         <form className="admin-search" onSubmit={(event) => { event.preventDefault(); setPage(1); setAppliedQuery(query); }}>
           <Search size={16} /><Input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search name, email, username or referral code" aria-label="Search accounts" />
@@ -200,14 +198,14 @@ export function AdminAccountsPage() {
         )}
       </div>
 
-      <section className="panel invitations-panel">
-        <div className="panel-head"><span><Mail size={15} /> Pending invitations</span><Button variant="ghost" size="sm" onClick={() => { setInviteOpen(true); setInviteResult(null); }} icon={<UserPlus size={14} />}>New invitation</Button></div>
+      {isMaster && <section className="panel invitations-panel">
+        <div className="panel-head"><span><Mail size={15} /> Pending invitations</span><Button variant="ghost" size="sm" onClick={() => { setInviteOpen(true); setInviteResult(null); setActionError(null); }} icon={<UserPlus size={14} />}>Issue credentials</Button></div>
         {!invitations.length ? <p className="muted-small">No invitations recorded in your scope.</p> : (
           <div className="data-table-wrap"><table className="data-table"><thead><tr><th>Invitee</th><th>Role</th><th>Invited by</th><th>Expires</th><th>Status</th><th /></tr></thead><tbody>
             {invitations.map((item) => <tr key={item.id}><td><strong>{item.display_name}</strong><span className="row-sub">{item.email}</span></td><td><Badge tone="outline">{item.role_name}</Badge></td><td className="muted-cell">{item.invited_by_name}</td><td className="muted-cell">{dateShort(item.expires_at)}</td><td><span className={classNames("status-pill", item.status)}>{item.status}</span></td><td>{item.status === "pending" && <button className="text-btn" onClick={() => revokeInvitation(item.id)}>Revoke</button>}</td></tr>)}
           </tbody></table></div>
         )}
-      </section>
+      </section>}
 
       <Modal open={!!selected} onClose={() => setSelected(null)} title={selected ? `Manage ${selected.displayName}` : "Manage account"} wide footer={<Button variant="secondary" onClick={() => setSelected(null)}>Close</Button>}>
         {selected && (
@@ -246,23 +244,25 @@ export function AdminAccountsPage() {
         )}
       </Modal>
 
-      <Modal open={inviteOpen} onClose={() => setInviteOpen(false)} title="Create account / invitation" footer={<Button variant="secondary" onClick={() => setInviteOpen(false)}>Close</Button>}>
+      <Modal open={inviteOpen} onClose={() => setInviteOpen(false)} title="Issue staff credentials" footer={<Button variant="secondary" onClick={() => setInviteOpen(false)}>Close</Button>}>
         {inviteResult ? (
           <div className="invite-result">
             <span className="success-icon"><Check size={22} /></span>
-            <h3>Temporary credentials</h3>
-            <p>Share these through an approved secure channel. The temporary password is shown once.</p>
+            <h3>Account credentials</h3>
+            <p>Give these credentials to the staff member through an approved secure channel. The temporary password is shown once.</p>
             <div className="credential-box"><span>{inviteResult.email}</span><strong>{inviteResult.temporaryPassword}</strong></div>
-            <Button variant="lime" size="sm" onClick={() => { setInviteResult(null); setInvite({ email: "", displayName: "", role: "player" }); }}>Create another</Button>
+            <CopyButton value={`${inviteResult.email} / ${inviteResult.temporaryPassword}`} label="Copy credentials" />
+            <Button variant="lime" size="sm" onClick={() => { setInviteResult(null); setInvite({ email: "", displayName: "", role: "player" }); }}>Issue another</Button>
           </div>
         ) : (
           <form className="invite-form" onSubmit={doInvite}>
+            <div className="invite-scope-note"><ShieldCheck size={15} /><span>Only Master Admin can create staff logins. The account is created immediately and the member can sign in with the generated credentials.</span></div>
             <Field label="Display name" required><Input value={invite.displayName} onChange={(event) => setInvite({ ...invite, displayName: event.target.value })} placeholder="Full name" minLength={2} required /></Field>
-            <Field label="Email" required><Input type="email" value={invite.email} onChange={(event) => setInvite({ ...invite, email: event.target.value })} placeholder="person@example.com" required /></Field>
+            <Field label="Email / login ID" required><Input type="email" value={invite.email} onChange={(event) => setInvite({ ...invite, email: event.target.value })} placeholder="person@example.com" required /></Field>
             <Field label="Role" required><Select value={invite.role} onChange={(event) => setInvite({ ...invite, role: event.target.value })}>{inviteRoles.map((item) => <option key={item} value={item}>{item.replace("_", " ")}</option>)}</Select></Field>
             {actionError && <div className="form-error">{actionError}</div>}
-            <Button variant="lime" loading={inviteBusy} type="submit" icon={<UserPlus size={15} />}>Create invitation</Button>
-            <p className="form-note">Invitees receive their role immediately but must change the temporary password after signing in. Role escalation is blocked by the server.</p>
+            <Button variant="lime" loading={inviteBusy} type="submit" icon={<UserPlus size={15} />}>Generate credentials</Button>
+            <p className="form-note">The temporary password must be changed after the first sign-in. Role escalation is blocked by the server.</p>
           </form>
         )}
       </Modal>

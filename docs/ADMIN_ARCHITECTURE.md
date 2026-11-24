@@ -40,6 +40,7 @@ Important permissions:
 | Hierarchy | `/admin/network` | recursive tree, role/status/balance, search | actor branch |
 | Accounts | `/admin/accounts` | search/filter/paginate, manage modal | actor branch |
 | Account actions | modal | suspend/restore, credit adjustment, role change, revoke sessions | target must be descendant; rank checks |
+| Staff credentials | `/admin/accounts` modal | create account/login ID, one-time temporary password, copy handoff; staff account is created immediately | **Master Admin only** |
 | Roles | `/admin/roles` | permission matrix, save per role | Master only |
 | Game catalogue | `/admin/games` | status, featured, badge/copy; no outcome edits | `games.view/manage` |
 | Content | `/admin/content` | page title/body/status; promotion title/terms/active | `content.manage`, `promotions.manage` |
@@ -58,7 +59,7 @@ Important permissions:
 - Master Admin cannot be suspended, demoted, or role-changed through the API.
 - Credit adjustments are limited to player accounts and require a reason of at least 8 characters.
 - Target accounts are checked against the actor's recursive scope.
-- Invitations can only grant roles below the inviter's authority.
+- Only the Master Admin can create any staff login or issue a temporary password. Administrators can manage scoped users and the game catalogue but cannot create staff accounts, issue credentials, change roles, open settings, review deposits or access other Master-only controls.
 - Transfer approval checks destination branch scope and records a reason.
 - All privileged changes append an audit event with actor, action, entity, before/after, IP, and hash chain.
 - Audit and settled rounds are protected by PostgreSQL triggers.
@@ -74,6 +75,8 @@ Important permissions:
 - `/api/admin/roles` and `/api/admin/transfers` return permission denied.
 - A player gets `staff_required` for `/api/admin/overview`.
 - Anonymous admin access is `401`.
+- Master credential issuance returns a one-time email/password; the new admin can access scoped accounts and the game catalogue but receives `403` for settings, roles and further staff issuance.
+- A branch admin is blocked from staff credential creation by `requireMaster`.
 
 ## Files
 
