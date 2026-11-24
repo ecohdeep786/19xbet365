@@ -11,11 +11,13 @@
 | `scripts/game-smoke.mjs` | Passed: all 11 playable originals settled; Crash cash-out 1.05x; Mines bust path; 19 lifetime rounds; final balance 22,498.00 VC | console output |
 | `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries; see `SECURITY_TEST_REPORT.md` | console output |
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
+| `scripts/deposit-smoke.mjs` | Passed: sandbox request, admin approval, 15% tier bonus, deposit/bonus ledger, cancellation, rejection and live-collection activation gate | console output |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 VC; referee balance reflects reward | console output |
-| `scripts/capture-screenshots.mjs` | Passed: 23 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,647 modules |
+| `scripts/capture-screenshots.mjs` | Passed: 26 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,649 modules |
 | Playwright real-user journey | Passed | 32/32 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
-| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, casino, login, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
+| Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
+| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, casino, login, account, wallet, deposit, support, promotions, tournaments, help, game detail, register and admin |
 
 The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 VC** player balance with 6 seeded rounds and 2 seeded open bets. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.
 
@@ -51,7 +53,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 
 ### 4. Wallet/account states
 
-- Wallet balance renders on one line at desktop and mobile; deposit/withdraw remain disabled with explanation.
+- Wallet balance renders on one line at desktop and mobile; Add coins opens the sandbox deposit flow, while live withdrawal remains disabled with explanation.
 - Empty states shown for new accounts (rounds/bets/notifications).
 - Activity page has round filters and expandable record details.
 - Responsive QA found and fixed 320px wallet filter overflow and the mobile support-card ordering defect.
@@ -82,7 +84,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ### 8. Evidence capture
 
 - `scripts/capture-screenshots.mjs` logs in through the real API, sets viewport metrics through DevTools, captures desktop player pages, mobile pages, signed-out auth pages and the Master Admin control room.
-- All 23 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
+- All 26 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
 - Demo identity and support addresses were cleaned from the legacy `astraplay.io` domain to `19xbet365.test` in seed, UI shortcuts, existing rows and documentation.
 
 ## Defects found and fixed
@@ -115,7 +117,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ## Not covered end-to-end
 
 - Real provider game session (no contract/certification).
-- Real-money deposit/withdrawal (disabled).
+- Live real-money collection and withdrawals (sandbox deposit/review is covered; live activation remains gated).
 - Email/SMS delivery or verification (no provider).
 - Native app / real touch-device gestures.
 - Full WCAG screen-reader audit.

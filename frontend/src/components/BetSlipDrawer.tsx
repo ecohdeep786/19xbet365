@@ -66,7 +66,7 @@ export function BetSlipDrawer() {
                 <span className="slip-mode-note">{multiple ? `${selections.length} selections combined` : "One selection"}</span>
               </div>
               <div className="slip-stake">
-                <label htmlFor="slip-stake">Stake <span>virtual credits</span></label>
+                <label htmlFor="slip-stake">Stake <span>coins</span></label>
                 <div className="stake-input">
                   <Coins size={16} />
                   <input
@@ -99,8 +99,15 @@ export function BetSlipDrawer() {
                   <Link to="/login" onClick={() => setOpen(false)}>Sign in</Link>
                 </div>
               )}
-              <Button variant="primary" size="lg" loading={busy} onClick={placeBet} className="slip-place">
-                Place virtual bet <ArrowRight size={17} />
+              {user && stake > user.balance && (
+                <div className="slip-low-balance">
+                  <Coins size={16} />
+                  <div><strong>Not enough coins</strong><span>Your balance is {vc(user.balance)}.</span></div>
+                  <Link to="/account/deposit" onClick={() => setOpen(false)}>Add coins</Link>
+                </div>
+              )}
+              <Button variant="primary" size="lg" loading={busy} onClick={placeBet} className="slip-place" disabled={Boolean(user && stake > user.balance)}>
+                {user && stake > user.balance ? "Add coins to place bet" : "Place virtual bet"} <ArrowRight size={17} />
               </Button>
               <p className="slip-disclaimer">Demo fixtures only. All stakes and returns are non-redeemable virtual credits. No real-money wagering.</p>
             </>

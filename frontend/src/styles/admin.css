@@ -502,3 +502,29 @@
   .admin-topbar-copy { gap: 7px; }
   .admin-env { display: none; }
 }
+
+/* Deposit review */
+.deposit-admin-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.deposit-admin-panel { padding: 16px; }
+.deposit-admin-panel .panel-head { margin-bottom: 10px; }
+.deposit-admin-list { display: grid; gap: 8px; }
+.deposit-admin-row { padding: 13px 14px; border: 1px solid var(--line); border-radius: 10px; background: rgba(8,19,31,.45); }
+.deposit-admin-row.status-pending { border-color: rgba(240,190,80,.28); background: rgba(49,37,12,.22); }
+.deposit-admin-row.status-approved { border-color: rgba(98,237,145,.18); }
+.deposit-admin-row.status-rejected { border-color: rgba(255,125,138,.18); }
+.deposit-admin-main { display: grid; grid-template-columns: 1.1fr 1.3fr 1.3fr 1.2fr auto; align-items: center; gap: 14px; }
+.deposit-admin-main > div { display: grid; gap: 2px; min-width: 0; }
+.deposit-admin-main span { color: var(--muted); font-size: .62rem; }
+.deposit-admin-main strong { color: var(--text-soft); font-size: .76rem; overflow-wrap: anywhere; }
+.deposit-admin-amount { color: var(--lime); font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; }
+.deposit-admin-amount span { color: var(--muted); font-family: var(--font-body); font-size: .6rem; }
+.deposit-admin-note { margin: 9px 0 0; color: var(--muted); font-size: .68rem; line-height: 1.5; }
+.deposit-admin-actions { display: flex; gap: 7px; margin-top: 10px; justify-content: flex-end; }
+@media (max-width: 1100px) { .deposit-admin-main { grid-template-columns: 1fr 1fr 1fr; } .deposit-admin-main > .badge { justify-self: start; } }
+@media (max-width: 700px) { .deposit-admin-stats { grid-template-columns: 1fr; } .deposit-admin-main { grid-template-columns: 1fr 1fr; } .deposit-admin-actions { justify-content: flex-start; flex-wrap: wrap; } }
+
+.admin-callout { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; border: 1px solid rgba(240,190,80,.22); border-radius: 10px; background: rgba(72,50,12,.2); color: var(--text-soft); }
+.admin-callout > svg { flex: 0 0 auto; margin-top: 2px; color: var(--amber); }
+.admin-callout > div { display: grid; gap: 2px; }
+.admin-callout strong { color: #fff; font-size: .8rem; }
+.admin-callout span { color: var(--muted); font-size: .72rem; line-height: 1.5; }

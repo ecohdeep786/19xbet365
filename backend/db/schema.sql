@@ -79,6 +79,23 @@ CREATE TABLE IF NOT EXISTS referrals (
   UNIQUE (referee_id)
 );
 
+CREATE TABLE IF NOT EXISTS deposit_requests (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id      UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+  amount          NUMERIC(14,2) NOT NULL CHECK (amount > 0),
+  method          TEXT NOT NULL DEFAULT 'qr_manual',
+  reference       TEXT NOT NULL,
+  note            TEXT,
+  status          TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','approved','rejected','cancelled')),
+  bonus_amount    NUMERIC(14,2) NOT NULL DEFAULT 0,
+  reviewed_by     UUID REFERENCES accounts(id) ON DELETE SET NULL,
+  review_note     TEXT,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  reviewed_at     TIMESTAMPTZ
+);
+CREATE INDEX IF NOT EXISTS deposit_requests_status_idx ON deposit_requests (status, created_at DESC);
+CREATE INDEX IF NOT EXISTS deposit_requests_account_idx ON deposit_requests (account_id, created_at DESC);
+
 CREATE TABLE IF NOT EXISTS account_transfers (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   account_id    UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
@@ -218,7 +235,7 @@ CREATE INDEX IF NOT EXISTS rounds_open_idx ON game_rounds (account_id, status) W
 CREATE TABLE IF NOT EXISTS transactions (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   account_id    UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
-  type          TEXT NOT NULL CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry')),
+  type          TEXT NOT NULL CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus')),
   amount        NUMERIC(14,2) NOT NULL,
   balance_after NUMERIC(14,2) NOT NULL CHECK (balance_after >= 0),
   description   TEXT NOT NULL,
@@ -228,6 +245,9 @@ CREATE TABLE IF NOT EXISTS transactions (
   created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS transactions_account_idx ON transactions (account_id, created_at DESC);
+ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_type_check;
+ALTER TABLE transactions ADD CONSTRAINT transactions_type_check
+  CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus'));
 
 CREATE TABLE IF NOT EXISTS favorites (
   account_id  UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,

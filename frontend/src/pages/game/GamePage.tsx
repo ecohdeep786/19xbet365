@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
-  ArrowLeft, ArrowRight, BadgeCheck, Check, ChevronRight, Clock3, Copy, Heart, Info,
+  ArrowLeft, ArrowRight, BadgeCheck, Check, ChevronRight, Clock3, Coins, Copy, Heart, Info,
   LockKeyhole, Play, ShieldCheck, Sparkles, Star, Trophy, Users, Zap
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
@@ -142,6 +142,14 @@ export function GamePage() {
                   <Badge tone="outline"><ShieldCheck size={12} /> Server records</Badge>
                 </div>
               </div>
+
+              {user && game.playable && user.balance < stake && (
+                <div className="game-low-balance">
+                  <Coins size={17} />
+                  <div><strong>Your coin balance is below the current stake</strong><span>Add coins or lower your stake in the game panel.</span></div>
+                  <Link to="/account/deposit">Add coins</Link>
+                </div>
+              )}
 
               {game.playable ? (
                 user ? (

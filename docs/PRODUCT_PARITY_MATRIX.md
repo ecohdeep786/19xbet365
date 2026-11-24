@@ -29,7 +29,9 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | 2FA | Authenticator/SMS | Preference stored + notification | Functionally incomplete | No authenticator provisioning |
 | Player dashboard | Wallet, bets, bonuses, history | Overview, balance, open bets, rounds, notifications, limits | Complete | `Overview.tsx` |
 | Profile | Personal details, verification | Editable display/country/phone/marketing; protected email/username | Complete | No KYC document upload |
-| Wallet | Deposit/withdraw/history | Virtual-credit ledger, filters, no real money | Legal/restricted | Deposit/withdraw disabled by design |
+| Wallet | Deposit/withdraw/history | Coin ledger, filters, active Add coins entry point, no live cash-out | Improved | Deposit review and bonuses sandbox-ready; withdrawals disabled |
+| Deposit / QR review | Payment QR, amount, bonus tier, review | QR configuration, player request/UTR, Master review, percentage bonus, ledger/audit notifications | Complete (sandbox) | Live collection gated by `PAYMENTS_LIVE_ENABLED` and compliance |
+| Withdrawal | Cash-out to player | No endpoint; messaging only | Legal/restricted | Requires licensing, KYC/AML and merchant payout rails |
 | Bet history | Open/settled tickets | Open/won/lost/void cards with selections, settlement time and payout | Complete | No cash-out; 1X2 demo settlement is automatic |
 | Game activity | Round history | Server rounds, outcomes, references, details | Complete | `Activity.tsx` |
 | Notifications | All/unread/security | Notification centre, read/all, security tags | Complete | Global read updates currently affect global records |

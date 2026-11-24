@@ -10,7 +10,8 @@ interface Setting { key: string; value: unknown; description: string; updated_at
 
 const GROUPS: { title: string; description: string; keys: string[] }[] = [
   { title: "Platform identity", description: "Brand copy shown across the public site.", keys: ["platformName", "platformTagline", "supportEmail", "licenseStatus"] },
-  { title: "Operations", description: "Availability and gameplay controls.", keys: ["maintenanceMode", "registrationsEnabled", "maxGameStake", "liveUpdates", "responsibleGaming"] },
+  { title: "Operations", description: "Availability, gameplay and deposit controls.", keys: ["maintenanceMode", "registrationsEnabled", "maxGameStake", "liveUpdates", "responsibleGaming", "depositMode", "depositMin", "depositMax"] },
+  { title: "Deposit configuration", description: "QR payment details, instructions and transparent bonus tiers.", keys: ["depositQrImageUrl", "depositInstructions", "depositBonusTiers"] },
   { title: "Integrations & financial rails", description: "Provider and real-money controls. Locked where licensing is absent.", keys: ["thirdPartyIntegrations", "realMoneyEnabled", "kycRequired"] },
   { title: "Governance", description: "Retention and audit policy.", keys: ["auditRetentionDays"] }
 ];
@@ -51,7 +52,7 @@ export function AdminSettingsPage() {
   return (
     <div className="admin-page">
       <AdminHeader kicker="Governance" title="Platform configuration" body="Master-only controls for platform identity, operations, integrations, and audit retention. Every change is audited." actions={<><Badge tone="outline"><LockKeyhole size={12} /> Master-only</Badge><Button variant="secondary" size="sm" icon={<RefreshCcw size={15} />} onClick={load}>Refresh</Button></>} />
-      <div className="settings-warning"><ShieldAlert size={18} /><div><strong>Real-money rails are hard-disabled.</strong><span>The setting is locked. No deposit, withdrawal, cash wagering, or redemption capability exists in this foundation, regardless of configuration.</span></div></div>
+      <div className="settings-warning"><ShieldAlert size={18} /><div><strong>Live payment collection requires an operator gate.</strong><span>The deposit flow is sandbox-first. Setting <code>depositMode</code> to <code>manual_review</code> still requires <code>PAYMENTS_LIVE_ENABLED=true</code> on the server, plus licensing, KYC/AML and payment onboarding. <code>realMoneyEnabled</code> remains hard-locked.</span></div></div>
       {loading ? <div className="settings-groups">{Array.from({ length: 3 }).map((_, index) => <div className="panel" key={index}><Skeleton className="sk-line" /><Skeleton className="sk-line" /></div>)}</div> : error ? <ErrorState message={error} onRetry={load} /> : (
         <div className="settings-groups">
           {GROUPS.map((group) => {
@@ -74,6 +75,8 @@ export function AdminSettingsPage() {
                           <Input type="number" value={Number(value)} disabled={locked} onChange={(event) => setDraft(setting.key, Number(event.target.value))} />
                         ) : setting.key === "thirdPartyIntegrations" ? (
                           <Select value={String(value)} disabled={locked} onChange={(event) => setDraft(setting.key, event.target.value)}><option value="disabled">disabled</option><option value="simulation">simulation</option></Select>
+                        ) : setting.key === "depositMode" ? (
+                          <Select value={String(value)} disabled={locked} onChange={(event) => setDraft(setting.key, event.target.value)}><option value="sandbox">sandbox</option><option value="manual_review">manual_review</option><option value="disabled">disabled</option></Select>
                         ) : (
                           <Input value={String(value ?? "")} disabled={locked} onChange={(event) => setDraft(setting.key, event.target.value)} />
                         )}

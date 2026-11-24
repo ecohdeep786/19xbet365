@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowDownLeft, ArrowUpRight, Coins, Download, Info, ShieldCheck, WalletCards } from "lucide-react";
 import { api, isOfflineError } from "../../lib/api";
 import { demoTransactions } from "../../lib/demo";
@@ -10,6 +11,8 @@ import { classNames, dateTime, vc } from "../../lib/format";
 const TYPE_LABELS: Record<string, string> = {
   welcome_bonus: "Welcome allocation",
   promo_credit: "Promotion credit",
+  deposit: "Coin deposit",
+  deposit_bonus: "Deposit bonus",
   game_stake: "Game stake",
   game_win: "Game win",
   bet_stake: "Bet stake",
@@ -46,7 +49,7 @@ export function AccountWallet() {
         const filtered = filter === "all" ? demoTransactions : demoTransactions.filter((txn) => {
           if (filter === "game") return txn.type.startsWith("game_");
           if (filter === "sports") return txn.type.startsWith("bet_");
-          if (filter === "bonus") return ["welcome_bonus", "promo_credit", "referral_reward"].includes(txn.type);
+          if (filter === "bonus") return ["welcome_bonus", "promo_credit", "referral_reward", "deposit_bonus"].includes(txn.type);
           return txn.type.startsWith("admin_");
         });
         setTransactions(append ? [...transactions, ...filtered] : filtered);
@@ -89,18 +92,18 @@ export function AccountWallet() {
     <div className="account-subpage">
       <div className="subpage-head">
         <span className="eyebrow">Wallet</span>
-        <h2>Virtual-credit wallet</h2>
-        <p>A complete ledger of allocations, stakes, wins, and platform adjustments. All values are non-redeemable virtual credits.</p>
+        <h2>Coin wallet</h2>
+        <p>A complete ledger of sandbox coin top-ups, stakes, wins, and platform adjustments. Live cash-out remains disabled.</p>
       </div>
 
       <div className="wallet-hero panel">
         <div className="wallet-balance">
           <span>Available balance</span>
           <strong>{vc(user?.balance || 0)}</strong>
-          <small><ShieldCheck size={13} /> No cash value · no withdrawals</small>
+          <small><ShieldCheck size={13} /> No cash value · live cash-out disabled</small>
         </div>
         <div className="wallet-actions">
-          <Button variant="secondary" disabled icon={<Download size={16} />}>Deposit</Button>
+          <Link to="/account/deposit" className="btn btn-primary"><Download size={16} /> Add coins</Link>
           <Button variant="secondary" disabled icon={<ArrowUpRight size={16} />}>Withdraw</Button>
           <div className="wallet-disabled-note"><Info size={14} /><span>Real-money rails are disabled pending licensing. Virtual credits are allocated by the platform and cannot be purchased.</span></div>
         </div>

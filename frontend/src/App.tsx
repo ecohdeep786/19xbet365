@@ -12,6 +12,7 @@ import { AccountLayout } from "./pages/account/AccountLayout";
 import { AccountOverview } from "./pages/account/Overview";
 import { AccountProfile } from "./pages/account/Profile";
 import { AccountWallet } from "./pages/account/Wallet";
+import { AccountDeposit } from "./pages/account/Deposit";
 import { AccountBets } from "./pages/account/Bets";
 import { AccountActivity } from "./pages/account/Activity";
 import { AccountNotifications } from "./pages/account/Notifications";
@@ -35,6 +36,7 @@ import { AdminTransfersPage } from "./pages/admin/Transfers";
 import { AdminSecurityPage } from "./pages/admin/Security";
 import { AdminAuditPage } from "./pages/admin/Audit";
 import { AdminSettingsPage } from "./pages/admin/Settings";
+import { AdminDepositsPage } from "./pages/admin/Deposits";
 import { AdminSystemPage } from "./pages/admin/System";
 
 function PublicLayout() {
@@ -86,6 +88,7 @@ export default function App() {
             <Route index element={<AccountOverview />} />
             <Route path="profile" element={<AccountProfile />} />
             <Route path="wallet" element={<AccountWallet />} />
+            <Route path="deposit" element={<AccountDeposit />} />
             <Route path="bets" element={<AccountBets />} />
             <Route path="activity" element={<AccountActivity />} />
             <Route path="notifications" element={<AccountNotifications />} />
@@ -104,6 +107,7 @@ export default function App() {
           <Route path="games" element={<AdminGamesPage />} />
           <Route path="content" element={<AdminContentPage />} />
           <Route path="credits" element={<AdminCreditsPage />} />
+          <Route path="deposits" element={<RequireStaff master><AdminDepositsPage /></RequireStaff>} />
           <Route path="support" element={<AdminSupportPage />} />
           <Route path="transfers" element={<AdminTransfersPage />} />
           <Route path="security" element={<AdminSecurityPage />} />

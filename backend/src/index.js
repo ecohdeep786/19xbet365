@@ -15,6 +15,7 @@ import publicRoutes from "./routes/public.js";
 import playerRoutes from "./routes/player.js";
 import betRoutes from "./routes/bets.js";
 import gameRoutes from "./routes/games.js";
+import depositRoutes from "./routes/deposits.js";
 import adminRoutes from "./routes/admin.js";
 import { startDemoSettlementWorker } from "./services/sportsbook.js";
 
@@ -58,6 +59,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/player", playerRoutes);
 app.use("/api/bets", betRoutes);
 app.use("/api/games", gameRoutes);
+app.use("/api/deposits", depositRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api", publicRoutes);
 

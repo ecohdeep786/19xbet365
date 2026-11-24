@@ -8,6 +8,7 @@ import { ACCOUNT_FIELDS, serializeAccount } from "../lib/account.js";
 import { hashPassword, randomReferral, randomToken, sha256 } from "../lib/crypto.js";
 import { broadcast } from "../ws.js";
 import { round2 } from "../services/gameEngine.js";
+import { approveDeposit, rejectDeposit } from "../services/deposits.js";
 
 const router = express.Router();
 router.use(requireStaff);
@@ -117,7 +118,8 @@ router.get("/overview", requirePermission("reports.view.scope"), async (req, res
            (SELECT COUNT(*) FROM accounts a WHERE a.status='suspended' ${accountFilter}) AS suspended,
            (SELECT COUNT(*) FROM login_history l JOIN accounts a ON a.id=l.account_id WHERE l.success=false AND l.created_at > now()-interval '24 hours' ${accountFilter}) AS failed_logins,
            (SELECT COUNT(*) FROM transactions t JOIN accounts a ON a.id=t.account_id WHERE t.type IN ('admin_credit','admin_debit') AND t.created_at > now()-interval '24 hours' ${accountFilter}) AS credit_actions,
-           (SELECT COUNT(*) FROM account_transfers tr JOIN accounts a ON a.id=tr.account_id WHERE tr.status='pending' ${accountFilter}) AS transfers`,
+           (SELECT COUNT(*) FROM account_transfers tr JOIN accounts a ON a.id=tr.account_id WHERE tr.status='pending' ${accountFilter}) AS transfers,
+           (SELECT COUNT(*) FROM deposit_requests dr JOIN accounts a ON a.id=dr.account_id WHERE dr.status='pending' ${accountFilter}) AS pending_deposits`,
         param
       ),
       query("SELECT COUNT(*) AS routes FROM matches WHERE status <> 'finished'"),
@@ -144,6 +146,7 @@ router.get("/overview", requirePermission("reports.view.scope"), async (req, res
         openTickets: Number(tickets.rows[0].open_tickets),
         urgentTickets: Number(tickets.rows[0].urgent_tickets),
         failedLogins: Number(failedLogins.rows[0].failed),
+        pendingDeposits: Number(alerts.rows[0].pending_deposits),
         openRoutes: Number(routeCount.rows[0].routes)
       },
       roleCounts: roleCounts.rows.map((row) => ({ role: row.role_code, count: Number(row.count) })),
@@ -157,7 +160,8 @@ router.get("/overview", requirePermission("reports.view.scope"), async (req, res
         suspended: Number(alerts.rows[0].suspended),
         failedLogins: Number(alerts.rows[0].failed_logins),
         creditActions: Number(alerts.rows[0].credit_actions),
-        pendingTransfers: Number(alerts.rows[0].transfers)
+        pendingTransfers: Number(alerts.rows[0].transfers),
+        pendingDeposits: Number(alerts.rows[0].pending_deposits)
       },
       recentAudit: recentAudit.rows,
       auditChainTip: auditChain.rows[0] || null,
@@ -1066,6 +1070,76 @@ router.get("/audit", requirePermission("audit.view.scope"), async (req, res, nex
       chain,
       immutable: true
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Deposit review --------------------------------------------------------------
+router.get("/deposits", requireMaster, async (req, res, next) => {
+  try {
+    const status = ["pending", "approved", "rejected", "cancelled"].includes(String(req.query.status))
+      ? String(req.query.status)
+      : null;
+    const result = await query(
+      `SELECT dr.*, a.display_name, a.username, a.email
+       FROM deposit_requests dr
+       JOIN accounts a ON a.id = dr.account_id
+       ${status ? "WHERE dr.status = $1" : ""}
+       ORDER BY CASE WHEN dr.status = 'pending' THEN 0 ELSE 1 END, dr.created_at DESC
+       LIMIT 100`,
+      status ? [status] : []
+    );
+    res.json({
+      deposits: result.rows.map((row) => ({
+        id: row.id,
+        accountId: row.account_id,
+        player: row.display_name,
+        username: row.username,
+        email: row.email,
+        amount: Number(row.amount),
+        method: row.method,
+        reference: row.reference,
+        note: row.note,
+        status: row.status,
+        bonusAmount: Number(row.bonus_amount),
+        reviewNote: row.review_note,
+        createdAt: row.created_at,
+        reviewedAt: row.reviewed_at
+      }))
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/deposits/:id/approve", requireMaster, async (req, res, next) => {
+  try {
+    const result = await approveDeposit({
+      id: req.params.id,
+      reviewerId: req.account.id,
+      reviewNote: String(req.body?.note || "").trim().slice(0, 300) || null,
+      ip: requestMeta(req).ip
+    });
+    res.json({ deposit: result.request, balance: result.balance, bonus: result.bonus, message: "Deposit approved and coins credited." });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/deposits/:id/reject", requireMaster, async (req, res, next) => {
+  try {
+    const reason = String(req.body?.reason || "").trim().slice(0, 300);
+    if (reason.length < 4) {
+      throw Object.assign(new Error("Enter a rejection reason of at least 4 characters."), { status: 400, code: "reason_required" });
+    }
+    const result = await rejectDeposit({
+      id: req.params.id,
+      reviewerId: req.account.id,
+      reason,
+      ip: requestMeta(req).ip
+    });
+    res.json({ deposit: result.request, message: "Deposit request rejected." });
   } catch (error) {
     next(error);
   }

@@ -22,12 +22,14 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Sign in | reference login modal | `capture/product/login-1440.jpeg` |
 | Player dashboard | reference account gated | `capture/product/account-1440.jpeg` |
 | Wallet and ledger | reference account gated | `capture/product/wallet-1440.jpeg` |
+| Deposit / QR review | reference account gated | `capture/product/deposit-1440.jpeg` |
 | Sports bet history | reference account gated | `capture/product/bets-1440.jpeg` |
 | Promotions | reference promotions | `capture/product/promotions-1440.jpeg` |
 | Tournaments | reference tournaments | `capture/product/tournaments-1440.jpeg` |
 | Help centre | reference help | `capture/product/help-1440.jpeg` |
 | Support | reference support | `capture/product/support-1440.jpeg` |
 | Master Admin | not public reference | `capture/product/admin-dashboard-1440.jpeg` |
+| Deposit review | not public reference | `capture/product/admin-deposits-1440.jpeg` |
 | Mobile home | `capture/screenshot-390.png` | `capture/product/home-390.jpeg` |
 | Mobile sports | reference mobile live | `capture/product/sports-390.jpeg` |
 | Mobile casino | reference mobile casino | `capture/product/casino-390.jpeg` |

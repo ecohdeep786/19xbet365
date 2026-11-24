@@ -40,9 +40,10 @@ content_pages.updated_by ── accounts
 - **sessions:** SHA-256 token hash, IP/UA, created/last-seen/expiry, revocation.
 - **matches:** sport/league/teams, start time, status, live/final score text, 1X2 odds, demo flag, generated `result_home`/`result_away` integers and `settled_at` for the demo worker.
 - **bets:** single/acca, stake, total odds, potential return, status (`open|won|lost|void|cashed_out`), payout, placement/settlement.
+- **deposit_requests:** player, amount, method, payment reference, note, pending/approved/rejected/cancelled status, bonus amount, reviewer and review timestamps.
 - **bet_selections:** fixture, home/draw/away selection, locked odds, per-selection result (`pending|won|lost|void`).
 - **game_rounds:** game, stake, payout, status (`open|settled|void`), outcome/state JSONB, seed hash/client seed/nonce, timestamps.
-- **transactions:** type-constrained wallet ledger, amount, balance-after (non-negative), reference type/id, created-by, timestamp.
+- **transactions:** type-constrained wallet ledger including `deposit` and `deposit_bonus`, amount, balance-after (non-negative), reference type/id, created-by, timestamp.
 - **audit_events:** actor, action, entity, summary, before/after, IP, previous hash, event hash, created.
 - **platform_settings:** JSONB values and descriptions.
 - **responsible_limits:** daily bet limit, session/reality-check minutes, cool-off and self-exclusion timestamps.

@@ -176,7 +176,7 @@ export function Header() {
             </button>
             {user ? (
               <>
-                <div className="header-balance" title="Virtual-credit balance">
+                <div className="header-balance" title="Coin balance">
                   <Coins size={15} />
                   <span>{vc(user.balance)}</span>
                 </div>
@@ -239,7 +239,7 @@ export function Header() {
                         <Avatar name={user.displayName} seed={user.avatarSeed} size={42} />
                         <div><strong>{user.displayName}</strong><small>{user.email}</small></div>
                       </div>
-                      <div className="account-menu-balance"><span>Virtual balance</span><strong>{vc(user.balance)}</strong></div>
+                      <div className="account-menu-balance"><span>Coin balance</span><strong>{vc(user.balance)}</strong></div>
                       <Link to="/account" onClick={() => setAccountOpen(false)}><LayoutDashboard size={15} /> Dashboard</Link>
                       <Link to="/account/wallet" onClick={() => setAccountOpen(false)}><WalletCards size={15} /> Wallet & history</Link>
                       <Link to="/account/bets" onClick={() => setAccountOpen(false)}><Ticket size={15} /> My bets</Link>

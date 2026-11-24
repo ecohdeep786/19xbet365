@@ -1,7 +1,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
-  Activity, ArrowLeftRight, Bell, ChevronDown, CircleHelp, Coins, FileText, Gamepad2,
+  Activity, ArrowDownToLine, ArrowLeftRight, Bell, ChevronDown, CircleHelp, Coins, FileText, Gamepad2,
   HeartPulse, LayoutDashboard, LifeBuoy, LockKeyhole, LogOut, Menu, Network, ScrollText,
   Settings, ShieldAlert, ShieldCheck, Users, X, type LucideIcon
 } from "lucide-react";
@@ -28,6 +28,7 @@ const NAV_GROUPS: { label: string; links: AdminNavLink[] }[] = [
       { to: "/admin/games", label: "Game catalogue", icon: Gamepad2, permission: "games.view" },
       { to: "/admin/content", label: "Content & promos", icon: FileText, permission: "content.manage" },
       { to: "/admin/credits", label: "Credit activity", icon: Coins, permission: "credits.adjust" },
+      { to: "/admin/deposits", label: "Deposit review", icon: ArrowDownToLine, master: true },
       { to: "/admin/support", label: "Support desk", icon: LifeBuoy, permission: "support.view" },
       { to: "/admin/transfers", label: "Transfers", icon: ArrowLeftRight, permission: "transfers.approve" }
     ]
@@ -92,7 +93,7 @@ export function AdminLayout() {
           })}
         </nav>
         <div className="admin-sidebar-foot">
-          <div className="admin-virtual-note"><ShieldAlert size={15} /><span>Virtual credits only. Real-money rails are hard-disabled.</span></div>
+          <div className="admin-virtual-note"><ShieldAlert size={15} /><span>Deposit review is sandbox-first. Live payments require the operator activation gate.</span></div>
           <Link to="/" className="admin-view-site">View player site <ChevronDown size={13} /></Link>
         </div>
       </aside>

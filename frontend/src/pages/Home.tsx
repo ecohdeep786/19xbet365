@@ -126,7 +126,7 @@ export function Home() {
                   <em>{sport.count}</em>
                 </Link>
               ))}
-              <div className="sidebar-note"><ShieldCheck size={15} /><div><strong>Illustrative prices</strong><span>Demo fixtures only. Virtual credits have no cash value.</span></div></div>
+              <div className="sidebar-note"><ShieldCheck size={15} /><div><strong>Illustrative prices</strong><span>Demo fixtures only. Sandbox coins have no cash value.</span></div></div>
             </aside>
             <div className="panel match-panel">
               <div className="panel-head">
@@ -261,7 +261,7 @@ export function Home() {
         </section>
 
         <section className="trust-band">
-          <div><span className="trust-icon"><ShieldCheck size={19} /></span><div><strong>Virtual credits only</strong><p>No deposits, withdrawals, cash redemption, or real-money wagering.</p></div></div>
+          <div><span className="trust-icon"><ShieldCheck size={19} /></span><div><strong>Sandbox coins only</strong><p>No live cash deposits, withdrawals, redemption, or real-money wagering until operator activation.</p></div></div>
           <div><span className="trust-icon"><ServerCog size={19} /></span><div><strong>Server-authoritative play</strong><p>Rounds are generated and stored by the 19X game engine — never in the browser.</p></div></div>
           <div><span className="trust-icon"><BadgeCheck size={19} /></span><div><strong>Immutable audit trail</strong><p>Settled rounds and staff actions are hash-chained and append-only.</p></div></div>
           <div><span className="trust-icon"><Eye size={19} /></span><div><strong>Responsible by design</strong><p>Daily limits, reality checks, cool-offs, and self-exclusion are built in.</p></div></div>

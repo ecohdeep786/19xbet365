@@ -1,7 +1,7 @@
 # Responsive Test Report
 
 **Date:** 24 November 2026  
-**Method:** A same-origin iframe harness rendered the production build at controlled widths and compared `documentElement.scrollWidth` with `clientWidth + 1` on every route. Horizontal overflow was treated as a defect. The final sweep was repeated through Playwright/Edge at ten viewport widths and 16 routes, then evidence captures were regenerated with `scripts/capture-screenshots.mjs` at 1440×900 and 390×844. Temporary QA harness files were removed from the production output after acceptance.
+**Method:** A same-origin iframe harness rendered the production build at controlled widths and compared `documentElement.scrollWidth` with `clientWidth + 1` on every route. Horizontal overflow was treated as a defect. The final sweep was repeated through Playwright/Edge at ten viewport widths and 17 routes, then evidence captures were regenerated with `scripts/capture-screenshots.mjs` at 1440×900 and 390×844. Temporary QA harness files were removed from the production output after acceptance.
 
 ## Widths tested
 
@@ -9,7 +9,7 @@
 
 ## Routes tested
 
-`/`, `/sports`, `/live`, `/casino`, `/instant`, `/game/crash-orbit`, `/game/dice-roll`, `/account`, `/account/wallet`, `/account/bets`, `/promotions`, `/tournaments`, `/help`, `/support`, `/login`, `/register`, `/terms`.
+`/`, `/sports`, `/live`, `/casino`, `/instant`, `/game/crash-orbit`, `/game/dice-roll`, `/account`, `/account/wallet`, `/account/deposit`, `/account/bets`, `/promotions`, `/tournaments`, `/help`, `/support`, `/login`, `/register`, `/terms`.
 
 Admin routes were separately tested with a Master Admin session:
 
@@ -48,7 +48,12 @@ Admin routes were separately tested with a Master Admin session:
 6. **Mobile account tabs clipped without an obvious scroll affordance.**
    - The strip is intentionally horizontally scrollable with no wrapping; labels stay on one line and the active tab remains scrolled into view on navigation.
 
-7. **Icon pass caused desktop header crowding at 1181–1400px.**
+7. **Deposit page overflowed by 38px at 320px.**
+   - Cause: the account content grid inherited a min-content width from the deposit hero/form rather than the available mobile width.
+   - Fix: `min-width: 0` on the account main column and deposit grid children, plus fluid form controls.
+   - Verification: 320–2560px sweep and mobile capture `deposit-390.jpeg` pass.
+
+8. **Icon pass caused desktop header crowding at 1181–1400px.**
    - Cause: eight new category icons and club badges increased nav width while the balance chip stayed visible.
    - Fix: nav labels are nowrap; icons are 13–15px; padding tightens below 1400px, the header balance chip hides below 1400px, and the locale chip hides below 1440px. Desktop navigation remains available at 1181px and above.
    - Verification: measured `scrollWidth === clientWidth` at 1181, 1280 and 1440; full route sweep at 320–1920 returned zero overflows with club badges and category chips enabled.

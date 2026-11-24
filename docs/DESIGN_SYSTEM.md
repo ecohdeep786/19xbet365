@@ -45,12 +45,15 @@ Admin keeps the original dark navy/cyan/lime instrumentation palette for a disti
 | --- | --- | --- |
 | Display / h1 | Sora | `clamp(2.6rem, 5.2vw, 4.7rem)` |
 | Section h2 | Sora | `clamp(1.55rem, 2.6vw, 2.3rem)` |
-| Card title | Sora | `.82–1.3rem` |
-| Body | Manrope | `15px` base, `.7–.95rem` UI |
-| Labels / eyebrows | Sora | `.6–.78rem`, spaced uppercase |
-| Odds | Sora | `.6–.9rem`, tabular presentation |
+| Card title | Sora | `.9–1.3rem` |
+| Body | Manrope | `16px` base, `.72–1rem` UI |
+| Labels / eyebrows | Sora | `.7–.82rem`, spaced uppercase |
+| Odds | Sora | `.82–.9rem`, tabular presentation |
+| Form controls | Manrope | `1rem` (prevents mobile zoom) |
 
 Numeric odds remain compact and aligned; all labels use the supplied Sora/Manrope pair. The public theme applies `tabular-nums` and `lining-nums` so odds, balances and timestamps keep a stable column rhythm. Headings use `text-wrap: balance`, body copy uses `text-wrap: pretty`, and font smoothing/optical sizing are enabled. No reference font files are used.
+
+Microtype was raised to a **minimum 11.2px** on public surfaces, with 12–12.8px metadata, 13px odds and 16px form controls. The reference's dense 12px minimum informed the rhythm, but readability and contrast took priority over copying its smallest labels.
 
 ## Iconography and graphics
 

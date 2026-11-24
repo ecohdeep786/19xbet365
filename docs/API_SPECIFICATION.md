@@ -55,6 +55,20 @@ Errors: `{ "error": "code", "message": "human-readable" }`.
 | GET | `/player/support/:id` | ticket + public messages |
 | POST | `/player/support/:id/messages` | reply |
 
+## Deposits
+
+| Method | Path | Auth | Description |
+| --- | --- | --- | --- |
+| GET | `/deposits/config` | session | deposit mode, QR URL, instructions, min/max, bonus tiers |
+| GET | `/deposits` | session | own deposit requests |
+| POST | `/deposits` | session | `{amount,reference,note?}`; creates a pending request |
+| POST | `/deposits/:id/cancel` | session | cancel an own pending request |
+| GET | `/admin/deposits?status=` | Master Admin | review queue with player identity |
+| POST | `/admin/deposits/:id/approve` | Master Admin | verify, credit deposit + bonus, notify, audit |
+| POST | `/admin/deposits/:id/reject` | Master Admin | reject with reason, notify, audit |
+
+`depositMode=manual_review` is not sufficient for live collection: the server also requires `PAYMENTS_LIVE_ENABLED=true`. Sandbox mode is the default.
+
 ## Sports
 
 | Method | Path | Description |

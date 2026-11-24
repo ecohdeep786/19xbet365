@@ -101,13 +101,14 @@ export function AdminDashboard() {
         </section>
 
         <section className="panel admin-alerts-panel">
-          <div className="panel-head"><span><ShieldAlert size={15} /> Operations attention</span><Badge tone={data.alerts.suspended + data.alerts.failedLogins > 0 ? "amber" : "lime"}>{data.alerts.suspended + data.alerts.failedLogins} flags</Badge></div>
+          <div className="panel-head"><span><ShieldAlert size={15} /> Operations attention</span><Badge tone={data.alerts.suspended + data.alerts.failedLogins + data.alerts.pendingDeposits > 0 ? "amber" : "lime"}>{data.alerts.suspended + data.alerts.failedLogins + data.alerts.pendingDeposits} flags</Badge></div>
           <div className="alert-list">
             <Link to="/admin/accounts?status=suspended" className="alert-row"><span className="alert-icon amber"><ShieldAlert size={16} /></span><div><strong>Suspended accounts</strong><span>Review restrictions and restoration eligibility.</span></div><strong>{data.alerts.suspended}</strong></Link>
             <Link to="/admin/security" className="alert-row"><span className="alert-icon coral"><LockKeyhole size={16} /></span><div><strong>Failed sign-ins</strong><span>Last 24 hours across the scoped network.</span></div><strong>{data.alerts.failedLogins}</strong></Link>
             <Link to="/admin/credits" className="alert-row"><span className="alert-icon cyan"><Coins size={16} /></span><div><strong>Credit adjustments</strong><span>Manual virtual-credit changes in the last 24 hours.</span></div><strong>{data.alerts.creditActions}</strong></Link>
             <Link to="/admin/support" className="alert-row"><span className="alert-icon lime"><LifeBuoy size={16} /></span><div><strong>Open support tickets</strong><span>{metrics.urgentTickets} high-priority conversations need attention.</span></div><strong>{metrics.openTickets}</strong></Link>
             <Link to="/admin/transfers" className="alert-row"><span className="alert-icon violet"><ArrowLeftRight size={16} /></span><div><strong>Pending transfers</strong><span>Network moves awaiting an approver.</span></div><strong>{data.alerts.pendingTransfers}</strong></Link>
+            <Link to="/admin/deposits" className="alert-row"><span className="alert-icon lime"><Coins size={16} /></span><div><strong>Deposits awaiting review</strong><span>Manual QR requests awaiting verification.</span></div><strong>{data.alerts.pendingDeposits}</strong></Link>
           </div>
         </section>
 

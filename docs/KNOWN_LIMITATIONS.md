@@ -4,9 +4,9 @@
 
 ## Legal / financial
 
-1. **No real-money wagering.** Deposits, withdrawals, cash redemption, and cash commissions are disabled. `realMoneyEnabled` is hard-locked server-side.
-2. **No licence, payments, or KYC/AML provider.** A real-money launch requires jurisdiction-specific legal review, licensing, payment partners, KYC/sanctions checks, transaction monitoring, responsible-gaming approvals, and external testing.
-3. **Promotions/tournaments are virtual-credit only.** Automated campaign payout/qualification is not implemented; seeded leaderboards are demonstration records.
+1. **The financial rail is sandbox-only.** Deposit requests, QR instructions, Master Admin review and percentage bonuses are implemented, but live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true`. Withdrawals, cash redemption, and cash commissions are disabled; `realMoneyEnabled` remains hard-locked server-side.
+2. **No licence, merchant account, payment webhook or KYC/AML provider.** A real-money launch requires jurisdiction-specific legal review, licensing, a business-owned payment QR/merchant account, KYC/sanctions checks, transaction monitoring, responsible-gaming approvals, withdrawal policy, reconciliation and external testing.
+3. **Deposit bonuses are sandbox-simple.** The server calculates the configured percentage tier and credits it immediately. Production bonus terms still need wagering/playthrough rules, caps, expiry, forfeiture, prohibited-play rules and jurisdiction-specific legal review.
 4. **Affiliate commissions disabled.** Referral rewards are virtual credits only and never grant staff access.
 5. **Legal pages are demonstration documents** and require jurisdiction-specific legal review.
 

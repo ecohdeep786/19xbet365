@@ -44,6 +44,7 @@ The frontend build is served by the same Express process in production, so API c
 | Player | `src/routes/player.js` | overview, wallet, bets, rounds, notifications, favourites, referrals, support |
 | Sports | `src/routes/bets.js` | transactional slip placement, fixture locking and wallet debit |
 | Sports settlement | `src/services/sportsbook.js` | demo fixture progression, generated final scores, 1X2 single/acca settlement, audit and WS events |
+| Deposits | `src/routes/deposits.js`, `src/services/deposits.js` | sandbox/manual-review requests, QR config, bonus tiers, approval/rejection, wallet ledger and audit |
 | Games | `src/routes/games.js`, `src/services/gameEngine.js` | all playable originals, settlement, stale-round cleanup |
 | Wallet | `src/services/wallet.js` | locked balance updates, daily limits, stake/win/refund ledger |
 | Admin | `src/routes/admin.js` | scoped operations, roles, content, support, transfers, audit, settings, health |
@@ -58,6 +59,7 @@ The frontend build is served by the same Express process in production, so API c
 - `login_history` — successful and failed authentication events.
 - `games`, `sports`, `matches` — catalogue, demo fixtures, generated final scores (`result_home`, `result_away`) and fixture settlement time.
 - `bets`, `bet_selections` — sports slips, per-selection results and settled payouts.
+- `deposit_requests` — QR transfer references, review state and deposit bonus amounts.
 - `game_rounds` — every playable round, bet, payout, outcome, state, seed hash.
 - `transactions` — append-only wallet ledger with balance-after and reference IDs.
 - `favorites`, `recent_plays`, `notifications`, `responsible_limits`.

@@ -1,8 +1,8 @@
 import type {
-  Account, AdminAccount, AdminOverview, AdminTicket, AuditEvent, Bet, BootstrapData,
-  Game, GameActivity, GameRound, Limits, Match, NetworkNode, Notification, PlayerOverview,
-  Promotion, RoleInfo, SessionInfo, SupportMessage, SupportTicket, SystemHealth, Tournament,
-  Transaction, Transfer
+  Account, AdminAccount, AdminDeposit, AdminOverview, AdminTicket, AuditEvent, Bet, BootstrapData,
+  DepositConfig, DepositRequest, Game, GameActivity, GameRound, Limits, Match, NetworkNode, Notification,
+  PlayerOverview, Promotion, RoleInfo, SessionInfo, SupportMessage, SupportTicket, SystemHealth,
+  Tournament, Transaction, Transfer
 } from "../types";
 
 const API_BASE = "/api";
@@ -105,6 +105,12 @@ export const api = {
   replyTicket: (id: string, body: string) =>
     request<{ ok: boolean }>(`/player/support/${id}/messages`, { method: "POST", body: json({ body }) }),
 
+  depositConfig: () => request<DepositConfig>("/deposits/config"),
+  deposits: () => request<{ deposits: DepositRequest[] }>("/deposits"),
+  createDeposit: (payload: { amount: number; reference: string; note?: string }) =>
+    request<{ deposit: DepositRequest; bonusPreview: { percent: number; amount: number; tier: number }; message: string }>("/deposits", { method: "POST", body: json(payload) }),
+  cancelDeposit: (id: string) => request<{ deposit: DepositRequest; message: string }>(`/deposits/${id}/cancel`, { method: "POST" }),
+
   placeBet: (payload: { selections: { matchId: string; selection: string }[]; stake: number; mode: string }) =>
     request<{
       bet: { id: string; type: string; stake: number; totalOdds: number; potentialReturn: number; status: string; placedAt: string };
@@ -162,6 +168,11 @@ export const api = {
   adminUpdatePromotion: (id: string, payload: Record<string, unknown>) =>
     request<{ ok: boolean; message: string }>(`/admin/content/promotions/${id}`, { method: "PATCH", body: json(payload) }),
   adminCreditsLedger: () => request<{ summary: { credited: number; debited: number; adjustments: number }; activity: (Transaction & { account_name: string; account_email: string; actor_name: string | null })[]; series: { day: string; credited: number; debited: number }[] }>("/admin/credits"),
+  adminDeposits: (status?: string) => request<{ deposits: AdminDeposit[] }>(`/admin/deposits${status ? `?status=${encodeURIComponent(status)}` : ""}`),
+  adminApproveDeposit: (id: string, note?: string) =>
+    request<{ deposit: DepositRequest; balance: number; bonus: { amount: number; percent: number }; message: string }>(`/admin/deposits/${id}/approve`, { method: "POST", body: json({ note }) }),
+  adminRejectDeposit: (id: string, reason: string) =>
+    request<{ deposit: DepositRequest; message: string }>(`/admin/deposits/${id}/reject`, { method: "POST", body: json({ reason }) }),
   adminTickets: () => request<{ tickets: AdminTicket[] }>("/admin/support"),
   adminTicket: (id: string) => request<{ ticket: AdminTicket & { balance: number }; messages: SupportMessage[] }>(`/admin/support/${id}`),
   adminUpdateTicket: (id: string, payload: { status?: string; priority?: string; assign?: boolean | string }) =>

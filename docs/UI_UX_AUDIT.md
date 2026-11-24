@@ -36,12 +36,13 @@ The reference is attractive because it is **predictable**, not because it is lar
 - Emerald is reserved for success, winning amounts, selected odds and settled/live cues.
 - All-blue/white buttons were rechecked for AA contrast, and the 42px mobile odds targets remain.
 
-### Typography
+### Typography and readability
 - Kept supplied Sora display / Manrope body fonts only.
+- Raised the public interface's microtype floor: former 7.7–9.3px labels now render at **11.2–12.5px**, with 12–12.8px metadata, 13px odds, 16px body copy and 16px form controls (also preventing mobile input zoom). This is deliberately more readable than the reference's 12px dense minimum while preserving its compact rhythm.
 - Added tabular and lining numerals for odds, balances and timestamps.
 - Added font smoothing, optical sizing, `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs.
 - Darkened secondary ink from `#71869b`/`#7c90a4` to `#526a82`; positive amounts use `#14773a` instead of the lower-contrast lime text.
-- Increased event metadata from 9.28px to 10.24px and raised mobile odds targets to 42px.
+- Increased mobile odds targets to 42px and kept all controls labelled in full words rather than unexplained abbreviations.
 
 ### Navigation and icons
 - Original sport glyphs replace reused generic Lucide marks.
@@ -73,7 +74,8 @@ Passed checks included:
 
 - Home renders brand, navigation icons, sport glyphs, team badges and illustrated game covers.
 - Logged-out playable game routes show an account-required panel instead of a misleading 0 VC play surface.
-- Registration creates a player, navigates to the account and shows 10,500 VC.
+- Deposit page loads the QR/instructions configuration, bonus preview, request form and request history.
+- Registration creates a player, navigates to the account and shows 10,500 coins.
 - Sports selection opens the bet-slip dialog, receives focus, debits 50 VC and closes after placement.
 - Dice Roll plays and settles with a server result.
 - Wallet ledger and My Bets show the new records.
@@ -93,6 +95,7 @@ Passed checks included:
 | Login | 100 | 100 | 100 |
 | Account overview | 100 | 100 | 100 |
 | Account wallet | 100 | 100 | 100 |
+| Deposit page | 100 | 100 | 100 |
 | Support | 100 | 100 | 100 |
 | Promotions | 100 | 100 | 100 |
 | Help | 100 | 100 | 100 |
@@ -103,7 +106,20 @@ Passed checks included:
 
 The tournament leaderboard green was darkened to `#14773a` during the audit; the final run is clean on every audited page.
 
-## 5. Remaining boundaries
+## 5. Deposit and bonus flow
+
+A second Playwright run exercised the deposit path as a player and Master Admin: **11/11 checks passed**:
+
+1. Deposit page loads with sandbox notice and QR placeholder.
+2. Player submits amount and UTR reference.
+3. Pending request appears in player history.
+4. Master Admin sees the same request in the review queue.
+5. Admin approves and the wallet receives the deposit + 15% bonus.
+6. Player sees both ledger entries and the increased balance.
+
+The API smoke also covers cancellation, rejection and the live-payment activation gate. See `PAYMENTS_AND_BONUSES.md`.
+
+## 6. Remaining boundaries
 
 These are product-scope boundaries, not UI defects:
 

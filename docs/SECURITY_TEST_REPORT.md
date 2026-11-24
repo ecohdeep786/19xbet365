@@ -11,7 +11,11 @@ Run: `node scripts/security-smoke.mjs`
 | --- | --- | --- |
 | Anonymous `/api/admin/overview` | PASS | `401` “Sign in to the control room.” |
 | Anonymous bet placement | PASS | `401` “Sign in to continue.” |
+| Anonymous deposit config | PASS | `401` “Sign in to continue.” |
 | Player `/api/admin/overview` | PASS | `403` “This area is limited to authorized staff.” |
+| Player deposit review queue | PASS | `403` “This area is limited to authorized staff.” |
+| Agent deposit review queue | PASS | `403` “Master Admin authorization is required.” |
+| Master deposit review queue | PASS | `200`, queue available |
 | Player provider game | PASS | `409` provider session required |
 | Master tries to enable real money | PASS | `403` “Real-money rails are hard-disabled…” |
 | Agent account list | PASS | 9 accounts; roles only `agent`/`player`; no master or other admin |
@@ -57,6 +61,15 @@ Additional controls:
 - Suspensions revoke all active sessions.
 - Password change revokes other sessions.
 - Session expiry: 7 days.
+
+## Deposit controls
+
+- Deposit configuration and requests require a player session; players can only see their own requests.
+- The review queue, approval and rejection endpoints require **Master Admin**. Player/agent access is denied.
+- Approval locks the request and account row, credits the deposit and server-calculated bonus in one transaction, inserts both ledger rows, a notification and an audit event, and prevents double review.
+- `manual_review` mode still rejects live collection unless `PAYMENTS_LIVE_ENABLED=true`; sandbox mode is the default.
+- No withdrawal endpoint exists; `realMoneyEnabled` remains hard-locked.
+- Player cancellation is limited to their own pending request.
 
 ## Input and API controls
 

@@ -10,6 +10,7 @@
 - [Database Architecture](DATABASE_ARCHITECTURE.md)
 - [API Specification](API_SPECIFICATION.md)
 - [Responsive Test Report](RESPONSIVE_TEST_REPORT.md)
+- [Payments, Deposits and Bonuses](PAYMENTS_AND_BONUSES.md)
 - [UI/UX Audit](UI_UX_AUDIT.md)
 - [Visual Comparison Report](VISUAL_COMPARISON_REPORT.md)
 - [End-to-End Test Report](END_TO_END_TEST_REPORT.md)

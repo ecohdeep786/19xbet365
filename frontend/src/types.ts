@@ -306,6 +306,7 @@ export interface AdminOverview {
     openTickets: number;
     urgentTickets: number;
     failedLogins: number;
+    pendingDeposits: number;
     openRoutes: number;
   };
   roleCounts: { role: Role; count: number }[];
@@ -315,6 +316,7 @@ export interface AdminOverview {
     failedLogins: number;
     creditActions: number;
     pendingTransfers: number;
+    pendingDeposits: number;
   };
   recentAudit: AuditEvent[];
   auditChainTip: { event_hash: string; prev_hash: string } | null;
@@ -401,6 +403,41 @@ export interface SystemHealth {
   auditChain: { checked: number; broken: number; intact: boolean };
   realMoneyRails: Record<string, unknown>;
   services: { name: string; status: string; detail: string }[];
+}
+
+export interface DepositTier {
+  min: number;
+  percent: number;
+}
+
+export interface DepositConfig {
+  mode: "sandbox" | "manual_review" | "disabled";
+  qrImageUrl: string;
+  instructions: string;
+  tiers: DepositTier[];
+  min: number;
+  max: number;
+  livePaymentsEnabled: boolean;
+}
+
+export interface DepositRequest {
+  id: string;
+  amount: number;
+  method: string;
+  reference: string;
+  note: string | null;
+  status: "pending" | "approved" | "rejected" | "cancelled";
+  bonusAmount: number;
+  reviewNote: string | null;
+  createdAt: string;
+  reviewedAt: string | null;
+}
+
+export interface AdminDeposit extends DepositRequest {
+  accountId: string;
+  player: string;
+  username: string;
+  email: string;
 }
 
 export interface ApiErrorShape {

@@ -1,6 +1,6 @@
 import { NavLink, Outlet, Link } from "react-router-dom";
 import {
-  Activity, Bell, ChevronRight, Coins, HeartHandshake, ShieldCheck, Ticket, UserRound,
+  Activity, ArrowDownToLine, Bell, ChevronRight, Coins, HeartHandshake, ShieldCheck, Ticket, UserRound,
   WalletCards, Users, ArrowRight, Sparkles
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
@@ -12,6 +12,7 @@ const LINKS = [
   { to: "/account", label: "Overview", icon: Activity, end: true },
   { to: "/account/profile", label: "Profile", icon: UserRound },
   { to: "/account/wallet", label: "Wallet & history", icon: WalletCards },
+  { to: "/account/deposit", label: "Add coins", icon: ArrowDownToLine },
   { to: "/account/bets", label: "My bets", icon: Ticket },
   { to: "/account/activity", label: "Game activity", icon: Sparkles },
   { to: "/account/notifications", label: "Notifications", icon: Bell },
@@ -44,7 +45,7 @@ export function AccountLayout() {
             </div>
           </div>
           <div className="account-balance-block">
-            <span>Virtual balance</span>
+            <span>Coin balance</span>
             <strong>{vc(user.balance)}</strong>
             <Link to="/account/wallet" className="text-btn">Wallet history <ArrowRight size={14} /></Link>
           </div>
@@ -73,7 +74,7 @@ export function AccountLayout() {
             <span>Support is open for account, game, and responsible-play questions.</span>
             <Link to="/support" className="text-btn">Contact support <ArrowRight size={13} /></Link>
           </div>
-          <div className="account-nav-note"><ShieldCheck size={15} /> Virtual credits only. No deposits or withdrawals.</div>
+          <div className="account-nav-note"><ShieldCheck size={15} /> Sandbox coin top-ups. Live cash-out is disabled.</div>
         </aside>
         <main className="account-main"><Outlet /></main>
       </div>

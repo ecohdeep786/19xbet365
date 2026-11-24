@@ -1,8 +1,8 @@
 # 19xbet365
 
-19xbet365 is an independent, virtual-credit gaming platform built as a complete foundation for a future licensed operation. It includes a sportsbook, casino lobby, live-casino preview, virtual sports, playable 19X Originals, player accounts, support, legal pages, and a protected Master Admin control room.
+19xbet365 is an independent gaming platform with a real-money-ready coin wallet and sandbox financial rails. It includes a sportsbook, casino lobby, live-casino preview, virtual sports, playable 19X Originals, player accounts, deposit/QR review, support, legal pages, and a protected Master Admin control room.
 
-**Important:** 19xbet365 uses non-redeemable virtual credits only. Real-money wagering, deposits, withdrawals, cash redemption, and financial affiliate commissions are disabled. Provider-required game pages are clearly labelled and cannot be played without a certified integration.
+**Important:** 19xbet365 currently runs a **sandbox coin economy**. The production deposit path is implemented: players can submit a QR payment reference, Master Admin can verify it, and a configurable deposit bonus is credited with ledger and audit records. Real cash collection remains hard-gated behind licensing, KYC/AML, payment onboarding and `PAYMENTS_LIVE_ENABLED=true`; withdrawals, cash redemption and real-money wagering are disabled. Provider-required game pages are clearly labelled and cannot be played without a certified integration.
 
 ## Repository layout
 
@@ -118,7 +118,9 @@ All seeded accounts use the password **`19X#2026`**.
 | Agent | `mira.haddad@19xbet365.test` | Haddad player network |
 | Agent | `jonas.weber@19xbet365.test` | Weber player network |
 
-New registrations start with 10,500 virtual credits (10,000 welcome allocation plus a 500-credit gameplay boost). A referral relationship rewards both accounts with 1,000 virtual credits after the referred player completes their first qualifying game round.
+New registrations start with 10,500 sandbox coins (10,000 welcome allocation plus a 500-coin gameplay boost). A referral relationship rewards both accounts with 1,000 coins after the referred player completes their first qualifying game round.
+
+Deposits run through **Account → Add coins**. Operators configure the QR image URL, instructions and bonus tiers in Master Admin → Configuration. The default flow is sandbox: no money is collected, but the request, review, bonus, ledger and audit path is fully exercised. Master Admin → Deposit review approves or rejects requests. See `docs/PAYMENTS_AND_BONUSES.md` for the production activation checklist.
 
 ## What is playable
 
@@ -140,7 +142,7 @@ Provider-required catalogue titles (live casino, provider slots, some virtuals) 
 
 ## Explicit limitations
 
-- **No real-money rails.** No deposits, withdrawals, cash redemption, or wagering with money. The `realMoneyEnabled` setting is hard-locked.
+- **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Withdrawals and cash redemption remain disabled; `realMoneyEnabled` is still hard-locked.
 - **No certified provider integrations.** Provider titles are integration-ready catalogue pages only.
 - **Demo fixtures and demo settlement.** Sports fixtures and odds are seeded demonstration data. A server-side worker starts upcoming fixtures, finishes live fixtures after a simulated period, and settles 1X2 singles/accumulators with generated final scores. There is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
 - **Virtual credits.** All balances and prizes are non-redeemable and have no cash value.
@@ -156,9 +158,10 @@ node scripts/api-smoke.mjs
 node scripts/game-smoke.mjs
 node scripts/security-smoke.mjs
 node scripts/settlement-smoke.mjs
+node scripts/deposit-smoke.mjs
 ```
 
-`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `game-smoke.mjs` plays every supported original and checks settlement. `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, provider-required responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the virtual-credit reward flow.
+`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `game-smoke.mjs` plays every supported original and checks settlement. `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, provider-required responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `deposit-smoke.mjs` submits a sandbox QR request, approves it as Master Admin, verifies the tiered deposit bonus and both ledger entries, then tests player cancellation, admin rejection and the live-collection activation gate. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the coin reward flow.
 
 The demo settlement worker runs every 60 seconds by default and is controlled by `DEMO_MATCH_MINUTES` (default 90), `DEMO_SETTLEMENT_INTERVAL_MS` (default 60000) and `DEMO_SETTLEMENT=off` in `backend/.env`.
 

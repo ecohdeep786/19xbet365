@@ -111,6 +111,7 @@ try {
     ["/game/dice-roll", "dice-1440"],
     ["/account", "account-1440"],
     ["/account/wallet", "wallet-1440"],
+    ["/account/deposit", "deposit-1440"],
     ["/account/bets", "bets-1440"],
     ["/promotions", "promotions-1440"],
     ["/tournaments", "tournaments-1440"],
@@ -133,6 +134,7 @@ try {
     ["/casino", "casino-390"],
     ["/game/dice-roll", "dice-390"],
     ["/account/wallet", "wallet-390"],
+    ["/account/deposit", "deposit-390"],
     ["/login", "login-390"]
   ]) {
     await goto(route, 900);
@@ -159,6 +161,8 @@ try {
   await waitReady(1400);
   await goto("/admin", 1600);
   await shot("admin-dashboard-1440");
+  await goto("/admin/deposits", 1200);
+  await shot("admin-deposits-1440");
 
   await viewport(390, 844, true);
   await goto("/admin", 1100);
