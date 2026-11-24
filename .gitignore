@@ -1,0 +1,29 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+cookies.txt
+*.log
+coverage/
+.vite/
+.DS_Store
+Thumbs.db
+
+# Local harness/tooling artefacts
+tools/
+inbox/
+investigation.cany/
+reference/
+craft.json
+feed.json
+transcript.json
+usage.json
+
+# Third-party reference captures are research-only and are not redistributed.
+capture/reference/
+capture/states/
+capture/states-390/
+capture/screenshot-*.png
+capture/noise-*.png
+capture/capture.json

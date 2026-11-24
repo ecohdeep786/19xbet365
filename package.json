@@ -1,0 +1,20 @@
+{
+  "name": "19xbet365",
+  "private": true,
+  "version": "1.0.0",
+  "description": "19xbet365 — virtual-credit sportsbook, casino lobby, original games, and Master Admin control room.",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "db:seed": "npm --prefix backend run seed",
+    "dev:api": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "smoke:api": "node scripts/api-smoke.mjs",
+    "smoke:games": "node scripts/game-smoke.mjs",
+    "smoke:referral": "node scripts/referral-smoke.mjs",
+    "smoke:security": "node scripts/security-smoke.mjs",
+    "smoke:settlement": "node scripts/settlement-smoke.mjs",
+    "capture": "node scripts/capture-screenshots.mjs"
+  }
+}

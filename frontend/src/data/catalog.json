@@ -1,0 +1,2518 @@
+{
+  "generatedAt": "2026-11-24T12:40:00.000Z",
+  "sports": [
+    {
+      "slug": "football",
+      "name": "Football",
+      "icon": "football",
+      "count": 1568
+    },
+    {
+      "slug": "cricket",
+      "name": "Cricket",
+      "icon": "cricket",
+      "count": 55
+    },
+    {
+      "slug": "basketball",
+      "name": "Basketball",
+      "icon": "basketball",
+      "count": 180
+    },
+    {
+      "slug": "tennis",
+      "name": "Tennis",
+      "icon": "tennis",
+      "count": 454
+    },
+    {
+      "slug": "esports",
+      "name": "Esports",
+      "icon": "gamepad",
+      "count": 110
+    },
+    {
+      "slug": "ice-hockey",
+      "name": "Ice Hockey",
+      "icon": "hockey",
+      "count": 276
+    },
+    {
+      "slug": "volleyball",
+      "name": "Volleyball",
+      "icon": "volleyball",
+      "count": 77
+    },
+    {
+      "slug": "table-tennis",
+      "name": "Table Tennis",
+      "icon": "tabletennis",
+      "count": 619
+    },
+    {
+      "slug": "badminton",
+      "name": "Badminton",
+      "icon": "badminton",
+      "count": 38
+    },
+    {
+      "slug": "mma",
+      "name": "MMA",
+      "icon": "mma",
+      "count": 52
+    },
+    {
+      "slug": "baseball",
+      "name": "Baseball",
+      "icon": "baseball",
+      "count": 44
+    },
+    {
+      "slug": "horse-racing",
+      "name": "Horse Racing",
+      "icon": "horse",
+      "count": 84
+    }
+  ],
+  "matches": [
+    {
+      "id": "m001",
+      "sport": "football",
+      "league": "UEFA Champions League",
+      "homeTeam": "Northbridge FC",
+      "awayTeam": "Real Valera",
+      "startTime": "2026-11-24T12:02:00.000Z",
+      "status": "live",
+      "scoreHome": "2",
+      "scoreAway": "1",
+      "minute": "64'",
+      "oddsHome": 2.15,
+      "oddsDraw": 3.4,
+      "oddsAway": 3.1,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m002",
+      "sport": "football",
+      "league": "UEFA Champions League",
+      "homeTeam": "Atletico Meridian",
+      "awayTeam": "Dortmund 09",
+      "startTime": "2026-11-24T13:26:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.6,
+      "oddsDraw": 3.25,
+      "oddsAway": 2.55,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m003",
+      "sport": "football",
+      "league": "Premier Division",
+      "homeTeam": "Harbour City",
+      "awayTeam": "Blackthorn Rovers",
+      "startTime": "2026-11-24T14:50:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.72,
+      "oddsDraw": 3.9,
+      "oddsAway": 4.6,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m004",
+      "sport": "football",
+      "league": "Serie Aurora",
+      "homeTeam": "AC Verona",
+      "awayTeam": "Torino Nova",
+      "startTime": "2026-11-24T12:28:00.000Z",
+      "status": "live",
+      "scoreHome": "0",
+      "scoreAway": "0",
+      "minute": "18'",
+      "oddsHome": 2.05,
+      "oddsDraw": 3.1,
+      "oddsAway": 3.9,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m005",
+      "sport": "football",
+      "league": "La Cumbre",
+      "homeTeam": "Real Alicante",
+      "awayTeam": "FC Sevilla Nueva",
+      "startTime": "2026-11-24T17:00:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.3,
+      "oddsDraw": 3.35,
+      "oddsAway": 3.05,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m006",
+      "sport": "football",
+      "league": "Bundes Arena",
+      "homeTeam": "Berlin Union",
+      "awayTeam": "Rhein FC",
+      "startTime": "2026-11-25T05:00:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.8,
+      "oddsDraw": 3.6,
+      "oddsAway": 2.4,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m007",
+      "sport": "cricket",
+      "league": "19X T20 League",
+      "homeTeam": "Mumbai Mariners",
+      "awayTeam": "Delhi Dynamos",
+      "startTime": "2026-11-24T12:14:00.000Z",
+      "status": "live",
+      "scoreHome": "156/4",
+      "scoreAway": "132/6",
+      "minute": "17.2 ov",
+      "oddsHome": 1.66,
+      "oddsDraw": null,
+      "oddsAway": 2.22,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m008",
+      "sport": "cricket",
+      "league": "19X T20 League",
+      "homeTeam": "Bengaluru Blaze",
+      "awayTeam": "Chennai Kings",
+      "startTime": "2026-11-24T11:30:00.000Z",
+      "status": "live",
+      "scoreHome": "201/3",
+      "scoreAway": "98/7",
+      "minute": "12.4 ov",
+      "oddsHome": 1.28,
+      "oddsDraw": null,
+      "oddsAway": 3.6,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m009",
+      "sport": "cricket",
+      "league": "19X T20 League",
+      "homeTeam": "Kolkata Tigers",
+      "awayTeam": "Punjab Panthers",
+      "startTime": "2026-11-24T16:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.9,
+      "oddsDraw": null,
+      "oddsAway": 1.9,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m010",
+      "sport": "cricket",
+      "league": "Global Test Series",
+      "homeTeam": "Australia",
+      "awayTeam": "England",
+      "startTime": "2026-11-24T14:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.86,
+      "oddsDraw": 24,
+      "oddsAway": 1.96,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m011",
+      "sport": "cricket",
+      "league": "Global Test Series",
+      "homeTeam": "South Africa",
+      "awayTeam": "New Zealand",
+      "startTime": "2026-11-25T00:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.05,
+      "oddsDraw": 22,
+      "oddsAway": 1.8,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m012",
+      "sport": "cricket",
+      "league": "Women's Premier Cup",
+      "homeTeam": "Northern Stars",
+      "awayTeam": "Central Sparks",
+      "startTime": "2026-11-24T18:20:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.74,
+      "oddsDraw": null,
+      "oddsAway": 2.05,
+      "featured": true,
+      "demo": true
+    },
+    {
+      "id": "m013",
+      "sport": "basketball",
+      "league": "EuroLeague",
+      "homeTeam": "Athens BC",
+      "awayTeam": "Madrid Vitae",
+      "startTime": "2026-11-24T12:16:00.000Z",
+      "status": "live",
+      "scoreHome": "58",
+      "scoreAway": "54",
+      "minute": "Q3 04:12",
+      "oddsHome": 1.95,
+      "oddsDraw": null,
+      "oddsAway": 1.88,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m014",
+      "sport": "basketball",
+      "league": "EuroLeague",
+      "homeTeam": "Istanbul Giants",
+      "awayTeam": "Munich 55",
+      "startTime": "2026-11-24T13:38:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.4,
+      "oddsDraw": null,
+      "oddsAway": 1.58,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m015",
+      "sport": "basketball",
+      "league": "Nova Basketball League",
+      "homeTeam": "Coast Comets",
+      "awayTeam": "Peak City",
+      "startTime": "2026-11-24T15:55:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.7,
+      "oddsDraw": null,
+      "oddsAway": 2.15,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m016",
+      "sport": "basketball",
+      "league": "Nova Basketball League",
+      "homeTeam": "Desert Suns",
+      "awayTeam": "Lakeside Storm",
+      "startTime": "2026-11-24T19:50:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.02,
+      "oddsDraw": null,
+      "oddsAway": 1.82,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m017",
+      "sport": "tennis",
+      "league": "19X Masters",
+      "homeTeam": "E. Navarro",
+      "awayTeam": "K. Sato",
+      "startTime": "2026-11-24T11:45:00.000Z",
+      "status": "live",
+      "scoreHome": "1",
+      "scoreAway": "0",
+      "minute": "Set 3",
+      "oddsHome": 1.44,
+      "oddsDraw": null,
+      "oddsAway": 2.8,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m018",
+      "sport": "tennis",
+      "league": "19X Masters",
+      "homeTeam": "M. Kovac",
+      "awayTeam": "L. Bernard",
+      "startTime": "2026-11-24T13:15:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.66,
+      "oddsDraw": null,
+      "oddsAway": 2.25,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m019",
+      "sport": "tennis",
+      "league": "Challenger Tour",
+      "homeTeam": "A. Petrov",
+      "awayTeam": "J. Wilson",
+      "startTime": "2026-11-24T15:10:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.1,
+      "oddsDraw": null,
+      "oddsAway": 1.75,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m020",
+      "sport": "tennis",
+      "league": "Women's Open",
+      "homeTeam": "S. Kim",
+      "awayTeam": "R. Alvarez",
+      "startTime": "2026-11-24T19:00:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.57,
+      "oddsDraw": null,
+      "oddsAway": 2.4,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m021",
+      "sport": "esports",
+      "league": "CS2 — Nova Masters",
+      "homeTeam": "Vortex Esports",
+      "awayTeam": "Ironclad",
+      "startTime": "2026-11-24T12:22:00.000Z",
+      "status": "live",
+      "scoreHome": "12",
+      "scoreAway": "9",
+      "minute": "Map 2",
+      "oddsHome": 1.74,
+      "oddsDraw": null,
+      "oddsAway": 2.1,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m022",
+      "sport": "esports",
+      "league": "Dota 2 — Aurora Cup",
+      "homeTeam": "Team Zenith",
+      "awayTeam": "Nightfall",
+      "startTime": "2026-11-24T14:10:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.92,
+      "oddsDraw": null,
+      "oddsAway": 1.9,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m023",
+      "sport": "esports",
+      "league": "LoL — Rift Series",
+      "homeTeam": "Crimson Wolves",
+      "awayTeam": "Nova Five",
+      "startTime": "2026-11-24T16:10:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.3,
+      "oddsDraw": null,
+      "oddsAway": 1.62,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m024",
+      "sport": "esports",
+      "league": "Valorant — 19X Invite",
+      "homeTeam": "Sentinel Prime",
+      "awayTeam": "Orbit",
+      "startTime": "2026-11-24T17:55:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.55,
+      "oddsDraw": null,
+      "oddsAway": 2.45,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m025",
+      "sport": "esports",
+      "league": "CS2 — Nova Masters",
+      "homeTeam": "Polaris",
+      "awayTeam": "Blacksite",
+      "startTime": "2026-11-24T20:25:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.8,
+      "oddsDraw": null,
+      "oddsAway": 2,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m026",
+      "sport": "esports",
+      "league": "Dota 2 — Aurora Cup",
+      "homeTeam": "Aegis",
+      "awayTeam": "Tempo Storm",
+      "startTime": "2026-11-24T22:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.05,
+      "oddsDraw": null,
+      "oddsAway": 1.78,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m027",
+      "sport": "ice-hockey",
+      "league": "Northern Ice League",
+      "homeTeam": "Oslo Fjords",
+      "awayTeam": "Helsinki Frost",
+      "startTime": "2026-11-24T12:31:00.000Z",
+      "status": "live",
+      "scoreHome": "2",
+      "scoreAway": "2",
+      "minute": "P2 08:31",
+      "oddsHome": 2.15,
+      "oddsDraw": null,
+      "oddsAway": 1.88,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m028",
+      "sport": "ice-hockey",
+      "league": "Northern Ice League",
+      "homeTeam": "Stockholm Royals",
+      "awayTeam": "Prague Lions",
+      "startTime": "2026-11-24T14:02:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.9,
+      "oddsDraw": null,
+      "oddsAway": 2,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m029",
+      "sport": "ice-hockey",
+      "league": "Champions Ice Cup",
+      "homeTeam": "Zurich Peaks",
+      "awayTeam": "Vienna Stars",
+      "startTime": "2026-11-24T21:00:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.35,
+      "oddsDraw": null,
+      "oddsAway": 1.7,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m030",
+      "sport": "volleyball",
+      "league": "CEV Champions",
+      "homeTeam": "Perugia Volley",
+      "awayTeam": "Warsaw Eagles",
+      "startTime": "2026-11-24T12:55:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.6,
+      "oddsDraw": null,
+      "oddsAway": 2.4,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m031",
+      "sport": "volleyball",
+      "league": "CEV Champions",
+      "homeTeam": "Ankara Spor",
+      "awayTeam": "Milano Azzurri",
+      "startTime": "2026-11-24T17:10:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.2,
+      "oddsDraw": null,
+      "oddsAway": 1.68,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m032",
+      "sport": "table-tennis",
+      "league": "19X TT Series",
+      "homeTeam": "Lin Wei",
+      "awayTeam": "Dmitri Sokolov",
+      "startTime": "2026-11-24T12:34:00.000Z",
+      "status": "live",
+      "scoreHome": "2",
+      "scoreAway": "1",
+      "minute": "Set 4",
+      "oddsHome": 1.72,
+      "oddsDraw": null,
+      "oddsAway": 2.05,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m033",
+      "sport": "table-tennis",
+      "league": "19X TT Series",
+      "homeTeam": "Hugo Laurent",
+      "awayTeam": "Kenta Mori",
+      "startTime": "2026-11-24T13:22:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.95,
+      "oddsDraw": null,
+      "oddsAway": 1.85,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m034",
+      "sport": "badminton",
+      "league": "Asia Open",
+      "homeTeam": "P. V. Nair",
+      "awayTeam": "Yuki Tanaka",
+      "startTime": "2026-11-24T13:52:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.55,
+      "oddsDraw": null,
+      "oddsAway": 2.35,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m035",
+      "sport": "mma",
+      "league": "Nova Fight Night",
+      "homeTeam": "K. Okafor",
+      "awayTeam": "D. Reyes",
+      "startTime": "2026-11-24T23:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.62,
+      "oddsDraw": null,
+      "oddsAway": 2.3,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m036",
+      "sport": "mma",
+      "league": "Nova Fight Night",
+      "homeTeam": "M. Lindqvist",
+      "awayTeam": "S. Almeida",
+      "startTime": "2026-11-25T01:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 2.1,
+      "oddsDraw": null,
+      "oddsAway": 1.72,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m037",
+      "sport": "baseball",
+      "league": "Pacific Series",
+      "homeTeam": "Tokyo Waves",
+      "awayTeam": "Seoul Comets",
+      "startTime": "2026-11-24T17:40:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 1.78,
+      "oddsDraw": null,
+      "oddsAway": 2.02,
+      "featured": false,
+      "demo": true
+    },
+    {
+      "id": "m038",
+      "sport": "horse-racing",
+      "league": "19X Derby — Race 7",
+      "homeTeam": "Silver Comet",
+      "awayTeam": "Field of 12",
+      "startTime": "2026-11-24T13:05:00.000Z",
+      "status": "upcoming",
+      "scoreHome": null,
+      "scoreAway": null,
+      "minute": null,
+      "oddsHome": 3.4,
+      "oddsDraw": null,
+      "oddsAway": 2.1,
+      "featured": false,
+      "demo": true
+    }
+  ],
+  "games": [
+    {
+      "id": "crash-orbit",
+      "name": "Crash Orbit",
+      "category": "crash",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 99,
+      "volatility": "High",
+      "tagline": "Ride the curve. Cash out before orbit breaks.",
+      "description": "A live multiplier curve climbs from 1.00x. Cash out at any moment to bank your stake multiplied by the current value — wait too long and the round ends at zero. Every crash point is generated server-side and recorded.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Live multiplier graph",
+        "Manual and auto cash-out",
+        "Server-generated crash points",
+        "Instant round history"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 5796,
+      "sortOrder": 1,
+      "maxWin": "1,000x"
+    },
+    {
+      "id": "mines-vault",
+      "name": "Mines Vault",
+      "category": "mines",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 99,
+      "volatility": "Medium",
+      "tagline": "Reveal gems, dodge the mines, take the profit.",
+      "description": "A 5×5 vault hides between one and twenty-four mines. Every safe tile raises your multiplier. Cash out whenever you like — or clear the board for the maximum win.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 3643,
+      "sortOrder": 2,
+      "maxWin": "2,231x"
+    },
+    {
+      "id": "plinko-drop",
+      "name": "Plinko Drop",
+      "category": "plinko",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 99,
+      "volatility": "Medium",
+      "tagline": "Drop the ball. Follow the path. Find your multiplier.",
+      "description": "Choose a risk profile and number of rows, then send a ball through the peg field. The landing bucket determines your payout. Paths are generated on our servers and shown after each drop.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 6693,
+      "sortOrder": 3,
+      "maxWin": "170x"
+    },
+    {
+      "id": "dice-roll",
+      "name": "Dice Roll",
+      "category": "dice",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 99,
+      "volatility": "Low",
+      "tagline": "Set your target. Roll above or below. Simple by design.",
+      "description": "Roll a number between 0 and 100. Choose your target and direction to set the win chance and multiplier. The result is generated with a cryptographically secure server RNG.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 1560,
+      "sortOrder": 4,
+      "maxWin": "49x"
+    },
+    {
+      "id": "wheel-of-astra",
+      "name": "Wheel of 19X",
+      "category": "wheel",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 97.5,
+      "volatility": "High",
+      "tagline": "One spin. Twenty-four sectors. Endless possibility.",
+      "description": "Spin the 19X wheel and land on a multiplier from 0x to 5x. Every result is settled by the server and stored with its round identifier.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#4e360c",
+        "to": "#201604",
+        "accent": "#ffd166",
+        "icon": "crown"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 2937,
+      "sortOrder": 5,
+      "maxWin": "5x"
+    },
+    {
+      "id": "coin-flip",
+      "name": "Coinflip",
+      "category": "coinflip",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 98,
+      "volatility": "Low",
+      "tagline": "Heads or tails. One call, instant result.",
+      "description": "Call the coin and let it fly. A winning call returns 1.96x your stake. Rounds resolve instantly and are recorded for your activity history.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#0c3555",
+        "to": "#061b2e",
+        "accent": "#5cc8ff",
+        "icon": "waves"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 7255,
+      "sortOrder": 6,
+      "maxWin": "1.96x"
+    },
+    {
+      "id": "hi-lo",
+      "name": "Hi-Lo",
+      "category": "cards",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 97,
+      "volatility": "Medium",
+      "tagline": "Higher or lower? Read the card, trust your call.",
+      "description": "A card is drawn and revealed. Predict whether the next card will be higher or lower. Ties lose. Volatility changes with the rank on the table.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3e2d0e",
+        "to": "#1b1407",
+        "accent": "#ffc857",
+        "icon": "coins"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 6437,
+      "sortOrder": 7,
+      "maxWin": "12x"
+    },
+    {
+      "id": "lucky-ten",
+      "name": "Lucky Ten",
+      "category": "lucky",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 90,
+      "volatility": "High",
+      "tagline": "Pick a number. Ten possibilities. One golden draw.",
+      "description": "Choose one number from zero to nine. If the draw lands on your number, the round pays 8.8x. Results are generated on the server and immediately auditable in your history.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#2b1b4e",
+        "to": "#120d24",
+        "accent": "#ff7ae0",
+        "icon": "sparkles"
+      },
+      "badge": "ORIGINAL",
+      "featured": false,
+      "players": 6084,
+      "sortOrder": 8,
+      "maxWin": "8.8x"
+    },
+    {
+      "id": "nova-fruits",
+      "name": "Nova Fruits",
+      "category": "slots",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 96,
+      "volatility": "Medium",
+      "tagline": "Classic fruit energy with three reels and three paylines.",
+      "description": "A three-reel, three-row original slot with three paylines. Match three symbols across any row. Simple to learn, quick to play, and built with responsible virtual-credit limits.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#4e360c",
+        "to": "#201604",
+        "accent": "#ffd166",
+        "icon": "crown"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 6917,
+      "sortOrder": 9,
+      "maxWin": "180x"
+    },
+    {
+      "id": "velocity-derby",
+      "name": "Velocity Derby",
+      "category": "virtuals",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 95,
+      "volatility": "High",
+      "tagline": "Six runners. One finish line. Pick your champion.",
+      "description": "A fully simulated six-horse race with fixed virtual odds. Pick a runner, watch the simulated race, and see the official order in your results history. No real horses or live events are involved.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": "ORIGINAL",
+      "featured": true,
+      "players": 10159,
+      "sortOrder": 10,
+      "maxWin": "9.4x"
+    },
+    {
+      "id": "keno-blitz",
+      "name": "Keno Blitz",
+      "category": "instant",
+      "provider": "Novaline Studios",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.2,
+      "volatility": "Medium",
+      "tagline": "Fast numbers, bright lights, instant draws.",
+      "description": "A licensed Keno title prepared for provider integration. The interface is wired to the provider adapter contract; real play remains disabled until certification.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 7432,
+      "sortOrder": 20,
+      "maxWin": "10,000x"
+    },
+    {
+      "id": "scratch-nova",
+      "name": "Scratch Nova",
+      "category": "instant",
+      "provider": "Lumen Gaming",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.8,
+      "volatility": "Low",
+      "tagline": "Scratch the surface. Reveal a tiny constellation of wins.",
+      "description": "A scratch-card mechanic prepared for integration. The demo layout, loading state, and session guard are complete; the provider renderer is pending.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#0c3555",
+        "to": "#061b2e",
+        "accent": "#5cc8ff",
+        "icon": "waves"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 3221,
+      "sortOrder": 21,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "limbo-velocity",
+      "name": "Limbo Velocity",
+      "category": "instant",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 99,
+      "volatility": "High",
+      "tagline": "Set a target multiplier. Beat it to win.",
+      "description": "A multiplier-target game prepared for provider integration. The API adapter and responsible-play cap are specified but not enabled in this environment.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 5644,
+      "sortOrder": 22,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "airball-crash",
+      "name": "Airball",
+      "category": "crash",
+      "provider": "Novaline Studios",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 97,
+      "volatility": "High",
+      "tagline": "A second crash title, awaiting provider certification.",
+      "description": "An integration-ready crash interface from Novaline Studios. The game logic and outcome engine belong to the licensed provider and are not simulated here.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 2891,
+      "sortOrder": 23,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "tower-climb",
+      "name": "Tower Climb",
+      "category": "instant",
+      "provider": "Lumen Gaming",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 97,
+      "volatility": "Medium",
+      "tagline": "Climb the tower, collect along the way.",
+      "description": "An integration-ready step-based game. Card artwork, information architecture, and session guards are complete; provider certification is pending.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 1876,
+      "sortOrder": 24,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "neon-fortune",
+      "name": "Neon Fortune",
+      "category": "slots",
+      "provider": "Cobalt Play",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.4,
+      "volatility": "High",
+      "tagline": "A neon-lit five-reel journey through the city that never sleeps.",
+      "description": "A provider slot stage prepared for integration. Provider: Cobalt Play. Volatility: high. The launch button is disabled until the certified provider session is configured.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": "NEW",
+      "featured": false,
+      "players": 9321,
+      "sortOrder": 30,
+      "maxWin": "12,500x"
+    },
+    {
+      "id": "starlight-lines",
+      "name": "Starlight Lines",
+      "category": "slots",
+      "provider": "Novaline Studios",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.1,
+      "volatility": "Medium",
+      "tagline": "Twenty-five lines of starlit wins.",
+      "description": "A five-reel, 25-line slot interface. Artwork and information panels are in place; provider connectivity and outcome reporting are pending certification.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 8120,
+      "sortOrder": 31,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "golden-nova",
+      "name": "Golden Nova",
+      "category": "slots",
+      "provider": "Helios Interactive",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.9,
+      "volatility": "High",
+      "tagline": "Chase the golden nova across five reels.",
+      "description": "An integration-ready slot with a hold-and-win bonus concept. All play and outcome logic remain with the licensed provider.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#4e360c",
+        "to": "#201604",
+        "accent": "#ffd166",
+        "icon": "crown"
+      },
+      "badge": "HOT",
+      "featured": false,
+      "players": 11980,
+      "sortOrder": 32,
+      "maxWin": "8,000x"
+    },
+    {
+      "id": "mystic-temple",
+      "name": "Mystic Temple",
+      "category": "slots",
+      "provider": "Enigma Labs",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.3,
+      "volatility": "Medium",
+      "tagline": "Enter the temple. Follow the fireflies.",
+      "description": "A five-reel adventure slot prepared for provider integration, with original artwork and a responsive information panel.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 6742,
+      "sortOrder": 33,
+      "maxWin": "7,500x"
+    },
+    {
+      "id": "sakura-fortune",
+      "name": "Sakura Fortune",
+      "category": "slots",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96,
+      "volatility": "Medium",
+      "tagline": "A calm, blossom-filled reel set.",
+      "description": "An integration-ready slot from Aurora Live. The provider session contract is defined; demo spins are not available for third-party titles.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#2b1b4e",
+        "to": "#120d24",
+        "accent": "#ff7ae0",
+        "icon": "sparkles"
+      },
+      "badge": "NEW",
+      "featured": false,
+      "players": 4550,
+      "sortOrder": 34,
+      "maxWin": "4,000x"
+    },
+    {
+      "id": "cyber-heist",
+      "name": "Cyber Heist",
+      "category": "slots",
+      "provider": "Cobalt Play",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.7,
+      "volatility": "High",
+      "tagline": "Break the vault across five reels.",
+      "description": "A high-volatility heist-themed slot interface. Provider integration is required before this title can be launched.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 7211,
+      "sortOrder": 35,
+      "maxWin": "9,000x"
+    },
+    {
+      "id": "dragons-vault",
+      "name": "Dragon's Vault",
+      "category": "slots",
+      "provider": "Helios Interactive",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.2,
+      "volatility": "High",
+      "tagline": "The vault breathes fire.",
+      "description": "A dragon-themed slot stage with original artwork. The certified provider game session is not connected in this environment.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 6320,
+      "sortOrder": 36,
+      "maxWin": "10,000x"
+    },
+    {
+      "id": "frost-queen",
+      "name": "Frost Queen",
+      "category": "slots",
+      "provider": "Novaline Studios",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.5,
+      "volatility": "Medium",
+      "tagline": "An icy realm of expanding wilds.",
+      "description": "A winter-themed slot prepared for integration. Interface and content panels complete; provider renderer pending.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#0c3555",
+        "to": "#061b2e",
+        "accent": "#5cc8ff",
+        "icon": "waves"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 3812,
+      "sortOrder": 37,
+      "maxWin": "6,000x"
+    },
+    {
+      "id": "cairo-nights",
+      "name": "Cairo Nights",
+      "category": "slots",
+      "provider": "Lumen Gaming",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.8,
+      "volatility": "Medium",
+      "tagline": "Lanterns, spice markets, and golden reels.",
+      "description": "A richly themed slot awaiting provider certification. The interface is fully described and ready for a certified launch URL.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3e2d0e",
+        "to": "#1b1407",
+        "accent": "#ffc857",
+        "icon": "coins"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 2934,
+      "sortOrder": 38,
+      "maxWin": "5,500x"
+    },
+    {
+      "id": "jungle-spirit",
+      "name": "Jungle Spirit",
+      "category": "slots",
+      "provider": "Enigma Labs",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.1,
+      "volatility": "Medium",
+      "tagline": "Deep in the emerald canopy, the reels awaken.",
+      "description": "A jungle adventure slot interface prepared for integration. Third-party play and outcomes are disabled.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 5123,
+      "sortOrder": 39,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "aztec-eclipse",
+      "name": "Aztec Eclipse",
+      "category": "slots",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.4,
+      "volatility": "High",
+      "tagline": "When the sun hides, the temple pays.",
+      "description": "An Aztec-themed, high-volatility slot prepared for provider integration. No third-party outcome or wager is simulated here.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3e2d0e",
+        "to": "#1b1407",
+        "accent": "#ffc857",
+        "icon": "coins"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 6631,
+      "sortOrder": 40,
+      "maxWin": "11,000x"
+    },
+    {
+      "id": "neon-reels",
+      "name": "Neon Reels",
+      "category": "slots",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96,
+      "volatility": "Low",
+      "tagline": "A quick-hit, low-volatility reel set.",
+      "description": "A low-volatility slot interface ready for a certified provider launch. Artwork is original 19xbet365 studio work.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 4408,
+      "sortOrder": 41,
+      "maxWin": "2,500x"
+    },
+    {
+      "id": "gilded-crown",
+      "name": "Gilded Crown",
+      "category": "slots",
+      "provider": "Helios Interactive",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.6,
+      "volatility": "Medium",
+      "tagline": "Royal reels with a gilded edge.",
+      "description": "A regal slot interface prepared for integration. Provider connectivity and regulatory certification are required before activation.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#4e360c",
+        "to": "#201604",
+        "accent": "#ffd166",
+        "icon": "crown"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 9902,
+      "sortOrder": 42,
+      "maxWin": "7,000x"
+    },
+    {
+      "id": "titans-gate",
+      "name": "Titan's Gate",
+      "category": "slots",
+      "provider": "Cobalt Play",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.6,
+      "volatility": "High",
+      "tagline": "Open the gate. Face the titan.",
+      "description": "A high-volatility slot interface with original art direction. The title remains in integration-ready status.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 5721,
+      "sortOrder": 43,
+      "maxWin": "15,000x"
+    },
+    {
+      "id": "lucky-lanterns",
+      "name": "Lucky Lanterns",
+      "category": "slots",
+      "provider": "Lumen Gaming",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.2,
+      "volatility": "Medium",
+      "tagline": "Lanterns rise, wins follow.",
+      "description": "A festival-themed slot prepared for certified provider integration. Play remains disabled in this foundation build.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 3340,
+      "sortOrder": 44,
+      "maxWin": "5,000x"
+    },
+    {
+      "id": "crystal-cavern",
+      "name": "Crystal Cavern",
+      "category": "slots",
+      "provider": "Novaline Studios",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.3,
+      "volatility": "Medium",
+      "tagline": "Find the light beneath the mountain.",
+      "description": "A crystal-themed slot interface awaiting provider certification. The game detail page documents integration requirements.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 2205,
+      "sortOrder": 45,
+      "maxWin": "6,000x"
+    },
+    {
+      "id": "phoenix-fire",
+      "name": "Phoenix Fire",
+      "category": "slots",
+      "provider": "Enigma Labs",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.9,
+      "volatility": "High",
+      "tagline": "Rise again with expanding flame wilds.",
+      "description": "A phoenix-themed slot stage prepared for integration. All gameplay remains with the licensed provider.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 8104,
+      "sortOrder": 46,
+      "maxWin": "9,500x"
+    },
+    {
+      "id": "astra-roulette-live",
+      "name": "19X Roulette Live",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 97.3,
+      "volatility": "Low",
+      "tagline": "A cinematic roulette table with a live dealer feed.",
+      "description": "An integration-ready live dealer roulette lobby. A certified live-stream provider, dealer studio, and real-wager license are required; none are active here.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Live dealer video",
+        "Betting timer",
+        "Full spin history",
+        "Provider studio controls"
+      ],
+      "theme": {
+        "from": "#4e360c",
+        "to": "#201604",
+        "accent": "#ffd166",
+        "icon": "crown"
+      },
+      "badge": "LIVE SOON",
+      "featured": false,
+      "players": 13800,
+      "sortOrder": 50,
+      "maxWin": "36x"
+    },
+    {
+      "id": "blackjack-azure",
+      "name": "Blackjack Azure",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 99.5,
+      "volatility": "Low",
+      "tagline": "Seven seats. One elegant table.",
+      "description": "A live blackjack table interface prepared for provider integration. The demo can display the table shell and rules, but no dealer feed or real-money play is active.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 8420,
+      "sortOrder": 51,
+      "maxWin": "2.5x"
+    },
+    {
+      "id": "baccarat-royale",
+      "name": "Baccarat Royale",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 98.9,
+      "volatility": "Low",
+      "tagline": "The classic card game, presented in full evening dress.",
+      "description": "A baccarat table interface prepared for live provider integration. Provider stream and wagering are not connected.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 6321,
+      "sortOrder": 52,
+      "maxWin": "9x"
+    },
+    {
+      "id": "dream-wheel-live",
+      "name": "Dream Wheel Live",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 96.8,
+      "volatility": "High",
+      "tagline": "A game-show wheel with a live host.",
+      "description": "A live game-show interface prepared for integration. Host video, game engine, and real-wager settlement require a certified provider.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#2b1b4e",
+        "to": "#120d24",
+        "accent": "#ff7ae0",
+        "icon": "sparkles"
+      },
+      "badge": "POPULAR",
+      "featured": false,
+      "players": 17720,
+      "sortOrder": 53,
+      "maxWin": "1,000x"
+    },
+    {
+      "id": "holdem-prime",
+      "name": "Texas Hold'em Prime",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 97.5,
+      "volatility": "Medium",
+      "tagline": "Tournament tables with a studio presentation.",
+      "description": "A poker lobby interface ready for provider integration. Real-money tables are not available in this foundation build.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 4720,
+      "sortOrder": 54,
+      "maxWin": "Pot"
+    },
+    {
+      "id": "sicbo-nova",
+      "name": "Sic Bo Nova",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 97.2,
+      "volatility": "Medium",
+      "tagline": "Three dice, a live table, and 50 ways to play.",
+      "description": "A live Sic Bo table shell prepared for provider integration. Stake ranges and dealer controls are illustrative only.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 2910,
+      "sortOrder": 55,
+      "maxWin": "180x"
+    },
+    {
+      "id": "speed-baccarat",
+      "name": "Speed Baccarat",
+      "category": "live-casino",
+      "provider": "Aurora Live",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 98.8,
+      "volatility": "Low",
+      "tagline": "A faster cadence for the classic table game.",
+      "description": "A speed baccarat table interface awaiting provider certification. No live dealer feed is connected.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#0c3555",
+        "to": "#061b2e",
+        "accent": "#5cc8ff",
+        "icon": "waves"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 5102,
+      "sortOrder": 56,
+      "maxWin": "9x"
+    },
+    {
+      "id": "virtual-football",
+      "name": "Virtual Football League",
+      "category": "virtuals",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.5,
+      "volatility": "Medium",
+      "tagline": "A full simulated league, every few minutes.",
+      "description": "An integration-ready virtual football product. Match simulation, league schedules, and provider odds require the certified Velocity Works feed.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#3b1d69",
+        "to": "#160d2f",
+        "accent": "#b18cff",
+        "icon": "gem"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 9150,
+      "sortOrder": 60,
+      "maxWin": "50x"
+    },
+    {
+      "id": "speed-derby",
+      "name": "Speed Derby",
+      "category": "virtuals",
+      "provider": "19X Originals",
+      "playable": true,
+      "integrationStatus": "playable_demo",
+      "rtp": 95,
+      "volatility": "High",
+      "tagline": "Eight lanes. One electric finish.",
+      "description": "A second 19X virtual racing product with a speedway theme. Choose a lane, watch the simulation, and review the official order.",
+      "howTo": [
+        "Set your virtual-credit stake using the controls on the right.",
+        "Start the round and follow the on-screen action.",
+        "Cash out or let the round complete, then review the result in your activity.",
+        "Use the history panel to see your last rounds. Virtual credits have no cash value."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#0c3555",
+        "to": "#061b2e",
+        "accent": "#5cc8ff",
+        "icon": "waves"
+      },
+      "badge": "ORIGINAL",
+      "featured": false,
+      "players": 4320,
+      "sortOrder": 61,
+      "maxWin": "14x"
+    },
+    {
+      "id": "greyhound-sprint",
+      "name": "Greyhound Sprint",
+      "category": "virtuals",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 94.8,
+      "volatility": "High",
+      "tagline": "Six hounds, one short dash.",
+      "description": "A virtual greyhound racing interface prepared for provider integration. No real animals or live races are involved.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#5a1a2c",
+        "to": "#220914",
+        "accent": "#ff8d8d",
+        "icon": "flame"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 3220,
+      "sortOrder": 62,
+      "maxWin": "14x"
+    },
+    {
+      "id": "virtual-basketball",
+      "name": "Virtual Basketball",
+      "category": "virtuals",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.2,
+      "volatility": "Medium",
+      "tagline": "A simulated court clash with live-style stats.",
+      "description": "An integration-ready virtual basketball product. The provider simulation engine is not connected.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#102a56",
+        "to": "#0a1730",
+        "accent": "#5ee7ff",
+        "icon": "orbit"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 2100,
+      "sortOrder": 63,
+      "maxWin": "20x"
+    },
+    {
+      "id": "virtual-tennis",
+      "name": "Virtual Tennis Open",
+      "category": "virtuals",
+      "provider": "Velocity Works",
+      "playable": false,
+      "integrationStatus": "provider_required",
+      "rtp": 95.4,
+      "volatility": "Medium",
+      "tagline": "A simulated tennis tournament.",
+      "description": "A virtual tennis interface awaiting provider integration. All simulated event data is illustrative.",
+      "howTo": [
+        "This title is presented as an integration-ready interface.",
+        "A licensed provider connection is required before play can be enabled.",
+        "No live dealer feed, real wager, or payout is active in this environment.",
+        "Contact platform operations to complete provider certification."
+      ],
+      "features": [
+        "Server-authoritative rounds",
+        "Responsive game canvas",
+        "Detailed round history",
+        "Responsible-play controls"
+      ],
+      "theme": {
+        "from": "#123f3a",
+        "to": "#071f22",
+        "accent": "#6fffc4",
+        "icon": "bolt"
+      },
+      "badge": null,
+      "featured": false,
+      "players": 1900,
+      "sortOrder": 64,
+      "maxWin": "18x"
+    }
+  ],
+  "promotions": [
+    {
+      "id": "p1",
+      "title": "The 19X Welcome Haul",
+      "kicker": "NEW PLAYERS",
+      "description": "Start with 10,000 virtual credits and a 500-credit gameplay boost. No deposit, no wagering, no cash value.",
+      "type": "welcome",
+      "badge": "VIRTUAL CREDITS",
+      "theme": "lime",
+      "endsAt": null,
+      "cta": "Create an account",
+      "terms": "One welcome allocation per verified player. Virtual credits cannot be withdrawn or exchanged. This is not a real-money bonus.",
+      "prize": "10,500 VC"
+    },
+    {
+      "id": "p2",
+      "title": "Crash Orbit: Altitude Week",
+      "kicker": "TOURNAMENT · LIVE",
+      "description": "The ten highest cash-out multipliers this week share a 250,000 virtual-credit prize pool.",
+      "type": "tournament",
+      "badge": "25 HOURS LEFT",
+      "theme": "cyan",
+      "endsAt": "2026-11-25T13:40:00.000Z",
+      "cta": "View tournament",
+      "terms": "Open to registered players aged 18+. Minimum qualifying stake 50 VC. Leaderboard is based on the highest completed cash-out multiplier.",
+      "prize": "250,000 VC"
+    },
+    {
+      "id": "p3",
+      "title": "Weekend Multiplier",
+      "kicker": "CASINO",
+      "description": "Play any 19X Originals game on Saturday or Sunday and collect a 10% virtual-credit top-up on net losses.",
+      "type": "casino",
+      "badge": "SAT & SUN",
+      "theme": "violet",
+      "endsAt": "2026-11-28T12:40:00.000Z",
+      "cta": "Explore originals",
+      "terms": "Maximum top-up 1,000 VC per day. Virtual credits only. Bonus terms apply.",
+      "prize": "10% back"
+    },
+    {
+      "id": "p4",
+      "title": "Prediction Points",
+      "kicker": "SPORTS",
+      "description": "Build a five-selection football accumulator and earn double loyalty points when all five settle as winners.",
+      "type": "sports",
+      "badge": "DOUBLE XP",
+      "theme": "gold",
+      "endsAt": "2026-12-01T12:40:00.000Z",
+      "cta": "View football",
+      "terms": "Minimum combined odds 3.00. Virtual-credit bets only. Loyalty points have no cash value.",
+      "prize": "2× XP"
+    },
+    {
+      "id": "p5",
+      "title": "Mines Vault: Deep Run",
+      "kicker": "TOURNAMENT · STARTS SOON",
+      "description": "Clear the most tiles without a bust. The top 50 vault runners win from a 100,000 VC pool.",
+      "type": "tournament",
+      "badge": "STARTS FRIDAY",
+      "theme": "emerald",
+      "endsAt": "2026-11-26T12:40:00.000Z",
+      "cta": "Open Mines Vault",
+      "terms": "Each round is recorded. Leaderboard ranks by total tiles cleared across qualifying rounds.",
+      "prize": "100,000 VC"
+    },
+    {
+      "id": "p6",
+      "title": "Bring a Friend",
+      "kicker": "REFERRALS",
+      "description": "Invite a friend to 19xbet365. You both receive 1,000 virtual credits after their first game round.",
+      "type": "referral",
+      "badge": "BOTH WIN",
+      "theme": "rose",
+      "endsAt": null,
+      "cta": "Get your invite code",
+      "terms": "Referrals do not grant administrative access. One reward per verified new account. Virtual credits only.",
+      "prize": "1,000 VC each"
+    }
+  ],
+  "tournaments": [
+    {
+      "id": "t1",
+      "name": "Crash Orbit: Altitude Week",
+      "gameId": "crash-orbit",
+      "prizePool": 250000,
+      "startsAt": "2026-11-21T12:40:00.000Z",
+      "endsAt": "2026-11-25T13:40:00.000Z",
+      "status": "live",
+      "participants": 18427,
+      "leaderboard": [
+        [
+          "Kairo_88",
+          949.2
+        ],
+        [
+          "NovaRider",
+          712.8
+        ],
+        [
+          "mellowfox",
+          603.4
+        ],
+        [
+          "TaraTakesOff",
+          558.1
+        ],
+        [
+          "A1pha",
+          441.7
+        ]
+      ]
+    },
+    {
+      "id": "t2",
+      "name": "Mines Vault: Deep Run",
+      "gameId": "mines-vault",
+      "prizePool": 100000,
+      "startsAt": "2026-11-26T12:40:00.000Z",
+      "endsAt": "2026-11-29T12:40:00.000Z",
+      "status": "upcoming",
+      "participants": 9320,
+      "leaderboard": []
+    },
+    {
+      "id": "t3",
+      "name": "Nova Fruits Harvest",
+      "gameId": "nova-fruits",
+      "prizePool": 75000,
+      "startsAt": "2026-11-19T12:40:00.000Z",
+      "endsAt": "2026-12-04T12:40:00.000Z",
+      "status": "live",
+      "participants": 6120,
+      "leaderboard": [
+        [
+          "fruitbat",
+          88
+        ],
+        [
+          "SunnyD",
+          74
+        ],
+        [
+          "Rell",
+          69
+        ],
+        [
+          "Kiko",
+          62
+        ],
+        [
+          "plumbob",
+          58
+        ]
+      ]
+    },
+    {
+      "id": "t4",
+      "name": "19X Sports Predictor",
+      "gameId": null,
+      "prizePool": 500000,
+      "startsAt": "2026-11-23T12:40:00.000Z",
+      "endsAt": "2026-12-06T12:40:00.000Z",
+      "status": "live",
+      "participants": 42321,
+      "leaderboard": [
+        [
+          "TheGaffer",
+          1420
+        ],
+        [
+          "CornerFlag",
+          1310
+        ],
+        [
+          "xGuru",
+          1288
+        ],
+        [
+          "AwayDay",
+          1199
+        ],
+        [
+          "TikiTaka",
+          1150
+        ]
+      ]
+    }
+  ],
+  "helpArticles": [
+    {
+      "slug": "getting-started",
+      "title": "Getting started with 19xbet365",
+      "category": "Account",
+      "body": "19xbet365 is a free-to-play demonstration platform. Create an account, explore the sportsbook and games, and use virtual credits to try every interaction. Virtual credits have no cash value and cannot be purchased, withdrawn, or exchanged."
+    },
+    {
+      "slug": "virtual-credits",
+      "title": "How virtual credits work",
+      "category": "Wallet",
+      "body": "Virtual credits (VC) are the only balance used on 19xbet365. They are granted for demonstration and cannot be bought or redeemed. Every stake, payout, and adjustment is recorded in your wallet history. Real-money deposits and withdrawals are disabled."
+    },
+    {
+      "slug": "placing-a-bet",
+      "title": "Placing a virtual sports bet",
+      "category": "Sports",
+      "body": "Open any sport, choose a match, then tap one of the odds buttons to add a selection to your bet slip. Enter a stake and confirm. A single selection creates a single bet; two or more create an accumulator. All bets use virtual credits and are limited to demo fixtures."
+    },
+    {
+      "slug": "cash-out",
+      "title": "Cashing out in Crash Orbit",
+      "category": "Games",
+      "body": "After launching a Crash Orbit round, the multiplier starts at 1.00x and climbs. Press Cash Out before the round ends to bank your stake multiplied by the current value. If the round ends first, the stake is lost. Auto cash-out can be set before launch."
+    },
+    {
+      "slug": "provably-fair",
+      "title": "How outcomes are generated",
+      "category": "Fairness",
+      "body": "Playable 19X Originals rounds are generated on the server using cryptographically secure random values. The client never decides an outcome. Completed rounds are recorded in your activity history. Third-party provider titles are disabled until certified integrations are connected."
+    },
+    {
+      "slug": "responsible-play",
+      "title": "Responsible play tools",
+      "category": "Safety",
+      "body": "Use Responsible Gaming in your account to set a daily virtual-credit limit, a session reminder, a cool-off period, or a self-exclusion. These controls apply to this demo and are recorded for transparency."
+    },
+    {
+      "slug": "verification",
+      "title": "Account verification and security",
+      "category": "Security",
+      "body": "Keep your password private. 19xbet365 staff will never ask for your password or a one-time code. You can review active sessions and sign out other devices from Security settings. Two-factor authentication is available as a demonstration control."
+    },
+    {
+      "slug": "referrals",
+      "title": "Inviting friends",
+      "category": "Account",
+      "body": "Share your referral code from your profile. A referred player receives the standard welcome allocation and you receive a referral reward once they complete their first round. Referring a player never grants administrative access."
+    },
+    {
+      "slug": "providers",
+      "title": "Why some games say integration-ready",
+      "category": "Games",
+      "body": "19xbet365 labels third-party titles clearly. An integration-ready game has a complete catalogue page but no live provider session, dealer feed, or real-wager engine. This is not an error: it shows exactly where a licensed provider connection would plug in."
+    },
+    {
+      "slug": "support",
+      "title": "Contacting support",
+      "category": "Support",
+      "body": "Open a support ticket from the Help Centre with your account email and a clear description. For security, never include your password. Response times shown in the support centre are illustrative for this foundation build."
+    }
+  ]
+}
