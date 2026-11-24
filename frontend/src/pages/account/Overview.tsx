@@ -52,7 +52,7 @@ export function AccountOverview() {
           <p>Your virtual-credit wallet, open tickets, and recent rounds in one place.</p>
         </div>
         <div className="account-welcome-actions">
-          <Link to="/instant" className="btn btn-lime btn-sm"><Sparkles size={15} /> Play originals</Link>
+          <Link to="/instant" className="btn btn-primary btn-sm"><Sparkles size={15} /> Play originals</Link>
           <Link to="/sports" className="btn btn-secondary btn-sm">Sportsbook</Link>
         </div>
       </div>

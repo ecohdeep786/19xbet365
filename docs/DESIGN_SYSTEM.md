@@ -77,7 +77,8 @@ Icon sizing follows a 13/15/17/22px ladder. `currentColor` is used so marks inhe
 - White panels with light borders and low shadows.
 - Dark blue ticker and footer.
 - Pale blue page heroes with a subtle grid.
-- Game cards retain dark artwork inside white card frames so original art stays legible.
+- Game cards use illustrated dark cover scenes inside white card frames so original art stays legible and every title is visually identifiable.
+- Primary navigation and actions use the blue family; the white header Join button is the only conversion pill; emerald is a semantic success/accent colour.
 - Sports rows use pale-blue odds buttons, green selected state, blue active underline.
 - Account panels, wallet, support, legal, help and admin content use the same surface hierarchy.
 
@@ -97,13 +98,13 @@ No fake urgency countdowns or flashing alerts.
 
 ## Components
 
-- `Button`: primary blue, lime/green action, secondary light blue, ghost, danger, outline.
+- `Button`: deep-blue primary action, white header conversion button, pale-blue secondary, ghost, danger and outline. Emerald is reserved for success, positive values, selected odds and live/settled cues rather than every call to action.
 - `Badge`: light green/blue/coral/violet/amber/outline.
 - `Input`, `Field`, `Select`, `Textarea`, `checkline`.
 - `Avatar`, `Modal`, `Segmented`, `Skeleton`, `EmptyState`, `ErrorState`, `Stat`, `ProgressBar`, `CopyButton`, `StatusDot`.
 - `ToastProvider`.
 - `BetSlipDrawer` + persistent `BetSlipRail`.
-- `GameCard` + category-specific original SVG `GameArt`.
+- `GameCard` + full-bleed `GameArt` cover scenes. Each cover is a layered, original SVG illustration (rocket orbit, vault, plinko board, dice, wheel, coins, cards, lottery balls, slot reels, racing, live table or instant ticket) with theme gradients, rim light, perspective and title-safe darkening. This gives every catalogue card recognizable cover imagery rather than a single abstract glyph.
 - `MatchRow` / `OddsButton` with pressed, selected, live and finished states. Finished rows show an `FT · settled` badge, final scores and disabled odds.
 - `Bet settlement` toast driven by the WebSocket `bet.settled` event and filtered to the owning account.
 - `AdminHeader`, `AdminScopePill`, `AdminBreadcrumb`.

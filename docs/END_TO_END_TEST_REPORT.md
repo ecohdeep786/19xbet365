@@ -14,7 +14,7 @@
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 VC; referee balance reflects reward | console output |
 | `scripts/capture-screenshots.mjs` | Passed: 23 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
 | Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,647 modules |
-| Playwright real-user journey | Passed | 29/29 checks across registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
+| Playwright real-user journey | Passed | 32/32 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
 | Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, casino, login, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
 
 The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 VC** player balance with 6 seeded rounds and 2 seeded open bets. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.

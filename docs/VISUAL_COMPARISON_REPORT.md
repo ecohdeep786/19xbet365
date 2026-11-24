@@ -47,6 +47,8 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 - Category icons in the desktop navigation, mega menus, casino filter chips and mobile drawer.
 - Dense league-grouped match rows with 1X2 odds, live scores, minutes and visibly selected odds.
 - Game lobbies with category filters, search, sorting, provider labels, favourite hearts and playable/provider-required states.
+- Full-bleed, picture-led game covers on every card, inspired by the reference’s strong tile imagery but drawn from original 19xbet365 scenes and theme tokens.
+- A restrained action palette: deep-blue primary buttons, a white conversion pill in the header, and green used only for positive/settled states.
 - Dense promotion and tournament sections with clear virtual-credit disclosure.
 - Registration, login, account sidebar, wallet ledger, bet history, support, legal and admin routes.
 - Mobile drawer navigation, compact account strip, stacked game tables and one/two-column card layouts.

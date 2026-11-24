@@ -24,6 +24,18 @@ The reference is attractive because it is **predictable**, not because it is lar
 
 ## 2. Interface changes made
 
+### Game cover imagery
+- Replaced single-glyph card art with 12 families of full-bleed, original SVG cover illustrations: rocket orbit, vault, plinko, dice, wheel, coins, cards, lottery, reels, racing, live table and instant ticket.
+- Every playable and provider card now carries a picture-led cover, varied by game theme and selected per live-casino game where appropriate.
+- Covers use layered gradients, perspective, rim light, particles and a title-safe darkening gradient so the card title and provider remain readable.
+- Added a subtle hover scale for pointer users, disabled under `prefers-reduced-motion`.
+
+### Action hierarchy and colour
+- Primary actions now use a deep blue gradient rather than repeating a saturated green everywhere.
+- The header conversion action is a crisp white pill with deep-blue text.
+- Emerald is reserved for success, winning amounts, selected odds and settled/live cues.
+- All-blue/white buttons were rechecked for AA contrast, and the 42px mobile odds targets remain.
+
 ### Typography
 - Kept supplied Sora display / Manrope body fonts only.
 - Added tabular and lining numerals for odds, balances and timestamps.
@@ -55,11 +67,12 @@ The reference is attractive because it is **predictable**, not because it is lar
 
 ## 3. Real-user QA performed
 
-A Playwright/Edge end-to-end run exercised the production build as a new player and then as Master Admin. The final run passed **29/29 checks**.
+A Playwright/Edge end-to-end run exercised the production build as a new player and then as Master Admin. The final run passed **32/32 checks**.
 
 Passed checks included:
 
-- Home renders brand, navigation icons, sport glyphs and team badges.
+- Home renders brand, navigation icons, sport glyphs, team badges and illustrated game covers.
+- Logged-out playable game routes show an account-required panel instead of a misleading 0 VC play surface.
 - Registration creates a player, navigates to the account and shows 10,500 VC.
 - Sports selection opens the bet-slip dialog, receives focus, debits 50 VC and closes after placement.
 - Dice Roll plays and settles with a server result.

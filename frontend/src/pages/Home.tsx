@@ -49,7 +49,7 @@ export function Home() {
               Every 19X round is generated on our server, recorded, and completely free to play.
             </p>
             <div className="hero-actions">
-              <Link to="/instant" className="btn btn-lime btn-lg">Explore originals <ArrowRight size={18} /></Link>
+              <Link to="/instant" className="btn btn-primary btn-lg">Explore originals <ArrowRight size={18} /></Link>
               <Link to="/live" className="btn btn-ghost btn-lg"><span className="live-pulse" /> View live odds</Link>
             </div>
             <div className="hero-trust">

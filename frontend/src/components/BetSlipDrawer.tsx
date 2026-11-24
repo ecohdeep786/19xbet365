@@ -99,7 +99,7 @@ export function BetSlipDrawer() {
                   <Link to="/login" onClick={() => setOpen(false)}>Sign in</Link>
                 </div>
               )}
-              <Button variant="lime" size="lg" loading={busy} onClick={placeBet} className="slip-place">
+              <Button variant="primary" size="lg" loading={busy} onClick={placeBet} className="slip-place">
                 Place virtual bet <ArrowRight size={17} />
               </Button>
               <p className="slip-disclaimer">Demo fixtures only. All stakes and returns are non-redeemable virtual credits. No real-money wagering.</p>

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft, ArrowRight, BadgeCheck, Check, ChevronRight, Clock3, Copy, Heart, Info,
-  Play, ShieldCheck, Sparkles, Star, Trophy, Users, Zap
+  LockKeyhole, Play, ShieldCheck, Sparkles, Star, Trophy, Users, Zap
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
 import { useData } from "../../state/DataContext";
@@ -135,7 +135,7 @@ export function GamePage() {
                 <div className="stage-toolbar-left">
                   <span className={classNames("stage-status", game.playable && "online")}><span className="status-dot" /> {game.playable ? "Game engine online" : "Provider session not configured"}</span>
                   <span className="stage-divider" />
-                  <span className="stage-balance"><span>Virtual balance</span><strong>{vc(user?.balance || 0)}</strong></span>
+                  <span className="stage-balance"><span>{user ? "Virtual balance" : "Player session"}</span><strong>{user ? vc(user.balance) : "Sign in required"}</strong></span>
                 </div>
                 <div className="stage-toolbar-right">
                   {demoMode && <Badge tone="amber">Browser preview</Badge>}
@@ -144,15 +144,19 @@ export function GamePage() {
               </div>
 
               {game.playable ? (
-                <PlayComponent
-                  game={game}
-                  stake={stake}
-                  setStake={setStake}
-                  balance={user?.balance || 0}
-                  onBalance={onBalance}
-                  onSettled={onSettled}
-                  offline={offline}
-                />
+                user ? (
+                  <PlayComponent
+                    game={game}
+                    stake={stake}
+                    setStake={setStake}
+                    balance={user.balance}
+                    onBalance={onBalance}
+                    onSettled={onSettled}
+                    offline={offline}
+                  />
+                ) : (
+                  <GameSignIn gameName={game.name} />
+                )
               ) : (
                 <ProviderPreview game={game} />
               )}
@@ -250,6 +254,23 @@ export function GamePage() {
           </div>
         </section>
       </div>
+    </div>
+  );
+}
+
+function GameSignIn({ gameName }: { gameName: string }) {
+  const location = useLocation();
+  return (
+    <div className="game-signin-gate">
+      <span className="game-signin-icon"><LockKeyhole size={25} /></span>
+      <span className="eyebrow">Account required</span>
+      <h2>Sign in to play {gameName}</h2>
+      <p>Your virtual balance, game rounds, and payouts are recorded against your player account. Sign in or create a free account to begin.</p>
+      <div className="game-signin-actions">
+        <Link to="/login" state={{ from: location.pathname }} className="btn btn-primary">Sign in to play <ArrowRight size={16} /></Link>
+        <Link to="/register" className="btn btn-secondary">Create free account</Link>
+      </div>
+      <span className="game-signin-note"><ShieldCheck size={14} /> No deposits · 10,500 VC welcome allocation · virtual credits only</span>
     </div>
   );
 }

@@ -80,7 +80,7 @@ export function Login() {
         </Field>
         <div className="auth-form-row"><label className="checkline"><input type="checkbox" defaultChecked /> Remember this browser</label><Link to="/forgot-password" className="text-btn">Forgot password?</Link></div>
         {error && <div className="form-error">{error}</div>}
-        <Button variant="lime" size="lg" loading={busy} type="submit" className="full-btn">Sign in <ArrowRight size={17} /></Button>
+        <Button variant="primary" size="lg" loading={busy} type="submit" className="full-btn">Sign in <ArrowRight size={17} /></Button>
       </form>
       <div className="demo-login">
         <span>Demo access</span>

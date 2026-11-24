@@ -688,6 +688,9 @@ code, pre { font-family: "SFMono-Regular", Consolas, monospace; }
 .game-card:hover { transform: translateY(-3px); border-color: rgba(103,247,231,.3); box-shadow: 0 18px 40px rgba(0,0,0,.32); }
 .game-card-link { display: block; position: relative; aspect-ratio: 4/4.85; }
 .game-art { position: relative; width: 100%; height: 100%; overflow: hidden; background: #0b1724; }
+.game-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; transition: transform .45s cubic-bezier(.2,.7,.2,1); transform-origin: center; }
+.game-card:hover .game-scene { transform: scale(1.035); }
+@media (prefers-reduced-motion: reduce) { .game-scene { transition: none; } .game-card:hover .game-scene { transform: none; } }
 .game-art::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 80%, rgba(255,255,255,.05), transparent 45%); }
 .art-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(180deg, rgba(0,0,0,.6), transparent 85%); opacity: .55; }
 .art-glow { position: absolute; width: 150px; height: 150px; border-radius: 50%; filter: blur(60px); opacity: .2; right: 8%; top: 8%; }
