@@ -75,10 +75,11 @@ function useInstantPlay(gameId: string, props: GameProps, minStake = 5) {
 
 function ResultBanner({ result, gameName }: { result: InstantResult | null; gameName: string }) {
   if (!result) return null;
+  const push = Boolean((result.outcome as Record<string, unknown>)?.push);
   return (
-    <div className={classNames("instant-result", result.win ? "win" : "loss")}>
-      <span>{result.win ? <><Trophy size={16} /> Win</> : <><RotateCcw size={15} /> No win</>}</span>
-      <strong>{result.win ? vc(result.payout) : "Try another round"}</strong>
+    <div className={classNames("instant-result", push ? "push" : result.win ? "win" : "loss")}>
+      <span>{push ? <><RotateCcw size={15} /> Push</> : result.win ? <><Trophy size={16} /> Win</> : <><RotateCcw size={15} /> No win</>}</span>
+      <strong>{push ? `${vc(result.payout)} returned` : result.win ? vc(result.payout) : "Try another round"}</strong>
       <small>{result.message}</small>
       <em>{gameName} · coins</em>
     </div>
@@ -199,7 +200,7 @@ export function CoinFlipGame(props: GameProps) {
 }
 
 // Wheel ----------------------------------------------------------------------
-const WHEEL_SEGMENTS = [0, 1.5, 0, 1.2, 2, 0, 1.5, 0, 1.2, 3, 0, 1.5, 1.2, 0, 2, 0, 1.5, 0, 1.2, 5, 0, 1.5, 1.2, 0];
+const WHEEL_SEGMENTS = [0, 1.5, 0, 1.2, 2, 0, 1.5, 0, 1.2, 3, 0, 1.5, 1.2, 0, 0, 0, 1.5, 0, 1.2, 5, 0, 1.5, 1.2, 0];
 const SEGMENT_ANGLE = 360 / WHEEL_SEGMENTS.length;
 const WHEEL_GRADIENT = (() => {
   const colors = WHEEL_SEGMENTS.map((value, index) => index % 2 === 0 ? (value === 0 ? "#122439" : "#1d4f63") : (value === 0 ? "#0d1b2b" : "#2b6b7a"));
@@ -437,7 +438,7 @@ export function LuckyTenGame(props: GameProps) {
       <ResultBanner result={result} gameName={game.name} />
       <div className="game-control-grid">
         <StakeBox stake={stake} setStake={setStake} balance={balance} disabled={busy}>
-          <div className="chance-row"><span>Selected digit <strong>{pick}</strong></span><span>Payout <strong>8.80x</strong></span></div>
+          <div className="chance-row"><span>Selected digit <strong>{pick}</strong></span><span>Payout <strong>9.00x</strong></span></div>
           <Button variant="lime" size="lg" loading={busy} onClick={() => play({ pick })} className="game-action"><Star size={18} /> Draw for {vc(stake)}</Button>
         </StakeBox>
         <div className="game-facts">
@@ -488,7 +489,7 @@ export function NovaFruitsGame(props: GameProps) {
       <div className="slots-stage">
         <span className="stage-live"><span className="live-pulse" /> {busy ? "REELS SPINNING" : result ? "REELS SETTLED" : "READY"}</span>
         <div className="slot-machine">
-          <div className="slot-machine-top"><span>NOVA FRUITS</span><em>3 × 3</em></div>
+          <div className="slot-machine-top"><span>{game.name.toUpperCase()}</span><em>3 × 3</em></div>
           <SlotGrid grid={grid} spinning={busy} />
           <div className="slot-paylines">
             {[0, 1, 2].map((row) => <span key={row} className={lines.some((line) => line.row === row && line.match) ? "win" : ""}>Line {row + 1}</span>)}
@@ -515,12 +516,21 @@ export function NovaFruitsGame(props: GameProps) {
 }
 
 // Derby ----------------------------------------------------------------------
-const RUNNERS = ["Nova Bolt", "Atlas Wind", "Kestrel", "Orion Dash", "Vega Storm", "Comet Trail", "Lyra Swift", "Nyx Runner"];
-const DERBY_ODDS = [3.1, 3.8, 4.6, 5.7, 7.2, 9.4, 11.5, 14.0];
+const RUNNER_SETS: Record<string, { runners: string[]; odds: number[] }> = {
+  "velocity-derby": { runners: ["Nova Bolt", "Atlas Wind", "Kestrel", "Orion Dash", "Vega Storm", "Comet Trail"], odds: [2.5, 4, 6, 9, 14, 25] },
+  "speed-derby": { runners: ["Nova Bolt", "Atlas Wind", "Kestrel", "Orion Dash", "Vega Storm", "Comet Trail", "Lyra Swift", "Nyx Runner"], odds: [3.2, 4.6, 6.2, 8.2, 11, 15.5, 21, 32] },
+  "virtual-football": { runners: ["Mumbai Mariners", "Delhi Dynamos", "Bengaluru Blaze", "Chennai Kings", "Kolkata Tigers", "Punjab Panthers"], odds: [2.5, 4, 6, 9, 14, 25] },
+  "virtual-basketball": { runners: ["Coastal Hawks", "Metro Kings", "Desert Suns", "Northern Giants", "Capital Storm", "Lake City Five"], odds: [2.5, 4, 6, 9, 14, 25] },
+  "virtual-tennis": { runners: ["A. Petrov", "M. Silva", "K. Tanaka", "L. Moreau", "R. Okafor", "S. Novak"], odds: [2.5, 4, 6, 9, 14, 25] },
+  "greyhound-sprint": { runners: ["Rapid Ember", "Silver Arrow", "Night Comet", "Copper Belle", "Storm Chaser", "Blue Rocket"], odds: [2.5, 4, 6, 9, 14, 25] }
+};
 
 export function DerbyGame(props: GameProps) {
   const { game, stake, setStake, balance } = props;
-  const count = game.id === "speed-derby" ? 8 : 6;
+  const set = RUNNER_SETS[game.id] || RUNNER_SETS["velocity-derby"];
+  const runners = set.runners;
+  const odds = set.odds;
+  const count = runners.length;
   const [runner, setRunner] = useState(0);
   const [racing, setRacing] = useState(false);
   const { busy, error, result, play } = useInstantPlay(game.id, props);
@@ -540,7 +550,7 @@ export function DerbyGame(props: GameProps) {
       <div className="derby-stage">
         <div className="derby-top">
           <span className="stage-live"><span className="live-pulse" /> {racing ? "RACE IN PROGRESS" : result ? "PHOTO FINISH" : "PICK YOUR RUNNER"}</span>
-          <BadgeTone>{count} runners · virtual track</BadgeTone>
+          <BadgeTone>{count} competitors — virtual event</BadgeTone>
         </div>
         <div className="derby-track">
           {Array.from({ length: count }, (_, index) => {
@@ -549,25 +559,25 @@ export function DerbyGame(props: GameProps) {
             return (
               <div key={index} className={classNames("derby-lane", winner === index && !racing && result && "winner", runner === index && "selected")}>
                 <span className="lane-number">{index + 1}</span>
-                <span className="lane-name">{RUNNERS[index]}</span>
+                <span className="lane-name">{runners[index]}</span>
                 <div className="lane-track">
                   <span className="lane-progress" style={{ width: `${progress}%`, transition: `width ${racing ? 0.4 : 1.4}s ease` }} />
                   <span className="lane-runner" style={{ left: `${progress}%`, transition: `left ${racing ? 0.4 : 1.4}s ease` }} />
                 </div>
-                <span className="lane-odds">{DERBY_ODDS[index].toFixed(2)}x</span>
-                <button className={classNames("lane-pick", runner === index && "active")} onClick={() => setRunner(index)} disabled={busy || racing} aria-label={`Pick ${RUNNERS[index]}`}>
+                <span className="lane-odds">{odds[index].toFixed(2)}x</span>
+                <button className={classNames("lane-pick", runner === index && "active")} onClick={() => setRunner(index)} disabled={busy || racing} aria-label={`Pick ${runners[index]}`}>
                   {runner === index ? "PICKED" : "PICK"}
                 </button>
               </div>
             );
           })}
         </div>
-        {result && !racing && <p className={result.win ? "result-win" : "result-loss"}>{result.win ? `${RUNNERS[winner!]} won — your pick paid ${vc(result.payout)}.` : `${RUNNERS[winner!]} won — your pick finished ${order.indexOf(runner) + 1}.`}</p>}
+        {result && !racing && <p className={result.win ? "result-win" : "result-loss"}>{result.win ? `${runners[winner!]} won — your pick paid ${vc(result.payout)}.` : `${runners[winner!]} won — your pick finished ${order.indexOf(runner) + 1}.`}</p>}
       </div>
       <ResultBanner result={result} gameName={game.name} />
       <div className="game-control-grid">
         <StakeBox stake={stake} setStake={setStake} balance={balance} disabled={busy || racing}>
-          <div className="chance-row"><span>Runner <strong>{RUNNERS[runner]}</strong></span><span>Pays <strong>{DERBY_ODDS[runner].toFixed(2)}x</strong></span></div>
+          <div className="chance-row"><span>Runner <strong>{runners[runner]}</strong></span><span>Pays <strong>{odds[runner].toFixed(2)}x</strong></span></div>
           <Button variant="lime" size="lg" loading={busy || racing} onClick={() => play({ runner })} className="game-action"><Zap size={18} /> Race for {vc(stake)}</Button>
         </StakeBox>
         <div className="game-facts">
@@ -585,6 +595,88 @@ export function DerbyGame(props: GameProps) {
 
 function BadgeTone({ children }: { children: ReactNode }) {
   return <span className="badge badge-outline">{children}</span>;
+}
+
+// Instant draw ---------------------------------------------------------------
+export function InstantDrawGame(props: GameProps) {
+  const { game, stake, setStake, balance } = props;
+  const [picks, setPicks] = useState<number[]>([1, 2, 3]);
+  const [target, setTarget] = useState("2.00");
+  const [steps, setSteps] = useState(3);
+  const { busy, error, result, play } = useInstantPlay(game.id, props);
+  const symbols = (result?.outcome.symbols as string[]) || [];
+  const togglePick = (number: number) => {
+    if (game.id !== "keno-blitz") return;
+    setPicks((current) => current.includes(number) ? current.filter((value) => value !== number) : current.length >= 3 ? current : [...current, number]);
+  };
+  const launch = () => play(game.id === "keno-blitz" ? { picks } : game.id === "limbo-velocity" ? { target: Number(target) } : game.id === "tower-climb" ? { steps } : {});
+  return (
+    <div className="generic-game instant-draw-game">
+      <div className="generic-stage">
+        <span className="stage-live"><span className="live-pulse" /> 19X INSTANT</span>
+        <h3>{game.name}</h3>
+        <p>{game.tagline}</p>
+        {game.id === "keno-blitz" && <div className="keno-grid">{Array.from({ length: 10 }, (_, index) => { const number = index + 1; return <button key={number} className={classNames("keno-number", picks.includes(number) && "active")} onClick={() => togglePick(number)} disabled={busy}>{number}</button>; })}</div>}
+        {game.id === "scratch-nova" && <div className="scratch-grid">{Array.from({ length: 9 }, (_, index) => <span key={index} className={classNames("scratch-cell", symbols[index] && "revealed")}>{symbols[index] || "?"}</span>)}</div>}
+        {game.id === "limbo-velocity" && <label className="limbo-control">Target multiplier <input className="input" type="number" min={1.2} max={100} step={0.1} value={target} onChange={(event) => setTarget(event.target.value)} disabled={busy} /></label>}
+        {game.id === "tower-climb" && <div className="tower-control">{Array.from({ length: 5 }, (_, index) => { const value = index + 1; return <button key={value} className={classNames("tower-step", steps === value && "active")} onClick={() => setSteps(value)} disabled={busy}>{value}</button>; })}<span>{steps} floors</span></div>}
+        <ResultBanner result={result} gameName={game.name} />
+      </div>
+      <div className="game-control-grid">
+        <StakeBox stake={stake} setStake={setStake} balance={balance} disabled={busy}>
+          <Button variant="lime" size="lg" loading={busy} onClick={launch} className="game-action"><Sparkles size={18} /> Play for {vc(stake)}</Button>
+        </StakeBox>
+        <div className="game-facts">
+          <div><span>Max win</span><strong>{game.maxWin}</strong></div>
+          <div><span>Volatility</span><strong>{game.volatility}</strong></div>
+          <div><span>Target RTP</span><strong>{game.rtp ? `${game.rtp}%` : "—"}</strong></div>
+          <div><span>Engine</span><strong>19X server RNG</strong></div>
+        </div>
+      </div>
+      {error && <div className="game-error">{error}</div>}
+    </div>
+  );
+}
+
+// Casino table games ---------------------------------------------------------
+function CardFace({ card }: { card: { rank: number; suit: string } }) {
+  return <span className="table-card">{card.rank === 11 ? "J" : card.rank === 12 ? "Q" : card.rank === 13 ? "K" : card.rank === 14 ? "A" : card.rank}{card.suit}</span>;
+}
+
+export function TableGame(props: GameProps) {
+  const { game, stake, setStake, balance } = props;
+  const [bet, setBet] = useState(game.id === "astra-roulette-live" ? "red" : game.id === "sicbo-nova" ? "big" : "player");
+  const { busy, error, result, play } = useInstantPlay(game.id, props);
+  const options = game.id === "astra-roulette-live"
+    ? ["red", "black", "even", "odd", "high", "low"]
+    : game.id === "sicbo-nova" ? ["big", "small", "odd", "even"]
+    : game.id === "baccarat-royale" || game.id === "speed-baccarat" ? ["player", "banker", "tie"]
+    : [];
+  const noBetChoice = game.id === "blackjack-azure" || game.id === "holdem-prime";
+  const outcome = result?.outcome || {};
+  return (
+    <div className="table-game">
+      <div className="table-stage">
+        <div className="table-top"><span className="stage-live"><span className="live-pulse" /> RNG TABLE</span><BadgeTone>{game.name}</BadgeTone></div>
+        <div className="table-felt">
+          {game.id === "astra-roulette-live" && <div className="roulette-result"><span>Number</span><strong>{outcome.number ?? "—"}</strong><em>{outcome.color ?? ""}</em></div>}
+          {game.id === "sicbo-nova" && <div className="dice-result-row">{(outcome.dice as number[] || []).map((die, index) => <span key={index} className="die">{die}</span>)}<strong>{outcome.total ?? "—"}</strong></div>}
+          {(game.id === "baccarat-royale" || game.id === "speed-baccarat") && <div className="table-hands"><div><span>Player {outcome.playerTotal ?? "—"}</span><div className="table-cards">{(outcome.player as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div><div><span>Banker {outcome.bankerTotal ?? "—"}</span><div className="table-cards">{(outcome.banker as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div></div>}
+          {game.id === "blackjack-azure" && <div className="table-hands"><div><span>You {outcome.playerTotal ?? "—"}</span><div className="table-cards">{(outcome.player as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div><div><span>Dealer {outcome.dealerTotal ?? "—"}</span><div className="table-cards">{(outcome.dealer as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div></div>}
+          {game.id === "holdem-prime" && <div className="holdem-result"><span className="table-caption">Board</span><div className="table-cards">{(outcome.board as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div><div className="table-hands"><div><span>You {outcome.playerHand ? `· ${outcome.playerHand}` : ""}</span><div className="table-cards">{(outcome.player as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div><div><span>Dealer {outcome.dealerHand ? `· ${outcome.dealerHand}` : ""}</span><div className="table-cards">{(outcome.dealer as any[] || []).map((card, index) => <CardFace card={card} key={index} />)}</div></div></div></div>}
+          <ResultBanner result={result} gameName={game.name} />
+        </div>
+        <div className="table-options">{options.map((option) => <button key={option} className={classNames("filter-chip", bet === option && "active")} onClick={() => setBet(option)} disabled={busy}>{option}</button>)}</div>
+      </div>
+      <div className="game-control-grid">
+        <StakeBox stake={stake} setStake={setStake} balance={balance} disabled={busy}>
+          <Button variant="lime" size="lg" loading={busy} onClick={() => play(noBetChoice ? {} : { bet })} className="game-action"><Sparkles size={18} /> {noBetChoice ? "Deal hand for" : `Play ${bet} for`} {vc(stake)}</Button>
+        </StakeBox>
+        <div className="game-facts"><div><span>Max win</span><strong>{game.maxWin}</strong></div><div><span>Volatility</span><strong>{game.volatility}</strong></div><div><span>Target RTP</span><strong>{game.rtp ? `${game.rtp}%` : "—"}</strong></div><div><span>Engine</span><strong>19X server RNG</strong></div></div>
+      </div>
+      {error && <div className="game-error">{error}</div>}
+    </div>
+  );
 }
 
 export function GenericInstantGame(props: GameProps) {

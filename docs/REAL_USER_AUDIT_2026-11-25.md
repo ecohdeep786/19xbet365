@@ -239,3 +239,7 @@ The next production slice is implemented in the sandbox:
 - Revenue & risk now includes fantasy GGR, fantasy fees, withdrawals paid, pending withdrawal value and open fantasy entries.
 - Every KYC, withdrawal and fantasy action is audited.
 - Real money remains hard-gated: `realMoneyEnabled=false`, `PAYMENTS_LIVE_ENABLED` is not set and the deployment still requires licensing/KYC/payment onboarding.
+
+## Post-audit update — 26 November 2026
+
+The live-user checks above remain valid for the player, wallet, fantasy, KYC, withdrawal and admin journeys. Game coverage has since expanded: all **44** catalogue titles are playable 19X Originals, including 18 slots, six virtuals, four instant games and seven RNG tables. Multi-step Blackjack Azure (deal/hit/stand) was added and verified by `scripts/blackjack-smoke.mjs`; `scripts/all-games-smoke.mjs` and `scripts/all-games-ui-smoke.mjs` now cover all 44 titles. Real-money and certified-provider gates are unchanged.

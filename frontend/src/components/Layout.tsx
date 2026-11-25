@@ -281,7 +281,7 @@ export function Header() {
             <span><Gift size={12} /> New player haul: 10,500 coins</span>
             <span><ShieldCheck size={12} /> Sandbox play · no real-money wagering</span>
             <span><Trophy size={12} /> Altitude Week is live</span>
-            <span><Gamepad2 size={12} /> 11 playable 19X Originals</span>
+            <span><Gamepad2 size={12} /> 44 playable 19X Originals</span>
             <span><Zap size={12} /> Server-authoritative coin play</span>
           </div>
         </div>
@@ -357,7 +357,7 @@ export function Footer() {
       <div className="footer-shell">
         <div className="footer-brand">
           <Logo />
-          <p>An independent, coin gaming platform. Built with server-authoritative play, transparent limits, and a clear line between what is live and what requires a licensed provider.</p>
+          <p>An independent, coin gaming platform. Built with server-authoritative play, transparent limits, and a clear line between playable 19X Originals and certified provider integration.</p>
           <div className="footer-trust">
             <span><ServerCog size={15} /> Server-authoritative</span>
             <span><Coins size={15} /> Non-redeemable coins</span>

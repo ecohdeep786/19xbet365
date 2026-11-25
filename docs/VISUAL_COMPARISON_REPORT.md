@@ -70,7 +70,7 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 - Sports/favourites-style left filter rail with counts.
 - Original per-sport glyphs, deterministic club badges and provider monograms give dense lists the same instant scanning cues as the reference without copying real crests or provider logos.
 - Dense league-grouped match rows with 1X2 odds, live scores, minutes and visibly selected odds.
-- Game lobbies with category filters, search, sorting, provider labels, favourite hearts and playable/provider-required states.
+- Game lobbies with category filters, search, sorting, original-game labels, favourite hearts and playable states.
 - Full-bleed, picture-led original game covers with title-safe darkening.
 - Compact page titles, white policy/help cards and a familiar account sidebar.
 - Mobile drawer navigation, compact account strip, stacked game tables and one/two-column card layouts.
@@ -84,8 +84,8 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Hero | Marketing carousel with third-party banners | Original orbit hero and coin-play story |
 | Typography | Roboto family, very low-contrast muted labels | Roboto / Roboto Condensed, with accessible contrast tokens |
 | Accent green | Bright lime with white text | Bright lime for decoration; darker accessible green `#557d1d` for white-text actions |
-| Live casino | Live dealer photography/video | Provider preview only; no fabricated live feed |
-| Provider games | Many certified providers | 33 clearly labelled integration-ready entries |
+| Live casino | Live dealer photography/video | In-house RNG tables; no fabricated live feed |
+| Provider games | Many certified providers | All 44 titles are original 19X RNG games |
 | Real money | Deposits, withdrawals, cash bonuses | Sandbox/manual-review deposit, KYC and withdrawal flow; automated payout disabled until compliance gates |
 | Sports markets | Many markets per fixture | 1X2 foundation only; no fake markets |
 | Header language | Country/currency/language selector | Static `EN · COINS` chip; documented gap |

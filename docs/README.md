@@ -1,5 +1,13 @@
 # 19xbet365 Documentation Index
 
+- [Real-User Audit — 25 Nov 2026](REAL_USER_AUDIT_2026-11-25.md)
+- [Fantasy Product Plan](FANTASY_PRODUCT_PLAN.md)
+- [1xBet Revenue and Control Model](IXBET_REVENUE_AND_CONTROL_MODEL.md)
+- [Current Product Analysis](CURRENT_PRODUCT_ANALYSIS.md)
+- [Product Gap Analysis](PRODUCT_GAP_ANALYSIS.md)
+- [Master Execution Plan](MASTER_EXECUTION_PLAN.md)
+- [Known Blockers](KNOWN_BLOCKERS.md)
+- [Astra Handoff](ASTRA_HANDOFF.md)
 - [Reference Product Analysis](REFERENCE_PRODUCT_ANALYSIS.md)
 - [Product Parity Matrix](PRODUCT_PARITY_MATRIX.md)
 - [Design System](DESIGN_SYSTEM.md)

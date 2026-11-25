@@ -1,8 +1,8 @@
 # 19xbet365
 
-19xbet365 is an independent gaming platform with a real-money-ready coin wallet and sandbox financial rails. It includes a sportsbook, casino lobby, live-casino preview, virtual sports, playable 19X Originals, player accounts, deposit/QR review, support, legal pages, and a protected Master Admin control room.
+19xbet365 is an independent gaming platform with a real-money-ready coin wallet and sandbox financial rails. It includes a sportsbook, casino lobby, live-casino tables, virtual sports, 44 playable 19X Originals, player accounts, deposit/QR review, support, legal pages, and a protected Master Admin control room.
 
-**Important:** 19xbet365 currently runs a **sandbox coin economy**. The production deposit path is implemented: players can submit a QR payment reference, Master Admin can verify it, and a configurable deposit bonus is credited with ledger and audit records. Real cash collection remains hard-gated behind licensing, KYC/AML, payment onboarding and `PAYMENTS_LIVE_ENABLED=true`; withdrawals, cash redemption and real-money wagering are disabled. Provider-required game pages are clearly labelled and cannot be played without a certified integration.
+**Important:** 19xbet365 currently runs a **sandbox coin economy**. The production deposit path is implemented: players can submit a QR payment reference, Master Admin can verify it, and a configurable deposit bonus is credited with ledger and audit records. Real cash collection remains hard-gated behind licensing, KYC/AML, payment onboarding and `PAYMENTS_LIVE_ENABLED=true`; withdrawals, cash redemption and real-money wagering are disabled. Every catalogue title is an original 19X server-RNG game; no certified third-party provider or live-dealer session is connected.
 
 ## Design system
 
@@ -132,11 +132,18 @@ Identity verification and withdrawals run through **Account → Verification** a
 
 ## What is playable
 
-The server-authoritative game engine currently supports 11 19X Originals:
+All **44 catalogue titles** are playable 19X Originals. Outcomes are generated on the server from cryptographically secure random values; settled rounds are immutable and recorded in player activity. There are no provider-required placeholder titles in the lobby.
 
-`crash-orbit`, `mines-vault`, `plinko-drop`, `dice-roll`, `wheel-of-astra`, `coin-flip`, `hi-lo`, `lucky-ten`, `nova-fruits`, `velocity-derby`, and `speed-derby`.
+| Family | Titles | Engine |
+| --- | --- | --- |
+| Originals | Crash Orbit, Mines Vault, Plinko Drop, Dice Roll, Wheel of 19X, Coinflip, Hi-Lo, Lucky Ten | Dedicated server engines with 90-99% target RTP |
+| Slots | Nova Fruits plus 17 catalogue slots | Shared three-reel, three-payline slot engine; 95.6% target RTP, 180x max |
+| Virtuals | Velocity Derby, Speed Derby, Virtual Football, Virtual Basketball, Virtual Tennis, Greyhound Sprint | Simulated six- or eight-competitor events with calibrated odds and visual replay |
+| Instant | Keno Blitz, Scratch Nova, Limbo Velocity, Tower Climb | Server-generated draw, scratch, target and step games |
+| Tables | Roulette, Blackjack, Baccarat, Speed Baccarat, Sic Bo, Dream Wheel, Texas Hold'em Prime | RNG table engines; blackjack uses a six-deck shoe and multi-step hit/stand rounds |
+| Crash | Crash Orbit, Airball | Multiplier curve with manual and auto cash-out |
 
-Provider-required catalogue titles (live casino, provider slots, some virtuals) return `provider_required` from the play API. Their pages explain what is missing rather than simulating a fake live feed.
+The six live-casino titles are RNG tables built in-house, **not live-dealer feeds**. Blackjack currently offers hit and stand; doubling and splitting are not available at this table. Target RTP and max-win labels on each game page match the implemented engine maths.
 
 ## Admin capabilities
 
@@ -156,7 +163,8 @@ Provider-required catalogue titles (live casino, provider slots, some virtuals) 
 - **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Withdrawals are manual-review only: a Master Admin approves the request and records an external payment reference; automated payout execution is not implemented and `realMoneyEnabled` remains hard-locked.
 - **Manual KYC.** Identity verification is a manual review workflow. A production launch requires an approved KYC provider, encrypted document handling, sanctions/PEP screening and geo eligibility.
 - **Demo fantasy data.** Player pools, salaries and scoring lines are seeded demonstration data. Paid contests require an authorized player-stat feed and jurisdiction-specific fantasy rules.
-- **No certified provider integrations.** Provider titles are integration-ready catalogue pages only.
+- **No certified third-party provider games.** All 44 catalogue titles are original 19X RNG games. Certified 1xBet/provider parity, live-dealer feeds and independently tested game maths require provider contracts and certification; none are connected.
+- **Simplified table rules.** Blackjack offers hit/stand only (no double or split). Baccarat uses standard third-card rules with no commission on the banker bet. Hold'em is a player-vs-dealer RNG table, not a multiplayer poker room.
 - **Demo fixtures and demo settlement.** Sports fixtures and odds are seeded demonstration data. A server-side worker starts upcoming fixtures, finishes live fixtures after a simulated period, and settles 1X2 singles/accumulators with generated final scores. There is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
 - **Sandbox coins.** All balances and prizes are non-redeemable and have no cash value.
 - **Demonstration security controls.** Two-factor preference is stored, but no authenticator is provisioned.
@@ -168,13 +176,18 @@ Smoke tests live in `scripts/`:
 
 ```bash
 node scripts/api-smoke.mjs
+node scripts/all-games-smoke.mjs
+node scripts/all-games-ui-smoke.mjs
+node scripts/blackjack-smoke.mjs
+node scripts/responsive-game-audit.mjs
 node scripts/game-smoke.mjs
 node scripts/security-smoke.mjs
 node scripts/settlement-smoke.mjs
 node scripts/deposit-smoke.mjs
+node scripts/fantasy-smoke.mjs
 ```
 
-`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `game-smoke.mjs` plays every supported original and checks settlement. `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, provider-required responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `deposit-smoke.mjs` submits a sandbox QR request, approves it as Master Admin, verifies the tiered deposit bonus and both ledger entries, then tests player cancellation, admin rejection and the live-collection activation gate. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the coin reward flow.
+`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `all-games-smoke.mjs` plays all 44 catalogue games through the API and verifies settlement for each; `all-games-ui-smoke.mjs` loads every game page and plays a representative sample, including multi-step blackjack; `blackjack-smoke.mjs` checks deal, hit, stand, stale-hand refunds and double-settle rejection; `responsive-game-audit.mjs` checks all 44 game pages and the main lobby routes at five widths for horizontal overflow and console errors. `game-smoke.mjs` covers the original 11 titles; `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, invalid-game/stake responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `deposit-smoke.mjs` submits a sandbox QR request, approves it as Master Admin, verifies the tiered deposit bonus and both ledger entries, then tests player cancellation, admin rejection and the live-collection activation gate. `fantasy-smoke.mjs` covers lineup entry, scoring and settlement. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the coin reward flow.
 
 The demo settlement worker runs every 60 seconds by default and is controlled by `DEMO_MATCH_MINUTES` (default 90), `DEMO_SETTLEMENT_INTERVAL_MS` (default 60000) and `DEMO_SETTLEMENT=off` in `backend/.env`.
 

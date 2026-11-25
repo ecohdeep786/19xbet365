@@ -30,7 +30,7 @@ const COPY: Record<Mode, { kicker: string; title: string; body: string }> = {
   virtuals: {
     kicker: "Virtual sports",
     title: "Fast events. Instant outcomes.",
-    body: "Original virtual racing and simulated sports titles. Playable originals are labelled; provider-required titles show their integration state."
+    body: "Original virtual racing and simulated sports titles, all playable. The events are server-generated; no real teams or live feed are involved."
   }
 };
 
@@ -271,7 +271,7 @@ function VirtualsContent({ games, matches }: { games: ReturnType<typeof useData>
         <div>
           <span className="eyebrow"><Zap size={13} /> Simulated sport</span>
           <h2>Short cycles. Fast results.</h2>
-          <p>Virtual events run on compressed schedules. Playable originals settle instantly; provider titles are integration-ready only.</p>
+          <p>Virtual events run on compressed schedules. Every event settles instantly and is recorded by the server.</p>
         </div>
         <div className="virtuals-badge">
           <span>Settlement</span>

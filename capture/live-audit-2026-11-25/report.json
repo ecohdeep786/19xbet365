@@ -1,14 +1,14 @@
 {
-  "email": "audit.1795630898027@19xbet365.test",
+  "email": "audit.1795634075668@19xbet365.test",
   "password": "Audit#2026",
-  "reference": "AUD30898027",
+  "reference": "AUD34075668",
   "state": {
     "startBalance": "10,500.00 coins",
     "fantasyRoute": "http://127.0.0.1:4000/#/fantasy",
     "selectionOdds": "1\n2.05\nAC Verona home odds, AC Verona vs Torino Nova",
     "afterBetBalance": "10,400.00 coins",
     "adminSeesDeposit": true,
-    "finalBalance": "10,999.00 coins",
+    "finalBalance": "10,900.00 coins",
     "gates": {
       "/api/verification": 200,
       "/api/withdrawals/config": 200,
@@ -66,7 +66,7 @@
     {
       "name": "dice round settles",
       "pass": true,
-      "detail": "WIN"
+      "detail": "NO WIN"
     },
     {
       "name": "wallet shows bet and game ledger entries",
@@ -86,7 +86,7 @@
     {
       "name": "deposit request submitted",
       "pass": true,
-      "detail": "AUD30898027"
+      "detail": "AUD34075668"
     },
     {
       "name": "responsible-play limit saves",
@@ -111,7 +111,7 @@
     {
       "name": "master admin sees deposit request",
       "pass": true,
-      "detail": "AUD30898027"
+      "detail": "AUD34075668"
     },
     {
       "name": "master admin approves deposit",
@@ -121,12 +121,12 @@
     {
       "name": "deposit appears in player ledger",
       "pass": true,
-      "detail": "AUD30898027"
+      "detail": "AUD34075668"
     },
     {
       "name": "final balance includes deposit/bonus",
       "pass": true,
-      "detail": "10,999.00 coins"
+      "detail": "10,900.00 coins"
     },
     {
       "name": "KYC endpoint exists",

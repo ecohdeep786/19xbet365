@@ -15,9 +15,10 @@ import { Badge, Button, EmptyState, ErrorState, Skeleton } from "../../component
 import { classNames, gameCategoryLabel, number, relative, vc } from "../../lib/format";
 import { CrashGame } from "./CrashGame";
 import { MinesGame } from "./MinesGame";
+import { BlackjackGame } from "./BlackjackGame";
 import {
-  CoinFlipGame, DerbyGame, DiceGame, GenericInstantGame, HiLoGame, LuckyTenGame,
-  NovaFruitsGame, PlinkoGame, WheelGame
+  CoinFlipGame, DerbyGame, DiceGame, GenericInstantGame, HiLoGame, InstantDrawGame, LuckyTenGame,
+  NovaFruitsGame, PlinkoGame, TableGame, WheelGame
 } from "./InstantGames";
 
 export function GamePage() {
@@ -33,15 +34,29 @@ export function GamePage() {
 
   const game = id ? gamesById.get(id) : undefined;
   const playableComponent = useMemo(() => {
+    if (game?.category === "slots") return NovaFruitsGame;
+    if (game?.category === "virtuals") return DerbyGame;
     switch (game?.id) {
       case "crash-orbit": return CrashGame;
+      case "airball-crash": return CrashGame;
       case "mines-vault": return MinesGame;
       case "plinko-drop": return PlinkoGame;
       case "dice-roll": return DiceGame;
       case "wheel-of-astra": return WheelGame;
+      case "dream-wheel-live": return WheelGame;
       case "coin-flip": return CoinFlipGame;
       case "hi-lo": return HiLoGame;
       case "lucky-ten": return LuckyTenGame;
+      case "blackjack-azure": return BlackjackGame;
+      case "keno-blitz":
+      case "scratch-nova":
+      case "limbo-velocity":
+      case "tower-climb": return InstantDrawGame;
+      case "astra-roulette-live":
+      case "baccarat-royale":
+      case "holdem-prime":
+      case "sicbo-nova":
+      case "speed-baccarat": return TableGame;
       case "nova-fruits": return NovaFruitsGame;
       case "velocity-derby":
       case "speed-derby": return DerbyGame;
@@ -154,6 +169,7 @@ export function GamePage() {
               {game.playable ? (
                 user ? (
                   <PlayComponent
+                    key={game.id}
                     game={game}
                     stake={stake}
                     setStake={setStake}

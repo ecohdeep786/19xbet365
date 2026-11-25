@@ -14,15 +14,15 @@
 
 6. **Sportsbook foundation supports 1X2 only.** No double chance, totals, BTTS, team wins, live market suspension engine, or cash-out.
 7. **Sports settlement is demo-only.** A server-side worker starts upcoming fixtures, finishes live fixtures after a simulated duration, and settles 1X2 singles/accumulators with generated final scores. There is no real sports feed, live-market suspension, or multi-market settlement; results are demonstration data and are recorded in the audit trail.
-8. **Provider games are integration-ready, not playable.** They return `409 provider_required`; no provider sessions, live dealer feeds, or certified outcomes exist.
-9. **Live casino is a preview.** No dealer video, live table, or wagering session is active.
+8. **All 44 catalogue games are 19X Originals, not certified third-party provider games.** Every title is playable with server-side RNG. Certified provider parity, live-dealer video feeds and independently certified game maths require provider contracts and certification; none are connected.
+9. **Table rules are intentionally limited.** Blackjack offers hit and stand only (no double/split); baccarat uses standard third-card rules with a 1.95x banker payout instead of commission; Hold'em is player-vs-dealer, not a multiplayer poker room. These tables are RNG products, not live-dealer feeds.
 10. **Language selection is not implemented.** Content is English-only; translation catalogues and locale persistence are required.
 11. **Save/load bet slip is not implemented.** Current slip is in-memory; refreshing clears it.
 12. **Registration is email/password only.** No SMS, social, phone, or email verification flow.
 13. **Password reset is manual.** The request is recorded in account notifications; no transactional email delivery.
 14. **2FA is only a stored preference.** No authenticator/SMS challenge is provisioned.
-15. **KYC document upload is absent.** Only the policy and disabled-state messaging exist.
-16. **Provider game art is CSS/SVG**, not licensed provider artwork; this is deliberate to avoid unauthorized assets.
+15. **KYC is a manual workflow.** Document metadata is submitted and reviewed by Master Admin; there is no integrated identity provider, sanctions/PEP screening, liveness check, or encrypted document-vault service.
+16. **Game art is CSS/SVG**, not licensed provider artwork; this is deliberate to avoid unauthorized assets.
 17. **No live chat provider.** Support is ticket/thread based.
 18. **No automated promo engine.** Promotions communicate terms but do not pay automatically.
 19. **No automated tournament qualification.** Standings are seeded demo data.
@@ -50,4 +50,4 @@
 
 ## Acceptance position
 
-The public, player, game-engine, support, account, RBAC, admin, audit, and responsive foundations are implemented and tested. Real-money, provider, email/SMS, KYC, multilingual, and automated campaign/settlement capabilities remain external or explicitly disabled. These blockers must stay visible in any production review.
+The public, player, game-engine, support, account, RBAC, admin, audit, and responsive foundations are implemented and tested, and all 44 catalogue games are playable 19X Originals. Real-money activation, certified provider parity, integrated KYC/AML and automated payouts remain external or explicitly disabled. These blockers must stay visible in any production review.

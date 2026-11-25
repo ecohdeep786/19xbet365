@@ -25,7 +25,8 @@ evidence.playerDepositAdmin = (await req("/api/admin/deposits", {}, 403)).data.m
 evidence.playerVerification = (await req("/api/verification")).data.verification.status;
 evidence.playerWithdrawalConfig = Boolean((await req("/api/withdrawals/config")).data.config);
 evidence.playerComplianceDenied = (await req("/api/admin/compliance/kyc", {}, 403)).data.message;
-evidence.providerRequired = (await req("/api/games/astra-roulette-live/play", { method: "POST", body: JSON.stringify({ stake: 10 }) }, 409)).data.message;
+evidence.unknownGame = (await req("/api/games/not-a-real-game/play", { method: "POST", body: JSON.stringify({ stake: 10 }) }, 404)).data.message;
+evidence.invalidStake = (await req("/api/games/astra-roulette-live/play", { method: "POST", body: JSON.stringify({ stake: 1 }) }, 400)).data.message;
 await login("admin@19xbet365.test");
 evidence.realMoneyLock = (await req("/api/admin/settings/realMoneyEnabled", { method: "PATCH", body: JSON.stringify({ value: true }) }, 403)).data.message;
 await login("luca.moretti@19xbet365.test");

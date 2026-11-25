@@ -144,7 +144,7 @@ Reference restrictions encountered:
 
 **19X mapping**
 - Original casino hero, featured game card, search, provider filter, sort, favourites.
-- Playable originals vs provider-required badges.
+- Playable originals with 19X Original labels.
 - 5-column desktop lobby; responsive 2-column mobile.
 - No real cashback/FAQ right rail; responsible-play and tournament information are used instead.
 - All artwork is original CSS/SVG.

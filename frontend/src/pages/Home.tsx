@@ -66,7 +66,7 @@ export function Home() {
             <div className="orbit-core">
               <span className="core-label">19X</span>
               <strong>ORIGINALS</strong>
-              <span className="core-sub">11 playable titles</span>
+              <span className="core-sub">44 playable titles</span>
             </div>
             {crash && (
               <div className="floating-card float-crash">
@@ -179,7 +179,7 @@ export function Home() {
             <SectionHeading
               kicker="Casino lobby"
               title="Reels, tables, and after-dark energy"
-              body="Original slots are playable now. Certified provider titles are labelled and integration-ready."
+              body="Eighteen original 19X slots, all playable now. No certified provider titles are connected or implied."
               action={<Link to="/casino" className="section-link">Enter casino <ArrowRight size={15} /></Link>}
             />
             <div className="game-grid casino-grid">

@@ -18,11 +18,11 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Live sports | Top live tiles, live table, stream flags | Live spotlight cards, live league table, score/minute, odds | Improved | `LiveSpotlight` added; no fake streams |
 | Persistent bet slip | Right rail with save/load, favourite tip | Header trigger + drawer + sports rail + auto-save/restore (24 Nov 2026) | Implemented | `BetSlipContext.tsx`; restore is a convenience only — placement remains server-authoritative |
 | Bet placement | Transactional stake/selection handling | Transactional server placement, wallet debit, potential return | Complete | `bets.js`; browser tested |
-| Casino lobby | 5-column tiles, categories, search/sort, provider badges | 44 titles, filter chips, search, sort, favourites, playable/provider badges | Complete | `Casino.tsx` |
-| Slots lobby | Provider slot catalogue | 19X slot originals + provider-required slot pages | Complete | No provider sessions |
-| 1xGames / instant | Demo games, category tabs, max win labels | 11 playable originals, filters, max win, server rounds | Complete | `GAME_CATALOGUE.md` |
-| Live casino | Hero carousel, filter chips, dealer cards | Preview lobby, provider notice, table cards | Integration required | Certified live provider needed |
-| Virtual sports | Simulated sport products | 19X Derby + provider-required virtual pages | Complete | No fabricated live feed |
+| Casino lobby | 5-column tiles, categories, search/sort, provider badges | 44 titles, filter chips, search, sort, favourites, playable badges | Complete | `Casino.tsx` |
+| Slots lobby | Provider slot catalogue | 18 original 19X three-reel slots | Complete (19X engine) | No provider sessions |
+| 1xGames / instant | Demo games, category tabs, max win labels | 44 playable originals, filters, max win, server rounds | Complete | `GAME_CATALOGUE.md` |
+| Live casino | Hero carousel, filter chips, dealer cards | Seven in-house RNG tables with full play flows | Complete (RNG) | Not a live-dealer feed; certified provider still optional |
+| Virtual sports | Simulated sport products | Six simulated 19X events with calibrated odds | Complete | No fabricated live feed |
 | Registration | Phone/email/social, bonus choice, SMS | Email registration, referral, welcome allocation, age consent | Improved | No SMS/social/email verification |
 | Login | Login form, recovery | Session login, rate limiting, demo access, recovery request | Complete | Email delivery absent; request goes to notifications |
 | Password recovery | Email reset link | Account notification request; manual support verification | Functionally incomplete | Requires mail provider/token page |
@@ -66,7 +66,7 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Responsive | Desktop/tablet/mobile | Tested 320–2560 for overflow; mobile layouts | Complete | `RESPONSIVE_TEST_REPORT.md` |
 | Accessibility | Keyboard, focus, labels | Skip link, focus rings, aria labels, reduced motion | Improved | Full WCAG audit still recommended |
 | Real-money operation | Licensed wagering | Disabled and hard-locked | Legal/restricted | Requires licence/KYC/payments |
-| Provider games | Certified integrations | Labelled integration-ready pages | Integration required | Requires provider contracts/session adapter |
+| Provider games | Certified integrations | All 44 titles are original 19X RNG games | Provider parity not connected | Requires provider contracts/session adapter |
 | Sports settlement | Live results/settlement | Server demo worker finishes fixtures and settles 1X2 singles/accas with notifications and audit events | Improved | `backend/src/services/sportsbook.js`, `scripts/settlement-smoke.mjs`; no real feed or multi-market engine |
 
 ## Priority work remaining

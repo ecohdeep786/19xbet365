@@ -2,45 +2,79 @@
 
 Catalogue source: `shared/catalog.json`; database seed: `backend/db/seed.js`; catalogue builder: `scripts/build-catalog.mjs`.
 
-## Playable 19X Originals
+All **44** catalogue titles are playable 19X Originals. There are no provider-required placeholder pages. Outcomes are generated on the server; settled rounds are immutable.
 
-| ID | Name | Category | Server engine | Max win display | Notes |
+## Originals
+
+| ID | Name | Category | Engine | Max win display | Target RTP |
 | --- | --- | --- | --- | --- | --- |
-| `crash-orbit` | Crash Orbit | Crash | crash curve, server crash point, polling settlement | 1,000x | manual/auto cash-out; abandoned rounds voided on next start |
-| `mines-vault` | Mines Vault | Mines | 25-tile mine layout, combinatorial payout | 2,231x | reveal/cash-out; immutability trigger |
-| `plinko-drop` | Plinko Drop | Plinko | server-generated path + bucket table | 170x | 8/10/12 rows, low/medium/high |
-| `dice-roll` | Dice Roll | Dice | cryptographic RNG roll 0–100 | 49x | target + over/under |
-| `wheel-of-astra` | Wheel of 19X | Wheel | 24-segment weighted array | 5x | server index, CSS replay |
-| `coin-flip` | Coin Flip | Coin flip | RNG heads/tails | 1.96x | instant |
-| `hi-lo` | Hi-Lo | Cards | two-card draw, rank rules | 12x | ties lose |
-| `lucky-ten` | Lucky Ten | Lucky | digit draw 0–9 | 8.8x | instant |
-| `nova-fruits` | Nova Fruits | Slots | 3×3 weighted symbol grid + paylines | 180x | 3 horizontal lines |
-| `velocity-derby` | Velocity Derby | Virtuals | weighted six-runner race | 9.4x | finish order server-side |
-| `speed-derby` | Speed Derby | Virtuals | weighted eight-runner race | 14x | finish order server-side |
+| `crash-orbit` | Crash Orbit | Crash | Server crash point; polling settlement | 1,000x | 98% |
+| `airball-crash` | Airball | Crash | Same crash engine with second theme | 1,000x | 98% |
+| `mines-vault` | Mines Vault | Mines | 25-tile layout; combinatorial multiplier | 2,231x at 3 mines | 97% |
+| `plinko-drop` | Plinko Drop | Plinko | Server path + bucket table | 170x | 99% |
+| `dice-roll` | Dice Roll | Dice | Cryptographic roll 0-100 | 49.5x | 99% |
+| `wheel-of-astra` | Wheel of 19X | Wheel | 24-segment weighted array | 5x | 97.9% |
+| `coin-flip` | Coinflip | Coinflip | RNG heads/tails | 1.96x | 98% |
+| `hi-lo` | Hi-Lo | Cards | Two-card draw; ties lose | 12x | 97% |
+| `lucky-ten` | Lucky Ten | Lucky | Digit draw 0-9 | 9x | 90% |
 
-All playable titles expose documented how-to-play content and persist rounds in `game_rounds`. Settled payout/outcome/status cannot be updated by the application.
+## Slots (18)
 
-## Provider-required catalogue
+`nova-fruits`, `neon-fortune`, `starlight-lines`, `golden-nova`, `mystic-temple`, `sakura-fortune`, `cyber-heist`, `dragons-vault`, `frost-queen`, `cairo-nights`, `jungle-spirit`, `aztec-eclipse`, `neon-reels`, `gilded-crown`, `titans-gate`, `lucky-lanterns`, `crystal-cavern`, `phoenix-fire`.
 
-The remaining 33 titles are integration-ready and return `provider_required` from play endpoints. They are not simulated as live provider sessions.
+- Shared three-reel, three-row engine with three horizontal paylines.
+- Weighted symbols; three of a kind pays 60x down to 2x; pairs pay 2x down to 0.2x.
+- Target RTP **95.6%**; maximum **180x** (three winning lines at 60x).
+- Every spin is server-generated and stored in `game_rounds`.
 
-- **Live casino:** 19X Roulette Live, Blackjack Azure, Baccarat Royale, Dream Wheel Live, Texas Hold'em Prime, Sic Bo Nova, Speed Baccarat.
-- **Provider slots:** Neon Fortune, Starlight Lines, Golden Nova, Mystic Temple, Sakura Fortune, Cyber Heist, Dragon's Vault, Frost Queen, Cairo Nights, Jungle Spirit, Aztec Eclipse, Neon Reels, Gilded Crown, Titan's Gate, Lucky Lanterns, Crystal Cavern, Phoenix Fire.
-- **Other provider/instant:** Keno Blitz, Scratch Nova, Limbo Velocity, Airball Crash, Tower Climb, Virtual Football League, Greyhound Sprint, Virtual Basketball, Virtual Tennis Open.
+## Virtuals (6)
+
+`velocity-derby`, `speed-derby`, `virtual-football`, `virtual-basketball`, `virtual-tennis`, `greyhound-sprint`.
+
+- Simulated six- or eight-competitor events; no real teams, animals or live feed.
+- Odds are calibrated so each pick returns about 95-96% over time: 6-runner sets pay 2.5x-25x (96.2% target), Speed Derby pays 3.2x-32x (95.5% target).
+- The finish order is server-generated; the track animation is a visual replay.
+
+## Instant (4)
+
+| ID | Engine | Max win | Target RTP |
+| --- | --- | --- | --- |
+| `keno-blitz` | Pick 3 of 10; 3 drawn; 3/2/1 matches pay 25x/2.5x/0.6x | 25x | 96.1% |
+| `scratch-nova` | 9-cell weighted scratch; star trio 20x, seven trio 5x, other trio returns stake | 20x | 95.5% |
+| `limbo-velocity` | Target 1.2x-100x; result from `0.99 / (1-u)` | 100x | 99% |
+| `tower-climb` | Choose 1-5 floors; survival chance 0.72 per floor | 5x | 97% |
+
+## RNG tables (7)
+
+| ID | Name | Engine | Max win | Target RTP |
+| --- | --- | --- | --- | --- |
+| `astra-roulette-live` | 19X Roulette | Single-zero European wheel; red/black/even/odd/high/low pay 2x | 2x | 97.3% |
+| `blackjack-azure` | Blackjack Azure | Six-deck shoe; multi-step deal/hit/stand; blackjack pays 3:2; dealer stands on soft 17 | 2.5x | 95.7% |
+| `baccarat-royale` | Baccarat Royale | Standard third-card rules; player 2x, banker 1.95x, tie 9x; ties push player/banker | 9x | 98.9% |
+| `speed-baccarat` | Speed Baccarat | Same engine as Baccarat Royale | 9x | 98.9% |
+| `sicbo-nova` | Sic Bo Nova | Three dice; big/small/odd/even pay 2x; triples lose | 2x | 97.2% |
+| `dream-wheel-live` | Dream Wheel | 24-segment RNG wheel | 5x | 97.9% |
+| `holdem-prime` | Texas Hold'em Prime | Player vs dealer best-of-seven from shared board; win 1.95x, tie pushes | 1.95x | 97.3% |
+
+These are **RNG tables, not live-dealer feeds**. Blackjack currently offers hit and stand only; doubling and splitting are not available. Baccarat does not charge banker commission because the banker payout is already 1.95x.
 
 ## Engine guarantees
 
 - Outcomes are generated in `backend/src/services/gameEngine.js` or route-level cryptographic RNG; they are never supplied by the browser.
 - Stakes are debited under an account row lock before a round starts.
 - Payouts are credited transactionally with the round settlement.
-- `get /api/player/rounds` exposes recorded outcome summaries.
+- `GET /api/player/rounds` exposes recorded outcome summaries; the full blackjack shoe remains server-side.
 - The DB trigger `settled_rounds_immutable` blocks payout/outcome/status changes on settled rounds.
-- Crash/Mines abandoned rounds are voided and the stake refunded when a new round starts.
+- Crash, Mines and Blackjack abandoned rounds are voided and the stake refunded when a new round starts.
+- Blackjack rejects a second hit/stand on a settled hand with `409 round_settled`.
 
 ## Target RTP
 
-The UI labels the RTP field **Target RTP** because these are simulation parameters, not certified return figures. Provider titles display catalogue RTP ranges only as information and cannot be played.
+The UI labels the RTP field **Target RTP** because these are simulation parameters, not certified return figures. The figures above are the modelled return for each implemented engine under its stated rules.
 
 ## Test evidence
 
-`scripts/game-smoke.mjs` played all 11 originals against the API. Last run: dice win, coin loss, wheel zero, Plinko 0.4x, lucky-ten miss, Hi-Lo miss, Nova Fruits 3x, both derbies, Crash cash-out at 1.1x, Mines bust. The test verified settlement responses and final balance.
+- `scripts/all-games-smoke.mjs`: played all **44/44** catalogue games through the API; every round settled and the wallet reconciled.
+- `scripts/all-games-ui-smoke.mjs`: loaded **44/44** game pages with no provider gate and played a representative sample across slots, virtuals, instant, tables, crash and blackjack.
+- `scripts/blackjack-smoke.mjs`: deal, hit, stand, dealer draw to 17, double-settle rejection and stale-hand refund all passed.
+- `scripts/game-smoke.mjs`: legacy smoke for the original 11 titles.

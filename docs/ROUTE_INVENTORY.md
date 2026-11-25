@@ -18,7 +18,7 @@
 | `/promotions` | Promotions | Public | coin campaign cards and terms |
 | `/tournaments` | Tournaments | Public | live/upcoming/finished leaderboards |
 | `/search` | SearchPage | Public | games, fixtures, help search |
-| `/game/:id` | GamePage | Public | playable game or provider-required preview |
+| `/game/:id` | GamePage | Public | playable 19X game or sign-in gate |
 | `/help`, `/help/:slug` | HelpPage | Public | help centre and article |
 | `/support` | SupportPage | Authenticated player | tickets, messages, new ticket |
 | `/login` | Login | Public | session login + demo buttons |

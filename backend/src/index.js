@@ -43,7 +43,7 @@ app.use(compression());
 app.use(express.json({ limit: "256kb" }));
 app.use(cookieParser());
 
-app.use("/api", rateLimit({ windowMs: 60_000, max: 300 }));
+app.use("/api", rateLimit({ windowMs: 60_000, max: 600 }));
 app.use("/api", async (req, res, next) => {
   try {
     const session = await loadSession(req);

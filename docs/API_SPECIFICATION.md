@@ -94,14 +94,20 @@ Set `DEMO_SETTLEMENT=off` to disable the worker. Live-market suspension, cash-ou
 | GET | `/games/:gameId/activity` | top wins/stats |
 | POST | `/games/:gameId/play` | instant play `{stake,params,clientSeed?}` |
 | POST | `/games/crash-orbit/start` | `{stake,autoCashout?}`; returns round ID/hash/start |
+| POST | `/games/airball-crash/start` | same crash contract with the Airball theme |
 | GET | `/games/crash-orbit/:roundId/status` | current multiplier/settlement |
+| GET | `/games/airball-crash/:roundId/status` | current multiplier/settlement |
 | POST | `/games/crash-orbit/:roundId/cashout` | manual cash-out |
+| POST | `/games/airball-crash/:roundId/cashout` | manual cash-out |
 | POST | `/games/mines-vault/start` | `{stake,mines}` |
 | POST | `/games/mines-vault/:roundId/reveal` | `{tile}` 0–24 |
 | POST | `/games/mines-vault/:roundId/cashout` | cash out revealed safe tiles |
 | GET | `/games/mines-vault/:roundId/state` | resume/review state |
+| POST | `/games/blackjack-azure/start` | `{stake}`; deals two player cards and the dealer upcard; full shoe stays server-side |
+| POST | `/games/blackjack-azure/:roundId/hit` | draw one card; settles immediately on bust |
+| POST | `/games/blackjack-azure/:roundId/stand` | dealer draws to 17 and the hand settles |
 
-Provider-required IDs return `409 provider_required` with explanation. Validation rejects invalid stakes, insufficient balance, restricted accounts, and responsible limits.
+All 44 catalogue IDs are playable 19X Originals; there is no `provider_required` gate in the current catalogue. Validation rejects unknown games, invalid stakes, insufficient balance, restricted accounts, and responsible limits. Multi-step endpoints reject actions on a settled round with `409 round_settled`.
 
 ## Admin
 

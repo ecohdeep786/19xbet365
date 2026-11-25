@@ -114,16 +114,16 @@ const G = (id, name, category, provider, playable, rtp, volatility, tagline, des
 });
 
 const games = [
-  G("crash-orbit", "Crash Orbit", "crash", "19X Originals", true, 99, "High", "Ride the curve. Cash out before orbit breaks.", "A live multiplier curve climbs from 1.00x. Cash out at any moment to bank your stake multiplied by the current value — wait too long and the round ends at zero. Every crash point is generated server-side and recorded.", themes[0], { badge: "ORIGINAL", featured: true, maxWin: "1,000x", sortOrder: 1, features: ["Live multiplier graph", "Manual and auto cash-out", "Server-generated crash points", "Instant round history"] }),
-  G("mines-vault", "Mines Vault", "mines", "19X Originals", true, 99, "Medium", "Reveal gems, dodge the mines, take the profit.", "A 5×5 vault hides between one and twenty-four mines. Every safe tile raises your multiplier. Cash out whenever you like — or clear the board for the maximum win.", themes[1], { badge: "ORIGINAL", featured: true, maxWin: "2,231x", sortOrder: 2 }),
+  G("crash-orbit", "Crash Orbit", "crash", "19X Originals", true, 98, "High", "Ride the curve. Cash out before orbit breaks.", "A live multiplier curve climbs from 1.00x. Cash out at any moment to bank your stake multiplied by the current value — wait too long and the round ends at zero. Every crash point is generated server-side and recorded.", themes[0], { badge: "ORIGINAL", featured: true, maxWin: "1,000x", sortOrder: 1, features: ["Live multiplier graph", "Manual and auto cash-out", "Server-generated crash points", "Instant round history"] }),
+  G("mines-vault", "Mines Vault", "mines", "19X Originals", true, 97, "Medium", "Reveal gems, dodge the mines, take the profit.", "A 5×5 vault hides between one and twenty-four mines. Every safe tile raises your multiplier. Cash out whenever you like — or clear the board for the maximum win.", themes[1], { badge: "ORIGINAL", featured: true, maxWin: "2,231x", sortOrder: 2 }),
   G("plinko-drop", "Plinko Drop", "plinko", "19X Originals", true, 99, "Medium", "Drop the ball. Follow the path. Find your multiplier.", "Choose a risk profile and number of rows, then send a ball through the peg field. The landing bucket determines your payout. Paths are generated on our servers and shown after each drop.", themes[2], { badge: "ORIGINAL", featured: true, maxWin: "170x", sortOrder: 3 }),
-  G("dice-roll", "Dice Roll", "dice", "19X Originals", true, 99, "Low", "Set your target. Roll above or below. Simple by design.", "Roll a number between 0 and 100. Choose your target and direction to set the win chance and multiplier. The result is generated with a cryptographically secure server RNG.", themes[3], { badge: "ORIGINAL", featured: true, maxWin: "49x", sortOrder: 4 }),
-  G("wheel-of-astra", "Wheel of 19X", "wheel", "19X Originals", true, 97.5, "High", "One spin. Twenty-four sectors. Endless possibility.", "Spin the 19X wheel and land on a multiplier from 0x to 5x. Every result is settled by the server and stored with its round identifier.", themes[4], { badge: "ORIGINAL", featured: true, maxWin: "5x", sortOrder: 5 }),
+  G("dice-roll", "Dice Roll", "dice", "19X Originals", true, 99, "Low", "Set your target. Roll above or below. Simple by design.", "Roll a number between 0 and 100. Choose your target and direction to set the win chance and multiplier. The result is generated with a cryptographically secure server RNG.", themes[3], { badge: "ORIGINAL", featured: true, maxWin: "49.5x", sortOrder: 4 }),
+  G("wheel-of-astra", "Wheel of 19X", "wheel", "19X Originals", true, 97.9, "High", "One spin. Twenty-four sectors. Endless possibility.", "Spin the 19X wheel and land on a multiplier from 0x to 5x. Every result is settled by the server and stored with its round identifier.", themes[4], { badge: "ORIGINAL", featured: true, maxWin: "5x", sortOrder: 5 }),
   G("coin-flip", "Coinflip", "coinflip", "19X Originals", true, 98, "Low", "Heads or tails. One call, instant result.", "Call the coin and let it fly. A winning call returns 1.96x your stake. Rounds resolve instantly and are recorded for your activity history.", themes[5], { badge: "ORIGINAL", featured: true, maxWin: "1.96x", sortOrder: 6 }),
   G("hi-lo", "Hi-Lo", "cards", "19X Originals", true, 97, "Medium", "Higher or lower? Read the card, trust your call.", "A card is drawn and revealed. Predict whether the next card will be higher or lower. Ties lose. Volatility changes with the rank on the table.", themes[6], { badge: "ORIGINAL", featured: true, maxWin: "12x", sortOrder: 7 }),
-  G("lucky-ten", "Lucky Ten", "lucky", "19X Originals", true, 90, "High", "Pick a number. Ten possibilities. One golden draw.", "Choose one number from zero to nine. If the draw lands on your number, the round pays 8.8x. Results are generated on the server and immediately auditable in your history.", themes[7], { badge: "ORIGINAL", featured: false, maxWin: "8.8x", sortOrder: 8 }),
+  G("lucky-ten", "Lucky Ten", "lucky", "19X Originals", true, 90, "High", "Pick a number. Ten possibilities. One golden draw.", "Choose one number from zero to nine. If the draw lands on your number, the round pays 9x. Results are generated on the server and immediately auditable in your history.", themes[7], { badge: "ORIGINAL", featured: false, maxWin: "9x", sortOrder: 8 }),
   G("nova-fruits", "Nova Fruits", "slots", "19X Originals", true, 96, "Medium", "Classic fruit energy with three reels and three paylines.", "A three-reel, three-row original slot with three paylines. Match three symbols across any row. Simple to learn, quick to play, and built with responsible coin limits.", themes[4], { badge: "ORIGINAL", featured: true, maxWin: "180x", sortOrder: 9 }),
-  G("velocity-derby", "Velocity Derby", "virtuals", "19X Originals", true, 95, "High", "Six runners. One finish line. Pick your champion.", "A fully simulated six-horse race with fixed virtual odds. Pick a runner, watch the simulated race, and see the official order in your results history. No real horses or live events are involved.", themes[2], { badge: "ORIGINAL", featured: true, maxWin: "9.4x", sortOrder: 10 }),
+  G("velocity-derby", "Velocity Derby", "virtuals", "19X Originals", true, 96.2, "Medium", "Six runners. One finish line. Pick your champion.", "A fully simulated six-horse race with fixed virtual odds. Pick a runner, watch the simulated race, and see the official order in your results history. No real horses or live events are involved.", themes[2], { badge: "ORIGINAL", featured: true, maxWin: "25x", sortOrder: 10 }),
   G("keno-blitz", "Keno Blitz", "instant", "Novaline Studios", false, 96.2, "Medium", "Fast numbers, bright lights, instant draws.", "A licensed Keno title prepared for provider integration. The interface is wired to the provider adapter contract; real play remains disabled until certification.", themes[3], { players: 7432, sortOrder: 20, maxWin: "10,000x" }),
   G("scratch-nova", "Scratch Nova", "instant", "Lumen Gaming", false, 95.8, "Low", "Scratch the surface. Reveal a tiny constellation of wins.", "A scratch-card mechanic prepared for integration. The demo layout, loading state, and session guard are complete; the provider renderer is pending.", themes[5], { players: 3221, sortOrder: 21 }),
   G("limbo-velocity", "Limbo Velocity", "instant", "Velocity Works", false, 99, "High", "Set a target multiplier. Beat it to win.", "A multiplier-target game prepared for provider integration. The API adapter and responsible-play cap are specified but not enabled in this environment.", themes[0], { players: 5644, sortOrder: 22 }),
@@ -185,11 +185,129 @@ const helpArticles = [
   { slug: "responsible-play", title: "Responsible play tools", category: "Safety", body: "Use Responsible Gaming in your account to set a daily coin limit, a session reminder, a cool-off period, or a self-exclusion. These controls apply to this demo and are recorded for transparency." },
   { slug: "verification", title: "Account verification and security", category: "Security", body: "Keep your password private. 19xbet365 staff will never ask for your password or a one-time code. You can review active sessions and sign out other devices from Security settings. Two-factor authentication is available as a demonstration control." },
   { slug: "referrals", title: "Inviting friends", category: "Account", body: "Share your referral code from your profile. A referred player receives the standard welcome allocation and you receive a referral reward once they complete their first round. Referring a player never grants administrative access." },
-  { slug: "providers", title: "Why some games say integration-ready", category: "Games", body: "19xbet365 labels third-party titles clearly. An integration-ready game has a complete catalogue page but no live provider session, dealer feed, or real-wager engine. This is not an error: it shows exactly where a licensed provider connection would plug in." },
+  { slug: "providers", title: "19X Originals and certified providers", category: "Games", body: "All 44 catalogue games are 19X Originals: they are generated and settled by the 19xbet365 server and can be played with coins. No third-party provider session, live-dealer feed, or independently certified game maths is connected. Game pages state this plainly and never present an original RNG title as a certified provider game." },
   { slug: "support", title: "Contacting support", category: "Support", body: "Open a support ticket from the Help Centre with your account email and a clear description. For security, never include your password. Response times shown in the support centre are illustrative for this foundation build." }
 ];
+
+// Every slot in the catalogue is now a first-party three-reel 19X game.
+const SLOT_RTP = 95.6;
+for (const game of games) {
+  if (game.category !== "slots") continue;
+  game.playable = true;
+  game.provider = "19X Originals";
+  game.integrationStatus = "playable_demo";
+  game.rtp = SLOT_RTP;
+  game.tagline = game.tagline.replace(/five-reel/gi, "three-reel");
+  game.description = `An original 19X three-reel slot with three horizontal paylines. Set a coin stake, spin the reels, and settle matching symbols instantly. Every outcome is generated by the server and recorded in your game history.`;
+  game.howTo = [
+    "Set your coin stake in the game panel.",
+    "Spin the three reels and watch the paylines settle.",
+    "Three matching symbols on a line pay the top prize; pairs pay smaller returns.",
+    "Review every settled spin in your game activity. Coins have no cash value."
+  ];
+  game.features = ["Three-reel, three-line slot", "Server-authoritative RNG", "Responsive reel stage", "Round history and responsible-play limits"];
+  game.maxWin = "180x";
+}
+
+for (const game of games) {
+  if (game.category === "virtuals") {
+    game.playable = true;
+    game.provider = "19X Originals";
+    game.integrationStatus = "playable_demo";
+    game.tagline = game.tagline.replace(/provider|licensed/gi, "simulated");
+    game.description = "A simulated 19X virtual event with server-generated finishing order. Pick a competitor, watch the visual replay, and settle the result into your coin wallet. No real teams, animals or live events are involved.";
+    game.howTo = [
+      "Pick a competitor and set your coin stake.",
+      "Start the event and watch the visual replay.",
+      "The server-generated finishing order determines the payout.",
+      "Review the result in your game activity. Coins have no cash value."
+    ];
+    game.features = ["Simulated event", "Server-generated finishing order", "Multiple competitors", "Responsive event stage"];
+    game.maxWin = game.id === "speed-derby" ? "32x" : "25x";
+    game.rtp = game.id === "speed-derby" ? 95.5 : 96.2;
+    game.volatility = game.id === "speed-derby" ? "High" : "Medium";
+  }
+}
+
+for (const game of games) {
+  if (game.category === "instant") {
+    game.playable = true;
+    game.provider = "19X Originals";
+    game.integrationStatus = "playable_demo";
+    game.tagline = game.tagline.replace(/provider|licensed/gi, "server-generated");
+    game.description = "An original 19X instant game with a cryptographically random server outcome. Set a coin stake, start the round, and review the result in your activity history.";
+    game.howTo = [
+      "Set your coin stake.",
+      "Start the round and reveal the server-generated result.",
+      "Winning outcomes are credited to your coin balance.",
+      "Review the result in game activity. Coins have no cash value."
+    ];
+    game.features = ["Server-generated outcome", "Instant settlement", "Responsive game stage", "Round history"];
+    const instantMeta = {
+      "keno-blitz": { maxWin: "25x", rtp: 96.1, volatility: "Medium" },
+      "scratch-nova": { maxWin: "20x", rtp: 95.5, volatility: "Low" },
+      "limbo-velocity": { maxWin: "100x", rtp: 99, volatility: "High" },
+      "tower-climb": { maxWin: "5x", rtp: 97, volatility: "Medium" }
+    }[game.id];
+    if (instantMeta) Object.assign(game, instantMeta);
+  }
+  if (game.category === "live-casino") {
+    game.playable = true;
+    game.provider = "19X Originals";
+    game.integrationStatus = "playable_demo";
+    game.name = game.name.replace(/\s+Live$/i, "").replace("Dream Wheel Live", "Dream Wheel");
+    game.tagline = "An RNG table game built for 19X. Not a live dealer feed.";
+    game.description = "An original 19X RNG table game. Choose a bet, play the round, and receive a server-generated result. This is not a live dealer or certified provider table.";
+    game.howTo = [
+      "Choose a bet option and set your coin stake.",
+      "Play the round and reveal the server-generated result.",
+      "Winning bets are credited to your coin balance.",
+      "Review the result in game activity. Coins have no cash value."
+    ];
+    game.features = ["Server-generated RNG table", "Instant settlement", "Responsive table stage", "Round history"];
+    game.badge = null;
+    const tableMeta = {
+      "astra-roulette-live": { maxWin: "2x", rtp: 97.3, volatility: "Low" },
+      "blackjack-azure": { maxWin: "2.5x", rtp: 95.7, volatility: "Low" },
+      "baccarat-royale": { maxWin: "9x", rtp: 98.9, volatility: "Low" },
+      "speed-baccarat": { maxWin: "9x", rtp: 98.9, volatility: "Low" },
+      "dream-wheel-live": { maxWin: "5x", rtp: 97.9, volatility: "High" },
+      "holdem-prime": { maxWin: "1.95x", rtp: 97.3, volatility: "Medium" },
+      "sicbo-nova": { maxWin: "2x", rtp: 97.2, volatility: "Medium" }
+    }[game.id];
+    if (tableMeta) Object.assign(game, tableMeta);
+    if (game.id === "blackjack-azure") {
+      game.howTo = [
+        "Set your coin stake and deal a hand. Dealer stands on soft 17.",
+        "Hit to draw another card, or stand to let the dealer play.",
+        "Blackjack pays 3:2; a winning hand pays even money; equal totals push.",
+        "This table offers hit and stand only. Doubling and splitting are not available."
+      ];
+      game.features = ["Server-authoritative six-deck shoe", "Hit and stand decisions", "Blackjack pays 3:2", "Settled hands in round history"];
+    }
+  }
+  if (game.id === "airball-crash") {
+    game.playable = true;
+    game.provider = "19X Originals";
+    game.integrationStatus = "playable_demo";
+    game.tagline = "A second crash curve. Cash out before it bursts.";
+    game.description = "An original 19X crash game. The multiplier climbs from 1.00x and the server-generated crash point ends the round. Cash out at any time to bank the current multiplier.";
+    game.howTo = [
+      "Set your coin stake and optional auto cash-out.",
+      "Launch the round and watch the multiplier climb.",
+      "Cash out before the server-generated crash point.",
+      "Review settled rounds in your activity. Coins have no cash value."
+    ];
+    game.features = ["Server-generated crash point", "Manual and auto cash-out", "Live multiplier curve", "Round history"];
+    game.maxWin = "1,000x";
+    game.rtp = 98;
+    game.volatility = "High";
+  }
+}
 
 const data = { generatedAt: now.toISOString(), sports, matches, games, promotions, tournaments, helpArticles };
 mkdirSync(join(root, "shared"), { recursive: true });
 writeFileSync(join(root, "shared", "catalog.json"), JSON.stringify(data, null, 2));
+mkdirSync(join(root, "frontend", "src", "data"), { recursive: true });
+writeFileSync(join(root, "frontend", "src", "data", "catalog.json"), JSON.stringify(data, null, 2));
 console.log(`catalog written: ${sports.length} sports, ${matches.length} matches, ${games.length} games, ${promotions.length} promos, ${tournaments.length} tournaments`);

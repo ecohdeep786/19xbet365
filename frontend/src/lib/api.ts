@@ -135,14 +135,22 @@ export const api = {
     request<{ round: GameRound; balance: number; message: string }>(`/games/${id}/play`, {
       method: "POST", body: json({ stake, params, clientSeed })
     }),
-  crashStart: (stake: number, autoCashout: number | null) =>
-    request<{ roundId: string; serverSeedHash: string; startedAt: string; balance: number; message: string }>("/games/crash-orbit/start", {
+  crashStart: (gameId: string, stake: number, autoCashout: number | null) =>
+    request<{ roundId: string; serverSeedHash: string; startedAt: string; balance: number; message: string }>(`/games/${gameId}/start`, {
       method: "POST", body: json({ stake, autoCashout })
     }),
-  crashStatus: (roundId: string) =>
-    request<{ roundId: string; status: string; multiplier: number; crashPoint?: number; payout: number; balance: number; won?: boolean; autoCashout?: boolean }>(`/games/crash-orbit/${roundId}/status`),
-  crashCashout: (roundId: string) =>
-    request<{ status: string; multiplier?: number; crashPoint?: number; payout: number; balance: number; message: string }>(`/games/crash-orbit/${roundId}/cashout`, { method: "POST" }),
+  crashStatus: (gameId: string, roundId: string) =>
+    request<{ roundId: string; status: string; multiplier: number; crashPoint?: number; payout: number; balance: number; won?: boolean; autoCashout?: boolean }>(`/games/${gameId}/${roundId}/status`),
+  crashCashout: (gameId: string, roundId: string) =>
+    request<{ status: string; multiplier?: number; crashPoint?: number; payout: number; balance: number; message: string }>(`/games/${gameId}/${roundId}/cashout`, { method: "POST" }),
+  blackjackStart: (stake: number) =>
+    request<{ roundId: string; status: string; player: { rank: number; suit: string }[]; dealer: { rank: number; suit: string }[]; playerTotal: number; balance: number; message: string }>("/games/blackjack-azure/start", {
+      method: "POST", body: json({ stake })
+    }),
+  blackjackHit: (roundId: string) =>
+    request<{ status: string; player: { rank: number; suit: string }[]; dealer: { rank: number; suit: string }[]; playerTotal: number; dealerTotal?: number; result?: string; payout?: number; balance: number; message: string }>(`/games/blackjack-azure/${roundId}/hit`, { method: "POST" }),
+  blackjackStand: (roundId: string) =>
+    request<{ status: string; player: { rank: number; suit: string }[]; dealer: { rank: number; suit: string }[]; playerTotal: number; dealerTotal: number; result: string; payout: number; balance: number; message: string }>(`/games/blackjack-azure/${roundId}/stand`, { method: "POST" }),
   minesStart: (stake: number, mines: number) =>
     request<{ roundId: string; minesCount: number; balance: number; message: string }>("/games/mines-vault/start", {
       method: "POST", body: json({ stake, mines })

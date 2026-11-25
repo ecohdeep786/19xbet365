@@ -1,6 +1,6 @@
 # End-to-End Test Report
 
-**Date:** 24 November 2026  
+**Date:** 26 November 2026  
 **Environment:** production Vite build served by Express at `http://127.0.0.1:4000`; PostgreSQL 16 `astra_play`; headless Edge 1440×900 and 390×844 for evidence capture; in-app browser for interactive checks.
 
 ## Automated smoke tests
@@ -8,8 +8,12 @@
 | Script | Result | Evidence |
 | --- | --- | --- |
 | `scripts/api-smoke.mjs` | Passed: health, bootstrap, login, overview, transactions, activity, dice, Mines start, admin overview/network/accounts/audit/security/system | console output |
-| `scripts/game-smoke.mjs` | Passed: all 11 playable originals settled; Crash cash-out 1.05x; Mines bust path; 19 lifetime rounds; final balance 22,498.00 coins | console output |
-| `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries; see `SECURITY_TEST_REPORT.md` | console output |
+| `scripts/all-games-smoke.mjs` | Passed: **44/44 catalogue games** played through the API and settled; zero failures; wallet reconciled | console output |
+| `scripts/all-games-ui-smoke.mjs` | Passed: **44/44 game pages** loaded with no provider gate; representative sample played across slots, virtuals, instant, tables, crash and blackjack; zero console/page errors | console output |
+| `scripts/blackjack-smoke.mjs` | Passed: deal, hit, stand, dealer draws to 17, settled-hand replay rejected, stale hand refunded | console output |
+| `scripts/responsive-game-audit.mjs` | Passed: 128 checks across all 44 game pages plus public/casino routes at 320, 390, 768, 1440 and 2560; zero horizontal overflow, zero console errors | console output |
+| `scripts/game-smoke.mjs` | Passed: original 11 originals settled; Crash cash-out and Mines bust paths; final balance reconciled | console output |
+| `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries, unknown-game 404, invalid-stake 400, real-money lock | console output |
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
 | `scripts/deposit-smoke.mjs` | Passed: sandbox request, admin approval, 15% tier bonus, deposit/bonus ledger, cancellation, rejection and live-collection activation gate | console output |
 | `scripts/risk-smoke.mjs` | Passed: Master/Admin revenue access, Player denial, sports stake cap and payout cap enforcement | console output |
@@ -17,14 +21,14 @@
 | `scripts/fantasy-ui-audit.mjs` | Passed: fantasy lobby, lineup builder, captain/vice selection, entry and balance debit | `capture/fantasy-audit/` |
 | `scripts/compliance-ui-audit.mjs` | Passed: KYC submission, Master approval, withdrawal request, approval and mark-paid | `capture/compliance-audit/` |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 coins; referee balance reflects reward | console output |
-| `scripts/capture-screenshots.mjs` | Passed: 34 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,658 modules |
+| `scripts/capture-screenshots.mjs` | Passed: product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,659 modules |
 | Playwright real-user journey | Passed | 27/27 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, deposit, responsible play, support, mobile drawer, auth, admin deposit review, fantasy route and KYC/withdrawal endpoints |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
-| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, login and deposit after the contrast pass; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
+| Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, fantasy, login, withdraw and deposit; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
 | Contrast pass | Passed | Muted ink `#52718a`, action green `#557d1d`, footer `#a9c4dd`; zero color-contrast failures on audited pages |
 
-The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 coins** player balance with 6 seeded rounds and 2 seeded open bets. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.
+The demo database was reseeded after this verification pass, so the handoff starts from a clean **22,500.00 coins** player balance with seeded history. Smoke-run balances above are historical test output; final screenshots show the clean reseeded state.
 
 ## Real-browser journeys
 
@@ -52,6 +56,8 @@ The demo database was reseeded after this verification pass, so the handoff star
 - Tested Dice Roll: server returned a valid roll, balance deducted, round recorded.
 - Tested Crash Orbit: launch, live multiplier, cash-out and bust paths, balance and history updated.
 - Tested Mines grid, Wheel of 19X, Plinko and all engines through the smoke script.
+- Played a multi-step Blackjack Azure hand: deal, hit, stand, dealer draw and settlement; confirmed the hole card stays hidden while the hand is open.
+- Confirmed all 44 catalogue games load and play with no provider-required gate; RNG tables are labelled as 19X Originals, not live dealer feeds.
 - Confirmed settled rounds and wallet ledger entries remain immutable.
 - Placed two opposing singles and a two-fold accumulator, forced demo fixtures to their simulated finish, and verified selection results, bet statuses, payouts, wallet credits and audit events.
 - Confirmed the settlement-event handler filters by account and raises a settlement toast in an open player session; the worker emits `bet.settled` on the same WebSocket channel.
@@ -89,7 +95,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ### 8. Evidence capture
 
 - `scripts/capture-screenshots.mjs` logs in through the real API, sets viewport metrics through DevTools, captures desktop player pages, mobile pages, signed-out auth pages and the Master Admin control room.
-- All 34 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
+- All 42 captures loaded real API data; interactive spot checks of the captured routes showed no console errors. New captures cover slots, virtuals, keno, blackjack, roulette and Airball on desktop, plus blackjack and roulette on mobile.
 - Demo identity and support addresses were cleaned from the legacy `astraplay.io` domain to `19xbet365.test` in seed, UI shortcuts, existing rows and documentation.
 
 ## Defects found and fixed
@@ -121,7 +127,8 @@ The demo database was reseeded after this verification pass, so the handoff star
 
 ## Not covered end-to-end
 
-- Real provider game session (no contract/certification).
+- Real certified provider game session or live-dealer feed (no contract/certification). All current catalogue games are original 19X RNG products.
+- Blackjack double/split decisions and multiplayer poker (current blackjack is hit/stand; Hold'em is player-vs-dealer).
 - Live real-money collection and withdrawals (sandbox deposit/review is covered; live activation remains gated).
 - Email/SMS delivery or verification (no provider).
 - Native app / real touch-device gestures.

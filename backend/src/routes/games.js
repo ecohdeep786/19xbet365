@@ -3,7 +3,7 @@ import express from "express";
 import { query, withTransaction } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { checkDailyLimit, creditWin, debitStake, lockAccount, refundStake, settleRound } from "../services/wallet.js";
-import { crashMultiplier, crashPoint, minesMultiplier, playInstant, round2 } from "../services/gameEngine.js";
+import { crashMultiplier, crashPoint, minesMultiplier, playInstant, round2, createBlackjackRound, blackjackHandTotal, settleBlackjack } from "../services/gameEngine.js";
 import { randomInt, sha256 } from "../lib/crypto.js";
 import { broadcast } from "../ws.js";
 import { rewardReferralIfEligible } from "../services/referrals.js";
@@ -171,9 +171,10 @@ router.post("/:gameId/play", requireAuth, async (req, res, next) => {
 });
 
 // Crash Orbit -----------------------------------------------------------------
-router.post("/crash-orbit/start", requireAuth, async (req, res, next) => {
+router.post(["/crash-orbit/start", "/airball-crash/start"], requireAuth, async (req, res, next) => {
   try {
-    const game = await requirePlayableGame("crash-orbit");
+    const crashId = req.path.startsWith("/airball") ? "airball-crash" : "crash-orbit";
+    const game = await requirePlayableGame(crashId);
     const stake = round2(Number(req.body?.stake));
     const autoCashout = req.body?.autoCashout ? round2(Number(req.body.autoCashout)) : null;
     if (autoCashout != null && (autoCashout < 1.01 || autoCashout > 1000)) {
@@ -184,12 +185,12 @@ router.post("/crash-orbit/start", requireAuth, async (req, res, next) => {
     }
     const result = await withTransaction(async (client) => {
       await lockAccount(client, req.account.id);
-      await voidStaleRounds(client, req.account.id, "crash-orbit");
+      await voidStaleRounds(client, req.account.id, crashId);
       await checkDailyLimit(client, req.account.id, stake);
       const crash = crashPoint();
       const roundId = crypto.randomUUID();
       const serverSeed = crypto.randomBytes(24).toString("hex");
-      const debit = await debitStake(client, req.account.id, stake, "Crash Orbit launch", "game_round", roundId);
+      const debit = await debitStake(client, req.account.id, stake, `${game.name} launch`, "game_round", roundId);
       await client.query(
         `INSERT INTO game_rounds (id, account_id, game_id, bet, status, outcome, state, server_seed_hash)
          VALUES ($1,$2,$3,$4,'open','{}'::jsonb,$5,$6)`,
@@ -204,19 +205,21 @@ router.post("/crash-orbit/start", requireAuth, async (req, res, next) => {
       startedAt: result.startedAt,
       autoCashout: result.autoCashout,
       balance: result.balance,
-      message: "Crash Orbit launched. Cash out before the round ends."
+      message: `${game.name} launched. Cash out before the round ends.`
     });
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/crash-orbit/:roundId/status", requireAuth, async (req, res, next) => {
+router.get(["/crash-orbit/:roundId/status", "/airball-crash/:roundId/status"], requireAuth, async (req, res, next) => {
   try {
+    const crashId = req.path.startsWith("/airball") ? "airball-crash" : "crash-orbit";
+    const gameName = crashId === "airball-crash" ? "Airball" : "Crash Orbit";
     const result = await withTransaction(async (client) => {
       const locked = await client.query(
-        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = 'crash-orbit' FOR UPDATE`,
-        [req.params.roundId, req.account.id]
+        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = $3 FOR UPDATE`,
+        [req.params.roundId, req.account.id, crashId]
       );
       const row = locked.rows[0];
       if (!row) throw Object.assign(new Error("Round not found."), { status: 404, code: "not_found" });
@@ -234,7 +237,7 @@ router.get("/crash-orbit/:roundId/status", requireAuth, async (req, res, next) =
       const current = crashMultiplier(row.created_at);
       if (current >= state.crashPoint) {
         const settled = await settleRound(client, row.id, req.account.id, 0, {
-          gameName: "Crash Orbit",
+          gameName,
           crashPoint: state.crashPoint,
           bustedAt: state.crashPoint,
           summary: `Crashed at ${state.crashPoint.toFixed(2)}x`,
@@ -245,7 +248,7 @@ router.get("/crash-orbit/:roundId/status", requireAuth, async (req, res, next) =
       }
       if (state.autoCashout && current >= state.autoCashout && state.autoCashout < state.crashPoint) {
         const settled = await settleRound(client, row.id, req.account.id, state.autoCashout, {
-          gameName: "Crash Orbit",
+          gameName,
           crashPoint: state.crashPoint,
           autoCashout: true,
           summary: `Auto cash-out at ${state.autoCashout.toFixed(2)}x`,
@@ -271,12 +274,14 @@ router.get("/crash-orbit/:roundId/status", requireAuth, async (req, res, next) =
   }
 });
 
-router.post("/crash-orbit/:roundId/cashout", requireAuth, async (req, res, next) => {
+router.post(["/crash-orbit/:roundId/cashout", "/airball-crash/:roundId/cashout"], requireAuth, async (req, res, next) => {
   try {
+    const crashId = req.path.startsWith("/airball") ? "airball-crash" : "crash-orbit";
+    const gameName = crashId === "airball-crash" ? "Airball" : "Crash Orbit";
     const result = await withTransaction(async (client) => {
       const locked = await client.query(
-        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = 'crash-orbit' FOR UPDATE`,
-        [req.params.roundId, req.account.id]
+        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = $3 FOR UPDATE`,
+        [req.params.roundId, req.account.id, crashId]
       );
       const row = locked.rows[0];
       if (!row) throw Object.assign(new Error("Round not found."), { status: 404, code: "not_found" });
@@ -285,7 +290,7 @@ router.post("/crash-orbit/:roundId/cashout", requireAuth, async (req, res, next)
       const current = crashMultiplier(row.created_at);
       if (current >= state.crashPoint) {
         const settled = await settleRound(client, row.id, req.account.id, 0, {
-          gameName: "Crash Orbit",
+          gameName,
           crashPoint: state.crashPoint,
           bustedAt: state.crashPoint,
           summary: `Crashed at ${state.crashPoint.toFixed(2)}x`,
@@ -295,7 +300,7 @@ router.post("/crash-orbit/:roundId/cashout", requireAuth, async (req, res, next)
         return { busted: true, crashPoint: state.crashPoint, balance: referralReward?.refereeBalance ?? settled.balance, current };
       }
       const settled = await settleRound(client, row.id, req.account.id, current, {
-        gameName: "Crash Orbit",
+        gameName,
         crashPoint: state.crashPoint,
         summary: `Cashed out at ${current.toFixed(2)}x`,
         win: true
@@ -303,7 +308,7 @@ router.post("/crash-orbit/:roundId/cashout", requireAuth, async (req, res, next)
       const referralReward = await rewardReferralIfEligible(client, req.account.id);
       return { busted: false, multiplier: current, payout: settled.payout, balance: referralReward?.refereeBalance ?? settled.balance, crashPoint: state.crashPoint };
     });
-    broadcast({ type: "game.settled", accountId: req.account.id, gameId: "crash-orbit", payout: result.payout || 0 });
+    broadcast({ type: "game.settled", accountId: req.account.id, gameId: crashId, payout: result.payout || 0 });
     if (result.busted) {
       return res.json({ status: "busted", crashPoint: result.crashPoint, multiplier: result.current, payout: 0, balance: result.balance, message: `Too late — crash at ${result.crashPoint.toFixed(2)}x.` });
     }
@@ -455,6 +460,149 @@ router.get("/mines-vault/:roundId/state", requireAuth, async (req, res, next) =>
       multiplier: row.status === "open" ? minesMultiplier(state.minesCount, (state.revealed || []).length) : row.outcome?.multiplier,
       payout: Number(row.payout),
       balance: req.account.balance
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Blackjack Azure -------------------------------------------------------------
+router.post("/blackjack-azure/start", requireAuth, async (req, res, next) => {
+  try {
+    const game = await requirePlayableGame("blackjack-azure");
+    const stake = round2(Number(req.body?.stake));
+    if (!Number.isFinite(stake) || stake < 5 || stake > 5000) {
+      throw Object.assign(new Error("Stake must be between 5 and 5,000 coins."), { status: 400, code: "invalid_stake" });
+    }
+    const result = await withTransaction(async (client) => {
+      await lockAccount(client, req.account.id);
+      await voidStaleRounds(client, req.account.id, "blackjack-azure");
+      await checkDailyLimit(client, req.account.id, stake);
+      const hand = createBlackjackRound();
+      const roundId = crypto.randomUUID();
+      const debit = await debitStake(client, req.account.id, stake, `${game.name} deal`, "game_round", roundId);
+      await client.query(
+        `INSERT INTO game_rounds (id, account_id, game_id, bet, status, outcome, state, server_seed_hash)
+         VALUES ($1,$2,$3,$4,'open','{}'::jsonb,$5,$6)`,
+        [roundId, req.account.id, game.id, stake, hand, sha256(roundId + "blackjack")]
+      );
+      await recordRecent(client, req.account.id, game.id);
+      return { roundId, hand, balance: debit.balance };
+    });
+    res.status(201).json({
+      roundId: result.roundId,
+      status: "open",
+      player: result.hand.player,
+      dealer: [result.hand.dealer[0]],
+      playerTotal: blackjackHandTotal(result.hand.player),
+      balance: result.balance,
+      message: "Hand dealt. Hit or stand."
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/blackjack-azure/:roundId/hit", requireAuth, async (req, res, next) => {
+  try {
+    const result = await withTransaction(async (client) => {
+      const locked = await client.query(
+        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = 'blackjack-azure' FOR UPDATE`,
+        [req.params.roundId, req.account.id]
+      );
+      const row = locked.rows[0];
+      if (!row) throw Object.assign(new Error("Round not found."), { status: 404, code: "not_found" });
+      if (row.status !== "open") throw Object.assign(new Error("This hand is already closed."), { status: 409, code: "round_settled" });
+      const hand = row.state;
+      hand.player.push(hand.shoe.pop());
+      const playerTotal = blackjackHandTotal(hand.player);
+      if (playerTotal > 21) {
+        const dealerTotal = blackjackHandTotal(hand.dealer);
+        const settled = await settleRound(client, row.id, req.account.id, 0, {
+          gameName: "Blackjack Azure",
+          player: hand.player,
+          dealer: hand.dealer,
+          playerTotal,
+          dealerTotal,
+          result: "bust",
+          win: false,
+          push: false,
+          summary: `Bust at ${playerTotal}`
+        });
+        const referralReward = await rewardReferralIfEligible(client, req.account.id);
+        return { settled: true, hand, playerTotal, dealerTotal, multiplier: 0, payout: 0, balance: referralReward?.refereeBalance ?? settled.balance, result: "bust" };
+      }
+      await client.query("UPDATE game_rounds SET state = $1 WHERE id = $2", [hand, row.id]);
+      return { settled: false, hand, playerTotal, balance: req.account.balance };
+    });
+    if (result.settled) {
+      broadcast({ type: "game.settled", accountId: req.account.id, gameId: "blackjack-azure", payout: 0 });
+      return res.json({
+        status: "settled",
+        player: result.hand.player,
+        dealer: result.hand.dealer,
+        playerTotal: result.playerTotal,
+        dealerTotal: result.dealerTotal,
+        result: "bust",
+        payout: 0,
+        balance: result.balance,
+        message: `Bust at ${result.playerTotal}. Dealer had ${result.dealerTotal}.`
+      });
+    }
+    res.json({
+      status: "open",
+      player: result.hand.player,
+      dealer: [result.hand.dealer[0]],
+      playerTotal: result.playerTotal,
+      balance: result.balance,
+      message: `You drew ${result.playerTotal}. Hit or stand.`
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/blackjack-azure/:roundId/stand", requireAuth, async (req, res, next) => {
+  try {
+    const result = await withTransaction(async (client) => {
+      const locked = await client.query(
+        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = 'blackjack-azure' FOR UPDATE`,
+        [req.params.roundId, req.account.id]
+      );
+      const row = locked.rows[0];
+      if (!row) throw Object.assign(new Error("Round not found."), { status: 404, code: "not_found" });
+      if (row.status !== "open") throw Object.assign(new Error("This hand is already closed."), { status: 409, code: "round_settled" });
+      const hand = row.state;
+      const outcome = settleBlackjack(hand);
+      const settled = await settleRound(client, row.id, req.account.id, outcome.multiplier, {
+        gameName: "Blackjack Azure",
+        ...outcome,
+        summary: outcome.result === "push" ? "Push — stake returned" : outcome.result === "blackjack" ? "Blackjack" : outcome.result === "win" ? "Dealer loses" : outcome.result === "dealer_blackjack" ? "Dealer blackjack" : "Dealer wins"
+      });
+      const referralReward = await rewardReferralIfEligible(client, req.account.id);
+      return { outcome, payout: settled.payout, balance: referralReward?.refereeBalance ?? settled.balance };
+    });
+    const { outcome, payout, balance } = result;
+    broadcast({ type: "game.settled", accountId: req.account.id, gameId: "blackjack-azure", payout });
+    const message = outcome.result === "push"
+      ? `Push at ${outcome.playerTotal}. Stake returned.`
+      : outcome.result === "blackjack"
+        ? `Blackjack! You won ${payout.toFixed(2)} coins.`
+        : outcome.result === "win"
+          ? `You won ${payout.toFixed(2)} coins. Dealer had ${outcome.dealerTotal}.`
+          : outcome.result === "dealer_blackjack"
+            ? `Dealer blackjack. You had ${outcome.playerTotal}.`
+            : `Dealer wins with ${outcome.dealerTotal} against ${outcome.playerTotal}.`;
+    res.json({
+      status: "settled",
+      player: outcome.player,
+      dealer: outcome.dealer,
+      playerTotal: outcome.playerTotal,
+      dealerTotal: outcome.dealerTotal,
+      result: outcome.result,
+      payout,
+      balance,
+      message
     });
   } catch (error) {
     next(error);

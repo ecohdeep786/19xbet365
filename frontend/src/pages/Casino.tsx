@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Boxes, Cherry, CircleDot, Club, Diamond, Dices, Flag, Flame, Grid3X3,
+  ArrowRight, Cherry, CircleDot, Club, Diamond, Dices, Flag, Flame, Grid3X3,
   Heart, LayoutGrid, Search, Spade, Sparkles, Timer, Trophy, Users, Zap
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -18,26 +18,26 @@ const COPY: Record<CasinoMode, { kicker: string; title: string; body: string; st
   casino: {
     kicker: "The casino lobby",
     title: "The casino lobby. All in one board.",
-    body: "19X Originals sit beside integration-ready provider titles. Everything playable is clearly marked; nothing pretends to be a certified live feed.",
-    stat: "44 catalogue titles"
+    body: "All 44 catalogue titles are playable 19X Originals. Each game is generated and settled on our servers; nothing pretends to be a certified live feed.",
+    stat: "44 playable originals"
   },
   live: {
     kicker: "Live casino",
     title: "The felt, with a front-row seat.",
-    body: "Roulette, blackjack, baccarat, and game-show style tables. These are interface previews — a licensed provider session is required before live play can be enabled.",
-    stat: "8 table previews"
+    body: "Roulette, blackjack, baccarat and game-show style tables built on 19X RNG engines. Play instantly with coins; these are RNG tables, not live-dealer video feeds.",
+    stat: "7 RNG tables"
   },
   slots: {
     kicker: "Slots & reels",
     title: "Spin the catalogue.",
-    body: "Playable 19X slot originals and provider-required reels in one lobby. Filter by provider, volatility, or your saved favourites.",
-    stat: "20 reel titles"
+    body: "Eighteen original 19X slots across themes and volatility profiles. Filter by volatility or your saved favourites; every spin is server-generated.",
+    stat: "18 reel titles"
   },
   instant: {
     kicker: "19X Originals",
     title: "Instant games. Real records.",
-    body: "Crash, Mines, Plinko, Dice, Wheel, Coin Flip, Hi-Lo, Lucky Ten, Nova Fruits, and Velocity Derby. Every round is server-generated.",
-    stat: "11 playable originals"
+    body: "Crash, Mines, Plinko, Dice, Wheel, Coin Flip, Hi-Lo, Lucky Ten, Keno, Scratch, Limbo, Tower, virtuals, slots and RNG tables. Every round is server-generated.",
+    stat: "44 playable originals"
   }
 };
 
@@ -62,7 +62,7 @@ const CHIPS: Record<CasinoMode, Chip[]> = {
   slots: [
     { value: "all", label: "All slots", icon: Cherry },
     { value: "originals", label: "19X originals", icon: Sparkles },
-    { value: "provider", label: "Provider titles", icon: Boxes }
+    { value: "high", label: "High volatility", icon: Flame }
   ],
   instant: [
     { value: "all", label: "All originals", icon: Sparkles },
@@ -100,6 +100,7 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
         : game.name.toLowerCase().includes(chip));
     }
     else if (chip === "originals") list = list.filter((game) => game.playable);
+    else if (chip === "high") list = list.filter((game) => game.volatility === "High");
     else if (chip === "provider") list = list.filter((game) => !game.playable);
     else if (chip === "table") list = list.filter((game) => ["cards", "dice", "coinflip", "lucky", "wheel"].includes(game.category));
     else if (chip === "race") list = list.filter((game) => game.category === "racing");
@@ -175,10 +176,12 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
             <Button variant={onlyFavorites ? "lime" : "ghost"} size="sm" icon={<Heart size={15} fill={onlyFavorites ? "currentColor" : "none"} />} onClick={() => setOnlyFavorites((value) => !value)}>
               Favourites
             </Button>
-            <select className="input select compact-select" value={provider} onChange={(event) => setProvider(event.target.value)} aria-label="Filter by provider">
-              <option value="all">All providers</option>
-              {providers.map((name) => <option key={name} value={name}>{name}</option>)}
-            </select>
+            {providers.length > 1 && (
+              <select className="input select compact-select" value={provider} onChange={(event) => setProvider(event.target.value)} aria-label="Filter by provider">
+                <option value="all">All providers</option>
+                {providers.map((name) => <option key={name} value={name}>{name}</option>)}
+              </select>
+            )}
           </div>
         </div>
 
@@ -194,8 +197,8 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
         {mode === "live" && (
           <div className="live-casino-notice">
             <span className="notice-icon"><Users size={19} /></span>
-            <div><strong>Provider session required</strong><p>Live dealer titles are presented as integration-ready interfaces. No live video, dealer, or wagering session is active in this environment.</p></div>
-            <Badge tone="amber">Not live</Badge>
+            <div><strong>19X RNG tables</strong><p>These tables are generated by our server RNG. There is no live dealer video or certified provider session in this environment.</p></div>
+            <Badge tone="amber">RNG tables</Badge>
           </div>
         )}
 
@@ -233,10 +236,10 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
         <section className="lobby-footer-grid">
           <div className="panel lobby-info">
             <span className="eyebrow"><Dices size={13} /> What is playable?</span>
-            <h3>Original titles vs provider titles</h3>
-            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play them immediately with coins.</p>
-            <p><strong>Provider titles</strong> are catalogue entries prepared for future certified integrations. Their pages describe the game and clearly label the missing provider session.</p>
-            <Link to="/help/games-and-providers" className="text-btn">Read about providers <ArrowRight size={14} /></Link>
+            <h3>Every catalogue title is a 19X Original</h3>
+            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play all 44 titles immediately with coins.</p>
+            <p>Certified third-party provider games and live-dealer feeds are not connected. Game pages never claim provider certification they do not have.</p>
+            <Link to="/help/games-and-providers" className="text-btn">Read about game integrity <ArrowRight size={14} /></Link>
           </div>
           <div className="panel lobby-info">
             <span className="eyebrow"><Trophy size={13} /> Tournaments</span>

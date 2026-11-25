@@ -6,8 +6,8 @@ A complete, independently branded coin-based gaming foundation with:
 
 - original **19X / 19xbet365** branding and hand-built CSS/SVG artwork;
 - a 1xBet-aligned public design system: deep-navy two-row header, blue navigation strip, bold uppercase navigation, Roboto/Roboto Condensed typography, flat 8px controls, light-grey odds cells and AA-compliant accent variants; all artwork and wording remain original;
-- public sportsbook, live, esports, virtuals, casino, live-casino preview, slots and instant games;
-- 11 server-authoritative playable 19X Originals;
+- public sportsbook, live, esports, virtuals, casino, live-casino RNG tables, slots and instant games;
+- 44 server-authoritative playable 19X Originals;
 - registration/login/account lifecycle, coin wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
 - Master Admin and delegated staff control room with scoped hierarchy, RBAC, coin adjustments, support, transfers, catalogue, content, audit, settings and health;
 - Master-only staff credential issuance with one-time login ID/password handoff; administrators can manage scoped users and games but cannot create staff logins or access Master-only settings, roles, deposits and credential controls;
@@ -96,7 +96,7 @@ New registrations receive 10,500 coins. The seeded player starts at 22,500 coins
 - Product desktop captures: `capture/product/home-1440.jpeg`, `sports-1440.jpeg`, `live-1440.jpeg`, `casino-1440.jpeg`, `instant-1440.jpeg`, `dice-1440.jpeg`, `account-1440.jpeg`, `wallet-1440.jpeg`, `deposit-1440.jpeg`, `bets-1440.jpeg`, `promotions-1440.jpeg`, `tournaments-1440.jpeg`, `help-1440.jpeg`, `support-1440.jpeg`, `login-1440.jpeg`, `register-1440.jpeg`, `admin-dashboard-1440.jpeg`, `admin-accounts-1440.jpeg`, `admin-deposits-1440.jpeg`.
 - Product mobile captures: `capture/product/home-390.jpeg`, `sports-390.jpeg`, `casino-390.jpeg`, `dice-390.jpeg`, `wallet-390.jpeg`, `deposit-390.jpeg`, `login-390.jpeg`, `admin-dashboard-390.jpeg`.
 - Reproducible capture: `scripts/capture-screenshots.mjs` (headless Edge, real API login, 1440×900 and 390×844).
-- Automated tests: `scripts/api-smoke.mjs`, `scripts/game-smoke.mjs`, `scripts/security-smoke.mjs`, `scripts/settlement-smoke.mjs`, `scripts/referral-smoke.mjs`, `scripts/risk-smoke.mjs`, `scripts/fantasy-smoke.mjs`, `scripts/live-user-audit.mjs`, `scripts/fantasy-ui-audit.mjs`, `scripts/compliance-ui-audit.mjs`.
+- Automated tests: `scripts/api-smoke.mjs`, `scripts/all-games-smoke.mjs`, `scripts/all-games-ui-smoke.mjs`, `scripts/blackjack-smoke.mjs`, `scripts/responsive-game-audit.mjs`, `scripts/game-smoke.mjs`, `scripts/security-smoke.mjs`, `scripts/settlement-smoke.mjs`, `scripts/referral-smoke.mjs`, `scripts/risk-smoke.mjs`, `scripts/deposit-smoke.mjs`, `scripts/fantasy-smoke.mjs`, `scripts/live-user-audit.mjs`, `scripts/fantasy-ui-audit.mjs`, `scripts/compliance-ui-audit.mjs`.
 - Responsive method and results: `docs/RESPONSIVE_TEST_REPORT.md`.
 
 ## Known blockers / not approved
@@ -104,7 +104,7 @@ New registrations receive 10,500 coins. The seeded player starts at 22,500 coins
 - Deposit requests, QR configuration, admin verification and deposit bonuses are implemented in **sandbox**; live collection requires `PAYMENTS_LIVE_ENABLED=true`, a verified merchant QR, licensing, KYC/AML and payment onboarding.
 - Withdrawal requests and manual KYC review are implemented in sandbox; Master Admin approves/rejects/marks paid. Automated payout execution and live merchant settlement remain disabled, and `realMoneyEnabled` is hard-locked.
 - Fantasy cricket contests, salary-cap lineups, entries, scoring, settlement and refunds are implemented in sandbox; real player-stat feeds, legal contest rules and paid-entry compliance are still required.
-- No provider/live-dealer session; provider titles return `provider_required`.
+- No certified provider/live-dealer session; all 44 titles are original 19X RNG games. Provider parity and live-dealer video remain external integrations.
 - Sportsbook is a 1X2 foundation only. Demo settlement is server-generated on a timer with generated scores and audit records; there is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
 - No automated promo/tournament payout or qualification engine.
 - No email/SMS delivery, email/phone verification, provider KYC document upload, or MFA challenge.

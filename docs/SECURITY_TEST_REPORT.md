@@ -1,7 +1,7 @@
 # Security Test Report
 
 **Assessment type:** development/production-foundation review, not a third-party penetration test.  
-**Date:** 24 November 2026.
+**Date:** 26 November 2026.
 
 ## Automated authorization checks
 
@@ -16,7 +16,9 @@ Run: `node scripts/security-smoke.mjs`
 | Player deposit review queue | PASS | `403` “This area is limited to authorized staff.” |
 | Agent deposit review queue | PASS | `403` “Master Admin authorization is required.” |
 | Master deposit review queue | PASS | `200`, queue available |
-| Player provider game | PASS | `409` provider session required |
+| Unknown game ID | PASS | `404` not found |
+| Invalid stake | PASS | `400` stake validation |
+| Settled blackjack hand replay | PASS | `409` round already closed (`blackjack-smoke.mjs`) |
 | Master tries to enable real money | PASS | `403` “Real-money rails are hard-disabled…” |
 | Agent account list | PASS | 9 accounts; roles only `agent`/`player`; no master or other admin |
 | Agent overview | PASS | `global: false`, `accountCount: 9` |
@@ -89,7 +91,7 @@ Additional controls:
 - Helmet headers enabled; CSP disabled for SPA compatibility (must be re-enabled/tuned with a nonce/hash policy in production).
 - Server validation of email, password strength, names, reasons, amounts, selection IDs, statuses, roles, and scopes.
 - Errors do not expose SQL or stack details to clients.
-- Provider-required games are rejected server-side.
+- Unknown game IDs return `404`; invalid stakes return `400`; settled multi-step rounds reject replay.
 
 ## Findings / residual risks
 
@@ -105,7 +107,7 @@ Additional controls:
 | Low | Audit hash chain is application-level plus trigger; DB superuser can still disable triggers | Use restricted app DB role, immutable backups, external anchoring for high assurance |
 | Low | No account lockout beyond rate limit | Add alerting/step-up verification |
 | Low | Admin ITP/UA fields stored unvalidated (bounded strings) | Normalize/retain only what is needed |
-| Informational | Demo/provider integrations are intentionally unavailable | Keep explicit UI labels; never fake live sessions |
+| Informational | All 44 games are in-house 19X RNG products; no certified provider/live-dealer session is connected | Keep explicit "19X Originals" labels; never fake live sessions |
 
 ## Production security prerequisites
 

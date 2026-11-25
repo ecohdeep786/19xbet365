@@ -54,16 +54,16 @@ export function CrashGame({ game, stake, setStake, balance, onBalance, onSettled
         setMultiplier(1);
         setRoundId(`preview-${Date.now()}`);
         setPhase("running");
-        onSettled("Crash Orbit launched in browser preview mode.");
+        onSettled(`${game.name} launched in browser preview mode.`);
         return;
       }
-      const data = await api.crashStart(stake, autoCashout ? Number(autoCashout) : null);
+      const data = await api.crashStart(game.id, stake, autoCashout ? Number(autoCashout) : null);
       onBalance(data.balance);
       setStartedAt(new Date(data.startedAt).getTime());
       setRoundId(data.roundId);
       setMultiplier(1);
       setPhase("running");
-      onSettled("Crash Orbit launched. Cash out before the curve breaks.");
+      onSettled(`${game.name} launched. Cash out before the curve breaks.`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not launch the round.");
     } finally {
@@ -88,7 +88,7 @@ export function CrashGame({ game, stake, setStake, balance, onBalance, onSettled
         return;
       }
       if (!roundId) return;
-      const data = await api.crashCashout(roundId);
+      const data = await api.crashCashout(game.id, roundId);
       onBalance(data.balance);
       if (data.status === "busted") {
         finish(false, 0, data.message, data.crashPoint);
@@ -115,19 +115,19 @@ export function CrashGame({ game, stake, setStake, balance, onBalance, onSettled
         if (current >= localCrash.current && !settledRef.current) {
           setMultiplier(localCrash.current);
           finish(false, 0, `Crashed at ${localCrash.current.toFixed(2)}x`, localCrash.current);
-          onSettled(`Crash Orbit broke at ${localCrash.current.toFixed(2)}x. No win this round.`);
+          onSettled(`${game.name} broke at ${localCrash.current.toFixed(2)}x. No win this round.`);
           window.clearInterval(poll);
         }
         return;
       }
       if (!roundId || settledRef.current) return;
       try {
-        const data = await api.crashStatus(roundId);
+        const data = await api.crashStatus(game.id, roundId);
         setMultiplier(data.multiplier);
         if (data.status === "settled") {
           onBalance(data.balance);
           finish(Number(data.payout) > 0, data.payout, data.won ? `Auto cash-out at ${data.multiplier.toFixed(2)}x` : `Crashed at ${(data.crashPoint || data.multiplier).toFixed(2)}x`, data.crashPoint);
-          onSettled(data.won ? `Auto cash-out at ${data.multiplier.toFixed(2)}x for ${vc(data.payout)}.` : `Crash Orbit broke at ${(data.crashPoint || data.multiplier).toFixed(2)}x.`);
+          onSettled(data.won ? `Auto cash-out at ${data.multiplier.toFixed(2)}x for ${vc(data.payout)}.` : `${game.name} broke at ${(data.crashPoint || data.multiplier).toFixed(2)}x.`);
           window.clearInterval(poll);
         }
       } catch {
@@ -219,7 +219,7 @@ export function CrashGame({ game, stake, setStake, balance, onBalance, onSettled
           <div><span>Max win</span><strong>{game.maxWin}</strong></div>
           <div><span>Volatility</span><strong>{game.volatility}</strong></div>
           <div><span>Target RTP</span><strong>{game.rtp ? `${game.rtp}%` : "—"}</strong></div>
-          <div><span>Engine</span><strong>19X demo</strong></div>
+          <div><span>Engine</span><strong>19X server RNG</strong></div>
           <div className="fact-note"><Zap size={14} /> Auto cash-out is enforced by the server when the round status is polled.</div>
         </div>
       </div>
