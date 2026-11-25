@@ -4,6 +4,7 @@ import { withTransaction } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { checkDailyLimit, debitStake, lockAccount } from "../services/wallet.js";
 import { round2 } from "../services/gameEngine.js";
+import { getPlatformSettings } from "../lib/settings.js";
 import { broadcast } from "../ws.js";
 
 const router = express.Router();
@@ -23,6 +24,12 @@ router.post("/", requireAuth, async (req, res, next) => {
     }
     if (!Number.isFinite(stake) || stake < 10) {
       throw Object.assign(new Error("The minimum coin stake is 10 coins."), { status: 400, code: "invalid_stake" });
+    }
+    const riskSettings = await getPlatformSettings(["maxSportsStake", "maxSportsPayout"]);
+    const maxStake = Number(riskSettings.maxSportsStake ?? 5000);
+    const maxPayout = Number(riskSettings.maxSportsPayout ?? 50000);
+    if (Number.isFinite(maxStake) && stake > maxStake) {
+      throw Object.assign(new Error(`The maximum sports stake is ${maxStake.toLocaleString("en-GB")} coins.`), { status: 400, code: "stake_limit" });
     }
     if (selections.length > 1 && req.body?.mode === "singles") {
       throw Object.assign(new Error("Multiple singles are not enabled in this build. Place a single bet or use an accumulator."), { status: 400, code: "unsupported_mode" });
@@ -66,6 +73,9 @@ router.post("/", requireAuth, async (req, res, next) => {
       await checkDailyLimit(client, req.account.id, stake);
       const totalOdds = round2(prepared.reduce((product, item) => product * item.odds, 1));
       const potentialReturn = round2(stake * totalOdds);
+      if (Number.isFinite(maxPayout) && potentialReturn > maxPayout) {
+        throw Object.assign(new Error(`The maximum potential return is ${maxPayout.toLocaleString("en-GB")} coins. Reduce the stake or remove selections.`), { status: 400, code: "payout_limit" });
+      }
       const betId = crypto.randomUUID();
       const balance = await debitStake(client, req.account.id, stake, `Sports ${prepared.length > 1 ? "accumulator" : "single"} · ${prepared.length} selection${prepared.length > 1 ? "s" : ""}`, "sports_bet", betId);
       await client.query(

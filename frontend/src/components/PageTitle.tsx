@@ -39,6 +39,7 @@ const TITLES: Record<string, string> = {
   "/account/referrals": "Referrals",
   "/account/responsible": "Responsible gaming",
   "/admin": "Control room",
+  "/admin/revenue": "Revenue & risk",
   "/admin/network": "Network hierarchy",
   "/admin/accounts": "Accounts",
   "/admin/deposits": "Deposit review",

@@ -37,6 +37,7 @@ Important permissions:
 | Screen | Path | Key operations | Scope |
 | --- | --- | --- | --- |
 | Command centre | `/admin` | metrics, 7-day series, role counts, alerts, audit tip, JSON export | actor scope |
+| Revenue & risk | `/admin/revenue` | GGR, sports/game product mix, open exposure, deposits, bonus cost, NGR, active players | `reports.view.scope`; actor scope |
 | Hierarchy | `/admin/network` | recursive tree, role/status/balance, search | actor branch |
 | Accounts | `/admin/accounts` | search/filter/paginate, manage modal | actor branch |
 | Account actions | modal | suspend/restore, credit adjustment, role change, revoke sessions | target must be descendant; rank checks |
@@ -49,7 +50,7 @@ Important permissions:
 | Transfers | `/admin/transfers` | request move, approve/reject, reason | `transfers.approve` |
 | Security | `/admin/security` | failed logins, active sessions, suspended accounts, credit events, chain status, revoke sessions | scope |
 | Audit | `/admin/audit` | pagination, action filter, expand before/after/hash, CSV export | scope |
-| Configuration | `/admin/settings` | grouped settings; `realMoneyEnabled` hard locked false | Master only |
+| Configuration | `/admin/settings` | grouped settings including sports stake/payout caps; `realMoneyEnabled` hard locked false | Master only |
 | Health | `/admin/system` | API, DB latency/size, memory, counts, integrations, audit chain, rails | scope/system |
 
 ## Protections

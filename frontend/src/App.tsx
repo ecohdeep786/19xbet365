@@ -38,6 +38,7 @@ import { AdminSecurityPage } from "./pages/admin/Security";
 import { AdminAuditPage } from "./pages/admin/Audit";
 import { AdminSettingsPage } from "./pages/admin/Settings";
 import { AdminDepositsPage } from "./pages/admin/Deposits";
+import { AdminRevenuePage } from "./pages/admin/Revenue";
 import { AdminSystemPage } from "./pages/admin/System";
 
 function PublicLayout() {
@@ -103,6 +104,7 @@ export default function App() {
 
         <Route path="/admin" element={<RequireStaff><AdminLayout /></RequireStaff>}>
           <Route index element={<AdminDashboard />} />
+          <Route path="revenue" element={<AdminRevenuePage />} />
           <Route path="network" element={<AdminNetworkPage />} />
           <Route path="accounts" element={<AdminAccountsPage />} />
           <Route path="roles" element={<RequireStaff master><AdminRolesPage /></RequireStaff>} />

@@ -16,7 +16,7 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Sports filters | League/sport/market chips, search, status | Search, all/live/upcoming, sport filters, mobile drawer | Improved | Additional markets not fabricated |
 | Odds markets | 1X2, double chance, totals, BTTS, team wins | 1X2 core market only | Functionally incomplete | Backend schema supports one selection set; add market model before claiming parity |
 | Live sports | Top live tiles, live table, stream flags | Live spotlight cards, live league table, score/minute, odds | Improved | `LiveSpotlight` added; no fake streams |
-| Persistent bet slip | Right rail with save/load, favourite tip | Header trigger + drawer + sports rail | Improved | Save/load slip not implemented |
+| Persistent bet slip | Right rail with save/load, favourite tip | Header trigger + drawer + sports rail + auto-save/restore (24 Nov 2026) | Implemented | `BetSlipContext.tsx`; restore is a convenience only — placement remains server-authoritative |
 | Bet placement | Transactional stake/selection handling | Transactional server placement, wallet debit, potential return | Complete | `bets.js`; browser tested |
 | Casino lobby | 5-column tiles, categories, search/sort, provider badges | 44 titles, filter chips, search, sort, favourites, playable/provider badges | Complete | `Casino.tsx` |
 | Slots lobby | Provider slot catalogue | 19X slot originals + provider-required slot pages | Complete | No provider sessions |
@@ -44,6 +44,8 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Promotions | Deposit/cashback/free bet campaigns | Coin campaigns with terms, no cash value | Improved | Automated promo payout engine absent |
 | Tournaments | Live leaderboards | Seeded tournament cards/standings, qualifiers linked | Complete | Automated qualification worker absent |
 | Master Admin dashboard | Global analytics/network | Metrics, series, alerts, audit chain, export | Complete | `admin/Dashboard.tsx` |
+| Revenue & risk | GGR/NGR, exposure, product mix | Sports/game GGR, open exposure, deposits, bonus cost, active players | Complete | `admin/Revenue.tsx`; scoped; `risk-smoke.mjs` |
+| Risk limits | Stake/payout caps | Master-only `maxSportsStake` / `maxSportsPayout`, server-enforced and audited | Complete | Settings group + API enforcement |
 | Delegated admin | Scoped admin dashboard | Same dashboard with server-derived scope | Complete | `getScopedAccountIds` |
 | Admin account management | Restrictions, credits, roles | Search, suspend/restore, credit, role, revoke sessions | Complete | Tested 200 response and ledger update |
 | Staff credentials | Invite/admin accounts | Master-only issuance, one-time login ID/password, copy handoff, revoke | Complete | Password shown once; admins cannot create staff logins |

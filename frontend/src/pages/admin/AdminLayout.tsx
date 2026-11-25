@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-do
 import {
   Activity, ArrowDownToLine, ArrowLeftRight, Bell, ChevronDown, CircleHelp, Coins, FileText, Gamepad2,
   HeartPulse, LayoutDashboard, LifeBuoy, LockKeyhole, LogOut, Menu, Network, ScrollText,
-  Settings, ShieldAlert, ShieldCheck, Users, X, type LucideIcon
+  Settings, ShieldAlert, ShieldCheck, TrendingUp, Users, X, type LucideIcon
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
 import { useToast } from "../../state/ToastContext";
@@ -13,7 +13,7 @@ import { classNames, vc } from "../../lib/format";
 
 interface AdminNavLink { to: string; label: string; icon: LucideIcon; end?: boolean; master?: boolean; permission?: string }
 const NAV_GROUPS: { label: string; links: AdminNavLink[] }[] = [
-  { label: "Overview", links: [{ to: "/admin", label: "Command centre", icon: LayoutDashboard, end: true }] },
+  { label: "Overview", links: [{ to: "/admin", label: "Command centre", icon: LayoutDashboard, end: true }, { to: "/admin/revenue", label: "Revenue & risk", icon: TrendingUp, permission: "reports.view.scope" }] },
   {
     label: "Network",
     links: [

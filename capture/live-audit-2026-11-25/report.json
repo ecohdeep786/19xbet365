@@ -1,0 +1,163 @@
+{
+  "email": "audit.1795627492543@19xbet365.test",
+  "password": "Audit#2026",
+  "reference": "AUD27492543",
+  "state": {
+    "startBalance": "10,500.00 coins",
+    "fantasyRoute": "http://127.0.0.1:4000/#/fantasy",
+    "selectionOdds": "1\n2.05\nAC Verona home odds, AC Verona vs Torino Nova",
+    "afterBetBalance": "10,400.00 coins",
+    "adminSeesDeposit": true,
+    "finalBalance": "10,999.00 coins",
+    "gates": {
+      "/api/player/kyc": 404,
+      "/api/player/withdrawals": 404,
+      "/api/fantasy/contests": 404
+    }
+  },
+  "pass": 22,
+  "total": 27,
+  "checks": [
+    {
+      "name": "home renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "home has no fantasy entry",
+      "pass": true,
+      "detail": "No Fantasy navigation or lobby entry found"
+    },
+    {
+      "name": "no console errors on home",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "registration completes",
+      "pass": true,
+      "detail": "http://127.0.0.1:4000/#/account"
+    },
+    {
+      "name": "new player starts with 10,500 coins",
+      "pass": true,
+      "detail": "10,500.00 coins"
+    },
+    {
+      "name": "player dashboard renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "fantasy route exists",
+      "pass": false,
+      "detail": "Skip to content\n19\nXBET365\nTOP EVENTS\nCRICKET\nSPORTS\nLIVE\n1XGAMES\nSLOTS\nLIVE CASINO\nMORE\n10,500.00 coins\n1\nOpen account menu\nAP\nAudit\nLevel 1\nBET SLIP\nSERVER-AU"
+    },
+    {
+      "name": "sports bet placed",
+      "pass": true,
+      "detail": "Account created\nWelcome to 19X, Audit. Your coin wallet is ready.\nBet placed\nBet placed with coins. Potential return 205.00 coins."
+    },
+    {
+      "name": "balance debited after bet",
+      "pass": true,
+      "detail": "10,500.00 coins -> 10,400.00 coins"
+    },
+    {
+      "name": "dice round settles",
+      "pass": true,
+      "detail": "WIN"
+    },
+    {
+      "name": "wallet shows bet and game ledger entries",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "withdrawal is visibly disabled",
+      "pass": true,
+      "detail": "Withdraw action is present but disabled"
+    },
+    {
+      "name": "deposit page explains sandbox/QR review",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "deposit request submitted",
+      "pass": true,
+      "detail": "AUD27492543"
+    },
+    {
+      "name": "responsible-play limit saves",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "support ticket opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile drawer opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile drawer closes on Escape",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "master admin sees deposit request",
+      "pass": true,
+      "detail": "AUD27492543"
+    },
+    {
+      "name": "master admin approves deposit",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "deposit appears in player ledger",
+      "pass": true,
+      "detail": "AUD27492543"
+    },
+    {
+      "name": "final balance includes deposit/bonus",
+      "pass": true,
+      "detail": "10,999.00 coins"
+    },
+    {
+      "name": "KYC endpoint exists",
+      "pass": false,
+      "detail": "404"
+    },
+    {
+      "name": "withdrawal endpoint exists",
+      "pass": false,
+      "detail": "404"
+    },
+    {
+      "name": "fantasy contests endpoint exists",
+      "pass": false,
+      "detail": "404"
+    },
+    {
+      "name": "no uncaught page errors",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no console errors",
+      "pass": false,
+      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found) | Failed to load resource: the server responded with a status of 404 (Not Found) | Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "pageErrors": []
+}

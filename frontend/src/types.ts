@@ -323,6 +323,35 @@ export interface AdminOverview {
   generatedAt: string;
 }
 
+export interface AdminRevenue {
+  scope: { global: boolean; accountCount: number | null };
+  summary: {
+    sportsStakes: number;
+    sportsPayouts: number;
+    sportsGgr: number;
+    openExposure: number;
+    openBets: number;
+    settledBets: number;
+    gameStakes: number;
+    gamePayouts: number;
+    gameGgr: number;
+    settledRounds: number;
+    grossGamingRevenue: number;
+    promotionalCost: number;
+    welcomeAllocations: number;
+    netGamingRevenue: number;
+    depositsApproved: number;
+    depositBonuses: number;
+    pendingDeposits: number;
+    playerBalances: number;
+    activeAccounts: number;
+    activePlayers24h: number;
+  };
+  byGame: { id: string; name: string; category: string; rounds: number; stakes: number; payouts: number; ggr: number }[];
+  series: { day: string; sportsGgr: number; sportsStakes: number; gameGgr: number; gameStakes: number; deposits: number }[];
+  generatedAt: string;
+}
+
 export interface AuditEvent {
   id: string | number;
   actor_id: string | null;
@@ -438,6 +467,8 @@ export interface AdminDeposit extends DepositRequest {
   player: string;
   username: string;
   email: string;
+  bonusPercent?: number | null;
+  bonusExpected?: boolean;
 }
 
 export interface ApiErrorShape {

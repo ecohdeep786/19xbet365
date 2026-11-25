@@ -1,5 +1,5 @@
 import type {
-  Account, AdminAccount, AdminDeposit, AdminOverview, AdminTicket, AuditEvent, Bet, BootstrapData,
+  Account, AdminAccount, AdminDeposit, AdminOverview, AdminRevenue, AdminTicket, AuditEvent, Bet, BootstrapData,
   DepositConfig, DepositRequest, Game, GameActivity, GameRound, Limits, Match, NetworkNode, Notification,
   PlayerOverview, Promotion, RoleInfo, SessionInfo, SupportMessage, SupportTicket, SystemHealth,
   Tournament, Transaction, Transfer
@@ -144,6 +144,7 @@ export const api = {
     request<{ roundId: string; status: string; revealed: number[]; minesCount: number; mines?: number[]; multiplier: number; payout: number; balance: number }>(`/games/mines-vault/${roundId}/state`),
 
   adminOverview: () => request<AdminOverview>("/admin/overview"),
+  adminRevenue: () => request<AdminRevenue>("/admin/revenue"),
   adminNetwork: () => request<{ roots: NetworkNode[]; summary: { total: number; balance: number; suspended: number; roles: Record<string, number> }; scope: { global: boolean; label: string } }>("/admin/network"),
   adminAccounts: (params: string) => request<{ accounts: AdminAccount[]; total: number; page: number; pages: number }>(`/admin/accounts?${params}`),
   adminSuspend: (id: string, reason: string) => request<{ ok: boolean; message: string }>(`/admin/accounts/${id}/suspend`, { method: "POST", body: json({ reason }) }),

@@ -10,7 +10,8 @@ interface Setting { key: string; value: unknown; description: string; updated_at
 
 const GROUPS: { title: string; description: string; keys: string[] }[] = [
   { title: "Platform identity", description: "Brand copy shown across the public site.", keys: ["platformName", "platformTagline", "supportEmail", "licenseStatus"] },
-  { title: "Operations", description: "Availability, gameplay and deposit controls.", keys: ["maintenanceMode", "registrationsEnabled", "maxGameStake", "liveUpdates", "responsibleGaming", "depositMode", "depositMin", "depositMax"] },
+  { title: "Operations", description: "Availability, gameplay and deposit controls.", keys: ["maintenanceMode", "registrationsEnabled", "liveUpdates", "responsibleGaming", "depositMode", "depositMin", "depositMax"] },
+  { title: "Risk controls", description: "Stake and payout caps that protect the platform and its players.", keys: ["maxSportsStake", "maxSportsPayout", "maxGameStake"] },
   { title: "Deposit configuration", description: "QR payment details, instructions and transparent bonus tiers.", keys: ["depositQrImageUrl", "depositInstructions", "depositBonusTiers"] },
   { title: "Integrations & financial rails", description: "Provider and real-money controls. Locked where licensing is absent.", keys: ["thirdPartyIntegrations", "realMoneyEnabled", "kycRequired"] },
   { title: "Governance", description: "Retention and audit policy.", keys: ["auditRetentionDays"] }

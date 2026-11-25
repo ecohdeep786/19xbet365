@@ -100,7 +100,7 @@ export function AdminDepositsPage() {
             {deposits.map((deposit) => (
               <article className={classNames("deposit-admin-row", `status-${deposit.status}`)} key={deposit.id}>
                 <div className="deposit-admin-main">
-                  <div className="deposit-admin-amount">{vc(deposit.amount)}<span>+{vc(deposit.bonusAmount)} bonus</span></div>
+                  <div className="deposit-admin-amount">{vc(deposit.amount)}<span>+{vc(deposit.bonusAmount)} {deposit.bonusExpected ? `expected bonus (${deposit.bonusPercent}%)` : "bonus"}</span></div>
                   <div><strong>{deposit.player}</strong><span>{deposit.email} · @{deposit.username}</span></div>
                   <div><span>Reference</span><strong>{deposit.reference}</strong></div>
                   <div><span>Submitted</span><strong>{dateTime(deposit.createdAt)}</strong></div>

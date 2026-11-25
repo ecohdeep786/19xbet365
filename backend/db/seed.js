@@ -230,6 +230,8 @@ async function main() {
       ["maintenanceMode", false, "Pauses public playable actions when enabled"],
       ["registrationsEnabled", true, "Allows new player registration"],
       ["maxGameStake", 5000, "Maximum coin stake per game round"],
+      ["maxSportsStake", 5000, "Maximum coin stake per sports bet"],
+      ["maxSportsPayout", 50000, "Maximum potential return per sports bet"],
       ["depositMode", "sandbox", "Deposit mode: sandbox, manual_review or disabled"],
       ["depositQrImageUrl", "", "Payment QR image URL for the deposit page"],
       ["depositInstructions", "Scan the payment QR, then enter the amount and payment reference. A reviewer verifies the transfer before coins are credited.", "Instructions shown on the deposit page"],

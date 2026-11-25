@@ -8,7 +8,7 @@ import { ACCOUNT_FIELDS, serializeAccount } from "../lib/account.js";
 import { hashPassword, randomReferral, randomToken, sha256 } from "../lib/crypto.js";
 import { broadcast } from "../ws.js";
 import { round2 } from "../services/gameEngine.js";
-import { approveDeposit, rejectDeposit } from "../services/deposits.js";
+import { approveDeposit, bonusForDeposit, getDepositSettings, rejectDeposit } from "../services/deposits.js";
 
 const router = express.Router();
 router.use(requireStaff);
@@ -165,6 +165,144 @@ router.get("/overview", requirePermission("reports.view.scope"), async (req, res
       },
       recentAudit: recentAudit.rows,
       auditChainTip: auditChain.rows[0] || null,
+      generatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Revenue and risk -----------------------------------------------------------
+router.get("/revenue", requirePermission("reports.view.scope"), async (req, res, next) => {
+  try {
+    const ids = await scoped(req);
+    const accountFilter = ids === null ? "" : "AND a.id = ANY($1::uuid[])";
+    const param = ids === null ? [] : [ids];
+    const [sports, games, deposits, bonuses, balances, active, byGame, series] = await Promise.all([
+      query(
+        `SELECT
+           COALESCE(SUM(CASE WHEN b.status IN ('won','lost','void','cashed_out') THEN b.stake END),0) AS settled_stakes,
+           COALESCE(SUM(CASE WHEN b.status IN ('won','lost','void','cashed_out') THEN b.payout END),0) AS settled_payouts,
+           COALESCE(SUM(CASE WHEN b.status='open' THEN b.potential_return END),0) AS open_exposure,
+           COUNT(*) FILTER (WHERE b.status='open') AS open_bets,
+           COUNT(*) FILTER (WHERE b.status IN ('won','lost','void','cashed_out')) AS settled_bets
+         FROM bets b JOIN accounts a ON a.id = b.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT
+           COALESCE(SUM(gr.bet) FILTER (WHERE gr.status='settled'),0) AS stakes,
+           COALESCE(SUM(gr.payout) FILTER (WHERE gr.status='settled'),0) AS payouts,
+           COUNT(*) FILTER (WHERE gr.status='settled') AS settled_rounds
+         FROM game_rounds gr JOIN accounts a ON a.id = gr.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT
+           COALESCE(SUM(dr.amount) FILTER (WHERE dr.status='approved'),0) AS approved,
+           COALESCE(SUM(dr.bonus_amount) FILTER (WHERE dr.status='approved'),0) AS bonus,
+           COUNT(*) FILTER (WHERE dr.status='pending') AS pending
+         FROM deposit_requests dr JOIN accounts a ON a.id = dr.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT
+           COALESCE(SUM(t.amount) FILTER (WHERE t.type='welcome_bonus'),0) AS welcome,
+           COALESCE(SUM(t.amount) FILTER (WHERE t.type IN ('promo_credit','referral_reward','deposit_bonus')),0) AS promotional
+         FROM transactions t JOIN accounts a ON a.id = t.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT COALESCE(SUM(a.balance),0) AS total_balance,
+                COUNT(*) FILTER (WHERE a.status='active') AS active_accounts
+         FROM accounts a WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT COUNT(DISTINCT account_id) AS active_players FROM (
+           SELECT gr.account_id FROM game_rounds gr JOIN accounts a ON a.id=gr.account_id
+           WHERE gr.created_at > now() - interval '24 hours' ${accountFilter}
+           UNION
+           SELECT b.account_id FROM bets b JOIN accounts a ON a.id=b.account_id
+           WHERE b.placed_at > now() - interval '24 hours' ${accountFilter}
+         ) recent`,
+        param
+      ),
+      query(
+        `SELECT g.id, g.name, g.category,
+                COUNT(gr.*) AS rounds,
+                COALESCE(SUM(gr.bet),0) AS stakes,
+                COALESCE(SUM(gr.payout),0) AS payouts,
+                COALESCE(SUM(gr.bet - gr.payout),0) AS ggr
+         FROM game_rounds gr JOIN games g ON g.id = gr.game_id
+         JOIN accounts a ON a.id = gr.account_id
+         WHERE gr.status='settled' ${accountFilter}
+         GROUP BY g.id, g.name, g.category ORDER BY ggr DESC LIMIT 20`,
+        param
+      ),
+      query(
+        `SELECT d.day,
+           COALESCE((SELECT SUM(b.stake - b.payout) FROM bets b JOIN accounts a ON a.id=b.account_id
+             WHERE b.status IN ('won','lost','void','cashed_out') AND date_trunc('day', b.settled_at)=d.day ${accountFilter}),0) AS sports_ggr,
+           COALESCE((SELECT SUM(b.stake) FROM bets b JOIN accounts a ON a.id=b.account_id
+             WHERE b.status IN ('won','lost','void','cashed_out') AND date_trunc('day', b.settled_at)=d.day ${accountFilter}),0) AS sports_stakes,
+           COALESCE((SELECT SUM(gr.bet - gr.payout) FROM game_rounds gr JOIN accounts a ON a.id=gr.account_id
+             WHERE gr.status='settled' AND date_trunc('day', gr.settled_at)=d.day ${accountFilter}),0) AS game_ggr,
+           COALESCE((SELECT SUM(gr.bet) FROM game_rounds gr JOIN accounts a ON a.id=gr.account_id
+             WHERE gr.status='settled' AND date_trunc('day', gr.settled_at)=d.day ${accountFilter}),0) AS game_stakes,
+           COALESCE((SELECT SUM(dr.amount) FROM deposit_requests dr JOIN accounts a ON a.id=dr.account_id
+             WHERE dr.status='approved' AND date_trunc('day', dr.reviewed_at)=d.day ${accountFilter}),0) AS deposits
+         FROM generate_series(date_trunc('day', now()) - interval '6 days', date_trunc('day', now()), interval '1 day') d(day)
+         ORDER BY d.day`,
+        param
+      )
+    ]);
+    const sportsStakes = Number(sports.rows[0].settled_stakes);
+    const sportsPayouts = Number(sports.rows[0].settled_payouts);
+    const gameStakes = Number(games.rows[0].stakes);
+    const gamePayouts = Number(games.rows[0].payouts);
+    const sportsGgr = round2(sportsStakes - sportsPayouts);
+    const gameGgr = round2(gameStakes - gamePayouts);
+    const grossGamingRevenue = round2(sportsGgr + gameGgr);
+    const promotionalCost = Number(bonuses.rows[0].promotional);
+    const welcomeAllocations = Number(bonuses.rows[0].welcome);
+    res.json({
+      scope: { global: ids === null, accountCount: ids === null ? null : ids.length },
+      summary: {
+        sportsStakes,
+        sportsPayouts,
+        sportsGgr,
+        openExposure: Number(sports.rows[0].open_exposure),
+        openBets: Number(sports.rows[0].open_bets),
+        settledBets: Number(sports.rows[0].settled_bets),
+        gameStakes,
+        gamePayouts,
+        gameGgr,
+        settledRounds: Number(games.rows[0].settled_rounds),
+        grossGamingRevenue,
+        promotionalCost: round2(promotionalCost),
+        welcomeAllocations: round2(welcomeAllocations),
+        netGamingRevenue: round2(grossGamingRevenue - promotionalCost),
+        depositsApproved: Number(deposits.rows[0].approved),
+        depositBonuses: Number(deposits.rows[0].bonus),
+        pendingDeposits: Number(deposits.rows[0].pending),
+        playerBalances: Number(balances.rows[0].total_balance),
+        activeAccounts: Number(balances.rows[0].active_accounts),
+        activePlayers24h: Number(active.rows[0].active_players)
+      },
+      byGame: byGame.rows.map((row) => ({
+        id: row.id, name: row.name, category: row.category,
+        rounds: Number(row.rounds), stakes: Number(row.stakes),
+        payouts: Number(row.payouts), ggr: Number(row.ggr)
+      })),
+      series: series.rows.map((row) => ({
+        day: row.day,
+        sportsGgr: Number(row.sports_ggr),
+        sportsStakes: Number(row.sports_stakes),
+        gameGgr: Number(row.game_ggr),
+        gameStakes: Number(row.game_stakes),
+        deposits: Number(row.deposits)
+      })),
       generatedAt: new Date().toISOString()
     });
   } catch (error) {
@@ -1090,23 +1228,29 @@ router.get("/deposits", requireMaster, async (req, res, next) => {
        LIMIT 100`,
       status ? [status] : []
     );
+    const config = await getDepositSettings();
     res.json({
-      deposits: result.rows.map((row) => ({
-        id: row.id,
-        accountId: row.account_id,
-        player: row.display_name,
-        username: row.username,
-        email: row.email,
-        amount: Number(row.amount),
-        method: row.method,
-        reference: row.reference,
-        note: row.note,
-        status: row.status,
-        bonusAmount: Number(row.bonus_amount),
-        reviewNote: row.review_note,
-        createdAt: row.created_at,
-        reviewedAt: row.reviewed_at
-      }))
+      deposits: result.rows.map((row) => {
+        const expected = row.status === "pending" ? bonusForDeposit(Number(row.amount), config.tiers) : null;
+        return {
+          id: row.id,
+          accountId: row.account_id,
+          player: row.display_name,
+          username: row.username,
+          email: row.email,
+          amount: Number(row.amount),
+          method: row.method,
+          reference: row.reference,
+          note: row.note,
+          status: row.status,
+          bonusAmount: expected ? expected.amount : Number(row.bonus_amount),
+          bonusPercent: expected ? expected.percent : null,
+          bonusExpected: Boolean(expected),
+          reviewNote: row.review_note,
+          createdAt: row.created_at,
+          reviewedAt: row.reviewed_at
+        };
+      })
     });
   } catch (error) {
     next(error);
@@ -1158,6 +1302,12 @@ router.get("/settings", requirePermission("settings.manage"), async (req, res, n
 router.patch("/settings/:key", requireMaster, async (req, res, next) => {
   try {
     if (req.body?.value === undefined) throw Object.assign(new Error("A value is required."), { status: 400, code: "invalid_value" });
+    if (["maxGameStake", "maxSportsStake", "maxSportsPayout"].includes(req.params.key)) {
+      const amount = Number(req.body.value);
+      if (!Number.isFinite(amount) || amount <= 0) {
+        throw Object.assign(new Error("Enter a positive coin amount."), { status: 400, code: "invalid_value" });
+      }
+    }
     if (req.params.key === "realMoneyEnabled" && req.body.value !== false) {
       throw Object.assign(new Error("Real-money rails are hard-disabled in this foundation and cannot be enabled from configuration."), { status: 403, code: "real_money_locked" });
     }

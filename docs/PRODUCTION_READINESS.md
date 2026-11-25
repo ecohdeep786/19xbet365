@@ -17,14 +17,16 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Demo sports settlement | PASS | 1X2 singles/accumulators auto-settle with generated scores, wallet credit, notification and audit; `settlement-smoke.mjs` |
 | Deposit/bonus flow | PASS (sandbox) | QR request, Master review, configurable bonus, wallet/audit/notification path; `deposit-smoke.mjs` |
 | Player workflows E2E | PASS | registration, login, bet, wallet, games, support/help |
-| Master Admin workflows | PASS | dashboard, accounts, credit, roles, content, settings, support, transfers, audit, health |
+| Master Admin workflows | PASS | dashboard, revenue/risk, accounts, credit, roles, content, settings, support, transfers, audit, health |
+| Scoped Admin revenue access | PASS | `/admin/revenue` scoped to actor branch; 403 for players |
+| Sports risk caps | PASS | Master-only `maxSportsStake`/`maxSportsPayout`; server-enforced and audited; `risk-smoke.mjs` |
 | Delegated Admin workflows | PASS | scope/permission tests in `security-smoke.mjs` |
 | Network isolation | PASS | agent sees 9 accounts, no master/other admin |
 | Database persistence | PASS | PostgreSQL schema/seed, wallet/round/bet records |
 | Auth/authorization | PASS | session, RBAC, scope, trigger tests |
 | Security tests | PASS with findings | `SECURITY_TEST_REPORT.md` |
 | Production build | PASS | `tsc --noEmit && vite build` |
-| Performance | PARTIAL | ~168 KB gzip JS; no load test; illustrated SVG covers add no image payloads |
+| Performance | PARTIAL | ~170 KB gzip JS; no load test; illustrated SVG covers add no image payloads |
 | Critical defects | NONE KNOWN | recent bug fixes covered in E2E report |
 | Restricted functionality disabled | PASS | money locked, provider session required |
 | Legal/licensing satisfied | FAIL / BLOCKED | no licence; no real-money operation |
