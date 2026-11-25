@@ -28,10 +28,11 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Password recovery | Email reset link | Account notification request; manual support verification | Functionally incomplete | Requires mail provider/token page |
 | 2FA | Authenticator/SMS | Preference stored + notification | Functionally incomplete | No authenticator provisioning |
 | Player dashboard | Wallet, bets, bonuses, history | Overview, balance, open bets, rounds, notifications, limits | Complete | `Overview.tsx` |
-| Profile | Personal details, verification | Editable display/country/phone/marketing; protected email/username | Complete | No KYC document upload |
-| Wallet | Deposit/withdraw/history | Coin ledger, filters, active Add coins entry point, no live cash-out | Improved | Deposit review and bonuses sandbox-ready; withdrawals disabled |
+| Profile | Personal details, verification | Editable display/country/phone/marketing; protected email/username; KYC submission | Complete | Manual KYC record; provider document upload not integrated |
+| Wallet | Deposit/withdraw/history | Coin ledger, filters, Add coins and withdrawal request entry points | Improved | Deposit/manual withdrawal review sandbox-ready; no automated payout |
 | Deposit / QR review | Payment QR, amount, bonus tier, review | QR configuration, player request/UTR, Master review, percentage bonus, ledger/audit notifications | Complete (sandbox) | Live collection gated by `PAYMENTS_LIVE_ENABLED` and compliance |
-| Withdrawal | Cash-out to player | No endpoint; messaging only | Legal/restricted | Requires licensing, KYC/AML and merchant payout rails |
+| Withdrawal | Cash-out to player | UPI/bank request, KYC gate, Master approve/reject/mark-paid | Complete (manual) | Automated payment execution and reconciliation still required |
+| Fantasy | Daily fantasy contests | Cricket salary-cap lineup, entries, scores, leaderboard, prizes, cancel/refund | Complete (sandbox) | Real player-stat feed required for paid contests |
 | Bet history | Open/settled tickets | Open/won/lost/void cards with selections, settlement time and payout | Complete | No cash-out; 1X2 demo settlement is automatic |
 | Game activity | Round history | Server rounds, outcomes, references, details | Complete | `Activity.tsx` |
 | Notifications | All/unread/security | Notification centre, read/all, security tags | Complete | Global read updates currently affect global records |
@@ -53,6 +54,9 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Transfers | Request/approve network moves | Request/approve/reject workflow | Complete | Tested UI; server scope checks |
 | Game catalogue admin | Visibility/featured | Status, featured, copy controls | Complete | Outcomes/RTP not editable |
 | Content admin | CMS/promotions | Page and promotion editing, audit | Complete | Promotions are coin-funded only |
+| Fantasy | Daily fantasy sports | Cricket salary-cap contests, lineup builder, entries, scoring, leaderboard, settlement, cancel/refund | Complete (sandbox) | Real player data/scoring provider still required |
+| KYC | Identity verification | Submission, manual Master review, withdrawal gate | Complete (manual) | Provider/encrypted documents not integrated |
+| Withdrawals | Withdrawal methods | UPI/bank request, KYC gate, approve/reject/mark-paid, ledger/audit | Complete (manual) | No automated payout execution |
 | Credit admin | Manual adjustments | Player-only adjustment, reason, audit event | Complete | Browser test recorded 250 coins |
 | Support admin | Assign/status/reply/internal | Status, priority, assignment, public/internal replies | Complete | Browser tested |
 | Security centre | Sessions, failed logins, suspension | Events, chain status, revoke sessions | Complete | No forced password reset |

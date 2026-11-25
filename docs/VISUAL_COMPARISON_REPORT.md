@@ -18,6 +18,10 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Casino lobby | `capture/reference/live-casino.jpeg` | `capture/product/casino-1440.jpeg` |
 | Instant games | `capture/reference/1xgames.jpeg` | `capture/product/instant-1440.jpeg` |
 | Playable game detail | reference game page | `capture/product/dice-1440.jpeg` |
+| Fantasy lobby | reference fantasy/sportsbook | `capture/product/fantasy-1440.jpeg` |
+| Fantasy lineup builder | reference fantasy lineup | `capture/fantasy-audit/02-fantasy-lineup.jpeg` |
+| Identity verification | reference account gated | `capture/product/verification-1440.jpeg` |
+| Withdrawal request | reference account gated | `capture/product/withdraw-1440.jpeg` |
 | Registration | `capture/reference/registration-modal.jpeg` | `capture/product/register-1440.jpeg` |
 | Sign in | reference login modal | `capture/product/login-1440.jpeg` |
 | Player dashboard | reference account gated | `capture/product/account-1440.jpeg` |
@@ -29,6 +33,9 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Help centre | reference help | `capture/product/help-1440.jpeg` |
 | Support | reference support | `capture/product/support-1440.jpeg` |
 | Master Admin | not public reference | `capture/product/admin-dashboard-1440.jpeg` |
+| Revenue & risk | not public reference | `capture/product/admin-revenue-1440.jpeg` |
+| Fantasy operations | not public reference | `capture/product/admin-fantasy-1440.jpeg` |
+| KYC & withdrawals | not public reference | `capture/product/admin-compliance-1440.jpeg` |
 | Admin accounts & credential issuance | not public reference | `capture/product/admin-accounts-1440.jpeg` |
 | Deposit review | not public reference | `capture/product/admin-deposits-1440.jpeg` |
 | Mobile home | `capture/screenshot-390.png` | `capture/product/home-390.jpeg` |
@@ -79,7 +86,7 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Accent green | Bright lime with white text | Bright lime for decoration; darker accessible green `#557d1d` for white-text actions |
 | Live casino | Live dealer photography/video | Provider preview only; no fabricated live feed |
 | Provider games | Many certified providers | 33 clearly labelled integration-ready entries |
-| Real money | Deposits, withdrawals, cash bonuses | Disabled by compliance design; sandbox QR review only |
+| Real money | Deposits, withdrawals, cash bonuses | Sandbox/manual-review deposit, KYC and withdrawal flow; automated payout disabled until compliance gates |
 | Sports markets | Many markets per fixture | 1X2 foundation only; no fake markets |
 | Header language | Country/currency/language selector | Static `EN · COINS` chip; documented gap |
 | Save/load bet slip | Present | Not implemented; documented gap |

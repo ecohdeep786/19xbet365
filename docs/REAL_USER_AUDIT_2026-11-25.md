@@ -12,17 +12,11 @@ Evidence: `capture/live-audit-2026-11-25/` and `scripts/live-user-audit.mjs`.
 | Area | Result |
 | --- | --- |
 | Core player journeys | **22/22 implemented checks passed** |
-| Full audit (including missing production/fantasy gates) | **22/27 checks passed** |
-| Console/page errors | None from implemented UI; only expected 404s from absent KYC, withdrawal and fantasy endpoints |
+| Full audit (including missing production/fantasy gates) | **27/27 checks passed after the fantasy and compliance build**; initial audit was 22/27 before those features existed |
+| Console/page errors | None in the final run; the initial run only reported expected 404s from features that had not been built |
 | Visual/responsive | No layout failures observed in this run; 1440px desktop and 390px mobile drawer tested |
 
-The five failed checks are not regressions in the existing product. They are missing capabilities:
-
-1. No `#/fantasy` route.
-2. No KYC endpoint (`404`).
-3. No withdrawal endpoint (`404`).
-4. No fantasy-contests API (`404`).
-5. The three missing endpoints produce console 404s when probed.
+The initial audit found five missing capabilities: no fantasy route, no KYC endpoint, no withdrawal endpoint, no fantasy-contests API and the resulting console 404s. Those capabilities are now implemented; the final live-user run passes **27/27** with no console or page errors. The original audit remains below as the baseline that drove the build, and section 10 records the delivered features.
 
 ## 2. What was tested and passed
 
@@ -176,7 +170,7 @@ Recommended first vertical slice:
 - **Admin:** create, cancel/refund, lock and settle; view entries and payouts.
 - **Compliance UI:** 18+, contest rules, cancellation/refund policy, responsible-play links, sandbox banner until licensed.
 
-Detailed plan: `docs/FANTASY_MVP_PLAN.md`.
+Detailed plan: `docs/FANTASY_PRODUCT_PLAN.md`.
 
 ## 7. Immediate engineering fixes before the fantasy build
 
@@ -210,3 +204,38 @@ After the live test, a first Master/Admin control slice was added:
 - `scripts/risk-smoke.mjs` verifies Master/Admin revenue access, Player denial, and rejection of stakes/potential returns above the caps.
 
 The page explicitly states that outcomes and settled records are immutable. Staff control configuration, limits and settlement rules, not individual results.
+
+## 10. Fantasy and compliance product build
+
+The next production slice is implemented in the sandbox:
+
+### Fantasy cricket
+- `/fantasy` lobby with open/settled contests, prize pool, entry fee and spots.
+- `/fantasy/:id` server-validated salary-cap builder:
+  - 11 players from the fixture teams.
+  - 100-credit salary cap.
+  - 1 WK, 4 BAT, 3 AR, 3 BOWL.
+  - Maximum 7 from one team.
+  - Captain 2×, vice-captain 1.5×.
+- Transactional coin entry with one entry per player in the seeded contest.
+- Contest lock by time; late entries rejected server-side.
+- Server-recorded player scores, rank, prize payout, cancellation/refund and audit/notification records.
+- `/admin/fantasy` create/score/settle/cancel controls for Master and delegated Admin operators with `games.manage`.
+- Prize settlement is idempotent and paid through the wallet ledger with `fantasy_win` transactions.
+
+### Identity verification
+- `/account/verification` submission with legal name, date of birth, country, address and document reference.
+- Manual Master-only approval/rejection queue at `/admin/compliance`.
+- Approval required before withdrawal requests when `kycRequired` is enabled.
+- No document images are stored; production KYC must use an approved provider and encrypted document handling.
+
+### Manual withdrawals
+- `/account/withdraw` request flow with UPI/bank destination, amount range and KYC gate.
+- Request debit is recorded as `withdrawal_request`; rejection/cancellation refunds as `withdrawal_refund`.
+- Master-only review at `/admin/compliance`, with approve, reject and mark-paid states.
+- Payout is manual: the operator records the external payment reference. The UI states that live payouts remain disabled until the real-money rail is activated.
+
+### Control and reporting
+- Revenue & risk now includes fantasy GGR, fantasy fees, withdrawals paid, pending withdrawal value and open fantasy entries.
+- Every KYC, withdrawal and fantasy action is audited.
+- Real money remains hard-gated: `realMoneyEnabled=false`, `PAYMENTS_LIVE_ENABLED` is not set and the deployment still requires licensing/KYC/payment onboarding.

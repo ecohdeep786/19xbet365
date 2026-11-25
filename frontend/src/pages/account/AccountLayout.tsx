@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { NavLink, Outlet, Link, useLocation } from "react-router-dom";
 import {
-  Activity, ArrowDownToLine, Bell, ChevronRight, Coins, HeartHandshake, ShieldCheck, Ticket, UserRound,
+  Activity, ArrowDownToLine, ArrowUpFromLine, BadgeCheck, Bell, ChevronRight, Coins, HeartHandshake, ShieldCheck, Ticket, UserRound,
   WalletCards, Users, ArrowRight, Sparkles
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
@@ -14,6 +14,8 @@ const LINKS = [
   { to: "/account/profile", label: "Profile", icon: UserRound },
   { to: "/account/wallet", label: "Wallet & history", icon: WalletCards },
   { to: "/account/deposit", label: "Add coins", icon: ArrowDownToLine },
+  { to: "/account/withdraw", label: "Withdraw", icon: ArrowUpFromLine },
+  { to: "/account/verification", label: "Verification", icon: BadgeCheck },
   { to: "/account/bets", label: "My bets", icon: Ticket },
   { to: "/account/activity", label: "Game activity", icon: Sparkles },
   { to: "/account/notifications", label: "Notifications", icon: Bell },

@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE INDEX IF NOT EXISTS transactions_account_idx ON transactions (account_id, created_at DESC);
 ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_type_check;
 ALTER TABLE transactions ADD CONSTRAINT transactions_type_check
-  CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus'));
+  CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus','fantasy_entry','fantasy_win','fantasy_refund','withdrawal_request','withdrawal_paid','withdrawal_refund'));
 
 CREATE TABLE IF NOT EXISTS favorites (
   account_id  UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
@@ -372,6 +372,125 @@ CREATE TABLE IF NOT EXISTS responsible_limits (
   self_exclusion_until  TIMESTAMPTZ,
   updated_at            TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Fantasy contests ---------------------------------------------------------
+CREATE TABLE IF NOT EXISTS fantasy_contests (
+  id                    UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name                  TEXT NOT NULL,
+  sport                 TEXT NOT NULL DEFAULT 'cricket',
+  match_id              TEXT NOT NULL REFERENCES matches(id) ON DELETE RESTRICT,
+  status                TEXT NOT NULL DEFAULT 'open' CHECK (status IN ('draft','open','locked','live','settled','cancelled')),
+  salary_cap            NUMERIC(10,2) NOT NULL CHECK (salary_cap > 0),
+  entry_fee             NUMERIC(14,2) NOT NULL CHECK (entry_fee >= 0),
+  max_entries           INTEGER NOT NULL CHECK (max_entries > 0),
+  max_entries_per_user  INTEGER NOT NULL DEFAULT 1 CHECK (max_entries_per_user > 0),
+  prize_pool            NUMERIC(14,2) NOT NULL CHECK (prize_pool >= 0),
+  rake_percent          NUMERIC(5,2) NOT NULL DEFAULT 10 CHECK (rake_percent >= 0 AND rake_percent <= 100),
+  lock_at               TIMESTAMPTZ NOT NULL,
+  starts_at             TIMESTAMPTZ NOT NULL,
+  settled_at            TIMESTAMPTZ,
+  rules                 JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_by            UUID REFERENCES accounts(id) ON DELETE SET NULL,
+  created_at            TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at            TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS fantasy_contests_status_idx ON fantasy_contests (status, lock_at);
+CREATE INDEX IF NOT EXISTS fantasy_contests_match_idx ON fantasy_contests (match_id);
+
+CREATE TABLE IF NOT EXISTS fantasy_prize_tiers (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  contest_id  UUID NOT NULL REFERENCES fantasy_contests(id) ON DELETE CASCADE,
+  rank_from   INTEGER NOT NULL CHECK (rank_from > 0),
+  rank_to     INTEGER NOT NULL CHECK (rank_to >= rank_from),
+  amount      NUMERIC(14,2) NOT NULL CHECK (amount >= 0)
+);
+CREATE INDEX IF NOT EXISTS fantasy_prize_tiers_contest_idx ON fantasy_prize_tiers (contest_id, rank_from);
+
+CREATE TABLE IF NOT EXISTS fantasy_players (
+  id          TEXT PRIMARY KEY,
+  sport       TEXT NOT NULL DEFAULT 'cricket',
+  team        TEXT NOT NULL,
+  name        TEXT NOT NULL,
+  role        TEXT NOT NULL CHECK (role IN ('wk','bat','ar','bowl')),
+  salary      NUMERIC(8,2) NOT NULL CHECK (salary > 0),
+  active      BOOLEAN NOT NULL DEFAULT true,
+  external_ref TEXT,
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS fantasy_players_sport_team_idx ON fantasy_players (sport, team, role);
+
+CREATE TABLE IF NOT EXISTS fantasy_player_stats (
+  contest_id  UUID NOT NULL REFERENCES fantasy_contests(id) ON DELETE CASCADE,
+  player_id   TEXT NOT NULL REFERENCES fantasy_players(id) ON DELETE CASCADE,
+  points      NUMERIC(10,2) NOT NULL DEFAULT 0,
+  stats       JSONB NOT NULL DEFAULT '{}'::jsonb,
+  updated_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  PRIMARY KEY (contest_id, player_id)
+);
+
+CREATE TABLE IF NOT EXISTS fantasy_entries (
+  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  contest_id      UUID NOT NULL REFERENCES fantasy_contests(id) ON DELETE CASCADE,
+  account_id      UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+  lineup          JSONB NOT NULL,
+  captain_id      TEXT NOT NULL REFERENCES fantasy_players(id),
+  vice_captain_id TEXT NOT NULL REFERENCES fantasy_players(id),
+  entry_fee       NUMERIC(14,2) NOT NULL,
+  status          TEXT NOT NULL DEFAULT 'confirmed' CHECK (status IN ('confirmed','cancelled','settled')),
+  score           NUMERIC(10,2) NOT NULL DEFAULT 0,
+  rank            INTEGER,
+  payout          NUMERIC(14,2) NOT NULL DEFAULT 0,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  settled_at      TIMESTAMPTZ
+);
+CREATE INDEX IF NOT EXISTS fantasy_entries_contest_idx ON fantasy_entries (contest_id, score DESC);
+CREATE INDEX IF NOT EXISTS fantasy_entries_account_idx ON fantasy_entries (account_id, created_at DESC);
+
+CREATE TABLE IF NOT EXISTS fantasy_settlements (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  contest_id    UUID NOT NULL UNIQUE REFERENCES fantasy_contests(id) ON DELETE CASCADE,
+  settled_by    UUID REFERENCES accounts(id) ON DELETE SET NULL,
+  total_entries INTEGER NOT NULL,
+  total_paid    NUMERIC(14,2) NOT NULL,
+  details       JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Account verification and withdrawals ------------------------------------
+CREATE TABLE IF NOT EXISTS account_verifications (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id          UUID NOT NULL UNIQUE REFERENCES accounts(id) ON DELETE CASCADE,
+  legal_name          TEXT NOT NULL,
+  date_of_birth       DATE NOT NULL,
+  country             TEXT NOT NULL,
+  address             TEXT NOT NULL,
+  document_type       TEXT NOT NULL,
+  document_reference  TEXT NOT NULL,
+  status              TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','approved','rejected')),
+  review_note         TEXT,
+  reviewed_by         UUID REFERENCES accounts(id) ON DELETE SET NULL,
+  submitted_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  reviewed_at         TIMESTAMPTZ,
+  updated_at          TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE IF NOT EXISTS withdrawal_requests (
+  id                  UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id          UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+  amount              NUMERIC(14,2) NOT NULL CHECK (amount > 0),
+  method              TEXT NOT NULL,
+  destination         TEXT NOT NULL,
+  destination_masked  TEXT NOT NULL,
+  status              TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','approved','paid','rejected','cancelled')),
+  requested_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+  reviewed_by         UUID REFERENCES accounts(id) ON DELETE SET NULL,
+  review_note         TEXT,
+  reviewed_at         TIMESTAMPTZ,
+  paid_at             TIMESTAMPTZ,
+  payment_reference   TEXT
+);
+CREATE INDEX IF NOT EXISTS withdrawal_requests_status_idx ON withdrawal_requests (status, requested_at DESC);
+CREATE INDEX IF NOT EXISTS withdrawal_requests_account_idx ON withdrawal_requests (account_id, requested_at DESC);
 
 -- Security: audit records are append-only. The service also computes a hash chain.
 CREATE OR REPLACE FUNCTION prevent_audit_mutation() RETURNS trigger AS $$

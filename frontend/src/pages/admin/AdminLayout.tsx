@@ -1,9 +1,9 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
-  Activity, ArrowDownToLine, ArrowLeftRight, Bell, ChevronDown, CircleHelp, Coins, FileText, Gamepad2,
+  Activity, ArrowDownToLine, ArrowLeftRight, BadgeCheck, Bell, ChevronDown, CircleHelp, Coins, FileText, Gamepad2,
   HeartPulse, LayoutDashboard, LifeBuoy, LockKeyhole, LogOut, Menu, Network, ScrollText,
-  Settings, ShieldAlert, ShieldCheck, TrendingUp, Users, X, type LucideIcon
+  Settings, ShieldAlert, ShieldCheck, TrendingUp, Trophy, Users, X, type LucideIcon
 } from "lucide-react";
 import { useAuth } from "../../state/AuthContext";
 import { useToast } from "../../state/ToastContext";
@@ -26,9 +26,11 @@ const NAV_GROUPS: { label: string; links: AdminNavLink[] }[] = [
     label: "Operations",
     links: [
       { to: "/admin/games", label: "Game catalogue", icon: Gamepad2, permission: "games.view" },
+      { to: "/admin/fantasy", label: "Fantasy contests", icon: Trophy, permission: "games.manage" },
       { to: "/admin/content", label: "Content & promos", icon: FileText, permission: "content.manage" },
       { to: "/admin/credits", label: "Credit activity", icon: Coins, permission: "credits.adjust" },
       { to: "/admin/deposits", label: "Deposit review", icon: ArrowDownToLine, master: true },
+      { to: "/admin/compliance", label: "KYC & withdrawals", icon: BadgeCheck, master: true },
       { to: "/admin/support", label: "Support desk", icon: LifeBuoy, permission: "support.view" },
       { to: "/admin/transfers", label: "Transfers", icon: ArrowLeftRight, permission: "transfers.approve" }
     ]

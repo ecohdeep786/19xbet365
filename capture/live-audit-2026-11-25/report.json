@@ -1,7 +1,7 @@
 {
-  "email": "audit.1795627492543@19xbet365.test",
+  "email": "audit.1795630898027@19xbet365.test",
   "password": "Audit#2026",
-  "reference": "AUD27492543",
+  "reference": "AUD30898027",
   "state": {
     "startBalance": "10,500.00 coins",
     "fantasyRoute": "http://127.0.0.1:4000/#/fantasy",
@@ -10,12 +10,12 @@
     "adminSeesDeposit": true,
     "finalBalance": "10,999.00 coins",
     "gates": {
-      "/api/player/kyc": 404,
-      "/api/player/withdrawals": 404,
-      "/api/fantasy/contests": 404
+      "/api/verification": 200,
+      "/api/withdrawals/config": 200,
+      "/api/fantasy/contests": 200
     }
   },
-  "pass": 22,
+  "pass": 27,
   "total": 27,
   "checks": [
     {
@@ -24,9 +24,9 @@
       "detail": ""
     },
     {
-      "name": "home has no fantasy entry",
+      "name": "home exposes fantasy entry",
       "pass": true,
-      "detail": "No Fantasy navigation or lobby entry found"
+      "detail": "Fantasy navigation present"
     },
     {
       "name": "no console errors on home",
@@ -50,8 +50,8 @@
     },
     {
       "name": "fantasy route exists",
-      "pass": false,
-      "detail": "Skip to content\n19\nXBET365\nTOP EVENTS\nCRICKET\nSPORTS\nLIVE\n1XGAMES\nSLOTS\nLIVE CASINO\nMORE\n10,500.00 coins\n1\nOpen account menu\nAP\nAudit\nLevel 1\nBET SLIP\nSERVER-AU"
+      "pass": true,
+      "detail": "Skip to content\n19\nXBET365\nTOP EVENTS\nCRICKET\nSPORTS\nLIVE\nFANTASY\n1XGAMES\nSLOTS\nLIVE CASINO\nMORE\n10,500.00 coins\n1\nOpen account menu\nAP\nAudit\nLevel 1\nBET SLIP\nS"
     },
     {
       "name": "sports bet placed",
@@ -86,7 +86,7 @@
     {
       "name": "deposit request submitted",
       "pass": true,
-      "detail": "AUD27492543"
+      "detail": "AUD30898027"
     },
     {
       "name": "responsible-play limit saves",
@@ -111,7 +111,7 @@
     {
       "name": "master admin sees deposit request",
       "pass": true,
-      "detail": "AUD27492543"
+      "detail": "AUD30898027"
     },
     {
       "name": "master admin approves deposit",
@@ -121,7 +121,7 @@
     {
       "name": "deposit appears in player ledger",
       "pass": true,
-      "detail": "AUD27492543"
+      "detail": "AUD30898027"
     },
     {
       "name": "final balance includes deposit/bonus",
@@ -130,18 +130,18 @@
     },
     {
       "name": "KYC endpoint exists",
-      "pass": false,
-      "detail": "404"
+      "pass": true,
+      "detail": "200"
     },
     {
       "name": "withdrawal endpoint exists",
-      "pass": false,
-      "detail": "404"
+      "pass": true,
+      "detail": "200"
     },
     {
       "name": "fantasy contests endpoint exists",
-      "pass": false,
-      "detail": "404"
+      "pass": true,
+      "detail": "200"
     },
     {
       "name": "no uncaught page errors",
@@ -150,14 +150,10 @@
     },
     {
       "name": "no console errors",
-      "pass": false,
-      "detail": "Failed to load resource: the server responded with a status of 404 (Not Found) | Failed to load resource: the server responded with a status of 404 (Not Found) | Failed to load resource: the server responded with a status of 404 (Not Found)"
+      "pass": true,
+      "detail": ""
     }
   ],
-  "consoleErrors": [
-    "Failed to load resource: the server responded with a status of 404 (Not Found)",
-    "Failed to load resource: the server responded with a status of 404 (Not Found)",
-    "Failed to load resource: the server responded with a status of 404 (Not Found)"
-  ],
+  "consoleErrors": [],
   "pageErrors": []
 }

@@ -1,0 +1,78 @@
+import { chromium } from "file:///C:/Users/Administrator/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs";
+import { mkdirSync } from "node:fs";
+const OUT = "C:/Users/Administrator/19xbet365/capture/compliance-audit";
+mkdirSync(OUT, { recursive: true });
+const b = await chromium.launch({ channel: "msedge", headless: true, args: ["--no-sandbox"] });
+const p = await b.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = [];
+p.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
+p.on("pageerror", (e) => errors.push(e.message));
+async function login(email) {
+  await p.goto("http://127.0.0.1:4000/#/login", { waitUntil: "networkidle" });
+  await p.getByPlaceholder("you@example.com").fill(email);
+  await p.getByPlaceholder("Your password").fill("19X#2026");
+  await p.getByRole("button", { name: /^Sign in/i }).click();
+  await p.waitForTimeout(800);
+}
+await login("player@19xbet365.test");
+await p.goto("http://127.0.0.1:4000/#/account/verification", { waitUntil: "networkidle" });
+await p.waitForTimeout(600);
+console.log("verification initial", (await p.locator(".account-main, .admin-main").first().innerText()).slice(0, 200));
+await p.getByLabel(/Full legal name/).fill("Alex Rowan");
+await p.getByLabel(/Date of birth/).fill("1994-05-12");
+await p.getByLabel(/Country/).fill("United Kingdom");
+await p.getByLabel(/Residential address/).fill("14 Meridian Street, London");
+await p.getByLabel(/Document type/).selectOption("passport");
+await p.getByLabel(/Document reference/).fill("PASSPORT-QA-2026");
+await p.getByRole("button", { name: /Submit verification/i }).click();
+await p.waitForTimeout(1000);
+console.log("verification submitted", /under review|pending/i.test(await p.locator(".account-main, .admin-main").first().innerText()));
+await p.screenshot({ path: `${OUT}/01-kyc-pending.jpeg` });
+
+await p.evaluate(() => fetch("/api/auth/logout", { method: "POST" }));
+await login("admin@19xbet365.test");
+await p.goto("http://127.0.0.1:4000/#/admin/compliance", { waitUntil: "networkidle" });
+await p.waitForTimeout(700);
+await p.getByRole("button", { name: "KYC review" }).click();
+await p.waitForTimeout(400);
+console.log("admin kyc", (await p.locator(".compliance-row").first().innerText()).slice(0, 200));
+await p.getByRole("button", { name: /^Approve$/ }).first().click();
+await p.waitForTimeout(900);
+console.log("kyc approved", /approved/i.test(await p.locator(".compliance-row").first().innerText()));
+await p.screenshot({ path: `${OUT}/02-admin-kyc-approved.jpeg` });
+
+await p.evaluate(() => fetch("/api/auth/logout", { method: "POST" }));
+await login("player@19xbet365.test");
+await p.goto("http://127.0.0.1:4000/#/account/withdraw", { waitUntil: "networkidle" });
+await p.waitForTimeout(700);
+console.log("withdraw page", (await p.locator(".account-main, .admin-main").first().innerText()).slice(0, 250).replace(/\n/g, " | "));
+await p.getByLabel(/Amount/).fill("500");
+await p.getByLabel(/Method/).selectOption("upi");
+await p.getByLabel(/UPI ID/).fill("alex@upi");
+await p.getByRole("button", { name: /Request withdrawal/i }).click();
+await p.waitForTimeout(1000);
+console.log("withdraw requested", /pending/i.test(await p.locator(".account-main, .admin-main").first().innerText()));
+await p.screenshot({ path: `${OUT}/03-withdraw-pending.jpeg` });
+
+await p.evaluate(() => fetch("/api/auth/logout", { method: "POST" }));
+await login("admin@19xbet365.test");
+await p.goto("http://127.0.0.1:4000/#/admin/compliance", { waitUntil: "networkidle" });
+await p.waitForTimeout(700);
+console.log("admin withdrawal", (await p.locator(".compliance-row").first().innerText()).slice(0, 240));
+await p.getByRole("button", { name: /^Approve$/ }).first().click();
+await p.waitForTimeout(600);
+await p.getByRole("button", { name: /Mark paid/i }).first().click();
+await p.waitForTimeout(300);
+await p.getByPlaceholder(/UTR \/ bank reference/i).fill("UTR-QA-2026");
+await p.getByRole("button", { name: /Record payment/i }).click();
+await p.waitForTimeout(900);
+console.log("paid", /paid/i.test(await p.locator(".compliance-row").first().innerText()));
+await p.screenshot({ path: `${OUT}/04-admin-withdrawal-paid.jpeg` });
+
+await p.evaluate(() => fetch("/api/auth/logout", { method: "POST" }));
+await login("player@19xbet365.test");
+await p.goto("http://127.0.0.1:4000/#/account/withdraw", { waitUntil: "networkidle" });
+await p.waitForTimeout(600);
+console.log("player final", (await p.locator(".account-main, .admin-main").first().innerText()).slice(0, 300).replace(/\n/g, " | "));
+console.log("console errors", errors.slice(0, 6));
+await b.close();

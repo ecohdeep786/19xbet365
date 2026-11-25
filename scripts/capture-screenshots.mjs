@@ -108,10 +108,13 @@ try {
     ["/live", "live-1440"],
     ["/casino", "casino-1440"],
     ["/instant", "instant-1440"],
+    ["/fantasy", "fantasy-1440"],
     ["/game/dice-roll", "dice-1440"],
     ["/account", "account-1440"],
     ["/account/wallet", "wallet-1440"],
     ["/account/deposit", "deposit-1440"],
+    ["/account/verification", "verification-1440"],
+    ["/account/withdraw", "withdraw-1440"],
     ["/account/bets", "bets-1440"],
     ["/promotions", "promotions-1440"],
     ["/tournaments", "tournaments-1440"],
@@ -132,6 +135,7 @@ try {
     ["", "home-390"],
     ["/sports", "sports-390"],
     ["/casino", "casino-390"],
+    ["/fantasy", "fantasy-390"],
     ["/game/dice-roll", "dice-390"],
     ["/account/wallet", "wallet-390"],
     ["/account/deposit", "deposit-390"],
@@ -161,8 +165,14 @@ try {
   await waitReady(1400);
   await goto("/admin", 1600);
   await shot("admin-dashboard-1440");
+  await goto("/admin/revenue", 1200);
+  await shot("admin-revenue-1440");
   await goto("/admin/accounts", 1200);
   await shot("admin-accounts-1440");
+  await goto("/admin/fantasy", 1200);
+  await shot("admin-fantasy-1440");
+  await goto("/admin/compliance", 1200);
+  await shot("admin-compliance-1440");
   await goto("/admin/deposits", 1200);
   await shot("admin-deposits-1440");
 

@@ -1,6 +1,6 @@
-# Fantasy MVP Build Plan
+﻿# Fantasy Product Build Plan
 
-**Status:** proposed, not implemented
+**Status:** sandbox v1 implemented; real-money entry and withdrawals remain gated
 **Prepared:** 25 November 2026
 **Baseline:** `docs/REAL_USER_AUDIT_2026-11-25.md`
 
@@ -11,15 +11,15 @@ The current product is a sandbox sportsbook/casino. This plan defines the smalle
 - **Format:** daily salary-cap fantasy.
 - **First sport:** football (11 players) or cricket (11 players), using the sport already targeted by the operator.
 - **Salary cap:** 100 credits.
-- **Lineup:** position quotas, no duplicate players, one captain (2×) and one vice-captain (1.5×).
-- **Contest states:** `draft → open → locked → live → settled`, plus `cancelled`.
+- **Lineup:** position quotas, no duplicate players, one captain (2Ã—) and one vice-captain (1.5Ã—).
+- **Contest states:** `draft â†’ open â†’ locked â†’ live â†’ settled`, plus `cancelled`.
 - **Entry:** fixed coin entry; transactional debit; one entry per user per contest by default.
 - **Prize pool:** fixed or guaranteed tiers for the top ranks; ties split equally.
 - **Lock:** server rejects entries after the contest lock time.
 - **Cancellation:** if a contest is cancelled before lock, every entry is refunded and audited.
 - **Data:** demo player pool/stats initially; real player data requires a licensed feed.
 
-### Deliberately out of scope for MVP
+### Deliberately out of scope for the first release
 - Season-long leagues.
 - Private leagues and invite codes.
 - Multi-sport slates.
@@ -108,7 +108,7 @@ All admin actions use `requireMaster` or an explicitly granted fantasy permissio
 - Exactly the required number of players.
 - Valid position quotas.
 - No duplicate player IDs.
-- Total salary ≤ salary cap.
+- Total salary â‰¤ salary cap.
 - Captain and vice-captain must be in the lineup and distinct.
 - Contest must be `open` and before `lock_at`.
 - User must have enough coins.
@@ -116,7 +116,7 @@ All admin actions use `requireMaster` or an explicitly granted fantasy permissio
 
 ### Scoring
 - Sum selected player points.
-- Captain receives 2× points; vice-captain 1.5×.
+- Captain receives 2Ã— points; vice-captain 1.5Ã—.
 - Ties share the combined prize for occupied ranks.
 - Payouts credit the wallet ledger with reference `fantasy_contest` and the contest ID.
 - Settlement is idempotent: re-running must not pay twice.
@@ -128,11 +128,11 @@ All admin actions use `requireMaster` or an explicitly granted fantasy permissio
 
 ## 6. UI surfaces
 
-- `/fantasy` — lobby with filters (sport, entry fee, status), contest cards and a “How it works” strip.
-- `/fantasy/:id` — contest summary, prize table, player pool, salary-cap meter, position slots, captain/vice selection, entry CTA.
-- `/fantasy/my-entries` — upcoming, live and settled entries with scores and payouts.
-- `/fantasy/:id/leaderboard` — rank, entry name, points and prize.
-- Admin → **Fantasy contests** — create/edit/cancel/settle, entry table, payout preview.
+- `/fantasy` â€” lobby with filters (sport, entry fee, status), contest cards and a â€œHow it worksâ€ strip.
+- `/fantasy/:id` â€” contest summary, prize table, player pool, salary-cap meter, position slots, captain/vice selection, entry CTA.
+- `/fantasy/my-entries` â€” upcoming, live and settled entries with scores and payouts.
+- `/fantasy/:id/leaderboard` â€” rank, entry name, points and prize.
+- Admin â†’ **Fantasy contests** â€” create/edit/cancel/settle, entry table, payout preview.
 - Navigation: add **Fantasy** to the desktop nav, mobile drawer and footer.
 
 Design must follow `docs/DESIGN_SYSTEM.md`: navy header, blue nav strip, 8px cards, Roboto, green conversion actions, accessible states. No fabricated live scores; demo data is labelled.
@@ -155,31 +155,31 @@ Until then, all contests are **sandbox coin contests** and must say so in the UI
 
 ## 8. Delivery phases
 
-### Phase 1 — Domain and demo data (sandbox)
+### Phase 1 â€” Domain and demo data (sandbox)
 - Schema, seed players/contest, wallet entry transaction, lineup validation.
 - API list/detail/players/entry.
 - Fantasy lobby and lineup builder.
 - Admin contest list/create.
 - Transactional tests and ledger/audit evidence.
 
-### Phase 2 — Settlement and operations
+### Phase 2 â€” Settlement and operations
 - Lock job, demo scoring, leaderboard, payout tiers, ties.
 - Cancellation/refund, idempotent settlement, admin settle UI.
 - Notifications and audit.
 - End-to-end Playwright tests and responsive QA.
 
-### Phase 3 — Real-money compliance
+### Phase 3 â€” Real-money compliance
 - KYC page/provider adapter, geo/age checks, limits, terms.
 - Deposit/withdrawal rails and reconciliation.
 - Fraud controls and reporting.
 - Legal review and external test.
 
-### Phase 4 — Real data
+### Phase 4 â€” Real data
 - Authorized fixtures/player-stat provider.
 - Scoring normalization, postponement/void rules.
 - Live scoring only if the provider supports it.
 
-## 9. Acceptance criteria for the sandbox MVP
+## 9. Acceptance criteria for the sandbox release
 
 - A new player can open Fantasy, build a valid lineup and enter with coins.
 - Invalid lineup, salary-cap breach, duplicate player, late entry and insufficient balance are rejected server-side with clear errors.
@@ -197,4 +197,4 @@ Until then, all contests are **sandbox coin contests** and must say so in the UI
 4. Fixed prize pool or guaranteed?
 5. Entry fee range and rake?
 6. Which market/jurisdiction and payment/KYC providers?
-7. Does the first release need real-money entry, or is a coin MVP acceptable to validate mechanics?
+7. Does the first release need real-money entry, or is a coin-sandbox release acceptable to validate mechanics?

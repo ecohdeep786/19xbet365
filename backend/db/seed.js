@@ -98,6 +98,31 @@ const PLAYERS = [
   { name: "Isla Fraser", email: "isla.fraser@example.com", username: "islafraser", parent: "luca", balance: 10900, daysAgo: 1, country: "Scotland", status: "suspended", suspendedReason: "Chargeback simulation flag — demonstration review." }
 ];
 
+const FANTASY_PLAYERS = [
+  { id: "kt-wk-1", team: "Kolkata Tigers", name: "Arjun Mehta", role: "wk", salary: 9.0 },
+  { id: "kt-bat-1", team: "Kolkata Tigers", name: "Dev Malhotra", role: "bat", salary: 10.5 },
+  { id: "kt-bat-2", team: "Kolkata Tigers", name: "Kabir Rao", role: "bat", salary: 10.0 },
+  { id: "kt-bat-3", team: "Kolkata Tigers", name: "Ishan Bhatt", role: "bat", salary: 9.5 },
+  { id: "kt-bat-4", team: "Kolkata Tigers", name: "Vihaan Shah", role: "bat", salary: 9.0 },
+  { id: "kt-ar-1", team: "Kolkata Tigers", name: "Aditya Nair", role: "ar", salary: 9.5 },
+  { id: "kt-ar-2", team: "Kolkata Tigers", name: "Neel Kapoor", role: "ar", salary: 9.0 },
+  { id: "kt-ar-3", team: "Kolkata Tigers", name: "Rehan Ali", role: "ar", salary: 8.5 },
+  { id: "kt-bowl-1", team: "Kolkata Tigers", name: "Yash Kulkarni", role: "bowl", salary: 9.0 },
+  { id: "kt-bowl-2", team: "Kolkata Tigers", name: "Omkar Desai", role: "bowl", salary: 8.5 },
+  { id: "kt-bowl-3", team: "Kolkata Tigers", name: "Sahil Verma", role: "bowl", salary: 8.0 },
+  { id: "pp-wk-1", team: "Punjab Panthers", name: "Manav Singh", role: "wk", salary: 9.0 },
+  { id: "pp-bat-1", team: "Punjab Panthers", name: "Harpreet Gill", role: "bat", salary: 10.5 },
+  { id: "pp-bat-2", team: "Punjab Panthers", name: "Jaskaran Bedi", role: "bat", salary: 10.0 },
+  { id: "pp-bat-3", team: "Punjab Panthers", name: "Aryan Sethi", role: "bat", salary: 9.5 },
+  { id: "pp-bat-4", team: "Punjab Panthers", name: "Naman Arora", role: "bat", salary: 9.0 },
+  { id: "pp-ar-1", team: "Punjab Panthers", name: "Ritesh Chauhan", role: "ar", salary: 9.5 },
+  { id: "pp-ar-2", team: "Punjab Panthers", name: "Gurnoor Sandhu", role: "ar", salary: 9.0 },
+  { id: "pp-ar-3", team: "Punjab Panthers", name: "Vikram Dutta", role: "ar", salary: 8.5 },
+  { id: "pp-bowl-1", team: "Punjab Panthers", name: "Prabhsimran Bajwa", role: "bowl", salary: 9.0 },
+  { id: "pp-bowl-2", team: "Punjab Panthers", name: "Tejas Rana", role: "bowl", salary: 8.5 },
+  { id: "pp-bowl-3", team: "Punjab Panthers", name: "Karan Ahluwalia", role: "bowl", salary: 8.0 }
+];
+
 async function main() {
   const client = await pool.connect();
   try {
@@ -107,6 +132,8 @@ async function main() {
     await client.query(`
       TRUNCATE TABLE audit_events, support_messages, support_tickets, account_transfers, account_invitations,
         responsible_limits, recent_plays, favorites, notifications, transactions, bet_selections, bets,
+        fantasy_settlements, fantasy_entries, fantasy_player_stats, fantasy_prize_tiers, fantasy_contests, fantasy_players,
+        account_verifications, withdrawal_requests,
         game_rounds, login_history, sessions, referrals, content_pages, platform_settings, tournaments,
         promotions, matches, sports, games, accounts, roles RESTART IDENTITY CASCADE
     `);
@@ -186,6 +213,7 @@ async function main() {
     for (const sport of catalog.sports) {
       await client.query("INSERT INTO sports (slug, name, icon, event_count) VALUES ($1,$2,$3,$4)", [sport.slug, sport.name, sport.icon, sport.count]);
     }
+    const matchStartTimes = {};
     for (const [matchIndex, m] of catalog.matches.entries()) {
       // Keep the demo board alive relative to the seed run instead of replaying
       // stale catalogue timestamps. Live fixtures stay inside the 90-minute
@@ -195,11 +223,58 @@ async function main() {
         : m.status === "upcoming"
           ? new Date(Date.now() + (25 + (matchIndex % 10) * 14) * 60_000).toISOString()
           : m.startTime;
+      matchStartTimes[m.id] = startTime;
       await client.query(
         `INSERT INTO matches (id, sport, league, home_team, away_team, start_time, status, minute, score_home, score_away, odds_home, odds_draw, odds_away, featured, is_demo)
          VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,true)`,
         [m.id, m.sport, m.league, m.homeTeam, m.awayTeam, startTime, m.status, m.minute, m.scoreHome, m.scoreAway, m.oddsHome, m.oddsDraw, m.oddsAway, m.featured]
       );
+    }
+    for (const p of FANTASY_PLAYERS) {
+      await client.query(
+        `INSERT INTO fantasy_players (id, sport, team, name, role, salary, active)
+         VALUES ($1,'cricket',$2,$3,$4,$5,true)`,
+        [p.id, p.team, p.name, p.role, p.salary]
+      );
+    }
+    if (matchStartTimes.m009) {
+      const start = new Date(matchStartTimes.m009);
+      const lock = new Date(start.getTime() - 5 * 60_000);
+      const contestResult = await client.query(
+        `INSERT INTO fantasy_contests
+          (name, sport, match_id, status, salary_cap, entry_fee, max_entries, max_entries_per_user,
+           prize_pool, rake_percent, lock_at, starts_at, rules, created_by)
+         VALUES ($1,'cricket','m009','open',100,100,100,1,9000,10,$2,$3,$4,$5)
+         RETURNING id`,
+        [
+          "19X T20 Showdown",
+          lock.toISOString(),
+          start.toISOString(),
+          JSON.stringify({
+            positions: { wk: 1, bat: 4, ar: 3, bowl: 3 },
+            maxFromOneTeam: 7,
+            captainMultiplier: 2,
+            viceCaptainMultiplier: 1.5,
+            tieBreak: "Earlier entry wins the higher rank when scores are equal.",
+            sandbox: true
+          }),
+          ids.master
+        ]
+      );
+      const contestId = contestResult.rows[0].id;
+      const tiers = [
+        [1, 1, 4000],
+        [2, 2, 2000],
+        [3, 3, 1200],
+        [4, 10, 200],
+        [11, 20, 40]
+      ];
+      for (const [from, to, amount] of tiers) {
+        await client.query(
+          "INSERT INTO fantasy_prize_tiers (contest_id, rank_from, rank_to, amount) VALUES ($1,$2,$3,$4)",
+          [contestId, from, to, amount]
+        );
+      }
     }
     for (const g of catalog.games) {
       await client.query(
@@ -238,6 +313,9 @@ async function main() {
       ["depositBonusTiers", "100:5,500:10,1000:15,5000:20", "Deposit bonus tiers: minimum amount:percent"],
       ["depositMin", 50, "Minimum deposit amount"],
       ["depositMax", 100000, "Maximum deposit amount"],
+      ["withdrawalsEnabled", true, "Allow manual withdrawal requests (sandbox review)"],
+      ["withdrawalMin", 500, "Minimum withdrawal request amount"],
+      ["withdrawalMax", 50000, "Maximum withdrawal request amount"],
       ["supportEmail", "support@19xbet365.test", "Support contact"],
       ["licenseStatus", "Demonstration — coins only", "Regulatory status shown in the footer"],
       ["thirdPartyIntegrations", "disabled", "Certified provider connections"],
@@ -245,7 +323,7 @@ async function main() {
       ["responsibleGaming", "enabled", "Responsible-play tooling"],
       ["auditRetentionDays", 2555, "Audit retention policy"],
       ["liveUpdates", true, "WebSocket activity channel"],
-      ["kycRequired", false, "KYC required for real-money operations (disabled)"]
+      ["kycRequired", true, "Require approved KYC before withdrawal requests"]
     ];
     for (const [key, value, description] of settings) {
       await client.query("INSERT INTO platform_settings (key, value, description) VALUES ($1,$2,$3)", [key, JSON.stringify(value), description]);

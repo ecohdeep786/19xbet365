@@ -22,6 +22,9 @@ evidence.anonymousDeposits = (await req("/api/deposits/config", {}, 401)).data.m
 await login("player@19xbet365.test");
 evidence.playerAdmin = (await req("/api/admin/overview", {}, 403)).data.message;
 evidence.playerDepositAdmin = (await req("/api/admin/deposits", {}, 403)).data.message;
+evidence.playerVerification = (await req("/api/verification")).data.verification.status;
+evidence.playerWithdrawalConfig = Boolean((await req("/api/withdrawals/config")).data.config);
+evidence.playerComplianceDenied = (await req("/api/admin/compliance/kyc", {}, 403)).data.message;
 evidence.providerRequired = (await req("/api/games/astra-roulette-live/play", { method: "POST", body: JSON.stringify({ stake: 10 }) }, 409)).data.message;
 await login("admin@19xbet365.test");
 evidence.realMoneyLock = (await req("/api/admin/settings/realMoneyEnabled", { method: "PATCH", body: JSON.stringify({ value: true }) }, 403)).data.message;
@@ -38,6 +41,9 @@ evidence.adminStaffIssueDenied = (await req("/api/admin/staff", {
   method: "POST",
   body: JSON.stringify({ email: "blocked.staff@19xbet365.test", displayName: "Blocked Staff", role: "admin" })
 }, 403)).data.message;
+evidence.adminFantasyContests = (await req("/api/admin/fantasy/contests")).data.contests.length >= 0;
+evidence.adminComplianceDenied = (await req("/api/admin/compliance/kyc", {}, 403)).data.message;
+evidence.adminRevenue = (await req("/api/admin/revenue")).data.scope;
 await login("sofia.lind@example.com", 403);
 evidence.suspendedLogin = "rejected";
 await login("admin@19xbet365.test");
@@ -53,6 +59,8 @@ evidence.masterIssuedCredentials = Boolean(created.data.credentials?.temporaryPa
 await login(newAdminEmail, 200, created.data.credentials.temporaryPassword);
 evidence.newAdminAccounts = (await req("/api/admin/accounts?limit=5", {}, 200)).data.total >= 0;
 evidence.newAdminGames = (await req("/api/admin/games", {}, 200)).data.games.length > 0;
+evidence.newAdminFantasy = (await req("/api/admin/fantasy/contests", {}, 200)).data.contests.length >= 0;
+evidence.newAdminComplianceDenied = (await req("/api/admin/compliance/kyc", {}, 403)).data.message;
 evidence.newAdminSettingsDenied = (await req("/api/admin/settings", {}, 403)).data.message;
 evidence.newAdminRolesDenied = (await req("/api/admin/roles", {}, 403)).data.message;
 evidence.newAdminStaffDenied = (await req("/api/admin/staff", {

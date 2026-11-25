@@ -1,8 +1,8 @@
 import type {
-  Account, AdminAccount, AdminDeposit, AdminOverview, AdminRevenue, AdminTicket, AuditEvent, Bet, BootstrapData,
-  DepositConfig, DepositRequest, Game, GameActivity, GameRound, Limits, Match, NetworkNode, Notification,
+  Account, AdminAccount, AdminDeposit, AdminFantasyContest, AdminFantasyDetail, AdminOverview, AdminRevenue, AdminTicket, AdminVerification, AdminWithdrawal, AuditEvent, Bet, BootstrapData,
+  DepositConfig, DepositRequest, FantasyContest, FantasyDetail, FantasyEntry, Game, GameActivity, GameRound, Limits, Match, NetworkNode, Notification,
   PlayerOverview, Promotion, RoleInfo, SessionInfo, SupportMessage, SupportTicket, SystemHealth,
-  Tournament, Transaction, Transfer
+  Tournament, Transaction, Transfer, Verification, WithdrawalConfig, WithdrawalRequest
 } from "../types";
 
 const API_BASE = "/api";
@@ -76,6 +76,11 @@ export const api = {
   bootstrap: () => request<BootstrapData>("/bootstrap"),
   publicMatches: (params = "") => request<{ matches: Match[] }>(`/matches${params}`),
   publicGames: (params = "") => request<{ games: Game[] }>(`/games${params}`),
+  fantasyContests: () => request<{ contests: FantasyContest[] }>("/fantasy/contests"),
+  fantasyContest: (id: string) => request<FantasyDetail>(`/fantasy/contests/${id}`),
+  fantasyMyEntries: () => request<{ entries: (FantasyEntry & { contestName: string; contestStatus: string; startTime: string; prizePool: number; league: string; homeTeam: string; awayTeam: string })[] }>("/fantasy/my-entries"),
+  fantasyEnter: (id: string, payload: { lineup: string[]; captainId: string; viceCaptainId: string }) =>
+    request<{ entry: FantasyEntry; balance: number; message: string }>(`/fantasy/contests/${id}/entries`, { method: "POST", body: json(payload) }),
   game: (id: string) => request<{ game: Game }>(`/games/${id}`),
   promotions: () => request<{ promotions: Promotion[] }>("/promotions"),
   tournaments: () => request<{ tournaments: Tournament[] }>("/tournaments"),
@@ -107,6 +112,14 @@ export const api = {
 
   depositConfig: () => request<DepositConfig>("/deposits/config"),
   deposits: () => request<{ deposits: DepositRequest[] }>("/deposits"),
+  verification: () => request<{ verification: Verification }>("/verification"),
+  submitVerification: (payload: { legalName: string; dateOfBirth: string; country: string; address: string; documentType: string; documentReference: string }) =>
+    request<{ verification: Verification; message: string }>("/verification", { method: "POST", body: json(payload) }),
+  withdrawalConfig: () => request<{ config: WithdrawalConfig }>("/withdrawals/config"),
+  withdrawals: () => request<{ requests: WithdrawalRequest[] }>("/withdrawals"),
+  requestWithdrawal: (payload: { amount: number; method: string; destination: string }) =>
+    request<{ request: WithdrawalRequest; balance: number; message: string }>("/withdrawals", { method: "POST", body: json(payload) }),
+  cancelWithdrawal: (id: string) => request<{ request: WithdrawalRequest; balance: number; message: string }>(`/withdrawals/${id}/cancel`, { method: "POST" }),
   createDeposit: (payload: { amount: number; reference: string; note?: string }) =>
     request<{ deposit: DepositRequest; bonusPreview: { percent: number; amount: number; tier: number }; message: string }>("/deposits", { method: "POST", body: json(payload) }),
   cancelDeposit: (id: string) => request<{ deposit: DepositRequest; message: string }>(`/deposits/${id}/cancel`, { method: "POST" }),
@@ -161,6 +174,29 @@ export const api = {
   adminUpdateRole: (code: string, permissions: string[]) =>
     request<{ ok: boolean; permissions: string[]; message: string }>(`/admin/roles/${code}/permissions`, { method: "PATCH", body: json({ permissions }) }),
   adminGames: () => request<{ games: Game[] }>("/admin/games"),
+  adminFantasyContests: () => request<{ contests: AdminFantasyContest[] }>("/admin/fantasy/contests"),
+  adminFantasyMatches: () => request<{ matches: { id: string; sport: string; league: string; homeTeam: string; awayTeam: string; startTime: string; status: string }[] }>("/admin/fantasy/eligible-matches"),
+  adminFantasyContest: (id: string) => request<AdminFantasyDetail>(`/admin/fantasy/contests/${id}`),
+  adminCreateFantasyContest: (payload: Record<string, unknown>) =>
+    request<{ contest: AdminFantasyContest; message: string }>("/admin/fantasy/contests", { method: "POST", body: json(payload) }),
+  adminFantasyScores: (id: string, scores: { playerId: string; points: number }[]) =>
+    request<{ updated: number; message: string }>(`/admin/fantasy/contests/${id}/scores`, { method: "POST", body: json({ scores }) }),
+  adminFantasyCancel: (id: string) =>
+    request<{ refunded: number; message: string }>(`/admin/fantasy/contests/${id}/cancel`, { method: "POST" }),
+  adminFantasySettle: (id: string) =>
+    request<{ entries: number; totalPaid: number; message: string }>(`/admin/fantasy/contests/${id}/settle`, { method: "POST" }),
+  adminVerifications: () => request<{ verifications: AdminVerification[] }>("/admin/compliance/kyc"),
+  adminApproveVerification: (id: string, note?: string) =>
+    request<{ verification: AdminVerification; message: string }>(`/admin/compliance/kyc/${id}/approve`, { method: "POST", body: json({ note }) }),
+  adminRejectVerification: (id: string, reason: string) =>
+    request<{ verification: AdminVerification; message: string }>(`/admin/compliance/kyc/${id}/reject`, { method: "POST", body: json({ reason }) }),
+  adminWithdrawals: () => request<{ requests: AdminWithdrawal[] }>("/admin/compliance/withdrawals"),
+  adminApproveWithdrawal: (id: string, note?: string) =>
+    request<{ request: AdminWithdrawal; message: string }>(`/admin/compliance/withdrawals/${id}/approve`, { method: "POST", body: json({ note }) }),
+  adminRejectWithdrawal: (id: string, reason: string) =>
+    request<{ request: AdminWithdrawal; message: string }>(`/admin/compliance/withdrawals/${id}/reject`, { method: "POST", body: json({ reason }) }),
+  adminMarkWithdrawalPaid: (id: string, paymentReference: string) =>
+    request<{ request: AdminWithdrawal; message: string }>(`/admin/compliance/withdrawals/${id}/paid`, { method: "POST", body: json({ paymentReference }) }),
   adminUpdateGame: (id: string, payload: Record<string, unknown>) =>
     request<{ ok: boolean; message: string }>(`/admin/games/${id}`, { method: "PATCH", body: json(payload) }),
   adminContent: () => request<{ pages: { slug: string; title: string; category: string; body: string; status: string; updated_at: string }[]; promotions: Promotion[] }>("/admin/content"),

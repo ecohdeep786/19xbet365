@@ -13,10 +13,13 @@
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
 | `scripts/deposit-smoke.mjs` | Passed: sandbox request, admin approval, 15% tier bonus, deposit/bonus ledger, cancellation, rejection and live-collection activation gate | console output |
 | `scripts/risk-smoke.mjs` | Passed: Master/Admin revenue access, Player denial, sports stake cap and payout cap enforcement | console output |
+| `scripts/fantasy-smoke.mjs` | Passed: salary-cap entry, score upload, settlement, rank and prize credit | console output |
+| `scripts/fantasy-ui-audit.mjs` | Passed: fantasy lobby, lineup builder, captain/vice selection, entry and balance debit | `capture/fantasy-audit/` |
+| `scripts/compliance-ui-audit.mjs` | Passed: KYC submission, Master approval, withdrawal request, approval and mark-paid | `capture/compliance-audit/` |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 coins; referee balance reflects reward | console output |
-| `scripts/capture-screenshots.mjs` | Passed: 27 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,651 modules |
-| Playwright real-user journey | Passed | 32/32 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, bets, support, mobile dialogs, auth and admin |
+| `scripts/capture-screenshots.mjs` | Passed: 34 product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,658 modules |
+| Playwright real-user journey | Passed | 27/27 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, deposit, responsible play, support, mobile drawer, auth, admin deposit review, fantasy route and KYC/withdrawal endpoints |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
 | Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, login and deposit after the contrast pass; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
 | Contrast pass | Passed | Muted ink `#52718a`, action green `#557d1d`, footer `#a9c4dd`; zero color-contrast failures on audited pages |
@@ -86,7 +89,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 ### 8. Evidence capture
 
 - `scripts/capture-screenshots.mjs` logs in through the real API, sets viewport metrics through DevTools, captures desktop player pages, mobile pages, signed-out auth pages and the Master Admin control room.
-- All 27 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
+- All 34 captures loaded real API data; interactive spot checks of the captured routes showed no console errors.
 - Demo identity and support addresses were cleaned from the legacy `astraplay.io` domain to `19xbet365.test` in seed, UI shortcuts, existing rows and documentation.
 
 ## Defects found and fixed

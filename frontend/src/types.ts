@@ -336,6 +336,10 @@ export interface AdminRevenue {
     gamePayouts: number;
     gameGgr: number;
     settledRounds: number;
+    fantasyStakes: number;
+    fantasyPayouts: number;
+    fantasyGgr: number;
+    openFantasyEntries: number;
     grossGamingRevenue: number;
     promotionalCost: number;
     welcomeAllocations: number;
@@ -343,6 +347,9 @@ export interface AdminRevenue {
     depositsApproved: number;
     depositBonuses: number;
     pendingDeposits: number;
+    withdrawalsPaid: number;
+    withdrawalsPending: number;
+    pendingWithdrawals: number;
     playerBalances: number;
     activeAccounts: number;
     activePlayers24h: number;
@@ -350,6 +357,130 @@ export interface AdminRevenue {
   byGame: { id: string; name: string; category: string; rounds: number; stakes: number; payouts: number; ggr: number }[];
   series: { day: string; sportsGgr: number; sportsStakes: number; gameGgr: number; gameStakes: number; deposits: number }[];
   generatedAt: string;
+}
+
+export type FantasyRole = "wk" | "bat" | "ar" | "bowl";
+export type FantasyStatus = "draft" | "open" | "locked" | "live" | "settled" | "cancelled";
+
+export interface FantasyContest {
+  id: string;
+  name: string;
+  sport: string;
+  matchId: string;
+  league: string;
+  homeTeam: string;
+  awayTeam: string;
+  status: FantasyStatus;
+  salaryCap: number;
+  entryFee: number;
+  maxEntries: number;
+  maxEntriesPerUser: number;
+  prizePool: number;
+  rakePercent: number;
+  lockAt: string;
+  startTime: string;
+  settledAt: string | null;
+  entries: number;
+  collected: number;
+  myEntries: number;
+  rules: Record<string, unknown>;
+}
+
+export interface FantasyTier { rankFrom: number; rankTo: number; amount: number }
+export interface FantasyPlayer { id: string; team: string; name: string; role: FantasyRole; salary: number }
+export interface FantasyEntry {
+  id: string;
+  contestId: string;
+  lineup: string[];
+  captainId: string;
+  viceCaptainId: string;
+  entryFee: number;
+  status: "confirmed" | "cancelled" | "settled";
+  score: number;
+  rank: number | null;
+  payout: number;
+  createdAt: string;
+  settledAt: string | null;
+}
+export interface FantasyLeaderboardRow {
+  entryId: string;
+  accountId: string;
+  player: string;
+  score: number;
+  rank: number;
+  payout: number;
+}
+export interface FantasyDetail {
+  contest: FantasyContest;
+  tiers: FantasyTier[];
+  players: FantasyPlayer[];
+  rules: { size: number; roles: Record<FantasyRole, number>; maxFromOneTeam: number; captainMultiplier: number; viceCaptainMultiplier: number };
+  myEntries: FantasyEntry[];
+  leaderboard: FantasyLeaderboardRow[];
+}
+
+export interface AdminFantasyContest extends Omit<FantasyContest, "myEntries" | "rules"> {
+  scoredPlayers: number;
+  createdAt: string;
+}
+
+export interface AdminFantasyDetail {
+  contest: AdminFantasyContest;
+  tiers: FantasyTier[];
+  entries: (FantasyEntry & { player: string; email: string })[];
+  players: FantasyPlayer[];
+  scores: Record<string, number>;
+}
+
+export interface Verification {
+  id?: string;
+  status: "not_started" | "pending" | "approved" | "rejected";
+  legalName: string;
+  dateOfBirth: string;
+  country: string;
+  address: string;
+  documentType: string;
+  documentReference: string;
+  reviewNote: string;
+  submittedAt: string | null;
+  reviewedAt: string | null;
+}
+
+export interface WithdrawalRequest {
+  id: string;
+  amount: number;
+  method: string;
+  destination: string;
+  status: "pending" | "approved" | "paid" | "rejected" | "cancelled";
+  requestedAt: string;
+  reviewedAt: string | null;
+  paidAt: string | null;
+  paymentReference: string | null;
+  reviewNote: string | null;
+}
+
+export interface WithdrawalConfig {
+  enabled: boolean;
+  min: number;
+  max: number;
+  kycRequired: boolean;
+  kycStatus: string;
+}
+
+export interface AdminVerification extends Omit<Verification, "id"> {
+  id: string;
+  accountId: string;
+  player: string;
+  email: string;
+}
+
+export interface AdminWithdrawal extends Omit<WithdrawalRequest, "destination"> {
+  accountId: string;
+  player: string;
+  email: string;
+  destination: string;
+  destinationMasked: string;
+  reviewNote: string | null;
 }
 
 export interface AuditEvent {

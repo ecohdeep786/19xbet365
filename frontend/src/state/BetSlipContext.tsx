@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Match } from "../types";
 import { api, isOfflineError } from "../lib/api";
 import { round2 } from "./betUtils";
@@ -13,6 +13,38 @@ export interface SlipSelection {
   league: string;
   sport: string;
   startTime: string;
+}
+
+const SLIP_STORAGE_KEY = "19x:bet-slip";
+
+function readSavedSlip(): { selections: SlipSelection[]; stake: number } | null {
+  try {
+    const raw = window.localStorage.getItem(SLIP_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object") return null;
+    const { selections, stake } = parsed as { selections?: unknown; stake?: unknown };
+    if (!Array.isArray(selections) || !selections.length) return null;
+    const valid = selections.filter((item): item is SlipSelection =>
+      Boolean(item) && typeof item === "object" &&
+      typeof (item as SlipSelection).matchId === "string" &&
+      ((item as SlipSelection).selection === "home" || (item as SlipSelection).selection === "draw" || (item as SlipSelection).selection === "away") &&
+      typeof (item as SlipSelection).odds === "number" && Number.isFinite((item as SlipSelection).odds)
+    );
+    if (!valid.length) return null;
+    const savedStake = typeof stake === "number" && Number.isFinite(stake) ? stake : 100;
+    return { selections: valid, stake: Math.max(0, Math.min(5000, savedStake)) };
+  } catch {
+    return null;
+  }
+}
+
+function saveSlip(slip: { selections: SlipSelection[]; stake: number }) {
+  try {
+    window.localStorage.setItem(SLIP_STORAGE_KEY, JSON.stringify(slip));
+  } catch {
+    // localStorage unavailable — skip persistence silently
+  }
 }
 
 interface BetSlipValue {
@@ -46,6 +78,23 @@ export function BetSlipProvider({ children }: { children: ReactNode }) {
   const setStake = useCallback((value: number) => {
     setStakeState(Math.max(0, Math.min(5000, Number.isFinite(value) ? value : 0)));
   }, []);
+
+  const [restored, setRestored] = useState(false);
+
+  useEffect(() => {
+    const saved = readSavedSlip();
+    if (saved) {
+      setSelections(saved.selections);
+      setStakeState(saved.stake);
+    }
+    setRestored(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!restored) return;
+    saveSlip({ selections, stake });
+  }, [restored, selections, stake]);
 
   const toggleSelection = useCallback((match: Match, selection: "home" | "draw" | "away", odds: number) => {
     setSelections((current) => {

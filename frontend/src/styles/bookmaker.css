@@ -215,8 +215,8 @@
 .bookmaker .btn-primary:hover:not(:disabled) { background: #205583; border-color: #205583; box-shadow: none; }
 .bookmaker .btn-lime { background: #557d1d; border-color: #557d1d; color: #fff; box-shadow: none; }
 .bookmaker .btn-lime:hover:not(:disabled) { background: #4f751a; border-color: #4f751a; color: #fff; box-shadow: none; }
-.bookmaker .header-join { background: #7eac2f; border-color: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
-.bookmaker .header-join:hover:not(:disabled) { background: #8cc63c; color: #fff; box-shadow: none; }
+.bookmaker .header-join { background: #557d1d; border-color: rgba(255,255,255,.16); color: #fff; box-shadow: none; }
+.bookmaker .header-join:hover:not(:disabled) { background: #4f751a; color: #fff; box-shadow: none; }
 .bookmaker .header-join svg { color: #eaf7d2; }
 .bookmaker .btn-secondary { background: #eef1f5; border-color: #e3e9ef; color: #1d4268; }
 .bookmaker .btn-secondary:hover:not(:disabled) { background: #e3e9ef; border-color: #cbd6e0; }
@@ -949,3 +949,6 @@
   .bookmaker .game-signin-actions .btn { width: 100%; }
   .bookmaker .game-signin-gate { min-height: 360px; padding: 34px 18px; }
 }
+
+.slip-trigger-wrap { position: relative; display: inline-flex; }
+.bookmaker .slip-count { position: absolute; top: -5px; right: -5px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 999px; background: #557d1d; color: #fff; border: 2px solid #1d4268; font-family: var(--font-body); font-size: .62rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; pointer-events: none; }

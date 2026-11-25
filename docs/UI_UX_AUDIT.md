@@ -118,9 +118,9 @@ The API smoke also covers cancellation, rejection and the live-payment activatio
 These are product-scope boundaries, not UI defects:
 
 - Provider/live-dealer titles remain integration-ready and intentionally cannot be played.
-- Real-money deposits/withdrawals are disabled until licensing, KYC/AML, merchant onboarding, a business-owned QR and `PAYMENTS_LIVE_ENABLED=true` are in place.
+- Real-money deposits and withdrawals are sandbox/manual-review only until licensing, KYC/AML, merchant onboarding, a business-owned QR and `PAYMENTS_LIVE_ENABLED=true` are in place. Automated payout execution is not implemented.
 - Promotions/tournaments have no automated payout engine.
 - There is no real sports feed, multi-market settlement, cash-out or live-stream service.
 - Email/SMS verification and transactional password reset are not provisioned.
-- Multi-language and KYC flows are not implemented.
+- Multi-language support and provider-backed KYC document verification are not implemented; the current KYC review is manual.
 - External penetration testing, legal sign-off and production monitoring remain outside this build.

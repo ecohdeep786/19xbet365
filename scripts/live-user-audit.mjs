@@ -46,7 +46,7 @@ try {
   await page.waitForTimeout(700);
   const homeText = await text();
   check("home renders", /Play beyond|Live right now/i.test(homeText));
-  check("home has no fantasy entry", !/fantasy/i.test(homeText), "No Fantasy navigation or lobby entry found");
+  check("home exposes fantasy entry", /fantasy/i.test(homeText), "Fantasy navigation present");
   check("no console errors on home", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" | "));
   await shot("01-home-visitor");
 
@@ -193,7 +193,7 @@ try {
 
   // 13. Production-gate observation
   const gates = await page.evaluate(async () => {
-    const endpoints = ["/api/player/kyc", "/api/player/withdrawals", "/api/fantasy/contests"];
+    const endpoints = ["/api/verification", "/api/withdrawals/config", "/api/fantasy/contests"];
     const results = {};
     for (const endpoint of endpoints) {
       try {
@@ -206,9 +206,9 @@ try {
     return results;
   });
   state.gates = gates;
-  check("KYC endpoint exists", gates["/api/player/kyc"] !== 404, gates["/api/player/kyc"]);
-  check("withdrawal endpoint exists", gates["/api/player/withdrawals"] !== 404, gates["/api/player/withdrawals"]);
-  check("fantasy contests endpoint exists", gates["/api/fantasy/contests"] !== 404, gates["/api/fantasy/contests"]);
+  check("KYC endpoint exists", gates["/api/verification"] === 200, gates["/api/verification"]);
+  check("withdrawal endpoint exists", gates["/api/withdrawals/config"] === 200, gates["/api/withdrawals/config"]);
+  check("fantasy contests endpoint exists", gates["/api/fantasy/contests"] === 200, gates["/api/fantasy/contests"]);
 
   check("no uncaught page errors", errors.length === 0, errors.slice(0, 4).join(" | "));
   check("no console errors", consoleErrors.length === 0, consoleErrors.slice(0, 6).join(" | "));

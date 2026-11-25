@@ -178,7 +178,7 @@ router.get("/revenue", requirePermission("reports.view.scope"), async (req, res,
     const ids = await scoped(req);
     const accountFilter = ids === null ? "" : "AND a.id = ANY($1::uuid[])";
     const param = ids === null ? [] : [ids];
-    const [sports, games, deposits, bonuses, balances, active, byGame, series] = await Promise.all([
+    const [sports, games, fantasy, withdrawals, deposits, bonuses, balances, active, byGame, series] = await Promise.all([
       query(
         `SELECT
            COALESCE(SUM(CASE WHEN b.status IN ('won','lost','void','cashed_out') THEN b.stake END),0) AS settled_stakes,
@@ -195,6 +195,22 @@ router.get("/revenue", requirePermission("reports.view.scope"), async (req, res,
            COALESCE(SUM(gr.payout) FILTER (WHERE gr.status='settled'),0) AS payouts,
            COUNT(*) FILTER (WHERE gr.status='settled') AS settled_rounds
          FROM game_rounds gr JOIN accounts a ON a.id = gr.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT
+           COALESCE(SUM(fe.entry_fee) FILTER (WHERE fe.status IN ('confirmed','settled')),0) AS stakes,
+           COALESCE(SUM(fe.payout) FILTER (WHERE fe.status='settled'),0) AS payouts,
+           COUNT(*) FILTER (WHERE fe.status='confirmed') AS open_entries
+         FROM fantasy_entries fe JOIN accounts a ON a.id = fe.account_id WHERE 1=1 ${accountFilter}`,
+        param
+      ),
+      query(
+        `SELECT
+           COALESCE(SUM(w.amount) FILTER (WHERE w.status='paid'),0) AS paid,
+           COALESCE(SUM(w.amount) FILTER (WHERE w.status IN ('pending','approved')),0) AS pending_value,
+           COUNT(*) FILTER (WHERE w.status IN ('pending','approved')) AS pending_count
+         FROM withdrawal_requests w JOIN accounts a ON a.id = w.account_id WHERE 1=1 ${accountFilter}`,
         param
       ),
       query(
@@ -261,9 +277,12 @@ router.get("/revenue", requirePermission("reports.view.scope"), async (req, res,
     const sportsPayouts = Number(sports.rows[0].settled_payouts);
     const gameStakes = Number(games.rows[0].stakes);
     const gamePayouts = Number(games.rows[0].payouts);
+    const fantasyStakes = Number(fantasy.rows[0].stakes);
+    const fantasyPayouts = Number(fantasy.rows[0].payouts);
     const sportsGgr = round2(sportsStakes - sportsPayouts);
     const gameGgr = round2(gameStakes - gamePayouts);
-    const grossGamingRevenue = round2(sportsGgr + gameGgr);
+    const fantasyGgr = round2(fantasyStakes - fantasyPayouts);
+    const grossGamingRevenue = round2(sportsGgr + gameGgr + fantasyGgr);
     const promotionalCost = Number(bonuses.rows[0].promotional);
     const welcomeAllocations = Number(bonuses.rows[0].welcome);
     res.json({
@@ -279,6 +298,10 @@ router.get("/revenue", requirePermission("reports.view.scope"), async (req, res,
         gamePayouts,
         gameGgr,
         settledRounds: Number(games.rows[0].settled_rounds),
+        fantasyStakes,
+        fantasyPayouts,
+        fantasyGgr,
+        openFantasyEntries: Number(fantasy.rows[0].open_entries),
         grossGamingRevenue,
         promotionalCost: round2(promotionalCost),
         welcomeAllocations: round2(welcomeAllocations),
@@ -286,6 +309,9 @@ router.get("/revenue", requirePermission("reports.view.scope"), async (req, res,
         depositsApproved: Number(deposits.rows[0].approved),
         depositBonuses: Number(deposits.rows[0].bonus),
         pendingDeposits: Number(deposits.rows[0].pending),
+        withdrawalsPaid: Number(withdrawals.rows[0].paid),
+        withdrawalsPending: Number(withdrawals.rows[0].pending_value),
+        pendingWithdrawals: Number(withdrawals.rows[0].pending_count),
         playerBalances: Number(balances.rows[0].total_balance),
         activeAccounts: Number(balances.rows[0].active_accounts),
         activePlayers24h: Number(active.rows[0].active_players)

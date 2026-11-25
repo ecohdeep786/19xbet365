@@ -16,8 +16,14 @@ import playerRoutes from "./routes/player.js";
 import betRoutes from "./routes/bets.js";
 import gameRoutes from "./routes/games.js";
 import depositRoutes from "./routes/deposits.js";
+import fantasyRoutes from "./routes/fantasy.js";
+import adminFantasyRoutes from "./routes/adminFantasy.js";
+import verificationRoutes from "./routes/verification.js";
+import withdrawalRoutes from "./routes/withdrawals.js";
+import adminComplianceRoutes from "./routes/adminCompliance.js";
 import adminRoutes from "./routes/admin.js";
 import { startDemoSettlementWorker } from "./services/sportsbook.js";
+import { startFantasyWorker } from "./services/fantasy.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..", "..");
@@ -60,6 +66,11 @@ app.use("/api/player", playerRoutes);
 app.use("/api/bets", betRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/deposits", depositRoutes);
+app.use("/api/fantasy", fantasyRoutes);
+app.use("/api/verification", verificationRoutes);
+app.use("/api/withdrawals", withdrawalRoutes);
+app.use("/api/admin/fantasy", adminFantasyRoutes);
+app.use("/api/admin/compliance", adminComplianceRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api", publicRoutes);
 
@@ -99,6 +110,7 @@ server.listen(PORT, () => {
   console.log(`19xbet365 API listening on http://127.0.0.1:${PORT}`);
   console.log(`Static frontend: ${distRoot}`);
   startDemoSettlementWorker();
+  startFantasyWorker();
 });
 
 async function shutdown(signal) {

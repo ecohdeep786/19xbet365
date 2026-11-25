@@ -13,6 +13,7 @@ const GROUPS: { title: string; description: string; keys: string[] }[] = [
   { title: "Operations", description: "Availability, gameplay and deposit controls.", keys: ["maintenanceMode", "registrationsEnabled", "liveUpdates", "responsibleGaming", "depositMode", "depositMin", "depositMax"] },
   { title: "Risk controls", description: "Stake and payout caps that protect the platform and its players.", keys: ["maxSportsStake", "maxSportsPayout", "maxGameStake"] },
   { title: "Deposit configuration", description: "QR payment details, instructions and transparent bonus tiers.", keys: ["depositQrImageUrl", "depositInstructions", "depositBonusTiers"] },
+  { title: "Withdrawals", description: "Manual withdrawal request range and availability.", keys: ["withdrawalsEnabled", "withdrawalMin", "withdrawalMax"] },
   { title: "Integrations & financial rails", description: "Provider and real-money controls. Locked where licensing is absent.", keys: ["thirdPartyIntegrations", "realMoneyEnabled", "kycRequired"] },
   { title: "Governance", description: "Retention and audit policy.", keys: ["auditRetentionDays"] }
 ];

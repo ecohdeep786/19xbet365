@@ -4,6 +4,8 @@ import { RequireAuth, RequireStaff, ScrollToTop } from "./components/ProtectedRo
 import { PageTitle } from "./components/PageTitle";
 import { Home } from "./pages/Home";
 import { SportsPage, LiveSports, Esports, VirtualSports } from "./pages/Sports";
+import { FantasyPage } from "./pages/Fantasy";
+import { FantasyContestPage } from "./pages/FantasyContest";
 import { Casino, LiveCasino, Slots, InstantGames } from "./pages/Casino";
 import { Promotions, Tournaments } from "./pages/Promotions";
 import { SearchPage } from "./pages/Search";
@@ -14,6 +16,8 @@ import { AccountOverview } from "./pages/account/Overview";
 import { AccountProfile } from "./pages/account/Profile";
 import { AccountWallet } from "./pages/account/Wallet";
 import { AccountDeposit } from "./pages/account/Deposit";
+import { AccountWithdraw } from "./pages/account/Withdraw";
+import { AccountVerification } from "./pages/account/Verification";
 import { AccountBets } from "./pages/account/Bets";
 import { AccountActivity } from "./pages/account/Activity";
 import { AccountNotifications } from "./pages/account/Notifications";
@@ -30,6 +34,8 @@ import { AdminNetworkPage } from "./pages/admin/Network";
 import { AdminAccountsPage } from "./pages/admin/Accounts";
 import { AdminRolesPage } from "./pages/admin/Roles";
 import { AdminGamesPage } from "./pages/admin/Games";
+import { AdminFantasyPage } from "./pages/admin/Fantasy";
+import { AdminCompliancePage } from "./pages/admin/Compliance";
 import { AdminContentPage } from "./pages/admin/Content";
 import { AdminCreditsPage } from "./pages/admin/Credits";
 import { AdminSupportPage } from "./pages/admin/Support";
@@ -65,6 +71,8 @@ export default function App() {
         <Route element={<PublicLayout />}>
           <Route index element={<Home />} />
           <Route path="/sports" element={<SportsPage mode="all" />} />
+          <Route path="/fantasy" element={<FantasyPage />} />
+          <Route path="/fantasy/:id" element={<FantasyContestPage />} />
           <Route path="/live" element={<LiveSports />} />
           <Route path="/esports" element={<Esports />} />
           <Route path="/virtuals" element={<VirtualSports />} />
@@ -92,6 +100,8 @@ export default function App() {
             <Route path="profile" element={<AccountProfile />} />
             <Route path="wallet" element={<AccountWallet />} />
             <Route path="deposit" element={<AccountDeposit />} />
+            <Route path="withdraw" element={<AccountWithdraw />} />
+            <Route path="verification" element={<AccountVerification />} />
             <Route path="bets" element={<AccountBets />} />
             <Route path="activity" element={<AccountActivity />} />
             <Route path="notifications" element={<AccountNotifications />} />
@@ -109,6 +119,8 @@ export default function App() {
           <Route path="accounts" element={<AdminAccountsPage />} />
           <Route path="roles" element={<RequireStaff master><AdminRolesPage /></RequireStaff>} />
           <Route path="games" element={<AdminGamesPage />} />
+          <Route path="fantasy" element={<AdminFantasyPage />} />
+          <Route path="compliance" element={<RequireStaff master><AdminCompliancePage /></RequireStaff>} />
           <Route path="content" element={<AdminContentPage />} />
           <Route path="credits" element={<AdminCreditsPage />} />
           <Route path="deposits" element={<RequireStaff master><AdminDepositsPage /></RequireStaff>} />

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { RefreshCcw, ShieldAlert, TrendingDown, TrendingUp, Coins, Activity, ArrowDownToLine, Percent } from "lucide-react";
+import { RefreshCcw, ShieldAlert, TrendingDown, TrendingUp, Coins, Activity, ArrowDownToLine, ArrowUpFromLine, Percent, Trophy } from "lucide-react";
 import { api } from "../../lib/api";
 import type { AdminRevenue } from "../../types";
 import { Button, EmptyState, ErrorState, Skeleton, Stat } from "../../components/UI";
@@ -42,11 +42,13 @@ export function AdminRevenuePage() {
       ) : error ? <ErrorState message={error} onRetry={load} /> : !data ? null : (
         <>
           <div className="admin-stat-grid">
-            <Stat label="Gross gaming revenue" value={vc(data.summary.grossGamingRevenue, { compact: true })} hint={`${data.summary.settledBets + data.summary.settledRounds} settled bets and rounds`} tone={ggrPositive ? "lime" : "coral"} icon={ggrPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />} />
+            <Stat label="Gross gaming revenue" value={vc(data.summary.grossGamingRevenue, { compact: true })} hint={`${data.summary.settledBets + data.summary.settledRounds} settled bets/rounds + fantasy`} tone={ggrPositive ? "lime" : "coral"} icon={ggrPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />} />
             <Stat label="Sportsbook GGR" value={vc(data.summary.sportsGgr, { compact: true })} hint={`${vc(data.summary.sportsStakes, { compact: true })} staked`} tone="cyan" icon={<Coins size={16} />} />
             <Stat label="Games GGR" value={vc(data.summary.gameGgr, { compact: true })} hint={`${vc(data.summary.gameStakes, { compact: true })} staked`} tone="lime" icon={<Activity size={16} />} />
+            <Stat label="Fantasy GGR" value={vc(data.summary.fantasyGgr, { compact: true })} hint={`${data.summary.openFantasyEntries} open entries · ${vc(data.summary.fantasyStakes, { compact: true })} fees`} tone="cyan" icon={<Trophy size={16} />} />
             <Stat label="Open exposure" value={vc(data.summary.openExposure, { compact: true })} hint={`${number(data.summary.openBets)} open sports bets`} tone="amber" icon={<ShieldAlert size={16} />} />
             <Stat label="Approved deposits" value={vc(data.summary.depositsApproved, { compact: true })} hint={`${number(data.summary.pendingDeposits)} pending review`} tone="cyan" icon={<ArrowDownToLine size={16} />} />
+            <Stat label="Withdrawals paid" value={vc(data.summary.withdrawalsPaid, { compact: true })} hint={`${vc(data.summary.withdrawalsPending, { compact: true })} in ${data.summary.pendingWithdrawals} open requests`} tone="default" icon={<ArrowUpFromLine size={16} />} />
             <Stat label="Promotional cost" value={vc(data.summary.promotionalCost, { compact: true })} hint={`Ongoing bonuses; ${vc(data.summary.welcomeAllocations, { compact: true })} welcome allocations`} tone="default" icon={<Percent size={16} />} />
             <Stat label="Net gaming revenue" value={vc(data.summary.netGamingRevenue, { compact: true })} hint="GGR minus ongoing bonus cost" tone={data.summary.netGamingRevenue >= 0 ? "lime" : "coral"} icon={<Coins size={16} />} />
             <Stat label="Active players (24h)" value={number(data.summary.activePlayers24h)} hint={`${number(data.summary.activeAccounts)} active accounts`} tone="cyan" icon={<Activity size={16} />} />

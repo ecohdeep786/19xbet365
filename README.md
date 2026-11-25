@@ -126,6 +126,10 @@ New registrations start with 10,500 sandbox coins (10,000 welcome allocation plu
 
 Deposits run through **Account → Add coins**. Operators configure the QR image URL, instructions and bonus tiers in Master Admin → Configuration. The default flow is sandbox: no money is collected, but the request, review, bonus, ledger and audit path is fully exercised. Master Admin → Deposit review approves or rejects requests. See `docs/PAYMENTS_AND_BONUSES.md` for the production activation checklist.
 
+Fantasy cricket runs through **Fantasy**. Players build an 11-player salary-cap lineup (100 credits, 1 WK / 4 BAT / 3 AR / 3 BOWL, maximum 7 from one team), choose a captain and vice-captain, and enter with coins. Entries lock five minutes before the match. Admins create, score, settle and refund contests from **Admin → Fantasy contests**. Current player pools and scores are seeded demonstration data; a licensed player-stat feed is required before paid contests.
+
+Identity verification and withdrawals run through **Account → Verification** and **Account → Withdraw**. KYC is manually reviewed by Master Admin. A withdrawal request debits the wallet immediately; Master Admin can approve, reject/refund or mark it paid with an external payment reference. Live payout execution remains gated by licensing, KYC/AML, merchant onboarding and reconciliation.
+
 ## What is playable
 
 The server-authoritative game engine currently supports 11 19X Originals:
@@ -140,16 +144,21 @@ Provider-required catalogue titles (live casino, provider slots, some virtuals) 
 - Account search, suspension/restoration, session revocation, coin adjustments, and Master-only role changes.
 - **Master-only staff credential issuance** with a one-time email/password handoff. Admins can manage scoped accounts and the game catalogue, but cannot create staff logins, change roles, open settings, review deposits or access other Master-only controls.
 - Game catalogue visibility/featured controls; outcomes and RTP are not editable.
+- Fantasy contest creation, player scoring, settlement, cancellation/refunds and entry review.
+- Revenue and risk dashboard: sports/games/fantasy GGR, open exposure, deposits, withdrawals, bonuses and active players.
+- Master-only KYC and withdrawal review, including approve, reject/refund and mark-paid states.
 - Content pages, promotions, support tickets, transfer approvals, security events, audit chain verification, settings, and system health.
 - Master Admin account is protected from suspension, demotion, and deletion through the API.
 - All privileged actions append to the hash-chained audit trail with before/after state.
 
 ## Explicit limitations
 
-- **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Withdrawals and cash redemption remain disabled; `realMoneyEnabled` is still hard-locked.
+- **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Withdrawals are manual-review only: a Master Admin approves the request and records an external payment reference; automated payout execution is not implemented and `realMoneyEnabled` remains hard-locked.
+- **Manual KYC.** Identity verification is a manual review workflow. A production launch requires an approved KYC provider, encrypted document handling, sanctions/PEP screening and geo eligibility.
+- **Demo fantasy data.** Player pools, salaries and scoring lines are seeded demonstration data. Paid contests require an authorized player-stat feed and jurisdiction-specific fantasy rules.
 - **No certified provider integrations.** Provider titles are integration-ready catalogue pages only.
 - **Demo fixtures and demo settlement.** Sports fixtures and odds are seeded demonstration data. A server-side worker starts upcoming fixtures, finishes live fixtures after a simulated period, and settles 1X2 singles/accumulators with generated final scores. There is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
-- **Virtual credits.** All balances and prizes are non-redeemable and have no cash value.
+- **Sandbox coins.** All balances and prizes are non-redeemable and have no cash value.
 - **Demonstration security controls.** Two-factor preference is stored, but no authenticator is provisioned.
 - **No image assets from third parties.** All artwork is CSS/SVG built for this project.
 

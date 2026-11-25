@@ -9,6 +9,7 @@ import { BetSlipProvider } from "./state/BetSlipContext";
 import { ToastProvider } from "./state/ToastContext";
 import "./styles/theme.css";
 import "./styles/pages.css";
+import "./styles/fantasy.css";
 import "./styles/game.css";
 import "./styles/admin.css";
 import "./styles/bookmaker.css";

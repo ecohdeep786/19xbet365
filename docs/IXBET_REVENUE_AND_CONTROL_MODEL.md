@@ -103,30 +103,34 @@ Implemented:
 - Basic revenue metrics on the command centre.
 
 Added in this pass:
-- **Revenue & risk** admin page: sports/games GGR, open exposure, deposits, bonus cost, net revenue, active players and product mix.
+- **Revenue & risk** admin page: sports/games/fantasy GGR, open exposure, deposits, withdrawals, bonus cost, net revenue, active players and product mix.
 - **Sports risk caps**: `maxSportsStake` and `maxSportsPayout` settings, enforced server-side.
-- Settings grouped into risk controls; every change audited.
+- **Fantasy cricket product**: lobby, salary-cap lineup builder, transactional entries, scoring, leaderboards, prize settlement, cancellation/refunds and admin contest controls.
+- **Identity verification**: manual KYC submission and Master review.
+- **Manual withdrawals**: request, KYC gate, approve/reject/mark-paid with ledger, notification and audit records.
+- Settings grouped into risk and withdrawal controls; every change audited.
 
 Still missing:
-- Withdrawal request/approval/payment execution.
-- KYC document upload/verification and geo/age gating.
 - Live payment QR/merchant webhook and reconciliation.
+- Automated KYC provider, document upload/encryption and sanctions/PEP screening.
+- Automatic withdrawal execution; current payouts are manual and marked paid by an operator.
 - Per-game min/max stake controls.
 - Sports odds/margin configuration, market suspension and manual result/settlement controls.
 - Exposure/liability caps by sport/market/customer.
 - Fraud/AML transaction monitoring.
 - Real sports/player data feed and certified RNG/game math audit.
 - Provider game sessions.
+- Real-money legal/licensing activation.
 
 ## 6. Recommended build order
 
-1. **Master Control Center** (current slice): revenue/risk dashboard, sports stake/payout caps, per-game stake limits, audited settings.
-2. **Withdrawal + KYC**: request intake, document upload, Master review, payment status, ledger, audit; no live payout until merchant rails exist.
+1. **Master Control Center** (implemented): revenue/risk dashboard, sports stake/payout caps, fantasy operations, KYC and withdrawal review, audited settings.
+2. **Withdrawal + KYC** (sandbox implemented): request intake, KYC gate, Master review, payment status, ledger, audit; live payout still requires merchant rails.
 3. **Sportsbook control**: margin/odds config, market suspension, event result entry, void/refund, exposure caps.
 4. **Real-money payments**: business-owned QR/merchant, webhook confirmation, reconciliation, chargeback handling.
 5. **Fraud/AML**: duplicate checks, velocity rules, sanctions/PEP screening, source-of-funds, reporting.
 6. **Certification/ops**: RNG/RTP audit, penetration test, backups/PITR, monitoring, legal sign-off.
-7. **Fantasy product**: only after the format, market and data provider are decided; use the existing wallet/audit/admin foundation.
+7. **Fantasy data provider**: replace seeded player pools/scores with an authorized feed before real-money contests; the product UI, wallet, ledger, settlement and admin controls are already built.
 
 ## 7. Operating rules to preserve
 

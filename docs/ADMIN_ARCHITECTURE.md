@@ -37,7 +37,9 @@ Important permissions:
 | Screen | Path | Key operations | Scope |
 | --- | --- | --- | --- |
 | Command centre | `/admin` | metrics, 7-day series, role counts, alerts, audit tip, JSON export | actor scope |
-| Revenue & risk | `/admin/revenue` | GGR, sports/game product mix, open exposure, deposits, bonus cost, NGR, active players | `reports.view.scope`; actor scope |
+| Revenue & risk | `/admin/revenue` | GGR, sports/game/fantasy product mix, open exposure, deposits, withdrawals, bonus cost, NGR, active players | `reports.view.scope`; actor scope |
+| Fantasy contests | `/admin/fantasy` | create, score, settle, cancel and refund contests | `games.manage`; audited |
+| KYC & withdrawals | `/admin/compliance` | manual identity review and withdrawal approve/reject/mark-paid | Master only |
 | Hierarchy | `/admin/network` | recursive tree, role/status/balance, search | actor branch |
 | Accounts | `/admin/accounts` | search/filter/paginate, manage modal | actor branch |
 | Account actions | modal | suspend/restore, credit adjustment, role change, revoke sessions | target must be descendant; rank checks |

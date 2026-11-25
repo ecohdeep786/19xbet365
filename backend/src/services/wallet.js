@@ -30,7 +30,7 @@ export async function checkDailyLimit(client, accountId, bet) {
   if (limit.daily_bet_limit) {
     const spent = await client.query(
       `SELECT COALESCE(SUM(ABS(amount)),0) AS total FROM transactions
-       WHERE account_id = $1 AND type IN ('game_stake','bet_stake') AND created_at::date = CURRENT_DATE`,
+       WHERE account_id = $1 AND type IN ('game_stake','bet_stake','fantasy_entry') AND created_at::date = CURRENT_DATE`,
       [accountId]
     );
     if (Number(spent.rows[0].total) + bet > Number(limit.daily_bet_limit)) {
@@ -54,7 +54,7 @@ export async function debitStake(client, accountId, stake, description, referenc
   await client.query("UPDATE accounts SET balance = $1, updated_at = now() WHERE id = $2", [balance, accountId]);
   await walletTransaction(client, {
     accountId,
-    type: referenceType === "sports_bet" ? "bet_stake" : "game_stake",
+    type: referenceType === "sports_bet" ? "bet_stake" : referenceType === "fantasy_contest" ? "fantasy_entry" : "game_stake",
     amount: -stake,
     balanceAfter: balance,
     description,
@@ -64,17 +64,17 @@ export async function debitStake(client, accountId, stake, description, referenc
   return { balance, before: Number(account.balance), account };
 }
 
-export async function refundStake(client, accountId, amount, description, referenceId) {
+export async function refundStake(client, accountId, amount, description, referenceId, referenceType = "game_round", transactionType = "bet_refund") {
   const account = await lockAccount(client, accountId);
   const balance = round2(Number(account.balance) + Number(amount));
   await client.query("UPDATE accounts SET balance = $1, updated_at = now() WHERE id = $2", [balance, accountId]);
   await walletTransaction(client, {
     accountId,
-    type: "bet_refund",
+    type: transactionType,
     amount,
     balanceAfter: balance,
     description,
-    referenceType: "game_round",
+    referenceType,
     referenceId
   });
   return balance;
@@ -88,7 +88,7 @@ export async function creditWin(client, accountId, amount, description, referenc
   await client.query("UPDATE accounts SET balance = $1, xp = $2, level = $3, updated_at = now() WHERE id = $4", [balance, xp, level, accountId]);
   await walletTransaction(client, {
     accountId,
-    type: referenceType === "sports_bet" ? "bet_win" : "game_win",
+    type: referenceType === "sports_bet" ? "bet_win" : referenceType === "fantasy_contest" ? "fantasy_win" : "game_win",
     amount,
     balanceAfter: balance,
     description,

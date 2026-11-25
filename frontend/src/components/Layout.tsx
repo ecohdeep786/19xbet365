@@ -54,6 +54,7 @@ const NAV: NavItem[] = [
     ]
   },
   { label: "Live", to: "/live", icon: Radio },
+  { label: "Fantasy", to: "/fantasy", icon: Trophy },
   { label: "1xGames", to: "/instant", icon: Gamepad2 },
   { label: "Slots", to: "/slots", icon: Cherry },
   { label: "Live Casino", to: "/live-casino", icon: Spade },
@@ -257,11 +258,13 @@ export function Header() {
                 <Link to="/register" className="btn btn-lime btn-sm header-join"><Sparkles size={14} /> Join 19X</Link>
               </>
             )}
-            <button className={classNames("slip-trigger", selections.length > 0 && "has-items")} onClick={() => setOpen(true)} aria-label="Open bet slip">
-              <Ticket size={18} />
-              <span>Bet slip</span>
-              {selections.length > 0 && <em>{selections.length}</em>}
-            </button>
+            <span className="slip-trigger-wrap">
+              <button className={classNames("slip-trigger", selections.length > 0 && "has-items")} onClick={() => setOpen(true)} aria-label="Bet slip" title={selections.length ? `${selections.length} selection${selections.length === 1 ? "" : "s"}` : "Bet slip"}>
+                <Ticket size={18} />
+                <span>Bet slip</span>
+              </button>
+              {selections.length > 0 && <em className="slip-count" aria-hidden="true">{selections.length}</em>}
+            </span>
           </div>
         </div>
         {searchOpen && (
@@ -312,6 +315,7 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
         <div className="mobile-nav-section">
           <span className="eyebrow">Sports</span>
           <Link to="/sports" onClick={onClose}><Goal size={17} /> Sportsbook</Link>
+          <Link to="/fantasy" onClick={onClose}><Trophy size={17} /> Fantasy</Link>
           <Link to="/live" onClick={onClose}><Radio size={17} /> Live betting</Link>
           <Link to="/esports" onClick={onClose}><Gamepad2 size={17} /> Esports</Link>
           <Link to="/virtuals" onClick={onClose}><Timer size={17} /> Virtual sports</Link>
@@ -368,6 +372,7 @@ export function Footer() {
         <div className="footer-col">
           <strong>Play</strong>
           <Link to="/sports">Sportsbook</Link>
+          <Link to="/fantasy">Fantasy</Link>
           <Link to="/live">Live betting</Link>
           <Link to="/casino">Casino</Link>
           <Link to="/instant">Instant games</Link>

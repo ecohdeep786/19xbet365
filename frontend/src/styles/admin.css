@@ -554,3 +554,16 @@
 /* Constrain admin grid children so wide tables scroll internally */
 .admin-page { grid-template-columns: minmax(0, 1fr); }
 .admin-page > * { min-width: 0; }
+
+/* KYC and withdrawal review */
+.compliance-list { display: grid; gap: 7px; padding: 10px; }
+.compliance-row { display: grid; grid-template-columns: 1.2fr .7fr .9fr .9fr auto auto; gap: 12px; align-items: center; padding: 11px 12px; border: 1px solid var(--line); border-radius: 7px; background: rgba(255,255,255,.025); }
+.compliance-row.status-pending { border-color: rgba(240,190,80,.24); background: rgba(49,37,12,.18); }
+.compliance-row.status-approved { border-color: rgba(98,237,145,.18); }
+.compliance-row.status-rejected { border-color: rgba(255,125,138,.18); }
+.compliance-row > div:not(.compliance-actions) { display: grid; gap: 2px; min-width: 0; }
+.compliance-row span { color: var(--muted); font-size: .6rem; }
+.compliance-row strong { color: var(--text-soft); font-size: .7rem; overflow-wrap: anywhere; }
+.compliance-actions { display: flex; gap: 5px; justify-content: flex-end; flex-wrap: wrap; }
+@media (max-width: 1100px) { .compliance-row { grid-template-columns: 1fr 1fr 1fr; } .compliance-row .badge { grid-column: 1 / -1; justify-self: start; } .compliance-actions { grid-column: 1 / -1; justify-content: flex-start; } }
+@media (max-width: 700px) { .compliance-row { grid-template-columns: 1fr 1fr; } }

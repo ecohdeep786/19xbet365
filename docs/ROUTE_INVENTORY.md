@@ -13,6 +13,8 @@
 | `/live-casino` | LiveCasino | Public | integration-required table previews |
 | `/slots` | Slots | Public | slot catalogue |
 | `/instant` | InstantGames | Public | playable 19X Originals |
+| `/fantasy` | FantasyPage | Public | fantasy cricket lobby |
+| `/fantasy/:id` | FantasyContestPage | Public | salary-cap lineup builder and contest detail |
 | `/promotions` | Promotions | Public | coin campaign cards and terms |
 | `/tournaments` | Tournaments | Public | live/upcoming/finished leaderboards |
 | `/search` | SearchPage | Public | games, fixtures, help search |
@@ -25,6 +27,8 @@
 | `/account` | AccountOverview | Auth | player dashboard |
 | `/account/profile` | AccountProfile | Auth | profile details |
 | `/account/wallet` | AccountWallet | Auth | coin ledger |
+| `/account/withdraw` | AccountWithdraw | Auth | manual withdrawal requests |
+| `/account/verification` | AccountVerification | Auth | KYC submission and status |
 | `/account/bets` | AccountBets | Auth | sports bet history |
 | `/account/activity` | AccountActivity | Auth | game round history |
 | `/account/notifications` | AccountNotifications | Auth | inbox |
@@ -44,6 +48,9 @@
 | `/admin/accounts` | AdminAccountsPage | Staff | accounts + actions |
 | `/admin/roles` | AdminRolesPage | Master | role permissions |
 | `/admin/games` | AdminGamesPage | Staff with games.view | catalogue operations |
+| `/admin/fantasy` | AdminFantasyPage | Staff with games.manage | create, score, settle and refund fantasy contests |
+| `/admin/revenue` | AdminRevenuePage | Staff with reports.view.scope | GGR, exposure, withdrawals, product mix |
+| `/admin/compliance` | AdminCompliancePage | Master | KYC and withdrawal review |
 | `/admin/content` | AdminContentPage | Staff with content.manage | pages/promotions |
 | `/admin/credits` | AdminCreditsPage | Staff with credits.adjust | adjustment ledger |
 | `/admin/support` | AdminSupportPage | Staff with support.view | support desk |
@@ -63,6 +70,11 @@
 - `/api/player/*` — overview, transactions, bets, rounds, notifications, favourites, recent, responsible, referrals, support.
 - `/api/bets` — sports bet placement.
 - `/api/games/*` — instant play, activity, Crash and Mines multi-step routes.
+- `/api/fantasy/*` — fantasy contests, player pools, entries and my entries.
+- `/api/verification` — identity verification submission and status.
+- `/api/withdrawals/*` — withdrawal config, requests and cancellation.
+- `/api/admin/fantasy/*` — contest creation, scores, settlement and cancellation.
+- `/api/admin/compliance/*` — Master-only KYC and withdrawal review.
 - `/api/admin/*` — dashboard, network, accounts, invitations, roles, games, content, credits, support, transfers, security, audit, settings, system, broadcast.
 
 Full method and payload details are in `docs/API_SPECIFICATION.md`.
