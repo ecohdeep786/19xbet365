@@ -2,7 +2,7 @@
 
 **Date:** 26 November 2026  
 **Firebase project:** `xbet365-ab8fb`  
-**Status:** Firebase email/password authentication is implemented for players. PostgreSQL remains the system of record for wallets, game rounds, bets, payments, KYC, audit events and admin controls.
+**Status:** Firebase email/password authentication is implemented for players. PostgreSQL remains the system of record for wallets, game rounds, bets, payments, KYC, audit events and admin controls. See [`DATABASE_DESIGN_V2.md`](DATABASE_DESIGN_V2.md) for the relational model and invariants.
 
 ## 1. What is live
 
@@ -33,7 +33,7 @@ Firestore is a good real-time document database, but it is the wrong authority f
 
 ```text
 Player
-  │  email/password or Google
+  │  email/password
   ▼
 Firebase Authentication
   │  signed ID token (JWT, ~1 hour)
@@ -82,7 +82,7 @@ The browser never supplies a balance, role, account ID, game outcome or settleme
 
 ## 6. Firebase console setup required
 
-1. **Authentication → Sign-in method:** Email/Password is enabled. Enable Google/Apple only when the provider is configured; set `VITE_FIREBASE_GOOGLE_ENABLED=true` for the Google button.
+1. **Authentication → Sign-in method:** Email/Password is enabled. Social providers are intentionally disabled; the product uses email and password only.
 2. **Authentication → Settings → Authorized domains:** add every production hostname (for example `19xbet365.com`, `www.19xbet365.com`). `localhost` is used for local verification links; `127.0.0.1` is not an authorized domain.
 3. **Authentication → Templates:** customise verification and password-reset emails with the production sender and support address.
 4. **Authentication → Settings:** enable email-enumeration protection and a password policy.
@@ -112,7 +112,6 @@ VITE_FIREBASE_STORAGE_BUCKET=xbet365-ab8fb.firebasestorage.app
 VITE_FIREBASE_MESSAGING_SENDER_ID=1079337385097
 VITE_FIREBASE_APP_ID=1:1079337385097:web:f4d24b600520555bb0da58
 VITE_FIREBASE_MEASUREMENT_ID=G-F342CYS1YK
-VITE_FIREBASE_GOOGLE_ENABLED=false
 ```
 
 The app has local fallbacks for the public web config, but production should set its own environment values explicitly.

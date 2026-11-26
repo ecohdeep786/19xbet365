@@ -25,7 +25,7 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Sports risk caps | PASS | Master-only `maxSportsStake`/`maxSportsPayout`; server-enforced and audited; `risk-smoke.mjs` |
 | Delegated Admin workflows | PASS | scope/permission tests in `security-smoke.mjs` |
 | Network isolation | PASS | agent sees 9 accounts, no master/other admin |
-| Database persistence | PASS | PostgreSQL schema/seed, wallet/round/bet records |
+| Database integrity | PASS | append-only wallet ledger, unique business references, immutable settled records, cycle/lineup/prize checks, `wallet_reconciliation`; `db:audit` |
 | Auth/authorization | PASS | existing session/RBAC plus server-verified Firebase identity exchange; unverified email cannot link to an existing account |
 | Firebase player identity | PASS | email/password sign-up/sign-in, server session exchange, session restoration, welcome ledger and verification gate; `firebase-smoke.mjs` / `firebase-ui-smoke.mjs` |
 | Security tests | PASS with findings | `SECURITY_TEST_REPORT.md` |

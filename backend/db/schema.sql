@@ -244,7 +244,7 @@ CREATE INDEX IF NOT EXISTS rounds_open_idx ON game_rounds (account_id, status) W
 CREATE TABLE IF NOT EXISTS transactions (
   id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   account_id    UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
-  type          TEXT NOT NULL CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus')),
+  type          TEXT NOT NULL CHECK (type IN ('opening_balance','welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus')),
   amount        NUMERIC(14,2) NOT NULL,
   balance_after NUMERIC(14,2) NOT NULL CHECK (balance_after >= 0),
   description   TEXT NOT NULL,
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 CREATE INDEX IF NOT EXISTS transactions_account_idx ON transactions (account_id, created_at DESC);
 ALTER TABLE transactions DROP CONSTRAINT IF EXISTS transactions_type_check;
 ALTER TABLE transactions ADD CONSTRAINT transactions_type_check
-  CHECK (type IN ('welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus','fantasy_entry','fantasy_win','fantasy_refund','withdrawal_request','withdrawal_paid','withdrawal_refund'));
+  CHECK (type IN ('opening_balance','welcome_bonus','game_stake','game_win','bet_stake','bet_win','bet_refund','admin_credit','admin_debit','referral_reward','promo_credit','bonus_expiry','deposit','deposit_bonus','fantasy_entry','fantasy_win','fantasy_refund','withdrawal_request','withdrawal_paid','withdrawal_refund'));
 
 CREATE TABLE IF NOT EXISTS favorites (
   account_id  UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,

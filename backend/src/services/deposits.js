@@ -99,6 +99,13 @@ export async function approveDeposit({ id, reviewerId, reviewNote = null, ip = n
         referenceId: request.id,
         createdBy: reviewerId
       });
+      await client.query(
+        `INSERT INTO bonus_grants
+          (account_id, source_type, source_id, amount, remaining, wagering_required, expires_at)
+         VALUES ($1,'deposit_bonus',$2,$3,$3,$4,now() + interval '30 days')
+         ON CONFLICT (source_type, source_id, account_id) DO NOTHING`,
+        [request.account_id, request.id, bonus.amount, round2(bonus.amount * 3)]
+      );
     }
     await client.query(
       "UPDATE deposit_requests SET status = 'approved', bonus_amount = $1, reviewed_by = $2, review_note = $3, reviewed_at = now() WHERE id = $4",

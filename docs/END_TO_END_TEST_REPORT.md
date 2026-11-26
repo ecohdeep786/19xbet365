@@ -13,6 +13,8 @@
 | `scripts/all-games-smoke.mjs` | Passed: **44/44 catalogue games** played through the API and settled; zero failures; wallet reconciled | console output |
 | `scripts/all-games-ui-smoke.mjs` | Passed: **44/44 game pages** loaded with no provider gate; representative sample played across slots, virtuals, instant, tables, crash and blackjack; zero console/page errors | console output |
 | `scripts/blackjack-smoke.mjs` | Passed: deal, hit, stand, dealer draws to 17, settled-hand replay rejected, stale hand refunded | console output |
+| `backend/db/audit.js` (`npm run db:audit`) | Passed: 30/30 accounts balanced, no duplicate ledger references, required tables/triggers present, direct mutation of transactions/settled rounds/settled bets/deposit amounts rejected, odds and responsible-play history populated | console output |
+| `backend/db/migrate.js` (`npm run db:migrate`) | Passed: versioned migration applied and recorded in `schema_migrations` | console output |
 | `scripts/responsive-game-audit.mjs` | Passed: 128 checks across all 44 game pages plus public/casino routes at 320, 390, 768, 1440 and 2560; zero horizontal overflow, zero console errors | console output |
 | `scripts/game-smoke.mjs` | Passed: original 11 originals settled; Crash cash-out and Mines bust paths; final balance reconciled | console output |
 | `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries, unknown-game 404, invalid-stake 400, real-money lock | console output |

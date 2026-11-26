@@ -1,96 +1,80 @@
 # Database Architecture
 
-## Engine and connection
+The full v2 domain model, ERD, invariants and scaling plan are in [`DATABASE_DESIGN_V2.md`](DATABASE_DESIGN_V2.md). This page is the operational summary.
+
+## Engine and files
 
 - PostgreSQL 16, database `astra_play`.
 - Development default: `postgres://postgres@127.0.0.1:5433/astra_play`.
 - Pool and transaction helpers: `backend/src/db.js`.
-- Schema: `backend/db/schema.sql`.
+- Baseline schema: `backend/db/schema.sql`.
+- Versioned migrations: `backend/db/migrations/` and `schema_migrations`.
 - Seed: `backend/db/seed.js`.
-- `DATABASE_URL` can override the connection string.
+- Migration runner: `backend/db/migrate.js` (`npm run db:migrate`).
+- Invariant audit: `backend/db/audit.js` (`npm run db:audit`).
 
-## Tables and relationships
+Never edit an applied migration. Add the next numbered migration and run `db:migrate`.
+
+## Domain tables
 
 ```text
 roles 1 ── * accounts
-accounts.parent_id ── accounts (self-referencing hierarchy)
+accounts.parent_id ── accounts (self-referencing hierarchy, cycle-protected)
 accounts.referred_by ── accounts (referral ownership)
 accounts 1 ── * sessions
-accounts 1 ── * login_history
+accounts 1 ── * login_history (append-only)
 accounts 1 ── * referrals (referrer/referee)
-accounts 1 ── * account_transfers
-accounts 1 ── * account_invitations
+accounts 1 ── * account_transfers / account_invitations
 accounts 1 ── * bets 1 ── * bet_selections ── matches
+matches 1 ── * match_odds_history
 accounts 1 ── * game_rounds ── games
-accounts 1 ── * transactions
-accounts * ── * games via favorites
-accounts * ── * games via recent_plays
+accounts 1 ── * transactions (append-only wallet ledger)
+accounts 1 ── * deposit_requests / withdrawal_requests
+accounts 1 ── * bonus_grants
 accounts 1 ── * notifications
 accounts 1 ── * support_tickets 1 ── * support_messages
-accounts 1 ── 1 responsible_limits
-games * ── * promotions/tournaments (catalogue references)
-audit_events.actor_id ── accounts
-platform_settings.updated_by ── accounts
-content_pages.updated_by ── accounts
+accounts 1 ── 1 responsible_limits 1 ── * responsible_limit_events
+accounts 1 ── 1 account_verifications 1 ── * kyc_documents
+accounts 1 ── * fantasy_entries ── fantasy_contests
+fantasy_contests 1 ── * fantasy_prize_tiers
+fantasy_contests 1 ── * fantasy_player_stats
+fantasy_contests 1 ── 1 fantasy_settlements (append-only)
+accounts * ── * games via favorites / recent_plays
+audit_events.actor_id ── accounts (hash-chained, append-only)
 ```
 
-## Key column groups
+## Integrity guarantees
 
-- **accounts:** username/email unique lower-case indexes, scrypt password hash, role code, parent tree, referral code, status (`active|suspended|pending|closed`), balance `NUMERIC(14,2)`, XP/level, country/phone, avatar seed, 2FA/marketing flags, suspension reason, timestamps.
-- **sessions:** SHA-256 token hash, IP/UA, created/last-seen/expiry, revocation.
-- **matches:** sport/league/teams, start time, status, live/final score text, 1X2 odds, demo flag, generated `result_home`/`result_away` integers and `settled_at` for the demo worker.
-- **bets:** single/acca, stake, total odds, potential return, status (`open|won|lost|void|cashed_out`), payout, placement/settlement.
-- **deposit_requests:** player, amount, method, payment reference, note, pending/approved/rejected/cancelled status, bonus amount, reviewer and review timestamps.
-- **bet_selections:** fixture, home/draw/away selection, locked odds, per-selection result (`pending|won|lost|void`).
-- **game_rounds:** game, stake, payout, status (`open|settled|void`), outcome/state JSONB, seed hash/client seed/nonce, timestamps.
-- **transactions:** type-constrained wallet ledger including `deposit` and `deposit_bonus`, amount, balance-after (non-negative), reference type/id, created-by, timestamp.
-- **audit_events:** actor, action, entity, summary, before/after, IP, previous hash, event hash, created.
-- **platform_settings:** JSONB values and descriptions.
-- **responsible_limits:** daily bet limit, session/reality-check minutes, cool-off and self-exclusion timestamps.
+1. **Wallet reconciliation:** `wallet_reconciliation` compares `accounts.balance` with the sum of append-only transactions. Latest run: 30/30 balanced.
+2. **Ledger append-only:** `transactions_append_only` rejects UPDATE/DELETE. A unique `(account_id, reference_type, reference_id, type)` index prevents duplicate credits/debits.
+3. **Immutable settlement:** settled/void game rounds, settled sports bets, settled selections, settled fantasy entries and fantasy settlement rows reject mutation.
+4. **Review integrity:** deposit amount/reference and withdrawal amount/destination cannot change after submission; final states cannot transition again.
+5. **Hierarchy safety:** a recursive trigger rejects account parent cycles.
+6. **Fantasy integrity:** lineup trigger validates players, teams, salary cap, cricket role quotas, captain/vice-captain and team limits; prize tiers cannot overlap.
+7. **KYC history:** every submission is stored in `kyc_documents`, with superseded/approved/rejected states.
+8. **Responsible-play history:** every limit insert/update is captured in `responsible_limit_events`.
+9. **Odds audit:** every inserted/updated fixture odds row is captured in `match_odds_history`.
+10. **Audit chain:** `audit_events` is append-only and hash-chained; `appendAudit` serializes chain appends with an advisory lock.
+11. **Money locks:** every wallet mutation uses `SELECT … FOR UPDATE` on the account row. Balance and ledger rows commit together.
+12. **Versioned schema:** applied migrations are recorded in `schema_migrations`; the seed force-reapplies migrations after the v1 baseline so functions and triggers cannot drift.
 
-## Integrity and security
+## Verification
 
-1. **Append-only audit:** `prevent_audit_mutation()` raises on UPDATE/DELETE of `audit_events`.
-2. **Immutable settled rounds:** `protect_settled_rounds()` raises if payout, outcome, or status changes after settlement.
-3. **Wallet row lock:** every stake/win/refund uses `SELECT … FOR UPDATE` on the account.
-4. **Transactional settlement:** debit, round insert, payout, ledger rows, and settlement commit atomically. Demo sports settlement follows the same rule across fixture result, selection results, bet status, wallet credit and audit event.
-5. **Fixture locking:** bet placement locks selected fixtures `FOR UPDATE` in ID order; the worker processes due fixtures `FOR UPDATE SKIP LOCKED`, preventing a closed market from accepting a concurrent bet.
-6. **Audit chain serialization:** `appendAudit` takes `pg_advisory_xact_lock(824001)` before reading the chain tip.
-7. **Non-negative balances:** database check on balance and transaction balance-after.
-8. **Unique identities:** lower-case unique indexes for email and username; unique referral code; unique session token hash.
-9. **Scope relationships:** recursive `parent_id` walk is done in SQL and never trusted from the client.
-
-## Seed model
-
-`backend/db/seed.js` recreates:
-
-- 5 roles and 26 permissions.
-- 1 Master Admin, 2 Admins, 2 Sub-admins, 3 Agents, 22 Players (30 accounts).
-- 12 sports, 38 demo fixtures, 44 game catalogue entries.
-- Welcome/history transactions, historical rounds and 5 bets for the demo player.
-- Favorites, recent plays, notifications, responsible limits.
-- 3 support tickets with staggered message timestamps.
-- 2 pending transfers and 1 pending invitation.
-- 6 promotions, 4 tournaments, 8 content pages, 10 help articles, 13 settings.
-- 10 initial hash-chained audit events.
-
-## Immutability test evidence
-
-Direct SQL tests were rejected as expected:
-
-```text
-UPDATE audit_events ...   -> ERROR: audit_events is append-only
-DELETE FROM audit_events  -> ERROR: audit_events is append-only
-UPDATE game_rounds ...    -> ERROR: settled rounds are immutable
+```bash
+npm run db:migrate   # pending migrations only
+npm run db:seed      # schema + migrations + clean demo data
+npm run db:audit     # reconciliation and trigger/invariant tests
 ```
 
-## Backup/recovery recommendation
+The audit checks required tables/triggers, ledger balance, duplicate references, and direct mutation rejection for wallet transactions, settled rounds, settled bets and deposit amounts.
 
-Before a production launch:
+## Backup and production controls
 
-- run PostgreSQL with PITR/continuous archiving;
-- take encrypted daily logical backups plus WAL archives;
-- test restore in an isolated environment;
-- retain audit/settlement backups according to policy;
-- grant the application a restricted role (no DDL, no trigger/schema privileges);
-- rotate the database credential and restrict network access to the API host.
+- PITR with encrypted WAL archives; tested restores.
+- Daily logical backups plus retention for ledger, audit and settlement data.
+- Restricted application DB role: no DDL, no trigger ownership, no superuser.
+- Monthly partition strategy for `transactions`, `audit_events`, `login_history`, `game_rounds` and `match_odds_history` at scale.
+- Scheduled `wallet_reconciliation` monitor with alerts on any mismatch.
+- External penetration test and legal/compliance review before real-money activation.
+
+The current wallet is a single-entry player ledger with reconciliation. A regulated real-money operator should add an operator-side double-entry journal, multi-currency wallets and PSP reconciliation tables as described in `DATABASE_DESIGN_V2.md`.

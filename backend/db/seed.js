@@ -1,10 +1,11 @@
 import crypto from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pool } from "../src/db.js";
 import { hashPassword, randomInt, randomReferral, randomToken, sha256, randomFloat } from "../src/lib/crypto.js";
 import { appendAudit } from "../src/lib/audit.js";
+import { applyMigrations } from "./applyMigrations.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const catalog = JSON.parse(readFileSync(join(__dirname, "..", "..", "shared", "catalog.json"), "utf8"));
@@ -128,9 +129,11 @@ async function main() {
   try {
     console.log("Applying schema…");
     await client.query(schema);
+    await applyMigrations(client, { log: (message) => console.log(message), force: true });
     console.log("Resetting demonstration data…");
     await client.query(`
       TRUNCATE TABLE audit_events, support_messages, support_tickets, account_transfers, account_invitations,
+        bonus_grants, kyc_documents, responsible_limit_events, match_odds_history,
         responsible_limits, recent_plays, favorites, notifications, transactions, bet_selections, bets,
         fantasy_settlements, fantasy_entries, fantasy_player_stats, fantasy_prize_tiers, fantasy_contests, fantasy_players,
         account_verifications, withdrawal_requests,
@@ -347,7 +350,7 @@ async function main() {
     // History for the demo player --------------------------------------------
     const now = new Date("2026-11-24T12:40:00.000Z");
     const at = (days, hour) => { const d = new Date(now); d.setUTCDate(d.getUTCDate() - days); d.setUTCHours(hour, 20, 0, 0); return d.toISOString(); };
-    let balance = 10000;
+    let balance = 0;
     const balanceTx = async (type, amount, description, createdAt, referenceType = null, referenceId = null) => {
       balance = Math.round((balance + amount) * 100) / 100;
       await client.query(
@@ -356,6 +359,7 @@ async function main() {
         [ids.alexrowan, type, amount, balance, description, referenceType, referenceId, createdAt]
       );
     };
+    await balanceTx("opening_balance", 10000, "Opening demo coin balance", isoDaysAgo(43, 9), "opening_balance", ids.alexrowan);
     await balanceTx("welcome_bonus", 10000, "Welcome coin allocation", isoDaysAgo(42, 9), "welcome", ids.alexrowan);
 
     const historicalRounds = [

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "node --env-file-if-exists=.env --watch src/index.js",
     "start": "node --env-file-if-exists=.env src/index.js",
-    "seed": "node --env-file-if-exists=.env db/seed.js"
+    "seed": "node --env-file-if-exists=.env db/seed.js",
+    "migrate": "node --env-file-if-exists=.env db/migrate.js",
+    "audit:db": "node --env-file-if-exists=.env db/audit.js"
   },
   "dependencies": {
     "compression": "^1.7.5",

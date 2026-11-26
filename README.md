@@ -100,6 +100,8 @@ Then open `http://localhost:5173`. Vite proxies API and WebSocket traffic to por
 ```bash
 npm run install:all
 npm run db:seed
+npm run db:migrate
+npm run db:audit
 npm run dev:api
 npm run dev:web
 npm run build
@@ -174,6 +176,7 @@ The six live-casino titles are RNG tables built in-house, **not live-dealer feed
 - **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Firebase Authentication does not collect money; a PSP merchant account and signed webhooks are still required. Withdrawals are manual-review only: a Master Admin approves the request and records an external payment reference; automated payout execution is not implemented and `realMoneyEnabled` remains hard-locked.
 - **Manual KYC.** Identity verification is a manual review workflow. A production launch requires an approved KYC provider, encrypted document handling, sanctions/PEP screening and geo eligibility.
 - **Demo fantasy data.** Player pools, salaries and scoring lines are seeded demonstration data. Paid contests require an authorized player-stat feed and jurisdiction-specific fantasy rules.
+- **Single-entry player ledger.** The wallet is append-only and reconciled, but an operator-side double-entry treasury journal, multi-currency wallets and PSP reconciliation are still required for regulated real-money scale. See `docs/DATABASE_DESIGN_V2.md`.
 - **Firebase identity, PostgreSQL ledger.** Firebase Authentication is the player identity provider; PostgreSQL remains the authoritative ledger for balances, bets, rounds, deposits, withdrawals, KYC and audit. Firestore is intentionally not used for money. See `docs/FIREBASE_AUTH_AND_DATA.md`.
 - **No certified third-party provider games.** All 44 catalogue titles are original 19X RNG games. Certified 1xBet/provider parity, live-dealer feeds and independently tested game maths require provider contracts and certification; none are connected.
 - **Simplified table rules.** Blackjack offers hit/stand only (no double or split). Baccarat uses standard third-card rules with no commission on the banker bet. Hold'em is a player-vs-dealer RNG table, not a multiplayer poker room.
@@ -214,6 +217,7 @@ The complete handoff set is indexed in [`docs/README.md`](docs/README.md), inclu
 - reference analysis and product parity matrix;
 - design system, component and route inventories;
 - game catalogue and admin/database architecture;
+- database design v2 with ERD, invariants, migrations and reconciliation;
 - API specification;
 - UI/UX audit, responsive, visual, end-to-end and security test reports;
 - known limitations, production readiness and the 19xbet365 handoff.

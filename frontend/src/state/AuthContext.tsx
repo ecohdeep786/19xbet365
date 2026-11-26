@@ -5,7 +5,7 @@ import { ApiError, api, isOfflineError } from "../lib/api";
 import { demoAdmin, demoUser } from "../lib/demo";
 import {
   FIREBASE_SESSION_MARKER, firebaseActionSettings, firebaseErrorMessage, firebaseReady,
-  getFirebaseAuth, getGoogleProvider
+  getFirebaseAuth
 } from "../lib/firebase";
 
 interface AuthValue {
@@ -16,7 +16,6 @@ interface AuthValue {
   isMaster: boolean;
   login: (email: string, password: string) => Promise<Account>;
   register: (payload: { email: string; password: string; displayName: string; referralCode?: string; marketingOptIn?: boolean }) => Promise<Account>;
-  loginWithGoogle: () => Promise<Account>;
   requestPasswordReset: (email: string) => Promise<{ mode: "firebase" | "legacy"; message: string }>;
   sendVerificationEmail: () => Promise<void>;
   refreshEmailVerification: () => Promise<Account>;
@@ -192,26 +191,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const loginWithGoogle = useCallback(async () => {
-    const auth = await getFirebaseAuth();
-    const provider = await getGoogleProvider();
-    if (!auth || !provider) {
-      throw new Error("Google sign-in is not enabled for this Firebase project.");
-    }
-    try {
-      const { signInWithPopup } = await import("firebase/auth");
-      const credential = await signInWithPopup(auth, provider);
-      const data = await api.firebaseLogin(await credential.user.getIdToken());
-      window.localStorage.setItem(FIREBASE_SESSION_MARKER, "1");
-      setUser(data.user);
-      setOffline(false);
-      return data.user;
-    } catch (error) {
-      if (error instanceof ApiError) throw error;
-      throw new Error(firebaseErrorMessage(error));
-    }
-  }, []);
-
   const requestPasswordReset = useCallback(async (email: string) => {
     const normalized = email.trim().toLowerCase();
     if (firebaseReady && normalized.includes("@") && !SEEDED_EMAIL.test(normalized)) {
@@ -276,10 +255,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     user, loading, offline,
     isStaff: !!user && ["master_admin", "admin", "sub_admin", "agent"].includes(user.role),
     isMaster: user?.role === "master_admin",
-    login, register, loginWithGoogle, requestPasswordReset, sendVerificationEmail, refreshEmailVerification,
+    login, register, requestPasswordReset, sendVerificationEmail, refreshEmailVerification,
     logout, updateUser, refresh
   }), [
-    user, loading, offline, login, register, loginWithGoogle, requestPasswordReset,
+    user, loading, offline, login, register, requestPasswordReset,
     sendVerificationEmail, refreshEmailVerification, logout, updateUser, refresh
   ]);
 

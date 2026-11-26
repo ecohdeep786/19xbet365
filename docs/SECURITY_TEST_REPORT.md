@@ -23,6 +23,8 @@ Run: `node scripts/security-smoke.mjs`
 | Staff email via Firebase auto-link | PASS | `403 staff_firebase_link_forbidden` (`firebase-smoke.mjs`) |
 | Invalid stake | PASS | `400` stake validation |
 | Settled blackjack hand replay | PASS | `409` round already closed (`blackjack-smoke.mjs`) |
+| Wallet ledger reconciliation | PASS | 30/30 accounts balanced (`npm run db:audit`) |
+| Direct mutation of ledger/settled records | PASS | triggers rejected transaction, settled round, settled bet and deposit amount updates |
 | Master tries to enable real money | PASS | `403` “Real-money rails are hard-disabled…” |
 | Agent account list | PASS | 9 accounts; roles only `agent`/`player`; no master or other admin |
 | Agent overview | PASS | `global: false`, `accountCount: 9` |

@@ -19,14 +19,15 @@
 10. **Language selection is not implemented.** Content is English-only; translation catalogues and locale persistence are required.
 11. **Save/load bet slip is not implemented.** Current slip is in-memory; refreshing clears it.
 12. **Firebase Authentication is the player identity provider; PostgreSQL is the ledger.** Firestore is not used for balances, bets, rounds, deposits, withdrawals or audit. Moving money to Firestore would create split-brain and reconciliation risk. Email verification is required before deposits/withdrawals; Firebase App Check and console-level API-key restrictions still need production configuration.
-13. **Registration is email/password only by default.** Google sign-in is implemented but disabled until the Firebase Google provider is enabled and `VITE_FIREBASE_GOOGLE_ENABLED=true`. SMS/phone authentication and staff Firebase linking are not implemented.
-13. **Password reset is manual.** The request is recorded in account notifications; no transactional email delivery.
-14. **2FA is only a stored preference.** No authenticator/SMS challenge is provisioned.
-15. **KYC is a manual workflow.** Document metadata is submitted and reviewed by Master Admin; there is no integrated identity provider, sanctions/PEP screening, liveness check, or encrypted document-vault service.
-16. **Game art is CSS/SVG**, not licensed provider artwork; this is deliberate to avoid unauthorized assets.
-17. **No live chat provider.** Support is ticket/thread based.
-18. **No automated promo engine.** Promotions communicate terms but do not pay automatically.
-19. **No automated tournament qualification.** Standings are seeded demo data.
+13. **The wallet is a single-entry player ledger with reconciliation.** An operator-side double-entry treasury journal, multi-currency wallets and PSP reconciliation are required for a regulated real-money deployment.
+14. **Registration is email/password only.** Social sign-in, SMS/phone authentication and staff Firebase linking are not implemented by design. Firebase email/password is the only player identity method.
+15. **Legacy seeded-account password reset is manual.** Firebase player accounts receive secure reset links; seeded demo/staff accounts use the existing notification/support path. No transactional email delivery for legacy accounts.
+16. **2FA is only a stored preference.** No authenticator/SMS challenge is provisioned.
+17. **KYC is a manual workflow.** Document metadata is submitted and reviewed by Master Admin; there is no integrated identity provider, sanctions/PEP screening, liveness check, or encrypted document-vault service.
+18. **Game art is CSS/SVG**, not licensed provider artwork; this is deliberate to avoid unauthorized assets.
+19. **No live chat provider.** Support is ticket/thread based.
+20. **No automated promo engine.** Promotions communicate terms but do not pay automatically.
+21. **No automated tournament qualification.** Standings are seeded demo data.
 
 ## Technical / operational
 

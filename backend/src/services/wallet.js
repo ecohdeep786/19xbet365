@@ -47,14 +47,16 @@ export async function walletTransaction(client, { accountId, type, amount, balan
   );
 }
 
-export async function debitStake(client, accountId, stake, description, referenceType, referenceId) {
+export async function debitStake(client, accountId, stake, description, referenceType, referenceId, transactionType = null) {
   const account = await lockAccount(client, accountId);
   await ensureCanWager(account, stake);
   const balance = round2(Number(account.balance) - stake);
+  const type = transactionType
+    || (referenceType === "sports_bet" ? "bet_stake" : referenceType === "fantasy_contest" ? "fantasy_entry" : "game_stake");
   await client.query("UPDATE accounts SET balance = $1, updated_at = now() WHERE id = $2", [balance, accountId]);
   await walletTransaction(client, {
     accountId,
-    type: referenceType === "sports_bet" ? "bet_stake" : referenceType === "fantasy_contest" ? "fantasy_entry" : "game_stake",
+    type,
     amount: -stake,
     balanceAfter: balance,
     description,
@@ -80,15 +82,17 @@ export async function refundStake(client, accountId, amount, description, refere
   return balance;
 }
 
-export async function creditWin(client, accountId, amount, description, referenceType, referenceId) {
+export async function creditWin(client, accountId, amount, description, referenceType, referenceId, transactionType = null) {
   const account = await lockAccount(client, accountId);
   const balance = round2(Number(account.balance) + amount);
   const xp = account.xp + Math.max(1, Math.floor(Number(amount) / 10));
   const level = Math.max(1, Math.floor(Math.sqrt(xp / 250)) + 1);
+  const type = transactionType
+    || (referenceType === "sports_bet" ? "bet_win" : referenceType === "fantasy_contest" ? "fantasy_win" : "game_win");
   await client.query("UPDATE accounts SET balance = $1, xp = $2, level = $3, updated_at = now() WHERE id = $4", [balance, xp, level, accountId]);
   await walletTransaction(client, {
     accountId,
-    type: referenceType === "sports_bet" ? "bet_win" : referenceType === "fantasy_contest" ? "fantasy_win" : "game_win",
+    type,
     amount,
     balanceAfter: balance,
     description,

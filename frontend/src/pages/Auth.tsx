@@ -7,7 +7,6 @@ import { useAuth } from "../state/AuthContext";
 import { useToast } from "../state/ToastContext";
 import { Button, Field, Input } from "../components/UI";
 import { Logo } from "../components/Layout";
-import { googleSignInEnabled } from "../lib/firebase";
 
 function AuthShell({ children, title, kicker, body }: { children: ReactNode; title: string; kicker: string; body: string }) {
   return (
@@ -42,7 +41,7 @@ function AuthShell({ children, title, kicker, body }: { children: ReactNode; tit
 }
 
 export function Login() {
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth();
   const { push } = useToast();
   const navigate = useNavigate();
   const location = useLocation() as { state?: { from?: string } };
@@ -50,7 +49,6 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (event: FormEvent) => {
@@ -66,17 +64,6 @@ export function Login() {
     } finally { setBusy(false); }
   };
 
-  const google = async () => {
-    setGoogleBusy(true); setError(null);
-    try {
-      const user = await loginWithGoogle();
-      push(`Welcome back, ${user.displayName.split(" ")[0]}.`, "success");
-      navigate(user.role === "player" ? (location.state?.from || "/account") : "/admin", { replace: true });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Google sign-in failed.");
-    } finally { setGoogleBusy(false); }
-  };
-
   const fillDemo = (kind: "player" | "admin") => {
     setEmail(kind === "player" ? "player@19xbet365.test" : "admin@19xbet365.test");
     setPassword("19X#2026");
@@ -84,12 +71,6 @@ export function Login() {
 
   return (
     <AuthShell kicker="Welcome back" title="Sign in to 19XBET365." body="Your wallet, bets, saved games, and activity are waiting.">
-      {googleSignInEnabled && (
-        <>
-          <Button variant="secondary" size="lg" loading={googleBusy} onClick={google} className="full-btn">Continue with Google</Button>
-          <div className="auth-divider"><span>or use your email</span></div>
-        </>
-      )}
       <form className="auth-form" onSubmit={submit}>
         <Field label="Email or username" required>
           <div className="input-with-icon"><Mail size={16} /><Input type="text" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" required /></div>

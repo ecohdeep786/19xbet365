@@ -11,7 +11,7 @@ A complete, independently branded coin-based gaming foundation with:
 - registration/login/account lifecycle, coin wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
 - Master Admin and delegated staff control room with scoped hierarchy, RBAC, coin adjustments, support, transfers, catalogue, content, audit, settings and health;
 - Master-only staff credential issuance with one-time login ID/password handoff; administrators can manage scoped users and games but cannot create staff logins or access Master-only settings, roles, deposits and credential controls;
-- PostgreSQL schema/seed, transactional wallet, immutable audit chain, settled-round immutability, server sessions, Firebase player identity exchange, rate limiting and a WebSocket activity channel;
+- PostgreSQL schema/seed, versioned migrations, append-only wallet ledger with reconciliation, immutable settled records, hash-chained audit chain, settled-round immutability, server sessions, Firebase player identity exchange, rate limiting and a WebSocket activity channel;
 - server demo-settlement worker for 1X2 singles/accumulators, with generated final scores, notifications, wallet credits and audit events;
 - sandbox deposit/QR-request flow with Master Admin verification, configurable percentage bonuses, wallet ledger entries, notifications and audit events; live collection is hard-gated;
 - a light bookmaker interface for players and a deliberately distinct dark control room for staff;

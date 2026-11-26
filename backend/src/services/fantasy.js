@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import { query, withTransaction } from "../db.js";
 import { appendAudit } from "../lib/audit.js";
 import { lockAccount, checkDailyLimit, debitStake, creditWin, refundStake } from "./wallet.js";
@@ -116,11 +117,12 @@ export async function joinFantasyContest({ contestId, accountId, lineup, captain
     if (!account || account.status !== "active") throw Object.assign(new Error("This account cannot enter contests right now."), { status: 403, code: "account_restricted" });
     if (Number(account.balance) < Number(contest.entry_fee)) throw Object.assign(new Error("Your coin balance is too low for this entry."), { status: 400, code: "insufficient_balance" });
     await checkDailyLimit(client, accountId, Number(contest.entry_fee));
-    const debit = await debitStake(client, accountId, Number(contest.entry_fee), `Fantasy entry · ${contest.name}`, "fantasy_contest", contest.id);
+    const entryId = crypto.randomUUID();
+    const debit = await debitStake(client, accountId, Number(contest.entry_fee), `Fantasy entry · ${contest.name}`, "fantasy_entry", entryId, "fantasy_entry");
     const entry = await client.query(
-      `INSERT INTO fantasy_entries (contest_id, account_id, lineup, captain_id, vice_captain_id, entry_fee)
-       VALUES ($1,$2,$3,$4,$5,$6) RETURNING *`,
-      [contestId, accountId, JSON.stringify(validation.selected.map((player) => player.id)), captainId, viceCaptainId, contest.entry_fee]
+      `INSERT INTO fantasy_entries (id, contest_id, account_id, lineup, captain_id, vice_captain_id, entry_fee)
+       VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+      [entryId, contestId, accountId, JSON.stringify(validation.selected.map((player) => player.id)), captainId, viceCaptainId, contest.entry_fee]
     );
     await client.query(
       "INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'game',$4)",
@@ -148,7 +150,7 @@ export async function cancelFantasyContest({ contestId, actorId, ip = null }) {
     if (contest.status === "cancelled") return { contest, refunded: 0 };
     const entries = await client.query("SELECT * FROM fantasy_entries WHERE contest_id=$1 AND status='confirmed' FOR UPDATE", [contestId]);
     for (const entry of entries.rows) {
-      await refundStake(client, entry.account_id, Number(entry.entry_fee), `Fantasy contest cancelled · ${contest.name}`, contestId, "fantasy_contest", "fantasy_refund");
+      await refundStake(client, entry.account_id, Number(entry.entry_fee), `Fantasy contest cancelled · ${contest.name}`, entry.id, "fantasy_entry", "fantasy_refund");
       await client.query("UPDATE fantasy_entries SET status='cancelled', settled_at=now() WHERE id=$1", [entry.id]);
       await client.query(
         "INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'system',$4)",
@@ -271,7 +273,7 @@ export async function settleFantasyContest({ contestId, actorId, ip = null }) {
         [entry._score, entry._rank, payout, entry.id]
       );
       if (payout > 0) {
-        await creditWin(client, entry.account_id, payout, `Fantasy prize · ${contest.name}`, "fantasy_contest", contestId);
+        await creditWin(client, entry.account_id, payout, `Fantasy prize · ${contest.name}`, "fantasy_entry", entry.id, "fantasy_win");
         await client.query(
           "INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'game',$4)",
           [entry.account_id, "Fantasy prize credited", `${contest.name}: rank ${entry._rank} with ${entry._score.toFixed(2)} points. ${payout.toFixed(2)} coins credited.`, `/fantasy/${contestId}`]

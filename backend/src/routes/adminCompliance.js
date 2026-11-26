@@ -47,6 +47,7 @@ router.post("/kyc/:id/approve", async (req, res, next) => {
       if (!verification) throw Object.assign(new Error("Verification not found."), { status: 404, code: "not_found" });
       if (verification.status === "approved") throw Object.assign(new Error("Already approved."), { status: 409, code: "already_reviewed" });
       await client.query("UPDATE account_verifications SET status='approved', reviewed_by=$1, reviewed_at=now(), review_note=$2, updated_at=now() WHERE id=$3", [req.account.id, String(req.body?.note || "").slice(0, 300) || null, verification.id]);
+      await client.query("UPDATE kyc_documents SET status='approved', reviewed_by=$1, reviewed_at=now() WHERE verification_id=$2 AND status='pending'", [req.account.id, verification.id]);
       await client.query("INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'system',$4)", [verification.account_id, "Identity verified", "Your identity verification was approved. You can now request withdrawals.", "/account/verification"]);
       await appendAudit(client, { actorId: req.account.id, action: "kyc.approved", entityType: "account_verification", entityId: verification.id, summary: "Approved identity verification", ip: requestMeta(req).ip });
       return { ...verification, status: "approved" };
@@ -65,6 +66,7 @@ router.post("/kyc/:id/reject", async (req, res, next) => {
       if (!verification) throw Object.assign(new Error("Verification not found."), { status: 404, code: "not_found" });
       if (verification.status === "approved") throw Object.assign(new Error("Approved verification cannot be rejected."), { status: 409, code: "already_reviewed" });
       await client.query("UPDATE account_verifications SET status='rejected', reviewed_by=$1, reviewed_at=now(), review_note=$2, updated_at=now() WHERE id=$3", [req.account.id, reason, verification.id]);
+      await client.query("UPDATE kyc_documents SET status='rejected', reviewed_by=$1, reviewed_at=now() WHERE verification_id=$2 AND status='pending'", [req.account.id, verification.id]);
       await client.query("INSERT INTO notifications (account_id, title, body, type, link) VALUES ($1,$2,$3,'system',$4)", [verification.account_id, "Identity verification needs attention", reason, "/account/verification"]);
       await appendAudit(client, { actorId: req.account.id, action: "kyc.rejected", entityType: "account_verification", entityId: verification.id, summary: `Rejected identity verification: ${reason}`, ip: requestMeta(req).ip });
       return { ...verification, status: "rejected" };

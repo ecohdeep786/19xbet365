@@ -63,6 +63,15 @@ router.post("/", requireAuth, async (req, res, next) => {
          RETURNING *`,
         [req.account.id, legalName, dateOfBirth, country, address, documentType, documentReference]
       );
+      await client.query(
+        "UPDATE kyc_documents SET status='superseded' WHERE verification_id=$1 AND status='pending'",
+        [row.rows[0].id]
+      );
+      await client.query(
+        `INSERT INTO kyc_documents (verification_id, account_id, document_type, document_reference, metadata)
+         VALUES ($1,$2,$3,$4,$5)`,
+        [row.rows[0].id, req.account.id, documentType, documentReference, JSON.stringify({ country, address })]
+      );
       await appendAudit(client, {
         actorId: req.account.id,
         action: "kyc.submitted",

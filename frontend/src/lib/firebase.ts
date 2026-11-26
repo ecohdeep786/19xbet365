@@ -1,4 +1,4 @@
-import type { Auth, GoogleAuthProvider } from "firebase/auth";
+import type { Auth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyDwOe2YCKvrhzuxwQnSD_XEF7g23_8iOf8",
@@ -11,11 +11,9 @@ const firebaseConfig = {
 };
 
 export const firebaseReady = Boolean(firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.authDomain);
-export const googleSignInEnabled = firebaseReady && import.meta.env.VITE_FIREBASE_GOOGLE_ENABLED === "true";
 export const FIREBASE_SESSION_MARKER = "19x:firebase-session";
 
 let cachedAuth: Auth | null = null;
-let cachedGoogleProvider: GoogleAuthProvider | null = null;
 
 /**
  * Load Firebase Auth only when a player uses a secure identity flow.
@@ -31,14 +29,6 @@ export async function getFirebaseAuth(): Promise<Auth | null> {
   const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
   cachedAuth = getAuth(app);
   return cachedAuth;
-}
-
-export async function getGoogleProvider(): Promise<GoogleAuthProvider | null> {
-  if (!googleSignInEnabled) return null;
-  if (cachedGoogleProvider) return cachedGoogleProvider;
-  const { GoogleAuthProvider } = await import("firebase/auth");
-  cachedGoogleProvider = new GoogleAuthProvider();
-  return cachedGoogleProvider;
 }
 
 export function firebaseActionSettings() {
@@ -67,7 +57,7 @@ export function firebaseErrorMessage(error: unknown) {
     case "auth/user-disabled":
       return "This secure identity is disabled. Contact support.";
     case "auth/popup-closed-by-user":
-      return "Google sign-in was closed before it finished.";
+      return "The secure sign-in window was closed before it finished.";
     case "auth/operation-not-allowed":
       return "This sign-in method is not enabled for the Firebase project yet.";
     case "auth/unauthorized-continue-uri":
