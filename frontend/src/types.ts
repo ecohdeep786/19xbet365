@@ -21,6 +21,9 @@ export interface Account {
   avatarSeed: string;
   twoFactorEnabled: boolean;
   marketingOptIn: boolean;
+  authProvider?: "password" | "firebase";
+  emailVerified?: boolean;
+  firebaseLinked?: boolean;
   suspendedReason: string | null;
   lastLoginAt: string | null;
   createdAt: string;

@@ -59,6 +59,9 @@ router.get("/", requireAuth, async (req, res, next) => {
 
 router.post("/", requireAuth, async (req, res, next) => {
   try {
+    if (req.account.emailVerified === false) {
+      throw Object.assign(new Error("Verify your email address before requesting a withdrawal. Resend the verification link from your account."), { status: 403, code: "email_verification_required" });
+    }
     const config = await configFor(req.account.id);
     if (!config.enabled) throw Object.assign(new Error("Withdrawals are disabled by platform operations."), { status: 403, code: "withdrawals_disabled" });
     if (config.kycRequired && config.kycStatus !== "approved") {

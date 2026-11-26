@@ -45,7 +45,7 @@ The two applications are connected through the `/api` surface. In development Vi
 - **Frontend:** React 18, TypeScript, Vite, React Router (HashRouter), Lucide controls, self-hosted Roboto/Roboto Condensed, original sport glyphs, club/provider monograms and hand-built CSS/SVG artwork.
 - **Backend:** Node.js ESM, Express, `pg`, `ws`, `helmet`, `compression`, `cookie-parser`.
 - **Database:** PostgreSQL 16. Default local database `astra_play`, port `5433`.
-- **Auth:** server sessions in PostgreSQL, HttpOnly `xbet_session` cookie, scrypt password hashes, rate-limited login.
+- **Auth:** Firebase Authentication for player email/password identities, verified server-side; existing PostgreSQL sessions and role-based authorization; scrypt password hashes for seeded/demo/staff accounts; rate-limited login.
 - **Realtime:** WebSocket channel at `/ws` broadcasting bet/game/admin activity.
 - **Audit:** append-only, hash-chained `audit_events`; database trigger rejects UPDATE/DELETE.
 - **Game integrity:** server-generated outcomes; settled rounds protected by an immutability trigger.
@@ -106,6 +106,17 @@ npm run build
 npm start
 ```
 
+### 5. Firebase Authentication
+
+Player email/password authentication uses Firebase project `xbet365-ab8fb`. The frontend loads the Firebase SDK only when a secure identity flow starts; public pages keep their original bundle profile.
+
+- Backend: set `FIREBASE_PROJECT_ID` (default `xbet365-ab8fb`). `FIREBASE_SERVICE_ACCOUNT_JSON` is optional and only needed for token-revocation checks or future Admin SDK writes.
+- Frontend: copy `frontend/.env.example` values into your environment. The provided Firebase web identifiers are public, not server secrets.
+- Firebase console: keep Email/Password enabled, add every production domain under **Authentication → Authorized domains**, and configure verification/reset email templates.
+- Unverified accounts can play with coins but cannot deposit or withdraw. Seeded demo/staff accounts continue to use issued passwords.
+
+See [`docs/FIREBASE_AUTH_AND_DATA.md`](docs/FIREBASE_AUTH_AND_DATA.md) for the full identity flow, security model and production checklist.
+
 ## Demo access
 
 All seeded accounts use the password **`19X#2026`**.
@@ -160,9 +171,10 @@ The six live-casino titles are RNG tables built in-house, **not live-dealer feed
 
 ## Explicit limitations
 
-- **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Withdrawals are manual-review only: a Master Admin approves the request and records an external payment reference; automated payout execution is not implemented and `realMoneyEnabled` remains hard-locked.
+- **Sandbox financial rails.** Deposit requests, QR configuration, Master Admin verification and percentage bonuses are implemented and tested. Live collection is rejected unless `PAYMENTS_LIVE_ENABLED=true` and the operator has completed licensing, KYC/AML and payment onboarding. Firebase Authentication does not collect money; a PSP merchant account and signed webhooks are still required. Withdrawals are manual-review only: a Master Admin approves the request and records an external payment reference; automated payout execution is not implemented and `realMoneyEnabled` remains hard-locked.
 - **Manual KYC.** Identity verification is a manual review workflow. A production launch requires an approved KYC provider, encrypted document handling, sanctions/PEP screening and geo eligibility.
 - **Demo fantasy data.** Player pools, salaries and scoring lines are seeded demonstration data. Paid contests require an authorized player-stat feed and jurisdiction-specific fantasy rules.
+- **Firebase identity, PostgreSQL ledger.** Firebase Authentication is the player identity provider; PostgreSQL remains the authoritative ledger for balances, bets, rounds, deposits, withdrawals, KYC and audit. Firestore is intentionally not used for money. See `docs/FIREBASE_AUTH_AND_DATA.md`.
 - **No certified third-party provider games.** All 44 catalogue titles are original 19X RNG games. Certified 1xBet/provider parity, live-dealer feeds and independently tested game maths require provider contracts and certification; none are connected.
 - **Simplified table rules.** Blackjack offers hit/stand only (no double or split). Baccarat uses standard third-card rules with no commission on the banker bet. Hold'em is a player-vs-dealer RNG table, not a multiplayer poker room.
 - **Demo fixtures and demo settlement.** Sports fixtures and odds are seeded demonstration data. A server-side worker starts upcoming fixtures, finishes live fixtures after a simulated period, and settles 1X2 singles/accumulators with generated final scores. There is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
@@ -176,6 +188,8 @@ Smoke tests live in `scripts/`:
 
 ```bash
 node scripts/api-smoke.mjs
+node scripts/firebase-smoke.mjs
+node scripts/firebase-ui-smoke.mjs
 node scripts/all-games-smoke.mjs
 node scripts/all-games-ui-smoke.mjs
 node scripts/blackjack-smoke.mjs
@@ -187,7 +201,7 @@ node scripts/deposit-smoke.mjs
 node scripts/fantasy-smoke.mjs
 ```
 
-`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `all-games-smoke.mjs` plays all 44 catalogue games through the API and verifies settlement for each; `all-games-ui-smoke.mjs` loads every game page and plays a representative sample, including multi-step blackjack; `blackjack-smoke.mjs` checks deal, hit, stand, stale-hand refunds and double-settle rejection; `responsive-game-audit.mjs` checks all 44 game pages and the main lobby routes at five widths for horizontal overflow and console errors. `game-smoke.mjs` covers the original 11 titles; `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, invalid-game/stake responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `deposit-smoke.mjs` submits a sandbox QR request, approves it as Master Admin, verifies the tiered deposit bonus and both ledger entries, then tests player cancellation, admin rejection and the live-collection activation gate. `fantasy-smoke.mjs` covers lineup entry, scoring and settlement. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the coin reward flow.
+`api-smoke.mjs` exercises public bootstrap, login, player overview, wallet, game activity, dice, Mines start/cash-out, admin overview, network, accounts, audit, security, and system health. `firebase-smoke.mjs` creates a real Firebase test identity, exchanges its ID token for a server session, verifies welcome coins, re-login idempotency, unverified deposit blocking, existing-account takeover protection and invalid-token rejection; `firebase-ui-smoke.mjs` covers browser sign-in, registration, session restoration and the verification gate. `all-games-smoke.mjs` plays all 44 catalogue games through the API and verifies settlement for each; `all-games-ui-smoke.mjs` loads every game page and plays a representative sample, including multi-step blackjack; `blackjack-smoke.mjs` checks deal, hit, stand, stale-hand refunds and double-settle rejection; `responsive-game-audit.mjs` checks all 44 game pages and the main lobby routes at five widths for horizontal overflow and console errors. `game-smoke.mjs` covers the original 11 titles; `security-smoke.mjs` verifies anonymous/player/agent/master boundaries, the real-money lock, invalid-game/stake responses, and suspended login. `settlement-smoke.mjs` places singles and a two-fold accumulator, forces demo fixtures to completion, and verifies selection results, payouts and wallet balances. `deposit-smoke.mjs` submits a sandbox QR request, approves it as Master Admin, verifies the tiered deposit bonus and both ledger entries, then tests player cancellation, admin rejection and the live-collection activation gate. `fantasy-smoke.mjs` covers lineup entry, scoring and settlement. `referral-smoke.mjs <referral-code>` registers a referred player, completes a first round, and verifies the coin reward flow.
 
 The demo settlement worker runs every 60 seconds by default and is controlled by `DEMO_MATCH_MINUTES` (default 90), `DEMO_SETTLEMENT_INTERVAL_MS` (default 60000) and `DEMO_SETTLEMENT=off` in `backend/.env`.
 

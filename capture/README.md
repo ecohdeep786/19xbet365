@@ -19,4 +19,5 @@ Additional focused evidence:
 
 - `capture/live-audit-2026-11-25/` — real-user audit, deposit review, revenue/risk and expected-bonus evidence.
 - `capture/fantasy-audit/` — fantasy lobby, lineup builder, entry and admin operations.
+- `capture/firebase-audit/` — Firebase player sign-in, email-verification banner, deposit gate and registration evidence.
 - `capture/compliance-audit/` — KYC submission, approval, withdrawal and mark-paid evidence.

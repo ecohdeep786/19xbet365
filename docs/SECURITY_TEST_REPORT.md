@@ -17,6 +17,10 @@ Run: `node scripts/security-smoke.mjs`
 | Agent deposit review queue | PASS | `403` “Master Admin authorization is required.” |
 | Master deposit review queue | PASS | `200`, queue available |
 | Unknown game ID | PASS | `404` not found |
+| Invalid Firebase token | PASS | `401 invalid_firebase_token` (`firebase-smoke.mjs`) |
+| Unverified Firebase email links to an existing player | PASS | `403 email_verification_required` |
+| Unverified Firebase email adds coins | PASS | `403 email_verification_required` |
+| Staff email via Firebase auto-link | PASS | `403 staff_firebase_link_forbidden` (`firebase-smoke.mjs`) |
 | Invalid stake | PASS | `400` stake validation |
 | Settled blackjack hand replay | PASS | `409` round already closed (`blackjack-smoke.mjs`) |
 | Master tries to enable real money | PASS | `403` “Real-money rails are hard-disabled…” |
@@ -100,8 +104,10 @@ Additional controls:
 | Medium | No CSRF token; SameSite=Lax protects most cross-site POSTs but is not a complete CSRF strategy | Add CSRF tokens/origin checks before production |
 | Medium | Rate limits are in-memory and single-process | Use Redis-backed limiter across instances |
 | Medium | No MFA challenge; 2FA is only a preference | Add TOTP/WebAuthn challenge and recovery codes |
-| Medium | Password reset is notification-only, not email-verified | Integrate transactional mail and single-use expiry tokens |
-| Medium | No email/phone verification | Add verification before enabling withdrawals |
+| Medium | Password reset is notification-only for legacy seeded accounts; Firebase accounts use secure email reset | Keep the legacy fallback limited to demo/staff accounts; add transactional mail for staff recovery |
+| Medium | Firebase token revocation checks require optional Admin credentials | Configure `FIREBASE_SERVICE_ACCOUNT_JSON` and enforce revocation checks before high-risk money flows |
+| Medium | Fixed Firebase web API key configuration relies on console restrictions, not secrecy | Restrict by HTTP referrer, configure authorized domains and App Check; monitor Identity Toolkit quotas |
+| Medium | npm audit reports known transitive issues in the optional Firestore/grpc tree and React Router 6 | Firestore is not imported by the app; plan a React Router 7 migration and refresh Firebase dependencies before launch |
 | Low | CSP disabled in Helmet configuration | Define CSP for production assets |
 | Low | Session cookie lacks explicit `domain` and `__Host-` prefix | Use `__Host-xbet_session` on HTTPS |
 | Low | Audit hash chain is application-level plus trigger; DB superuser can still disable triggers | Use restricted app DB role, immutable backups, external anchoring for high assurance |
@@ -119,4 +125,5 @@ Additional controls:
 6. Mail/SMS provider with verified templates.
 7. Backups/PITR and restore drills.
 8. KYC/AML/payment controls before any real-money capability.
-9. External penetration test and responsible disclosure channel.
+9. Firebase authorized domains, API-key referrer restrictions, email templates, enumeration protection, MFA and App Check for added surfaces.
+10. External penetration test and responsible disclosure channel.

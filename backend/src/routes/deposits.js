@@ -54,6 +54,9 @@ router.get("/", requireAuth, async (req, res, next) => {
 
 router.post("/", requireAuth, async (req, res, next) => {
   try {
+    if (req.account.emailVerified === false) {
+      throw Object.assign(new Error("Verify your email address before adding coins. Resend the verification link from your account."), { status: 403, code: "email_verification_required" });
+    }
     const config = await getDepositSettings();
     assertDepositAvailable(config);
     const amount = round2(Number(req.body?.amount));

@@ -61,6 +61,10 @@ export const api = {
     email: string; password: string; displayName: string; username?: string;
     referralCode?: string; marketingOptIn?: boolean;
   }) => request<{ user: Account }>("/auth/register", { method: "POST", body: json(payload) }),
+  firebaseLogin: (idToken: string, payload: { displayName?: string; referralCode?: string; marketingOptIn?: boolean } = {}) =>
+    request<{ user: Account; isNew: boolean; emailVerified: boolean }>("/auth/firebase", {
+      method: "POST", body: json({ idToken, ...payload })
+    }),
   logout: () => request<{ ok: boolean }>("/auth/logout", { method: "POST" }),
   forgotPassword: (email: string) =>
     request<{ ok: boolean; message: string }>("/auth/forgot-password", { method: "POST", body: json({ email }) }),

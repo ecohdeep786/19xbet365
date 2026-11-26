@@ -7,6 +7,7 @@ import {
 import { useAuth } from "../../state/AuthContext";
 import { useData } from "../../state/DataContext";
 import { Avatar, Badge, ProgressBar } from "../../components/UI";
+import { EmailVerificationBanner } from "../../components/EmailVerificationBanner";
 import { classNames, vc } from "../../lib/format";
 
 const LINKS = [
@@ -85,7 +86,7 @@ export function AccountLayout() {
           </div>
           <div className="account-nav-note"><ShieldCheck size={15} /> Sandbox coin top-ups. Live cash-out is disabled.</div>
         </aside>
-        <main className="account-main"><Outlet /></main>
+        <main className="account-main"><EmailVerificationBanner /><Outlet /></main>
       </div>
     </div>
   );

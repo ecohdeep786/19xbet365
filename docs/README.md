@@ -14,6 +14,7 @@
 - [Component Inventory](COMPONENT_INVENTORY.md)
 - [Route Inventory](ROUTE_INVENTORY.md)
 - [Game Catalogue](GAME_CATALOGUE.md)
+- [Firebase Authentication and Data Architecture](FIREBASE_AUTH_AND_DATA.md)
 - [Admin Architecture](ADMIN_ARCHITECTURE.md)
 - [Database Architecture](DATABASE_ARCHITECTURE.md)
 - [API Specification](API_SPECIFICATION.md)

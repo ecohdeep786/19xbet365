@@ -1,7 +1,7 @@
 {
-  "email": "audit.1795634075668@19xbet365.test",
+  "email": "audit.1795711547718@19xbet365.test",
   "password": "Audit#2026",
-  "reference": "AUD34075668",
+  "reference": "AUD11547718",
   "state": {
     "startBalance": "10,500.00 coins",
     "fantasyRoute": "http://127.0.0.1:4000/#/fantasy",
@@ -86,7 +86,7 @@
     {
       "name": "deposit request submitted",
       "pass": true,
-      "detail": "AUD34075668"
+      "detail": "AUD11547718"
     },
     {
       "name": "responsible-play limit saves",
@@ -111,7 +111,7 @@
     {
       "name": "master admin sees deposit request",
       "pass": true,
-      "detail": "AUD34075668"
+      "detail": "AUD11547718"
     },
     {
       "name": "master admin approves deposit",
@@ -121,7 +121,7 @@
     {
       "name": "deposit appears in player ledger",
       "pass": true,
-      "detail": "AUD34075668"
+      "detail": "AUD11547718"
     },
     {
       "name": "final balance includes deposit/bonus",

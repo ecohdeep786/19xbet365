@@ -26,6 +26,7 @@ Errors: `{ "error": "code", "message": "human-readable" }`.
 | --- | --- | --- | --- |
 | POST | `/auth/register` | none | `{email,password,displayName,username?,referralCode?,marketingOptIn}`; creates player + 10,500 coins welcome allocation + session |
 | POST | `/auth/login` | none | `{email,password}`; session cookie |
+| POST | `/auth/firebase` | none | `{idToken,displayName?,referralCode?,marketingOptIn?}`; verifies Firebase ID token, creates/links a player and issues the server session |
 | POST | `/auth/logout` | session | revokes current session |
 | GET | `/auth/me` | optional | current user or null |
 | POST | `/auth/forgot-password` | none | `{email}`; records notification request (no mail provider) |

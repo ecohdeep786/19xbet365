@@ -26,10 +26,11 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Delegated Admin workflows | PASS | scope/permission tests in `security-smoke.mjs` |
 | Network isolation | PASS | agent sees 9 accounts, no master/other admin |
 | Database persistence | PASS | PostgreSQL schema/seed, wallet/round/bet records |
-| Auth/authorization | PASS | session, RBAC, scope, trigger tests |
+| Auth/authorization | PASS | existing session/RBAC plus server-verified Firebase identity exchange; unverified email cannot link to an existing account |
+| Firebase player identity | PASS | email/password sign-up/sign-in, server session exchange, session restoration, welcome ledger and verification gate; `firebase-smoke.mjs` / `firebase-ui-smoke.mjs` |
 | Security tests | PASS with findings | `SECURITY_TEST_REPORT.md` |
 | Production build | PASS | `tsc --noEmit && vite build` |
-| Performance | PARTIAL | ~183 KB gzip JS after all-game and blackjack additions; no load test; illustrated SVG covers add no image payloads |
+| Performance | PARTIAL | ~186 KB gzip initial JS after Firebase additions; Firebase loaded lazily; no load test; illustrated SVG covers add no image payloads |
 | Critical defects | NONE KNOWN | recent bug fixes covered in E2E report |
 | Restricted functionality disabled | PASS | money locked; no certified provider session claimed |
 | Legal/licensing satisfied | FAIL / BLOCKED | no licence; no real-money operation |
@@ -40,6 +41,7 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | --- | --- |
 | Sandbox coin demo/public preview | **GO** |
 | Player account + coin wallet | **GO** (with security hardening) |
+| Firebase player authentication | **GO** for player identity; PostgreSQL remains the wallet authority. Add authorized domains and App Check before public traffic. |
 | 19X Originals | **GO** for demo; all 44 catalogue titles playable; independent certification not done |
 | 1X2 demo sportsbook settlement | **GO** for demo; results are server-generated demonstration data |
 | Manual QR deposit review | **GO** for sandbox; **NO-GO** for live collection until merchant QR, licensing, KYC/AML, `PAYMENTS_LIVE_ENABLED` and reconciliation are approved |
@@ -65,6 +67,8 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 10. External penetration test and legal review.
 11. Multi-market sports model and settlement worker if claiming that parity.
 12. Provider adapter/certification if certified or live-dealer parity is claimed; the current catalogue is explicitly 19X Originals.
+13. Firebase authorized domains, API-key referrer restrictions, email templates, enumeration protection and App Check for added Firebase surfaces.
+14. Payment service provider (PSP) merchant account with signed webhooks, reconciliation, KYC/AML and jurisdiction-specific gambling approval before any live money.
 
 ## Metrics and SLO recommendations
 

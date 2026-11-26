@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 import { Check, KeyRound, Laptop, LockKeyhole, LogOut, ShieldCheck, Smartphone, X } from "lucide-react";
 import { api, isOfflineError } from "../../lib/api";
 import type { SessionInfo } from "../../types";
@@ -89,8 +90,10 @@ export function AccountSecurity() {
       </div>
       <div className="security-grid">
         <section className="panel security-card">
-          <div className="security-card-head"><span className="security-icon"><KeyRound size={19} /></span><div><h3>Password</h3><span>Last changed when you set your account password.</span></div><Badge tone="outline">Protected</Badge></div>
-          {!showForm ? (
+          <div className="security-card-head"><span className="security-icon"><KeyRound size={19} /></span><div><h3>Password</h3><span>{user?.authProvider === "firebase" ? "Managed by Firebase secure sign-in." : "Last changed when you set your account password."}</span></div><Badge tone="outline">{user?.authProvider === "firebase" ? "Firebase" : "Protected"}</Badge></div>
+          {user?.authProvider === "firebase" ? (
+            <div className="security-card-body"><p>Your password is managed by Firebase Authentication. Use the secure email reset flow to choose a new password.</p><Link to="/forgot-password" className="btn btn-secondary btn-sm">Send reset link</Link></div>
+          ) : !showForm ? (
             <div className="security-card-body"><p>Use at least 8 characters with a letter and a number. Changing your password signs out other sessions.</p><Button variant="secondary" size="sm" onClick={() => setShowForm(true)}>Change password</Button></div>
           ) : (
             <form className="security-form" onSubmit={changePassword}>

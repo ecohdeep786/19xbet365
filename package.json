@@ -11,6 +11,8 @@
     "build": "npm --prefix frontend run build",
     "start": "npm --prefix backend start",
     "smoke:api": "node scripts/api-smoke.mjs",
+    "smoke:firebase": "node scripts/firebase-smoke.mjs",
+    "smoke:firebase-ui": "node scripts/firebase-ui-smoke.mjs",
     "smoke:games": "node scripts/game-smoke.mjs",
     "smoke:referral": "node scripts/referral-smoke.mjs",
     "smoke:security": "node scripts/security-smoke.mjs",

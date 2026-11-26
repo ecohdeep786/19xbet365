@@ -7,6 +7,7 @@ import { useAuth } from "../state/AuthContext";
 import { useToast } from "../state/ToastContext";
 import { Button, Field, Input } from "../components/UI";
 import { Logo } from "../components/Layout";
+import { googleSignInEnabled } from "../lib/firebase";
 
 function AuthShell({ children, title, kicker, body }: { children: ReactNode; title: string; kicker: string; body: string }) {
   return (
@@ -41,7 +42,7 @@ function AuthShell({ children, title, kicker, body }: { children: ReactNode; tit
 }
 
 export function Login() {
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const { push } = useToast();
   const navigate = useNavigate();
   const location = useLocation() as { state?: { from?: string } };
@@ -49,6 +50,7 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const submit = async (event: FormEvent) => {
@@ -64,6 +66,17 @@ export function Login() {
     } finally { setBusy(false); }
   };
 
+  const google = async () => {
+    setGoogleBusy(true); setError(null);
+    try {
+      const user = await loginWithGoogle();
+      push(`Welcome back, ${user.displayName.split(" ")[0]}.`, "success");
+      navigate(user.role === "player" ? (location.state?.from || "/account") : "/admin", { replace: true });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Google sign-in failed.");
+    } finally { setGoogleBusy(false); }
+  };
+
   const fillDemo = (kind: "player" | "admin") => {
     setEmail(kind === "player" ? "player@19xbet365.test" : "admin@19xbet365.test");
     setPassword("19X#2026");
@@ -71,6 +84,12 @@ export function Login() {
 
   return (
     <AuthShell kicker="Welcome back" title="Sign in to 19XBET365." body="Your wallet, bets, saved games, and activity are waiting.">
+      {googleSignInEnabled && (
+        <>
+          <Button variant="secondary" size="lg" loading={googleBusy} onClick={google} className="full-btn">Continue with Google</Button>
+          <div className="auth-divider"><span>or use your email</span></div>
+        </>
+      )}
       <form className="auth-form" onSubmit={submit}>
         <Field label="Email or username" required>
           <div className="input-with-icon"><Mail size={16} /><Input type="text" autoComplete="username" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" required /></div>
@@ -154,27 +173,30 @@ export function Register() {
 }
 
 export function ForgotPassword() {
+  const { requestPasswordReset } = useAuth();
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const submit = async (event: FormEvent) => {
     event.preventDefault();
     setBusy(true); setError(null);
     try {
-      await apiForgot(email);
+      const result = await requestPasswordReset(email);
+      setMessage(result.message);
       setSent(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Request failed.");
     } finally { setBusy(false); }
   };
   return (
-    <AuthShell kicker="Account recovery" title="Reset your access." body="Enter the email on your account. In this demonstration, reset requests appear as an account notification.">
+    <AuthShell kicker="Account recovery" title="Reset your access." body="Enter the email on your account. Firebase accounts receive a secure reset link; seeded demo accounts receive an in-app notification.">
       {sent ? (
         <div className="success-panel">
           <span className="success-icon"><Check size={22} /></span>
           <h3>Request received</h3>
-          <p>If that email is registered, a password-reset request has been added to the account notifications. Contact support if you need manual verification.</p>
+          <p>{message || "If that email is registered, reset instructions are on the way."}</p>
           <Link to="/login" className="btn btn-secondary">Back to sign in</Link>
         </div>
       ) : (
@@ -189,11 +211,4 @@ export function ForgotPassword() {
       <p className="auth-switch">Remembered it? <Link to="/login">Return to sign in</Link></p>
     </AuthShell>
   );
-}
-
-async function apiForgot(email: string) {
-  const res = await fetch("/api/auth/forgot-password", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email }) });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.message || "Request failed.");
-  return data;
 }

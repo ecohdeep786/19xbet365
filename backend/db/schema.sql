@@ -32,6 +32,9 @@ CREATE TABLE IF NOT EXISTS accounts (
   avatar_seed       TEXT NOT NULL DEFAULT '19x',
   two_factor_enabled BOOLEAN NOT NULL DEFAULT false,
   marketing_opt_in  BOOLEAN NOT NULL DEFAULT false,
+  firebase_uid      TEXT,
+  auth_provider     TEXT NOT NULL DEFAULT 'password',
+  email_verified    BOOLEAN NOT NULL DEFAULT true,
   suspended_reason  TEXT,
   last_login_at     TIMESTAMPTZ,
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -40,6 +43,12 @@ CREATE TABLE IF NOT EXISTS accounts (
 CREATE UNIQUE INDEX IF NOT EXISTS accounts_email_lower_idx ON accounts (lower(email));
 CREATE UNIQUE INDEX IF NOT EXISTS accounts_username_lower_idx ON accounts (lower(username));
 CREATE INDEX IF NOT EXISTS accounts_parent_idx ON accounts (parent_id);
+
+-- Online identity linking (idempotent for existing databases).
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS firebase_uid TEXT;
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS auth_provider TEXT NOT NULL DEFAULT 'password';
+ALTER TABLE accounts ADD COLUMN IF NOT EXISTS email_verified BOOLEAN NOT NULL DEFAULT true;
+CREATE UNIQUE INDEX IF NOT EXISTS accounts_firebase_uid_idx ON accounts (firebase_uid) WHERE firebase_uid IS NOT NULL;
 CREATE INDEX IF NOT EXISTS accounts_role_idx ON accounts (role_code);
 CREATE INDEX IF NOT EXISTS accounts_status_idx ON accounts (status);
 ALTER TABLE accounts ALTER COLUMN avatar_seed SET DEFAULT '19x';

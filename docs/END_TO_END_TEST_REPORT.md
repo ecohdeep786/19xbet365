@@ -8,6 +8,8 @@
 | Script | Result | Evidence |
 | --- | --- | --- |
 | `scripts/api-smoke.mjs` | Passed: health, bootstrap, login, overview, transactions, activity, dice, Mines start, admin overview/network/accounts/audit/security/system | console output |
+| `scripts/firebase-smoke.mjs` | Passed: real Firebase identity → server session, 10,500 welcome coins, idempotent re-login, unverified deposit gate, takeover protection, invalid-token rejection | console output |
+| `scripts/firebase-ui-smoke.mjs` | Passed: Firebase sign-in, verification banner, deposit gate, session restoration after server logout, Firebase registration, seeded password login | `capture/firebase-audit/` |
 | `scripts/all-games-smoke.mjs` | Passed: **44/44 catalogue games** played through the API and settled; zero failures; wallet reconciled | console output |
 | `scripts/all-games-ui-smoke.mjs` | Passed: **44/44 game pages** loaded with no provider gate; representative sample played across slots, virtuals, instant, tables, crash and blackjack; zero console/page errors | console output |
 | `scripts/blackjack-smoke.mjs` | Passed: deal, hit, stand, dealer draws to 17, settled-hand replay rejected, stale hand refunded | console output |
@@ -22,7 +24,7 @@
 | `scripts/compliance-ui-audit.mjs` | Passed: KYC submission, Master approval, withdrawal request, approval and mark-paid | `capture/compliance-audit/` |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 coins; referee balance reflects reward | console output |
 | `scripts/capture-screenshots.mjs` | Passed: product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,659 modules |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,673 modules; ~186 KB gzip initial JS, Firebase split into lazy chunks |
 | Playwright real-user journey | Passed | 27/27 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, deposit, responsible play, support, mobile drawer, auth, admin deposit review, fantasy route and KYC/withdrawal endpoints |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
 | Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, fantasy, login, withdraw and deposit; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
@@ -46,11 +48,13 @@ The demo database was reseeded after this verification pass, so the handoff star
 - Opened `/register`, filled display name, email, password and confirm, accepted age consent.
 - Server created a player with **10,500 coins** welcome allocation; session cookie set.
 - Redirected to the account dashboard with 10,500 balance, one welcome transaction, Level 1, 0 rounds.
+- Firebase registration was separately tested through the real UI: Firebase identity creation, backend player creation, verification banner and cleanup.
 - Password validation rejects short/weak/mismatched input in both UI and server.
 
 ### 3. Existing player
 
-- Logged in as `player@19xbet365.test` / `19X#2026`.
+- Logged in as `player@19xbet365.test` / `19X#2026` (seeded password path).
+- Firebase email/password sign-in verified separately: account creation, welcome allocation, verification banner, deposit gate and session restoration after the server session ended.
 - Dashboard stats, wallet ledger, bets, game activity, notifications, security, referrals and responsible-play pages loaded.
 - Placed a cricket 1X2 bet at 1.28 odds; balance deducted; bet appeared in My Bets with correct stake/odds/return; toast confirmed server response.
 - Tested Dice Roll: server returned a valid roll, balance deducted, round recorded.
