@@ -8,6 +8,9 @@ import { FantasyPage } from "./pages/Fantasy";
 import { FantasyContestPage } from "./pages/FantasyContest";
 import { Casino, LiveCasino, Slots, InstantGames } from "./pages/Casino";
 import { Promotions, Tournaments } from "./pages/Promotions";
+import { GameCategoryPage } from "./pages/GameCategory";
+import { ResultsPage } from "./pages/Results";
+import { StatisticsPage } from "./pages/Statistics";
 import { SearchPage } from "./pages/Search";
 import { GamePage } from "./pages/game/GamePage";
 import { Login, Register, ForgotPassword } from "./pages/Auth";
@@ -80,6 +83,17 @@ export default function App() {
           <Route path="/live-casino" element={<LiveCasino />} />
           <Route path="/slots" element={<Slots />} />
           <Route path="/instant" element={<InstantGames />} />
+          <Route path="/bingo" element={<GameCategoryPage kind="bingo" />} />
+          <Route path="/poker" element={<GameCategoryPage kind="poker" />} />
+          <Route path="/tv-games" element={<GameCategoryPage kind="tv" />} />
+          <Route path="/lotto" element={<GameCategoryPage kind="lotto" />} />
+          <Route path="/toto" element={<GameCategoryPage kind="toto" />} />
+          <Route path="/scratch-cards" element={<GameCategoryPage kind="scratch" />} />
+          <Route path="/hunting-fishing" element={<GameCategoryPage kind="fishing" />} />
+          <Route path="/other-games" element={<GameCategoryPage kind="other" />} />
+          <Route path="/quick-play" element={<GameCategoryPage kind="quick" />} />
+          <Route path="/results" element={<ResultsPage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/tournaments" element={<Tournaments />} />
           <Route path="/search" element={<SearchPage />} />

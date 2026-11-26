@@ -1,6 +1,6 @@
 # Visual evidence
 
-`capture/product/` contains **42 screenshots** of the 19xbet365 production build, captured by `scripts/capture-screenshots.mjs` in headless Edge at:
+`capture/product/` contains **65 screenshots** of the 19xbet365 production build, captured by `scripts/capture-screenshots.mjs` in headless Edge at:
 
 - **1440 × 900** desktop for public, fantasy, player, game, compliance and admin views;
 - **390 × 844** mobile for home, sports, casino, fantasy, game, wallet, deposit, login and admin views.
@@ -19,5 +19,6 @@ Additional focused evidence:
 
 - `capture/live-audit-2026-11-25/` — real-user audit, deposit review, revenue/risk and expected-bonus evidence.
 - `capture/fantasy-audit/` — fantasy lobby, lineup builder, entry and admin operations.
+- `capture/categories/` — Bingo, Poker, TV Games, Lotto, Toto, Scratch Cards, Hunting & Fishing, Other Games, Quick Play, Results and Statistics pages.
 - `capture/firebase-audit/` — Firebase player sign-in, email-verification banner, deposit gate and registration evidence.
 - `capture/compliance-audit/` — KYC submission, approval, withdrawal and mark-paid evidence.

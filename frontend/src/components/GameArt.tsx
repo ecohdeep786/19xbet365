@@ -411,7 +411,15 @@ const SCENES: Record<string, (props: SceneProps) => ReactNode> = {
   racing: RacingScene,
   virtuals: RacingScene,
   "live-casino": LiveScene,
-  instant: InstantScene
+  instant: InstantScene,
+  bingo: LuckyScene,
+  poker: CardsScene,
+  tv: WheelScene,
+  toto: InstantScene,
+  lotto: LuckyScene,
+  scratch: InstantScene,
+  fishing: PlinkoScene,
+  other: CrashScene
 };
 
 const GAME_SCENES: Record<string, (props: SceneProps) => ReactNode> = {
@@ -421,7 +429,18 @@ const GAME_SCENES: Record<string, (props: SceneProps) => ReactNode> = {
   "dream-wheel-live": WheelScene,
   "holdem-prime": CardsScene,
   "sicbo-nova": DiceScene,
-  "speed-baccarat": CardsScene
+  "speed-baccarat": CardsScene,
+  "bingo-bonanza": LuckyScene,
+  "bingo-neon": LuckyScene,
+  "video-poker-deluxe": CardsScene,
+  "tv-wheelbet": WheelScene,
+  "war-of-elements": CardsScene,
+  "toto-fifteen": InstantScene,
+  "lotto-636": LuckyScene,
+  "scratch-gold": InstantScene,
+  "scratch-lucky": InstantScene,
+  "reef-hunter": PlinkoScene,
+  "shadow-hunt": PlinkoScene
 };
 
 export function GameArt({ game, className }: { game: Game; className?: string }) {

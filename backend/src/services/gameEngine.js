@@ -228,6 +228,44 @@ function bestSeven(cards) {
   return best;
 }
 
+export function videoPokerScore(cards) {
+  const best = evaluateFive(cards);
+  const [category, high] = best.score;
+  let multiplier = 0;
+  let label = best.label;
+  if (category === 8) multiplier = high === 14 ? 250 : 50;
+  else if (category === 7) multiplier = 25;
+  else if (category === 6) multiplier = 9;
+  else if (category === 5) multiplier = 6;
+  else if (category === 4) multiplier = 4;
+  else if (category === 3) multiplier = 3;
+  else if (category === 2) multiplier = 2;
+  else if (category === 1) {
+    const pairRank = best.score[1];
+    if (pairRank >= 11) {
+      multiplier = 1;
+      label = "Jacks or better";
+    } else {
+      label = "Low pair";
+    }
+  }
+  return { best, label, multiplier, win: multiplier > 0 };
+}
+
+export function createVideoPokerRound() {
+  const deck = makeShoe(1);
+  const hand = [deck.pop(), deck.pop(), deck.pop(), deck.pop(), deck.pop()];
+  return { deck, hand };
+}
+
+export function drawVideoPoker(round, heldIndexes) {
+  const held = [...new Set(Array.isArray(heldIndexes) ? heldIndexes.map(Number) : [])]
+    .filter((index) => Number.isInteger(index) && index >= 0 && index < 5);
+  const hand = round.hand.map((card, index) => held.includes(index) ? card : round.deck.pop());
+  const score = videoPokerScore(hand);
+  return { hand, held, ...score };
+}
+
 export function playInstant(gameId, bet, params = {}) {
   switch (gameId) {
     case "dice-roll": {
@@ -383,7 +421,9 @@ export function playInstant(gameId, bet, params = {}) {
         summary: `${matches} of 3 numbers matched — ${multiplier > 0 ? `${multiplier.toFixed(2)}x` : "no win"}`
       };
     }
-    case "scratch-nova": {
+    case "scratch-nova":
+    case "scratch-gold":
+    case "scratch-lucky": {
       const symbols = Array.from({ length: 9 }, () => pickWeighted(SLOT_SYMBOLS.map(([symbol, weight]) => [symbol, weight])));
       const counts = symbols.reduce((acc, symbol) => ({ ...acc, [symbol]: (acc[symbol] || 0) + 1 }), {});
       const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
@@ -502,6 +542,128 @@ export function playInstant(gameId, bet, params = {}) {
         multiplier,
         outcome: { game: gameId, player, dealer, board, playerHand: playerBest.label, dealerHand: dealerBest.label, result: comparison > 0 ? "win" : comparison === 0 ? "push" : "loss", multiplier, win: comparison > 0, push: comparison === 0 },
         summary: `${playerBest.label} vs ${dealerBest.label} — ${comparison > 0 ? "win" : comparison === 0 ? "push" : "dealer wins"}`
+      };
+    }
+    case "bingo-bonanza":
+    case "bingo-neon": {
+      const ticket = shuffle(Array.from({ length: 30 }, (_, index) => index + 1)).slice(0, 9);
+      const grid = [ticket.slice(0, 3), ticket.slice(3, 6), ticket.slice(6, 9)];
+      const draw = shuffle(Array.from({ length: 30 }, (_, index) => index + 1)).slice(0, 12);
+      const marked = new Set(draw);
+      const rowLines = grid.filter((row) => row.every((number) => marked.has(number))).length;
+      const colLines = [0, 1, 2].filter((column) => grid.every((row) => marked.has(row[column]))).length;
+      const diagLines = (grid.every((row, index) => marked.has(row[index])) ? 1 : 0)
+        + (grid.every((row, index) => marked.has(row[2 - index])) ? 1 : 0);
+      const lines = rowLines + colLines + diagLines;
+      const fullHouse = grid.flat().every((number) => marked.has(number));
+      const multiplier = fullHouse ? 5000 : lines >= 2 ? 4 : lines === 1 ? 1.5 : 0;
+      return {
+        win: multiplier > 0,
+        multiplier,
+        outcome: { game: gameId, grid, draw, marked: [...marked], lines, fullHouse, multiplier, win: multiplier > 0 },
+        summary: fullHouse ? "Full house — 5,000x" : lines > 0 ? `${lines} bingo line${lines === 1 ? "" : "s"} — ${multiplier}x` : "No completed line"
+      };
+    }
+    case "tv-wheelbet": {
+      const bet = ["red", "black", "green"].includes(params.bet) ? params.bet : "red";
+      const number = randomInt(0, 36);
+      const reds = new Set([1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]);
+      const color = number === 0 ? "green" : reds.has(number) ? "red" : "black";
+      const win = bet === "green" ? number === 0 : number !== 0 && color === bet;
+      const multiplier = win ? (bet === "green" ? 36 : 2) : 0;
+      return {
+        win,
+        multiplier,
+        outcome: { game: gameId, bet, number, color, multiplier, win },
+        summary: `Wheel ${number} ${color} — ${win ? "winning call" : "no win"}`
+      };
+    }
+    case "war-of-elements": {
+      const elements = [
+        { key: "fire", label: "Fire", payout: 1.8 },
+        { key: "water", label: "Water", payout: 3.5 },
+        { key: "earth", label: "Earth", payout: 7 },
+        { key: "air", label: "Air", payout: 25 }
+      ];
+      const pick = Math.min(3, Math.max(0, Number(params.element ?? 0)));
+      const winner = pickWeighted(elements.map((element, index) => [index, 1 / element.payout]));
+      const win = winner === pick;
+      const multiplier = win ? elements[pick].payout : 0;
+      return {
+        win,
+        multiplier,
+        outcome: { game: gameId, pick, winner, elements, multiplier, win },
+        summary: `${elements[winner].label} won — ${win ? `${multiplier.toFixed(2)}x` : "no win"}`
+      };
+    }
+    case "toto-fifteen": {
+      const picks = Array.isArray(params.picks) ? params.picks.map(Number) : [];
+      if (picks.length !== 15 || picks.some((pick) => ![0, 1, 2].includes(pick))) {
+        throw Object.assign(new Error("Choose home, draw or away for all 15 fixtures."), { status: 400, code: "invalid_toto_picks" });
+      }
+      const results = Array.from({ length: 15 }, () => randomInt(0, 2));
+      const correct = picks.reduce((total, pick, index) => total + (pick === results[index] ? 1 : 0), 0);
+      const payouts = { 15: 120000, 14: 5000, 13: 800, 12: 150, 11: 35, 10: 12, 9: 5, 8: 2.5, 7: 1.5, 6: 1 };
+      const multiplier = payouts[correct] || 0;
+      return {
+        win: multiplier > 0,
+        multiplier,
+        outcome: { game: gameId, picks, results, correct, multiplier, win: multiplier > 0 },
+        summary: `${correct} of 15 correct — ${multiplier > 0 ? `${multiplier.toFixed(2)}x` : "no prize"}`
+      };
+    }
+    case "lotto-636": {
+      const picks = Array.isArray(params.picks) ? [...new Set(params.picks.map(Number).filter((number) => number >= 1 && number <= 36))] : [];
+      if (picks.length !== 6) throw Object.assign(new Error("Pick six different numbers from 1 to 36."), { status: 400, code: "invalid_lotto_picks" });
+      const draw = shuffle(Array.from({ length: 36 }, (_, index) => index + 1)).slice(0, 6);
+      const matches = picks.filter((number) => draw.includes(number)).length;
+      const payouts = { 6: 50000, 5: 1000, 4: 50, 3: 5, 2: 1.5 };
+      const multiplier = payouts[matches] || 0;
+      return {
+        win: multiplier > 0,
+        multiplier,
+        outcome: { game: gameId, picks, draw, matches, multiplier, win: multiplier > 0 },
+        summary: `${matches} of 6 matched — ${multiplier > 0 ? `${multiplier}x` : "no prize"}`
+      };
+    }
+    case "reef-hunter": {
+      const targets = [
+        { key: "sardine", label: "Sardine", payout: 2 },
+        { key: "clownfish", label: "Clownfish", payout: 4 },
+        { key: "turtle", label: "Sea Turtle", payout: 7 },
+        { key: "ray", label: "Manta Ray", payout: 12 },
+        { key: "shark", label: "Reef Shark", payout: 25 },
+        { key: "golden", label: "Golden Marlin", payout: 50 }
+      ];
+      const pick = Math.min(targets.length - 1, Math.max(0, Number(params.target ?? 0)));
+      const winner = pickWeighted(targets.map((target, index) => [index, 1 / target.payout]));
+      const win = winner === pick;
+      const multiplier = win ? targets[pick].payout : 0;
+      return {
+        win,
+        multiplier,
+        outcome: { game: gameId, pick, winner, targets, multiplier, win },
+        summary: `${targets[winner].label} caught — ${win ? `${multiplier}x` : "no catch"}`
+      };
+    }
+    case "shadow-hunt": {
+      const targets = [
+        { key: "rabbit", label: "Rabbit", payout: 2 },
+        { key: "fox", label: "Fox", payout: 4 },
+        { key: "boar", label: "Boar", payout: 7 },
+        { key: "stag", label: "Stag", payout: 12 },
+        { key: "wolf", label: "Wolf", payout: 25 },
+        { key: "eagle", label: "Golden Eagle", payout: 50 }
+      ];
+      const pick = Math.min(targets.length - 1, Math.max(0, Number(params.target ?? 0)));
+      const winner = pickWeighted(targets.map((target, index) => [index, 1 / target.payout]));
+      const win = winner === pick;
+      const multiplier = win ? targets[pick].payout : 0;
+      return {
+        win,
+        multiplier,
+        outcome: { game: gameId, pick, winner, targets, multiplier, win },
+        summary: `${targets[winner].label} tracked — ${win ? `${multiplier}x` : "no catch"}`
       };
     }
     default:

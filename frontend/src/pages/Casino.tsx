@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Cherry, CircleDot, Club, Diamond, Dices, Flag, Flame, Grid3X3,
@@ -18,8 +18,8 @@ const COPY: Record<CasinoMode, { kicker: string; title: string; body: string; st
   casino: {
     kicker: "The casino lobby",
     title: "The casino lobby. All in one board.",
-    body: "All 44 catalogue titles are playable 19X Originals. Each game is generated and settled on our servers; nothing pretends to be a certified live feed.",
-    stat: "44 playable originals"
+    body: "All 55 catalogue titles are playable 19X Originals. Each game is generated and settled on our servers; nothing pretends to be a certified live feed.",
+    stat: "55 playable originals"
   },
   live: {
     kicker: "Live casino",
@@ -37,7 +37,7 @@ const COPY: Record<CasinoMode, { kicker: string; title: string; body: string; st
     kicker: "19X Originals",
     title: "Instant games. Real records.",
     body: "Crash, Mines, Plinko, Dice, Wheel, Coin Flip, Hi-Lo, Lucky Ten, Keno, Scratch, Limbo, Tower, virtuals, slots and RNG tables. Every round is server-generated.",
-    stat: "44 playable originals"
+    stat: "55 playable originals"
   }
 };
 
@@ -237,7 +237,7 @@ export function CasinoPage({ mode = "casino" }: { mode?: CasinoMode }) {
           <div className="panel lobby-info">
             <span className="eyebrow"><Dices size={13} /> What is playable?</span>
             <h3>Every catalogue title is a 19X Original</h3>
-            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play all 44 titles immediately with coins.</p>
+            <p><strong>19X Originals</strong> are built and settled by our game engine. You can play all 55 titles immediately with coins.</p>
             <p>Certified third-party provider games and live-dealer feeds are not connected. Game pages never claim provider certification they do not have.</p>
             <Link to="/help/games-and-providers" className="text-btn">Read about game integrity <ArrowRight size={14} /></Link>
           </div>

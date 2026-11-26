@@ -58,6 +58,8 @@ export interface Match {
   minute: string | null;
   scoreHome: string | null;
   scoreAway: string | null;
+  resultHome?: number | null;
+  resultAway?: number | null;
   odds: { home: number | null; draw: number | null; away: number | null };
   featured: boolean;
   demo: boolean;
@@ -76,7 +78,15 @@ export type GameCategory =
   | "racing"
   | "slots-provider"
   | "live-casino"
-  | "virtuals";
+  | "virtuals"
+  | "bingo"
+  | "poker"
+  | "tv"
+  | "lotto"
+  | "toto"
+  | "scratch"
+  | "fishing"
+  | "other";
 
 export interface GameTheme {
   from: string;

@@ -10,7 +10,7 @@ import { Button } from "../../components/UI";
 import type { GameProps } from "./types";
 import { StakeBox } from "./StakeBox";
 
-interface InstantResult {
+export interface InstantResult {
   outcome: Record<string, any>;
   payout: number;
   multiplier: number;
@@ -18,7 +18,7 @@ interface InstantResult {
   win: boolean;
 }
 
-function useInstantPlay(gameId: string, props: GameProps, minStake = 5) {
+export function useInstantPlay(gameId: string, props: GameProps, minStake = 5) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<InstantResult | null>(null);
@@ -73,7 +73,7 @@ function useInstantPlay(gameId: string, props: GameProps, minStake = 5) {
   return { busy, error, result, play, setError, reset: () => setResult(null) };
 }
 
-function ResultBanner({ result, gameName }: { result: InstantResult | null; gameName: string }) {
+export function ResultBanner({ result, gameName }: { result: InstantResult | null; gameName: string }) {
   if (!result) return null;
   const push = Boolean((result.outcome as Record<string, unknown>)?.push);
   return (
@@ -617,7 +617,7 @@ export function InstantDrawGame(props: GameProps) {
         <h3>{game.name}</h3>
         <p>{game.tagline}</p>
         {game.id === "keno-blitz" && <div className="keno-grid">{Array.from({ length: 10 }, (_, index) => { const number = index + 1; return <button key={number} className={classNames("keno-number", picks.includes(number) && "active")} onClick={() => togglePick(number)} disabled={busy}>{number}</button>; })}</div>}
-        {game.id === "scratch-nova" && <div className="scratch-grid">{Array.from({ length: 9 }, (_, index) => <span key={index} className={classNames("scratch-cell", symbols[index] && "revealed")}>{symbols[index] || "?"}</span>)}</div>}
+        {game.id.startsWith("scratch-") && <div className="scratch-grid">{Array.from({ length: 9 }, (_, index) => <span key={index} className={classNames("scratch-cell", symbols[index] && "revealed")}>{symbols[index] || "?"}</span>)}</div>}
         {game.id === "limbo-velocity" && <label className="limbo-control">Target multiplier <input className="input" type="number" min={1.2} max={100} step={0.1} value={target} onChange={(event) => setTarget(event.target.value)} disabled={busy} /></label>}
         {game.id === "tower-climb" && <div className="tower-control">{Array.from({ length: 5 }, (_, index) => { const value = index + 1; return <button key={value} className={classNames("tower-step", steps === value && "active")} onClick={() => setSteps(value)} disabled={busy}>{value}</button>; })}<span>{steps} floors</span></div>}
         <ResultBanner result={result} gameName={game.name} />

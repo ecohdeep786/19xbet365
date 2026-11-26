@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+﻿import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  Bell, Cherry, ChevronDown, Coins, Dices, Flame, Gamepad2, Gift, HelpCircle,
-  LayoutDashboard, LayoutGrid, LogOut, Menu, Radio, ReceiptText, Search, ServerCog, ShieldCheck,
-  Sparkles, Spade, Ticket, Timer, Trophy, User, WalletCards, X, Zap, ShieldAlert, Goal
+  BarChart3, Bell, Cherry, ChevronDown, Club, Coins, Dices, Fish, Flame, Gamepad2, Gift, Grid3X3, Hash, HelpCircle,
+  Layers, LayoutDashboard, LayoutGrid, ListChecks, LogOut, Menu, Radio, ReceiptText, Search, ServerCog, ShieldCheck,
+  Sparkles, Spade, Ticket, Timer, Trophy, Tv, User, WalletCards, X, Zap, ShieldAlert, Goal
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -55,7 +55,23 @@ const NAV: NavItem[] = [
   },
   { label: "Live", to: "/live", icon: Radio },
   { label: "Fantasy", to: "/fantasy", icon: Trophy },
-  { label: "1xGames", to: "/instant", icon: Gamepad2 },
+  {
+    label: "1xGames",
+    base: "/instant",
+    icon: Gamepad2,
+    children: [
+      { to: "/instant", label: "1xGames lobby", body: "Instant 19X originals", icon: Sparkles },
+      { to: "/bingo", label: "Bingo", body: "Quick cards and full houses", icon: Grid3X3 },
+      { to: "/poker", label: "Poker", body: "Video poker and Hold'em", icon: Club },
+      { to: "/tv-games", label: "TV Games", body: "WheelBet and elemental games", icon: Tv },
+      { to: "/lotto", label: "Lotto", body: "Pick six from 36", icon: Hash },
+      { to: "/toto", label: "Toto 15", body: "Fifteen-fixture pool", icon: Ticket },
+      { to: "/scratch-cards", label: "Scratch Cards", body: "Reveal a winning trio", icon: Layers },
+      { to: "/hunting-fishing", label: "Hunting & Fishing", body: "Reef targets and catches", icon: Fish },
+      { to: "/other-games", label: "Other Games", body: "Crash and arcade originals", icon: Zap },
+      { to: "/quick-play", label: "Quick Play", body: "Fast short-session games", icon: Timer }
+    ]
+  },
   { label: "Slots", to: "/slots", icon: Cherry },
   { label: "Live Casino", to: "/live-casino", icon: Spade },
   {
@@ -65,6 +81,8 @@ const NAV: NavItem[] = [
     children: [
       { to: "/promotions", label: "Promotions", body: "Coin campaigns", icon: Gift },
       { to: "/tournaments", label: "Tournaments", body: "Leaderboards and prize pools", icon: Trophy },
+      { to: "/results", label: "Results", body: "Settled fixtures and rounds", icon: ListChecks },
+      { to: "/statistics", label: "Statistics", body: "Catalogue and game activity", icon: BarChart3 },
       { to: "/casino", label: "Casino lobby", body: "Full game catalogue", icon: Dices },
       { to: "/help", label: "Help centre", body: "Rules, account, responsible play", icon: HelpCircle }
     ]
@@ -281,7 +299,7 @@ export function Header() {
             <span><Gift size={12} /> New player haul: 10,500 coins</span>
             <span><ShieldCheck size={12} /> Sandbox play · no real-money wagering</span>
             <span><Trophy size={12} /> Altitude Week is live</span>
-            <span><Gamepad2 size={12} /> 44 playable 19X Originals</span>
+            <span><Gamepad2 size={12} /> 55 playable 19X Originals</span>
             <span><Zap size={12} /> Server-authoritative coin play</span>
           </div>
         </div>
@@ -326,10 +344,21 @@ function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
           <Link to="/instant" onClick={onClose}><Sparkles size={17} /> Instant games</Link>
           <Link to="/slots" onClick={onClose}><Cherry size={17} /> Slots</Link>
           <Link to="/live-casino" onClick={onClose}><Spade size={17} /> Live casino</Link>
+          <Link to="/bingo" onClick={onClose}><Grid3X3 size={17} /> Bingo</Link>
+          <Link to="/poker" onClick={onClose}><Club size={17} /> Poker</Link>
+          <Link to="/tv-games" onClick={onClose}><Tv size={17} /> TV Games</Link>
+          <Link to="/lotto" onClick={onClose}><Hash size={17} /> Lotto</Link>
+          <Link to="/toto" onClick={onClose}><Ticket size={17} /> Toto 15</Link>
+          <Link to="/scratch-cards" onClick={onClose}><Layers size={17} /> Scratch Cards</Link>
+          <Link to="/hunting-fishing" onClick={onClose}><Fish size={17} /> Hunting & Fishing</Link>
+          <Link to="/other-games" onClick={onClose}><Zap size={17} /> Other Games</Link>
+          <Link to="/quick-play" onClick={onClose}><Timer size={17} /> Quick Play</Link>
         </div>
         <div className="mobile-nav-section">
           <Link to="/promotions" onClick={onClose}><Gift size={17} /> Promotions</Link>
           <Link to="/tournaments" onClick={onClose}><Trophy size={17} /> Tournaments</Link>
+          <Link to="/results" onClick={onClose}><ListChecks size={17} /> Results</Link>
+          <Link to="/statistics" onClick={onClose}><BarChart3 size={17} /> Statistics</Link>
           <Link to="/help" onClick={onClose}><HelpCircle size={17} /> Help centre</Link>
           <Link to="/search" onClick={onClose}><Search size={17} /> Search</Link>
           {user && <Link to="/support" onClick={onClose}><ReceiptText size={17} /> Support</Link>}

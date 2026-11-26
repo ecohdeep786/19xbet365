@@ -23,7 +23,7 @@ for (const game of games) {
   }));
   if (state.stage && !state.providerGate) loaded.push(game.id); else failed.push({ id: game.id, ...state });
 }
-const samples = ["neon-fortune", "virtual-football", "keno-blitz", "scratch-nova", "limbo-velocity", "tower-climb", "astra-roulette-live", "baccarat-royale", "blackjack-azure", "holdem-prime", "sicbo-nova", "dream-wheel-live", "airball-crash"];
+const samples = ["neon-fortune", "virtual-football", "keno-blitz", "scratch-gold", "limbo-velocity", "tower-climb", "astra-roulette-live", "baccarat-royale", "blackjack-azure", "video-poker-deluxe", "holdem-prime", "sicbo-nova", "dream-wheel-live", "airball-crash", "bingo-bonanza", "tv-wheelbet", "war-of-elements", "toto-fifteen", "lotto-636", "reef-hunter", "shadow-hunt"];
 const played = [];
 for (const id of samples) {
   await p.goto(`http://127.0.0.1:4000/#/game/${id}`, { waitUntil: "networkidle" });
@@ -39,6 +39,14 @@ for (const id of samples) {
       await p.waitForTimeout(500);
       const stand = p.locator(".game-action").filter({ hasText: /Stand/i }).first();
       if (await stand.count()) await stand.click();
+    } else if (id === "video-poker-deluxe") {
+      await p.locator(".game-action").filter({ hasText: /Deal/i }).first().click();
+      await p.waitForTimeout(500);
+      const draw = p.locator(".game-action").filter({ hasText: /Draw/i }).first();
+      if (await draw.count()) await draw.click();
+    } else if (id === "lotto-636") {
+      for (let i = 0; i < 6; i += 1) await p.locator(".lotto-number").nth(i).click();
+      await p.locator(".game-action").first().click();
     } else {
       await p.locator(".game-action").first().click();
     }

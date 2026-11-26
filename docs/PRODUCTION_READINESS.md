@@ -13,7 +13,7 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Design system consistent | PASS | `DESIGN_SYSTEM.md`; shared tokens/components |
 | Enabled buttons function | PASS | tested journeys; provider/locked controls clear |
 | Device layouts tested | PASS (widths) | 320–2560, 0 overflow; physical devices not tested |
-| Game interfaces function | PASS | 44 server-authoritative 19X Originals; all-games API and UI smoke |
+| Game interfaces function | PASS | 55 server-authoritative 19X Originals; all-games API and UI smoke |
 | Demo sports settlement | PASS | 1X2 singles/accumulators auto-settle with generated scores, wallet credit, notification and audit; `settlement-smoke.mjs` |
 | Deposit/bonus flow | PASS (sandbox) | QR request, Master review, configurable bonus, wallet/audit/notification path; `deposit-smoke.mjs` |
 | Fantasy contests | PASS (sandbox) | Salary-cap lineup builder, transactional entries, scoring, settlement, cancel/refund, admin controls; `fantasy-smoke.mjs` |
@@ -30,7 +30,7 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Firebase player identity | PASS | email/password sign-up/sign-in, server session exchange, session restoration, welcome ledger and verification gate; `firebase-smoke.mjs` / `firebase-ui-smoke.mjs` |
 | Security tests | PASS with findings | `SECURITY_TEST_REPORT.md` |
 | Production build | PASS | `tsc --noEmit && vite build` |
-| Performance | PARTIAL | ~186 KB gzip initial JS after Firebase additions; Firebase loaded lazily; no load test; illustrated SVG covers add no image payloads |
+| Performance | PARTIAL | ~196 KB gzip initial JS after new game families; Firebase loaded lazily; no load test; illustrated SVG covers add no image payloads |
 | Critical defects | NONE KNOWN | recent bug fixes covered in E2E report |
 | Restricted functionality disabled | PASS | money locked; no certified provider session claimed |
 | Legal/licensing satisfied | FAIL / BLOCKED | no licence; no real-money operation |
@@ -42,7 +42,7 @@ This is a sandbox coin release with deliberate legal, provider, and operational 
 | Sandbox coin demo/public preview | **GO** |
 | Player account + coin wallet | **GO** (with security hardening) |
 | Firebase player authentication | **GO** for player identity; PostgreSQL remains the wallet authority. Add authorized domains and App Check before public traffic. |
-| 19X Originals | **GO** for demo; all 44 catalogue titles playable; independent certification not done |
+| 19X Originals | **GO** for demo; all 55 catalogue titles playable; independent certification not done |
 | 1X2 demo sportsbook settlement | **GO** for demo; results are server-generated demonstration data |
 | Manual QR deposit review | **GO** for sandbox; **NO-GO** for live collection until merchant QR, licensing, KYC/AML, `PAYMENTS_LIVE_ENABLED` and reconciliation are approved |
 | Fantasy contests | **GO** for sandbox coins; **NO-GO** for paid contests until legal review, real player data and scoring provider |

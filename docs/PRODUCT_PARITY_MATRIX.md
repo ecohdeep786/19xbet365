@@ -18,9 +18,18 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Live sports | Top live tiles, live table, stream flags | Live spotlight cards, live league table, score/minute, odds | Improved | `LiveSpotlight` added; no fake streams |
 | Persistent bet slip | Right rail with save/load, favourite tip | Header trigger + drawer + sports rail + auto-save/restore (24 Nov 2026) | Implemented | `BetSlipContext.tsx`; restore is a convenience only — placement remains server-authoritative |
 | Bet placement | Transactional stake/selection handling | Transactional server placement, wallet debit, potential return | Complete | `bets.js`; browser tested |
-| Casino lobby | 5-column tiles, categories, search/sort, provider badges | 44 titles, filter chips, search, sort, favourites, playable badges | Complete | `Casino.tsx` |
+| Casino lobby | 5-column tiles, categories, search/sort, provider badges | 55 titles, filter chips, search, sort, favourites, playable badges | Complete | `Casino.tsx` |
 | Slots lobby | Provider slot catalogue | 18 original 19X three-reel slots | Complete (19X engine) | No provider sessions |
-| 1xGames / instant | Demo games, category tabs, max win labels | 44 playable originals, filters, max win, server rounds | Complete | `GAME_CATALOGUE.md` |
+| 1xGames / instant | Demo games, category tabs, max win labels | 55 playable originals, filters, max win, server rounds | Complete | `GAME_CATALOGUE.md` |
+| Bingo | Bingo rooms with tickets and draws | Two 3×3 quick-bingo originals with line/full-house prizes | Complete | `bingo-bonanza`, `bingo-neon` |
+| Poker | Multiplayer poker lobby | Video Poker Deluxe hold/draw and Hold'em Prime | Complete (RNG) | No multiplayer poker room |
+| TV Games | Studio-style wheel/keno/table games | WheelBet, War of Elements, Keno and RNG tables | Complete (RNG) | Not live-dealer |
+| Toto | 15-fixture pool | Toto 15 with 1/X/2 picks and tiered prizes | Complete (simulated) | Server-generated results |
+| Lotto | Lottery draw games | Lotto 6/36 with tiered prizes | Complete | Server-generated draw |
+| Scratch cards | Scratch-card catalogue | Three 9-cell 19X scratch cards | Complete | `scratch-gold`, `scratch-lucky`, `scratch-nova` |
+| Hunting & Fishing | Fish/hunt shooting games | Reef Hunter and Shadow Hunt | Complete | Six-target RNG games |
+| Other / Quick Play | Crash/arcade and fast games | Crash, Airball, Mines, Plinko and quick-play lobby | Complete | Category pages |
+| Results / Statistics | Results archive and stats | Finished fixtures, catalogue counts and settled-round stats | Complete | `/results`, `/statistics` |
 | Live casino | Hero carousel, filter chips, dealer cards | Seven in-house RNG tables with full play flows | Complete (RNG) | Not a live-dealer feed; certified provider still optional |
 | Virtual sports | Simulated sport products | Six simulated 19X events with calibrated odds | Complete | No fabricated live feed |
 | Registration | Phone/email/social, bonus choice, SMS | Email registration, referral, welcome allocation, age consent | Improved | No SMS/social/email verification |
@@ -66,7 +75,7 @@ Statuses: **Complete**, **Improved**, **Functionally incomplete**, **Integration
 | Responsive | Desktop/tablet/mobile | Tested 320–2560 for overflow; mobile layouts | Complete | `RESPONSIVE_TEST_REPORT.md` |
 | Accessibility | Keyboard, focus, labels | Skip link, focus rings, aria labels, reduced motion | Improved | Full WCAG audit still recommended |
 | Real-money operation | Licensed wagering | Disabled and hard-locked | Legal/restricted | Requires licence/KYC/payments |
-| Provider games | Certified integrations | All 44 titles are original 19X RNG games | Provider parity not connected | Requires provider contracts/session adapter |
+| Provider games | Certified integrations | All 55 titles are original 19X RNG games | Provider parity not connected | Requires provider contracts/session adapter |
 | Sports settlement | Live results/settlement | Server demo worker finishes fixtures and settles 1X2 singles/accas with notifications and audit events | Improved | `backend/src/services/sportsbook.js`, `scripts/settlement-smoke.mjs`; no real feed or multi-market engine |
 
 ## Priority work remaining

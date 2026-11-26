@@ -85,7 +85,7 @@ Comparison focused on hierarchy, density, navigation familiarity, component stat
 | Typography | Roboto family, very low-contrast muted labels | Roboto / Roboto Condensed, with accessible contrast tokens |
 | Accent green | Bright lime with white text | Bright lime for decoration; darker accessible green `#557d1d` for white-text actions |
 | Live casino | Live dealer photography/video | In-house RNG tables; no fabricated live feed |
-| Provider games | Many certified providers | All 44 titles are original 19X RNG games |
+| Provider games | Many certified providers | All 55 titles are original 19X RNG games |
 | Real money | Deposits, withdrawals, cash bonuses | Sandbox/manual-review deposit, KYC and withdrawal flow; automated payout disabled until compliance gates |
 | Sports markets | Many markets per fixture | 1X2 foundation only; no fake markets |
 | Header language | Country/currency/language selector | Static `EN · COINS` chip; documented gap |

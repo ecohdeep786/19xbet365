@@ -78,6 +78,7 @@ export const api = {
     request<{ user: Account }>("/auth/profile", { method: "PATCH", body: json(payload) }),
 
   bootstrap: () => request<BootstrapData>("/bootstrap"),
+  statistics: () => request<{ games: { total: number; playable: number; players: number }; categories: { category: string; count: number }[]; sports: number; fixtures: { total: number; finished: number }; rounds: { settled: number; wagered: number; paid: number } }>("/statistics"),
   publicMatches: (params = "") => request<{ matches: Match[] }>(`/matches${params}`),
   publicGames: (params = "") => request<{ games: Game[] }>(`/games${params}`),
   fantasyContests: () => request<{ contests: FantasyContest[] }>("/fantasy/contests"),
@@ -155,6 +156,14 @@ export const api = {
     request<{ status: string; player: { rank: number; suit: string }[]; dealer: { rank: number; suit: string }[]; playerTotal: number; dealerTotal?: number; result?: string; payout?: number; balance: number; message: string }>(`/games/blackjack-azure/${roundId}/hit`, { method: "POST" }),
   blackjackStand: (roundId: string) =>
     request<{ status: string; player: { rank: number; suit: string }[]; dealer: { rank: number; suit: string }[]; playerTotal: number; dealerTotal: number; result: string; payout: number; balance: number; message: string }>(`/games/blackjack-azure/${roundId}/stand`, { method: "POST" }),
+  videoPokerStart: (stake: number) =>
+    request<{ roundId: string; status: string; hand: { rank: number; suit: string }[]; balance: number; message: string }>("/games/video-poker-deluxe/start", {
+      method: "POST", body: json({ stake })
+    }),
+  videoPokerDraw: (roundId: string, held: number[]) =>
+    request<{ status: string; hand: { rank: number; suit: string }[]; held: number[]; handLabel: string; multiplier: number; payout: number; balance: number; message: string }>(`/games/video-poker-deluxe/${roundId}/draw`, {
+      method: "POST", body: json({ held })
+    }),
   minesStart: (stake: number, mines: number) =>
     request<{ roundId: string; minesCount: number; balance: number; message: string }>("/games/mines-vault/start", {
       method: "POST", body: json({ stake, mines })

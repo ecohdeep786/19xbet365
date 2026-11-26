@@ -25,8 +25,9 @@ async function check(route, width) {
   if (metrics.scroll > metrics.client + 1) failures.push({ route, width, ...metrics, overflow: metrics.scroll - metrics.client });
 }
 
+const routes = ["/", "/casino", "/instant", "/live-casino", "/virtuals", "/bingo", "/poker", "/tv-games", "/lotto", "/toto", "/scratch-cards", "/hunting-fishing", "/other-games", "/quick-play", "/results", "/statistics", "/game/blackjack-azure", "/game/astra-roulette-live", "/game/baccarat-royale"];
 for (const width of [320, 390, 768, 1440, 2560]) {
-  for (const route of ["/", "/casino", "/instant", "/live-casino", "/virtuals", "/game/blackjack-azure", "/game/astra-roulette-live", "/game/baccarat-royale"]) {
+  for (const route of routes) {
     await check(route, width);
   }
 }
@@ -34,6 +35,6 @@ for (const width of [320, 1440]) {
   for (const game of games) await check(`/game/${game}`, width);
 }
 
-console.log(JSON.stringify({ games: games.length, checks: 5 * 8 + games.length * 2, failures, consoleErrors: errors.slice(0, 5), pass: failures.length === 0 && errors.length === 0 }, null, 2));
+console.log(JSON.stringify({ games: games.length, checks: 5 * routes.length + games.length * 2, failures, consoleErrors: errors.slice(0, 5), pass: failures.length === 0 && errors.length === 0 }, null, 2));
 await browser.close();
 if (failures.length || errors.length) process.exitCode = 1;

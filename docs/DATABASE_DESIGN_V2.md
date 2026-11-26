@@ -103,7 +103,7 @@ The current product exposes the 1X2 market. A future `match_markets` + `market_s
 
 | Table | Purpose | Key integrity |
 | --- | --- | --- |
-| `games` | 44-title catalogue and metadata | category/status indexes |
+| `games` | 55-title catalogue and metadata | category/status indexes |
 | `game_rounds` | Server-authoritative rounds | settled/void rounds immutable; one round per reference |
 | `favorites`, `recent_plays` | Player catalogue state | composite PKs |
 
@@ -217,4 +217,4 @@ These are not needed for the current coin product, but must be addressed before 
 - responsible-limit and odds history are populated;
 - migrations are recorded.
 
-Latest run: all checks passed, **30/30 accounts balanced**, **38 odds snapshots**, **1 migration applied**, and mutation attempts rejected by the database.
+Latest run: all checks passed, **30/30 accounts balanced**, **42 odds snapshots**, **1 migration applied**, and mutation attempts rejected by the database.

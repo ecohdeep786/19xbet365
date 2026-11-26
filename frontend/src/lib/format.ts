@@ -77,7 +77,9 @@ export function gameCategoryLabel(category: string) {
   const labels: Record<string, string> = {
     crash: "Crash", mines: "Mines", plinko: "Plinko", dice: "Dice", wheel: "Wheel",
     coinflip: "Coin flip", cards: "Cards", lucky: "Lucky", slots: "Slots", racing: "Racing",
-    "slots-provider": "Slots", "live-casino": "Live casino", virtuals: "Virtuals"
+    "slots-provider": "Slots", "live-casino": "Live casino", virtuals: "Virtuals",
+    bingo: "Bingo", poker: "Poker", tv: "TV Games", lotto: "Lotto", toto: "Toto",
+    scratch: "Scratch cards", fishing: "Hunting & Fishing", other: "Other games"
   };
   return labels[category] || titleCase(category);
 }

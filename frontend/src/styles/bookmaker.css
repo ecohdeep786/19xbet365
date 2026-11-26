@@ -952,3 +952,5 @@
 
 .slip-trigger-wrap { position: relative; display: inline-flex; }
 .bookmaker .slip-count { position: absolute; top: -5px; right: -5px; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 999px; background: #557d1d; color: #fff; border: 2px solid #1d4268; font-family: var(--font-body); font-size: .62rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; pointer-events: none; }
+.bookmaker .nav-panel { max-height: min(620px, calc(100vh - 150px)); overflow-y: auto; }
+@media (max-width: 720px) { .bookmaker .nav-panel { max-height: 70vh; } }

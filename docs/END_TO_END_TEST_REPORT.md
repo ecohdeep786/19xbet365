@@ -1,6 +1,6 @@
 # End-to-End Test Report
 
-**Date:** 26 November 2026  
+**Date:** 27 November 2026  
 **Environment:** production Vite build served by Express at `http://127.0.0.1:4000`; PostgreSQL 16 `astra_play`; headless Edge 1440×900 and 390×844 for evidence capture; in-app browser for interactive checks.
 
 ## Automated smoke tests
@@ -10,12 +10,15 @@
 | `scripts/api-smoke.mjs` | Passed: health, bootstrap, login, overview, transactions, activity, dice, Mines start, admin overview/network/accounts/audit/security/system | console output |
 | `scripts/firebase-smoke.mjs` | Passed: real Firebase identity → server session, 10,500 welcome coins, idempotent re-login, unverified deposit gate, takeover protection, invalid-token rejection | console output |
 | `scripts/firebase-ui-smoke.mjs` | Passed: Firebase sign-in, verification banner, deposit gate, session restoration after server logout, Firebase registration, seeded password login | `capture/firebase-audit/` |
-| `scripts/all-games-smoke.mjs` | Passed: **44/44 catalogue games** played through the API and settled; zero failures; wallet reconciled | console output |
-| `scripts/all-games-ui-smoke.mjs` | Passed: **44/44 game pages** loaded with no provider gate; representative sample played across slots, virtuals, instant, tables, crash and blackjack; zero console/page errors | console output |
+| `scripts/all-games-smoke.mjs` | Passed: **55/55 catalogue games** played through the API and settled; zero failures; wallet reconciled | console output |
+| `scripts/all-games-ui-smoke.mjs` | Passed: **55/55 game pages** loaded with no provider gate; representative sample played across every game family, including multi-step blackjack and video poker; zero console/page errors | console output |
+| `scripts/special-games-smoke.mjs` | Passed: bingo tickets/draws, WheelBet colour consistency, elemental payouts, Toto results, Lotto draws, reef/hunt targets, scratch cards and video-poker hold/draw state | console output |
+| `scripts/categories-ui-smoke.mjs` | Passed: every new category page, Results and Statistics loaded without overflow or console errors | `capture/categories/` |
+| `scripts/nav-ui-smoke.mjs` | Passed: 1xGames mega-menu, More menu and mobile drawer expose Bingo, Poker, TV Games, Lotto, Toto, Scratch, Hunting & Fishing, Other Games, Quick Play, Results and Statistics | `capture/categories/nav-*.jpeg` |
 | `scripts/blackjack-smoke.mjs` | Passed: deal, hit, stand, dealer draws to 17, settled-hand replay rejected, stale hand refunded | console output |
 | `backend/db/audit.js` (`npm run db:audit`) | Passed: 30/30 accounts balanced, no duplicate ledger references, required tables/triggers present, direct mutation of transactions/settled rounds/settled bets/deposit amounts rejected, odds and responsible-play history populated | console output |
 | `backend/db/migrate.js` (`npm run db:migrate`) | Passed: versioned migration applied and recorded in `schema_migrations` | console output |
-| `scripts/responsive-game-audit.mjs` | Passed: 128 checks across all 44 game pages plus public/casino routes at 320, 390, 768, 1440 and 2560; zero horizontal overflow, zero console errors | console output |
+| `scripts/responsive-game-audit.mjs` | Passed: 205 checks across all 55 game pages plus 19 public/lobby routes at 320, 390, 768, 1440 and 2560; zero horizontal overflow, zero console errors | console output |
 | `scripts/game-smoke.mjs` | Passed: original 11 originals settled; Crash cash-out and Mines bust paths; final balance reconciled | console output |
 | `scripts/security-smoke.mjs` | Passed: anonymous/player/agent/master auth and scope boundaries, unknown-game 404, invalid-stake 400, real-money lock | console output |
 | `scripts/settlement-smoke.mjs` | Passed across both settlement branches: two singles and a two-fold accumulator settled from generated final scores; winning/losing payouts and wallet balance reconciled | console output |
@@ -26,7 +29,7 @@
 | `scripts/compliance-ui-audit.mjs` | Passed: KYC submission, Master approval, withdrawal request, approval and mark-paid | `capture/compliance-audit/` |
 | `scripts/referral-smoke.mjs <code>` | Passed: referral registration starts 10,500; referred player's first dice round receives 1,000 coins; referee balance reflects reward | console output |
 | `scripts/capture-screenshots.mjs` | Passed: product captures across 1440×900 and 390×844, player and Master Admin sessions | `capture/product/` |
-| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,673 modules; ~186 KB gzip initial JS, Firebase split into lazy chunks |
+| Frontend `tsc --noEmit && vite build` | Passed | Vite production build, 1,677 modules; ~196 KB gzip initial JS, Firebase split into lazy chunks |
 | Playwright real-user journey | Passed | 27/27 checks across the logged-out game gate, registration, bet placement, Dice Roll, wallet, deposit, responsible play, support, mobile drawer, auth, admin deposit review, fantasy route and KYC/withdrawal endpoints |
 | Playwright deposit journey | Passed | 11/11 checks: sandbox notice, QR placeholder, request, pending state, admin approval, bonus ledger and balance update |
 | Lighthouse desktop audit | Passed | 100 accessibility / 100 best practices / 100 SEO on home, sports, fantasy, login, withdraw and deposit; earlier runs covered casino, account, wallet, support, promotions, tournaments, help, game detail, register and admin |
@@ -63,7 +66,7 @@ The demo database was reseeded after this verification pass, so the handoff star
 - Tested Crash Orbit: launch, live multiplier, cash-out and bust paths, balance and history updated.
 - Tested Mines grid, Wheel of 19X, Plinko and all engines through the smoke script.
 - Played a multi-step Blackjack Azure hand: deal, hit, stand, dealer draw and settlement; confirmed the hole card stays hidden while the hand is open.
-- Confirmed all 44 catalogue games load and play with no provider-required gate; RNG tables are labelled as 19X Originals, not live dealer feeds.
+- Confirmed all 55 catalogue games load and play with no provider-required gate; RNG tables are labelled as 19X Originals, not live dealer feeds.
 - Confirmed settled rounds and wallet ledger entries remain immutable.
 - Placed two opposing singles and a two-fold accumulator, forced demo fixtures to their simulated finish, and verified selection results, bet statuses, payouts, wallet credits and audit events.
 - Confirmed the settlement-event handler filters by account and raises a settlement toast in an open player session; the worker emits `bet.settled` on the same WebSocket channel.

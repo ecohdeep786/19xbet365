@@ -107,8 +107,12 @@ Set `DEMO_SETTLEMENT=off` to disable the worker. Live-market suspension, cash-ou
 | POST | `/games/blackjack-azure/start` | `{stake}`; deals two player cards and the dealer upcard; full shoe stays server-side |
 | POST | `/games/blackjack-azure/:roundId/hit` | draw one card; settles immediately on bust |
 | POST | `/games/blackjack-azure/:roundId/stand` | dealer draws to 17 and the hand settles |
+| POST | `/games/video-poker-deluxe/start` | `{stake}`; deals five cards from a server-side 52-card shoe |
+| POST | `/games/video-poker-deluxe/:roundId/draw` | `{held:[0-4]}`; replaces non-held cards and settles the paytable |
+| GET | `/statistics` | public catalogue, fixture and settled-round totals |
+| GET | `/matches?status=finished` | public finished fixtures for the Results page |
 
-All 44 catalogue IDs are playable 19X Originals; there is no `provider_required` gate in the current catalogue. Validation rejects unknown games, invalid stakes, insufficient balance, restricted accounts, and responsible limits. Multi-step endpoints reject actions on a settled round with `409 round_settled`.
+All 55 catalogue IDs are playable 19X Originals; there is no `provider_required` gate in the current catalogue. Validation rejects unknown games, invalid stakes, insufficient balance, restricted accounts, and responsible limits. Multi-step endpoints reject actions on a settled round with `409 round_settled`.
 
 ## Admin
 

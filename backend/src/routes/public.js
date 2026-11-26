@@ -42,6 +42,8 @@ const matchMapper = (row) => ({
   minute: row.minute,
   scoreHome: row.score_home,
   scoreAway: row.score_away,
+  resultHome: row.result_home,
+  resultAway: row.result_away,
   odds: {
     home: row.odds_home == null ? null : Number(row.odds_home),
     draw: row.odds_draw == null ? null : Number(row.odds_draw),
@@ -116,18 +118,44 @@ router.get("/health", async (req, res, next) => {
   }
 });
 
+router.get("/statistics", async (req, res, next) => {
+  try {
+    const [games, categories, sports, fixtures, rounds] = await Promise.all([
+      query("SELECT COUNT(*)::int AS total, COUNT(*) FILTER (WHERE playable)::int AS playable, COALESCE(SUM(players),0)::int AS players FROM games WHERE status <> 'hidden'"),
+      query("SELECT category, COUNT(*)::int AS count FROM games WHERE status <> 'hidden' GROUP BY category ORDER BY count DESC"),
+      query("SELECT COUNT(*)::int AS total FROM sports WHERE active"),
+      query("SELECT COUNT(*)::int AS total, COUNT(*) FILTER (WHERE status = 'finished')::int AS finished FROM matches"),
+      query("SELECT COUNT(*)::int AS settled, COALESCE(SUM(bet),0)::numeric(14,2) AS wagered, COALESCE(SUM(payout),0)::numeric(14,2) AS paid FROM game_rounds WHERE status = 'settled'")
+    ]);
+    res.json({
+      games: games.rows[0],
+      categories: categories.rows,
+      sports: sports.rows[0].total,
+      fixtures: fixtures.rows[0],
+      rounds: rounds.rows[0]
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get("/matches", async (req, res, next) => {
   try {
     const conditions = [];
     const params = [];
     if (req.query.sport) { params.push(req.query.sport); conditions.push(`sport = $${params.length}`); }
     if (req.query.live === "true") conditions.push("status = 'live'");
+    if (["upcoming", "live", "finished", "suspended"].includes(String(req.query.status || ""))) {
+      params.push(req.query.status);
+      conditions.push(`status = $${params.length}`);
+    }
     if (req.query.search) {
       params.push(`%${String(req.query.search).slice(0, 60)}%`);
       conditions.push(`(home_team ILIKE $${params.length} OR away_team ILIKE $${params.length} OR league ILIKE $${params.length})`);
     }
     const where = conditions.length ? `WHERE ${conditions.join(" AND ")}` : "";
-    const result = await query(`SELECT * FROM matches ${where} ORDER BY featured DESC, start_time ASC LIMIT 200`, params);
+    const limit = Math.max(1, Math.min(200, Number(req.query.limit) || 200));
+    const result = await query(`SELECT * FROM matches ${where} ORDER BY featured DESC, start_time ASC LIMIT ${limit}`, params);
     res.json({ matches: result.rows.map(matchMapper) });
   } catch (error) {
     next(error);

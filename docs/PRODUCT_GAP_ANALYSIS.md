@@ -1,6 +1,6 @@
 # PRODUCT GAP ANALYSIS — 19xbet365 vs 1xBet reference
 
-> **Historical note (26 November 2026):** This gap analysis was prepared on 24 November 2026. The game-coverage gap is closed: all 44 catalogue titles are playable 19X Originals, including RNG tables, virtuals, instant games and slots. See `README.md` and `GAME_CATALOGUE.md`.
+> **Historical note (26 November 2026):** This gap analysis was prepared on 24 November 2026. The game-coverage gap is closed: all 55 catalogue titles are playable 19X Originals, including RNG tables, virtuals, instant games and slots. See `README.md` and `GAME_CATALOGUE.md`.
 
 Date: 24 November 2026. Reference: https://1xbet.com/ (public, lawful sections studied via `webfetch`). Baseline: `docs/CURRENT_PRODUCT_ANALYSIS.md`. Statuses per `docs/PRODUCT_PARITY_MATRIX.md` conventions.
 
@@ -11,7 +11,7 @@ Method: product+feature completeness, visual/design quality, user interaction & 
 ### 1.1 Implemented (complete or improved)
 - Public pages: home, sports, live, esports, virtuals, casino, live-casino, slots, instant, promotions, tournaments, search, help/legal static pages, 404, NotFound.
 - Player journey: registration (email), login, forgot password (notification request), dashboard, wallet, deposits (sandbox QR), bets, activity, notifications, security, referrals, responsible.
-- Games: 19X Originals (44 playable, including slots, virtuals, instant games and RNG tables).
+- Games: 19X Originals (55 playable, including slots, virtuals, instant games, RNG tables, bingo, video poker, TV games, Toto, Lotto, scratch cards and fishing).
 - Admin hierarchy: Master/Admin/Sub-admin/Agent networks, roles, transfers, support, audit.
 
 ### 1.2 Missing or functionally incomplete (top findings)

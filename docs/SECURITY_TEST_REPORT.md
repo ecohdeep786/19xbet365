@@ -115,7 +115,7 @@ Additional controls:
 | Low | Audit hash chain is application-level plus trigger; DB superuser can still disable triggers | Use restricted app DB role, immutable backups, external anchoring for high assurance |
 | Low | No account lockout beyond rate limit | Add alerting/step-up verification |
 | Low | Admin ITP/UA fields stored unvalidated (bounded strings) | Normalize/retain only what is needed |
-| Informational | All 44 games are in-house 19X RNG products; no certified provider/live-dealer session is connected | Keep explicit "19X Originals" labels; never fake live sessions |
+| Informational | All 55 games are in-house 19X RNG products; no certified provider/live-dealer session is connected | Keep explicit "19X Originals" labels; never fake live sessions |
 
 ## Production security prerequisites
 

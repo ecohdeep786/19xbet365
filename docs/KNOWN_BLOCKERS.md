@@ -1,13 +1,13 @@
 # KNOWN BLOCKERS — 19xbet365
 
-> **Historical note (26 November 2026):** The provider-certified-integration blocker below remains valid, but the statement that provider-labelled titles return `provider_required` is superseded. All 44 catalogue titles are now playable 19X Originals. See `README.md`.
+> **Historical note (26 November 2026):** The provider-certified-integration blocker below remains valid, but the statement that provider-labelled titles return `provider_required` is superseded. All 55 catalogue titles are now playable 19X Originals. See `README.md`.
 
 Date: 24 November 2026. External or regulatory dependencies that the current engineering cannot resolve; each is recorded with evidence and what would unblock it.
 
 ## 1. Legal / licensing (hard blocks — do not guess)
 
 1. **Real-money deposits/withdrawals/wagering** — requires jurisdiction-specific licensing, merchant account/payment rails, KYC/AML, transaction monitoring, responsible-gaming approvals, withdrawal policy and external testing. Currently hard-locked (`realMoneyEnabled` false, `PAYMENTS_LIVE_ENABLED` default false).
-2. **Provider-certified game integrations** — requires provider contracts/session adapters/certification. All 44 current titles are in-house 19X Originals; no certified provider or live-dealer session is connected. Evidence: `docs/PRODUCTION_READINESS.md` "NO-GO until contracts/certification/session adapter".
+2. **Provider-certified game integrations** — requires provider contracts/session adapters/certification. All 55 current titles are in-house 19X Originals; no certified provider or live-dealer session is connected. Evidence: `docs/PRODUCTION_READINESS.md` "NO-GO until contracts/certification/session adapter".
 3. **Legal pages** — demonstration only; jurisdiction review required.
 
 ## 2. Providers / external feeds

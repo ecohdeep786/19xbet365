@@ -3,7 +3,7 @@ import express from "express";
 import { query, withTransaction } from "../db.js";
 import { requireAuth } from "../middleware/auth.js";
 import { checkDailyLimit, creditWin, debitStake, lockAccount, refundStake, settleRound } from "../services/wallet.js";
-import { crashMultiplier, crashPoint, minesMultiplier, playInstant, round2, createBlackjackRound, blackjackHandTotal, settleBlackjack } from "../services/gameEngine.js";
+import { crashMultiplier, crashPoint, minesMultiplier, playInstant, round2, createBlackjackRound, blackjackHandTotal, settleBlackjack, createVideoPokerRound, drawVideoPoker } from "../services/gameEngine.js";
 import { randomInt, sha256 } from "../lib/crypto.js";
 import { broadcast } from "../ws.js";
 import { rewardReferralIfEligible } from "../services/referrals.js";
@@ -603,6 +603,86 @@ router.post("/blackjack-azure/:roundId/stand", requireAuth, async (req, res, nex
       payout,
       balance,
       message
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Video Poker Deluxe ----------------------------------------------------------
+router.post("/video-poker-deluxe/start", requireAuth, async (req, res, next) => {
+  try {
+    const game = await requirePlayableGame("video-poker-deluxe");
+    const stake = round2(Number(req.body?.stake));
+    if (!Number.isFinite(stake) || stake < 5 || stake > 5000) {
+      throw Object.assign(new Error("Stake must be between 5 and 5,000 coins."), { status: 400, code: "invalid_stake" });
+    }
+    const result = await withTransaction(async (client) => {
+      await lockAccount(client, req.account.id);
+      await voidStaleRounds(client, req.account.id, "video-poker-deluxe");
+      await checkDailyLimit(client, req.account.id, stake);
+      const round = createVideoPokerRound();
+      const roundId = crypto.randomUUID();
+      const debit = await debitStake(client, req.account.id, stake, `${game.name} deal`, "game_round", roundId);
+      await client.query(
+        `INSERT INTO game_rounds (id, account_id, game_id, bet, status, outcome, state, server_seed_hash)
+         VALUES ($1,$2,$3,$4,'open','{}'::jsonb,$5,$6)`,
+        [roundId, req.account.id, game.id, stake, round, sha256(roundId + "video-poker")]
+      );
+      await recordRecent(client, req.account.id, game.id);
+      return { roundId, hand: round.hand, balance: debit.balance };
+    });
+    res.status(201).json({
+      roundId: result.roundId,
+      status: "open",
+      hand: result.hand,
+      balance: result.balance,
+      message: "Five cards dealt. Choose which cards to hold."
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/video-poker-deluxe/:roundId/draw", requireAuth, async (req, res, next) => {
+  try {
+    const result = await withTransaction(async (client) => {
+      const locked = await client.query(
+        `SELECT * FROM game_rounds WHERE id = $1 AND account_id = $2 AND game_id = 'video-poker-deluxe' FOR UPDATE`,
+        [req.params.roundId, req.account.id]
+      );
+      const row = locked.rows[0];
+      if (!row) throw Object.assign(new Error("Round not found."), { status: 404, code: "not_found" });
+      if (row.status !== "open") throw Object.assign(new Error("This hand is already closed."), { status: 409, code: "round_settled" });
+      const held = Array.isArray(req.body?.held) ? req.body.held.map(Number) : [];
+      const round = row.state;
+      const draw = drawVideoPoker(round, held);
+      const settled = await settleRound(client, row.id, req.account.id, draw.multiplier, {
+        gameName: "Video Poker Deluxe",
+        hand: draw.hand,
+        held: draw.held,
+        handLabel: draw.label,
+        win: draw.win,
+        summary: draw.label
+      });
+      const referralReward = await rewardReferralIfEligible(client, req.account.id);
+      return { draw, payout: settled.payout, balance: referralReward?.refereeBalance ?? settled.balance };
+    });
+    const { draw, payout, balance } = result;
+    broadcast({ type: "game.settled", accountId: req.account.id, gameId: "video-poker-deluxe", payout });
+    res.json({
+      status: "settled",
+      hand: draw.hand,
+      held: draw.held,
+      handLabel: draw.label,
+      multiplier: draw.multiplier,
+      payout,
+      balance,
+      message: draw.multiplier > 1
+        ? `${draw.label} — ${draw.multiplier}x paid ${payout.toFixed(2)} coins.`
+        : draw.multiplier === 1
+          ? `${draw.label} — stake returned.`
+          : `${draw.label} — no winning hand.`
     });
   } catch (error) {
     next(error);

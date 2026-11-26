@@ -117,7 +117,7 @@ The API smoke also covers cancellation, rejection and the live-payment activatio
 
 These are product-scope boundaries, not UI defects:
 
-- All 44 catalogue titles are playable 19X RNG games. Certified live-dealer and third-party provider parity remain outside the build.
+- All 55 catalogue titles are playable 19X RNG games. Certified live-dealer and third-party provider parity remain outside the build.
 - Real-money deposits and withdrawals are sandbox/manual-review only until licensing, KYC/AML, merchant onboarding, a business-owned QR and `PAYMENTS_LIVE_ENABLED=true` are in place. Automated payout execution is not implemented.
 - Promotions/tournaments have no automated payout engine.
 - There is no real sports feed, multi-market settlement, cash-out or live-stream service.

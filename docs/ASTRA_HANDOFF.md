@@ -1,6 +1,6 @@
 # ASTRA HANDOFF — 19xbet365 (24 November 2026)
 
-> **Historical note (26 November 2026):** This handoff was written on 24 November 2026, before all 44 catalogue games were made playable. Use `README.md` and `GAME_CATALOGUE.md` for current game and status information.
+> **Historical note (26 November 2026):** This handoff was written on 24 November 2026, before all 55 catalogue games were made playable. Use `README.md` and `GAME_CATALOGUE.md` for current game and status information.
 
 This document hands the product to the final review/acceptance owner ("Astra"). It summarises what exists, what changed this session, what is known to be missing, and what must not be claimed.
 

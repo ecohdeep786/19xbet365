@@ -7,7 +7,7 @@ A complete, independently branded coin-based gaming foundation with:
 - original **19X / 19xbet365** branding and hand-built CSS/SVG artwork;
 - a 1xBet-aligned public design system: deep-navy two-row header, blue navigation strip, bold uppercase navigation, Roboto/Roboto Condensed typography, flat 8px controls, light-grey odds cells and AA-compliant accent variants; all artwork and wording remain original;
 - public sportsbook, live, esports, virtuals, casino, live-casino RNG tables, slots and instant games;
-- 44 server-authoritative playable 19X Originals;
+- 55 server-authoritative playable 19X Originals;
 - registration/login/account lifecycle, coin wallet, bet history, game activity, notifications, security, referrals, responsible-play tools, support, help and legal content;
 - Master Admin and delegated staff control room with scoped hierarchy, RBAC, coin adjustments, support, transfers, catalogue, content, audit, settings and health;
 - Master-only staff credential issuance with one-time login ID/password handoff; administrators can manage scoped users and games but cannot create staff logins or access Master-only settings, roles, deposits and credential controls;
@@ -104,7 +104,7 @@ New registrations receive 10,500 coins. The seeded player starts at 22,500 coins
 - Deposit requests, QR configuration, admin verification and deposit bonuses are implemented in **sandbox**; live collection requires `PAYMENTS_LIVE_ENABLED=true`, a verified merchant QR, licensing, KYC/AML and payment onboarding.
 - Withdrawal requests and manual KYC review are implemented in sandbox; Master Admin approves/rejects/marks paid. Automated payout execution and live merchant settlement remain disabled, and `realMoneyEnabled` is hard-locked.
 - Fantasy cricket contests, salary-cap lineups, entries, scoring, settlement and refunds are implemented in sandbox; real player-stat feeds, legal contest rules and paid-entry compliance are still required.
-- No certified provider/live-dealer session; all 44 titles are original 19X RNG games. Provider parity and live-dealer video remain external integrations.
+- No certified provider/live-dealer session; all 55 titles are original 19X RNG games. Provider parity and live-dealer video remain external integrations.
 - Sportsbook is a 1X2 foundation only. Demo settlement is server-generated on a timer with generated scores and audit records; there is no real sports feed, live-market suspension, cash-out, or multi-market settlement.
 - No automated promo/tournament payout or qualification engine.
 - No email/SMS delivery, email/phone verification, provider KYC document upload, or MFA challenge.

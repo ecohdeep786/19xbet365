@@ -17,6 +17,9 @@ import { CrashGame } from "./CrashGame";
 import { MinesGame } from "./MinesGame";
 import { BlackjackGame } from "./BlackjackGame";
 import {
+  BingoGame, LottoGame, ReefGame, TotoGame, VideoPokerGame, WarElementsGame, WheelBetGame
+} from "./SpecialGames";
+import {
   CoinFlipGame, DerbyGame, DiceGame, GenericInstantGame, HiLoGame, InstantDrawGame, LuckyTenGame,
   NovaFruitsGame, PlinkoGame, TableGame, WheelGame
 } from "./InstantGames";
@@ -48,6 +51,17 @@ export function GamePage() {
       case "hi-lo": return HiLoGame;
       case "lucky-ten": return LuckyTenGame;
       case "blackjack-azure": return BlackjackGame;
+      case "bingo-bonanza":
+      case "bingo-neon": return BingoGame;
+      case "video-poker-deluxe": return VideoPokerGame;
+      case "tv-wheelbet": return WheelBetGame;
+      case "war-of-elements": return WarElementsGame;
+      case "toto-fifteen": return TotoGame;
+      case "lotto-636": return LottoGame;
+      case "scratch-gold":
+      case "scratch-lucky": return InstantDrawGame;
+      case "reef-hunter": return ReefGame;
+      case "shadow-hunt": return ReefGame;
       case "keno-blitz":
       case "scratch-nova":
       case "limbo-velocity":

@@ -14,6 +14,7 @@
 - [Component Inventory](COMPONENT_INVENTORY.md)
 - [Route Inventory](ROUTE_INVENTORY.md)
 - [Game Catalogue](GAME_CATALOGUE.md)
+- [1xBet Navigation Coverage](1XBET_NAV_COVERAGE.md)
 - [Database Design v2](DATABASE_DESIGN_V2.md)
 - [Firebase Authentication and Data Architecture](FIREBASE_AUTH_AND_DATA.md)
 - [Admin Architecture](ADMIN_ARCHITECTURE.md)

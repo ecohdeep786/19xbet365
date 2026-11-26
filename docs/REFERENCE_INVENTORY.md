@@ -32,13 +32,13 @@ Ticket, betting, deposit, withdrawal, and account surfaces were login-gated or r
 - Brand: **19X / 19xbet365**, deep-blue header chrome, pale blue/white bookmaker surfaces, green primary actions, Roboto Condensed display type, Roboto body type.
 - All hero art, game-card art, orbit graphics, icons, copy, layout, and CSS are original to this project. No 1xBet image files, logos, fonts, or text were reused.
 - The sportsbook model is illustrative demo fixtures, not copied live odds.
-- The casino catalogue contains 44 playable server-authoritative 19X Originals: 18 slots, six virtuals, four instant games, seven RNG tables, two crash games and nine other originals.
+- The casino catalogue contains 55 playable server-authoritative 19X Originals: 18 slots, six virtuals, four instant games, seven RNG tables, two crash games, two bingo rooms, one video poker, two TV games, one Toto, one Lotto, two scratch cards, two hunting/fishing games and seven other originals.
 - The Master Admin control room and hierarchical RBAC model are original requirements from this project, not public reference features.
 
 ## Reference limitations documented in the build
 
 - No real-money deposits, withdrawals, wagering, or cash redemption.
-- No certified third-party provider sessions; all 44 titles are original 19X RNG games, not certified 1xBet/provider titles.
+- No certified third-party provider sessions; all 55 titles are original 19X RNG games, not certified 1xBet/provider titles.
 - No copied live dealer video, live odds feed, or proprietary game artwork.
 - Public reference pages may change and may differ by region, currency, or login state.
 - The reference site's public shell is not a complete specification for a licensed sportsbook; any production launch would require jurisdiction-specific licensing, KYC/AML, responsible-gaming approvals, provider contracts, independent testing, and legal review.

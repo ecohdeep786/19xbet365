@@ -1,6 +1,6 @@
 # CURRENT PRODUCT ANALYSIS — 19xbet365 (as of 24 November 2026)
 
-> **Historical note (26 November 2026):** This analysis was produced on 24 November 2026. The "11 playable / 33 provider-required" coverage statements are superseded: all 44 catalogue titles are now playable 19X Originals. See `README.md` and `GAME_CATALOGUE.md` for current status.
+> **Historical note (26 November 2026):** This analysis was produced on 24 November 2026. The "11 playable / 33 provider-required" coverage statements are superseded: all 55 catalogue titles are now playable 19X Originals. See `README.md` and `GAME_CATALOGUE.md` for current status.
 
 This document records the existing state of the product, what works, what is incomplete, and where it uses placeholder or hardcoded data. It is the baseline for the gap analysis and execution plan that follow.
 
@@ -33,7 +33,7 @@ This document records the existing state of the product, what works, what is inc
 
 ## 4. Games
 
-- **19X Originals (44 playable, server-authoritative):** crash, Mines, Plinko, Dice, Wheel, Coinflip, Hi-Lo, Lucky Ten, 18 slots, six virtuals, four instant games and seven RNG tables (README).
+- **19X Originals (55 playable, server-authoritative):** crash, Mines, Plinko, Dice, Wheel, Coinflip, Hi-Lo, Lucky Ten, 18 slots, six virtuals, four instant games, seven RNG tables, bingo, video poker, TV games, Toto, Lotto, scratch cards, hunting/fishing and category pages (README).
 - Game catalogue: `shared/catalog.json` `games` array (lobby, filters, favorites) + `GamePage` discovery + playable server engines for every title.
 - **Gap:** certified third-party provider/live-dealer parity; some 1xBet categories (bingo, lotto, TV games, hunting/fishing) are not in the current 44-title catalogue; gaps documented in `docs/PRODUCT_PARITY_MATRIX.md`.
 

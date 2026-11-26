@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import {
   ArrowRight, BadgeCheck, ChevronRight, Clock3, Coins, Eye, Gamepad2, Radio,
   ServerCog, ShieldCheck, Sparkles, Trophy, Zap
@@ -66,7 +66,7 @@ export function Home() {
             <div className="orbit-core">
               <span className="core-label">19X</span>
               <strong>ORIGINALS</strong>
-              <span className="core-sub">44 playable titles</span>
+              <span className="core-sub">55 playable titles</span>
             </div>
             {crash && (
               <div className="floating-card float-crash">

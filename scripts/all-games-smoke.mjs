@@ -35,6 +35,10 @@ try {
         const start = await req("/api/games/blackjack-azure/start", { method: "POST", body: JSON.stringify({ stake: 10 }) }, 201);
         result = await req(`/api/games/blackjack-azure/${start.roundId}/stand`, { method: "POST" });
         result = { balance: result.balance, message: result.message };
+      } else if (game.id === "video-poker-deluxe") {
+        const start = await req("/api/games/video-poker-deluxe/start", { method: "POST", body: JSON.stringify({ stake: 10 }) }, 201);
+        result = await req(`/api/games/video-poker-deluxe/${start.roundId}/draw`, { method: "POST", body: JSON.stringify({ held: [0, 1] }) });
+        result = { balance: result.balance, message: result.message };
       } else {
         const params = game.id === "keno-blitz" ? { picks: [1, 2, 3] }
           : game.id === "limbo-velocity" ? { target: 2 }
@@ -42,6 +46,11 @@ try {
           : game.id === "astra-roulette-live" ? { bet: "red" }
           : game.id === "sicbo-nova" ? { bet: "big" }
           : game.id === "baccarat-royale" || game.id === "speed-baccarat" ? { bet: "player" }
+          : game.id === "tv-wheelbet" ? { bet: "red" }
+          : game.id === "war-of-elements" ? { element: 0 }
+          : game.id === "reef-hunter" ? { target: 0 }
+          : game.id === "toto-fifteen" ? { picks: Array(15).fill(0) }
+          : game.id === "lotto-636" ? { picks: [1, 2, 3, 4, 5, 6] }
           : game.category === "virtuals" ? { runner: 0 }
           : {};
         result = await req(`/api/games/${game.id}/play`, { method: "POST", body: JSON.stringify({ stake: 10, params }) }, 201);
